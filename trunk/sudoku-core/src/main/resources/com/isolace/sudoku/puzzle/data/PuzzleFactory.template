@@ -1,0 +1,83 @@
+package com.isolace.sudoku.puzzle;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.isolace.sudoku.puzzle.Puzzle;
+
+/**
+ * GENERATED FILE, DO NOT MODIFY.
+ * 
+ * @see PuzzleFactoryGenerator
+ */
+public class PuzzleFactory {
+    public static final int VERSION = %d;
+    public static final int NUM_PUZZLES = %d;
+    private static final List<String[]> puzzlesSolutionList = new ArrayList<String[]>();
+    private static final List<String[]> puzzlesProblemList = new ArrayList<String[]>();
+    
+    public static final Puzzle getPuzzle(final int level, final int index) {
+        if(level < Puzzle.EASY_LEVEL || level > Puzzle.CHALLENGE_LEVEL) {
+            throw new IllegalArgumentException("Invalid level '" + level + ".");
+        }
+        if(index < 0 || index >= NUM_PUZZLES) {
+            throw new IllegalArgumentException("Invalid index '" + index + ".");
+        }
+        String solution = puzzlesSolutionList.get(level)[index];
+        String problem = puzzlesProblemList.get(level)[index];
+        Puzzle puzzle = new Puzzle(level, index, solution, problem);
+        
+        return puzzle;
+    }
+    
+    public static final int getVersion() {
+        return PuzzleFactory.VERSION;
+    }
+
+    public static final int getNumPuzzles() {
+        return PuzzleFactory.NUM_PUZZLES;
+    }
+
+    private static final String[] EASY_SOLUTIONS = {
+%s
+				};
+    
+    private static final String[] MEDIUM_SOLUTIONS = {
+%s
+				};
+    
+    private static final String[] HARD_SOLUTIONS = {
+%s
+				};
+    
+    private static final String[] CHALLENGER_SOLUTIONS = {
+%s
+				};
+    
+    private static final String[] EASY_PROBLEMS = {
+%s
+				};
+    
+    private static final String[] MEDIUM_PROBLEMS = {
+%s
+				};
+    
+    private static final String[] HARD_PROBLEMS = {
+%s
+				};
+    
+    private static final String[] CHALLENGER_PROBLEMS = {
+%s
+				};
+
+    static {
+        puzzlesSolutionList.add(EASY_SOLUTIONS);
+        puzzlesSolutionList.add(MEDIUM_SOLUTIONS);
+        puzzlesSolutionList.add(HARD_SOLUTIONS);
+        puzzlesSolutionList.add(CHALLENGER_SOLUTIONS);
+        puzzlesProblemList.add(EASY_PROBLEMS);
+        puzzlesProblemList.add(MEDIUM_PROBLEMS);
+        puzzlesProblemList.add(HARD_PROBLEMS);
+        puzzlesProblemList.add(CHALLENGER_PROBLEMS);
+    }
+}

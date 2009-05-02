@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.isolace.sudoku.puzzle.test.PuzzleUtilTest" failures="0" tests="34" time="0.161" errors="0">
+  <properties/>
+  <testcase name="testValidateSolutionNullProblem" time="0.0090" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testInCol0" time="0.0030" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testMatrixFromStringNullPuzzle" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testNotInCol0" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testNotInGrid4" time="0.0060" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testInCol8" time="0.0020" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testValidGuess9" time="0.0020" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testInRow0" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testValidateSolution" time="0.0020" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testValidateSolutionNullSolution" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testSolutionMatrixFromString" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testInGrid0" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testNotInRow4" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testNotInRow8" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testValidateSolutionMatrix" time="0.0020" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testInGrid8" time="0.0020" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testMatrixFromStringLengthException" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testSolutionMatrixToString" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testValidGuess62" time="0.0020" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testNotInCol8" time="0.0020" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testNotInRow0" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testInCol4" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testInGrid4" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testValidateNullSolutionMatrix" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testNotValidGuess62" time="0.0020" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testValidGuess42" time="0.0020" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testNotValidGuess9" time="0.0020" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testNotInGrid8" time="0.0020" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testInRow4" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testNotInGrid0" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testNotValidGuess40" time="0.0020" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testNotInCol4" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testValidatePuzzleNonUnique" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+  <testcase name="testInRow8" time="0.0010" classname="com.isolace.sudoku.puzzle.test.PuzzleUtilTest"/>
+</testsuite>

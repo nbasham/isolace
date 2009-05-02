@@ -1,0 +1,14 @@
+<testng-results>
+  <reporter-output>
+  </reporter-output>
+  <suite name="sudoku-core">
+    <groups>
+    </groups>
+    <test name="com.isolace.sudoku.puzzle.data.test.PuzzleFileUtilTest">
+      <class name="com.isolace.sudoku.puzzle.data.test.PuzzleFileUtilTest">
+        <test-method status="PASS" signature="testReadPuzzlesFromFiles()" name="testReadPuzzlesFromFiles" duration-ms="330" started-at="2009-05-02T12:32:32Z" finished-at="2009-05-02T12:32:32Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>
