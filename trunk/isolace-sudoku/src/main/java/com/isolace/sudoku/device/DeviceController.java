@@ -22,7 +22,7 @@ public class DeviceController {
     @RequestMapping()
     public String list(ModelMap modelMap) {
         log.info("Device list controller");
-        modelMap.addAttribute("users", deviceDao.findAll());
+        modelMap.addAttribute("devices", deviceDao.findAll());
         return "sudoku/device/list";
     }
 
