@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.isolace.sudoku.puzzle.data.test.PuzzleFileUtilTest" failures="0" tests="1" time="0.378" errors="0">
-  <properties/>
-  <testcase name="testReadPuzzlesFromFiles" time="0.33" classname="com.isolace.sudoku.puzzle.data.test.PuzzleFileUtilTest"/>
-</testsuite>

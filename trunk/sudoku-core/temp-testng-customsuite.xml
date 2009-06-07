@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="sudoku-core">
-  <test verbose="2" name="com.isolace.sudoku.puzzle.data.test.PuzzleFileUtilTest" annotations="JDK">
-    <classes>
-      <class name="com.isolace.sudoku.puzzle.data.test.PuzzleFileUtilTest"/>
-    </classes>
-  </test>
-</suite>
