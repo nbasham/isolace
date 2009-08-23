@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="sudoku-server by packages">
+  <test verbose="2" name="com.isolace.sudoku.server.test" annotations="JDK">
+    <packages>
+      <package name="com.isolace.sudoku.server.test"/>
+    </packages>
+  </test>
+</suite>

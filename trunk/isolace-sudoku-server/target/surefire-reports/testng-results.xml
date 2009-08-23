@@ -1,0 +1,32 @@
+<testng-results>
+  <reporter-output>
+  </reporter-output>
+  <suite name="Command line suite">
+    <groups>
+    </groups>
+    <test name="Command line test">
+      <class name="com.isolace.sudoku.server.test.PuzzleTest">
+        <test-method status="PASS" signature="testJSON()" name="testJSON" duration-ms="319" started-at="2009-08-23T13:50:56Z" finished-at="2009-08-23T13:50:57Z">
+        </test-method>
+        <test-method status="PASS" signature="setUp()" name="setUp" is-config="true" duration-ms="0" started-at="2009-08-23T13:50:56Z" finished-at="2009-08-23T13:50:56Z">
+        </test-method>
+      </class>
+      <class name="com.isolace.sudoku.server.test.PuzzleDaoTest">
+        <test-method status="PASS" signature="setUp()" name="setUp" is-config="true" duration-ms="56" started-at="2009-08-23T13:50:56Z" finished-at="2009-08-23T13:50:56Z">
+        </test-method>
+        <test-method status="PASS" signature="testPuzzleDao()" name="testPuzzleDao" duration-ms="1" started-at="2009-08-23T13:50:56Z" finished-at="2009-08-23T13:50:56Z">
+        </test-method>
+      </class>
+      <class name="com.isolace.sudoku.server.test.PuzzleGenerationTest">
+        <test-method status="PASS" signature="testValidPuzzle()" name="testValidPuzzle" duration-ms="73" started-at="2009-08-23T13:50:56Z" finished-at="2009-08-23T13:50:56Z">
+        </test-method>
+        <test-method status="PASS" signature="testValidGridCandidateFail()" name="testValidGridCandidateFail" duration-ms="0" started-at="2009-08-23T13:50:56Z" finished-at="2009-08-23T13:50:56Z">
+        </test-method>
+        <test-method status="PASS" signature="testValidGridCandidate()" name="testValidGridCandidate" duration-ms="0" started-at="2009-08-23T13:50:56Z" finished-at="2009-08-23T13:50:56Z">
+        </test-method>
+        <test-method status="PASS" signature="testInvalidPuzzle()" name="testInvalidPuzzle" duration-ms="67" started-at="2009-08-23T13:50:56Z" finished-at="2009-08-23T13:50:56Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>
