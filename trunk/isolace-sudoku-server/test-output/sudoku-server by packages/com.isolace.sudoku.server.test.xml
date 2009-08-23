@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.isolace.sudoku.server.test" failures="0" tests="6" time="0.362" errors="0">
+  <properties/>
+  <testcase name="testPuzzleDao" time="0.0050" classname="com.isolace.sudoku.server.test.PuzzleDaoTest"/>
+  <testcase name="testValidPuzzle" time="0.013" classname="com.isolace.sudoku.server.test.PuzzleGenerationTest"/>
+  <testcase name="testInvalidPuzzle" time="0.0080" classname="com.isolace.sudoku.server.test.PuzzleGenerationTest"/>
+  <testcase name="testValidGridCandidate" time="0.0010" classname="com.isolace.sudoku.server.test.PuzzleGenerationTest"/>
+  <testcase name="testValidGridCandidateFail" time="0.0010" classname="com.isolace.sudoku.server.test.PuzzleGenerationTest"/>
+  <testcase name="testJSON" time="0.293" classname="com.isolace.sudoku.server.test.PuzzleTest"/>
+</testsuite>

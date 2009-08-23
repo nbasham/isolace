@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="http://dev.jquery.com/view/trunk/qunit/testsuite.css" type="text/css" media="screen" />
+<script type="text/javascript" src="yahoo-dom-event.js"></script>
+<script src="isolace.js"></script>
+<script src="sudoku-logic.js"></script>
+<script src="sudoku-ui.js"></script>
+
+<link rel="stylesheet" href="sudoku-render-text.css" type="text/css" media="screen" />
+<script src="sudoku-render-text.js"></script>
+
+<link rel="stylesheet" href="sudoku-selection-background.css" type="text/css" media="screen" />
+<script src="sudoku-selection-background.js"></script>
+
+<script>
+
+var problem = [8,6,4,5,3,1,2,9,7,9,5,1,6,2,7,8,4,3,2,7,3,4,8,9,6,1,5,1,4,7,9,5,6,3,8,2,3,9,6,2,4,8,5,7,1,5,8,2,1,7,3,9,6,4,6,2,5,8,1,4,7,3,9,7,1,9,3,6,5,4,2,8,4,3,8,7,9,2,1,5,6];
+var mask = [2,7,11,12,15,18,21,23,26,29,31,34,35,36,39,40,44,45,46,49,51,54,56,60,62,64,67,68,73,77,78];
+
+$logic.initialize(problem, mask);
+
+$(document).ready(function(){
+    
+    $('#someDiv').html($ui.getBoardHTML() + $ui.getTimerHTML());
+    $ui.startGame($logic);
+	
+module("UI");
+
+test("guess", function() {
+    $logic.initialize(problem, mask);
+    var index = 0;
+    $logic.selectedIndex(index);
+    var guessValue = 5;
+    $ui.guess(guessValue);
+    var cell = $('#c' + index);
+    var cellValue = cell.text();
+    equals(guessValue, cellValue);
+});
+
+test("guess toggle", function() {
+    $logic.initialize(problem, mask);
+    var index = 0;
+    $logic.selectedIndex(index);
+    var guessValue = 5;
+    $ui.guess(guessValue);
+    $ui.guess(guessValue);
+    var cell = $('#c' + index);
+    var cellValue = cell.text();
+    equals('', cellValue);
+});
+
+test("guess on guess", function() {
+    $logic.initialize(problem, mask);
+    var index = 0;
+    $logic.selectedIndex(index);
+    var guessValue = 5;
+    $ui.guess(guessValue);
+    $ui.guess(guessValue + 1);
+    var cell = $('#c' + index);
+    var cellValue = cell.text();
+    equals(guessValue + 1, cellValue);
+});
+
+test("guess on hint", function() {
+    $logic.initialize(problem, mask);
+    var index = 0;
+    $logic.selectedIndex(index);
+    var guessValue = 5;
+    $ui.hint(guessValue);
+    $ui.guess(guessValue);
+    var cell = $('#c' + index);
+    var cellValue = cell.text();
+    equals(guessValue, cellValue);
+});
+
+test("guess clears hints in grid", function() {
+    $logic.initialize(problem, mask);
+    //  add hint to cells 2 and 3
+    $logic.selectedIndex(2);
+    $ui.hint(9);
+    $logic.selectedIndex(3);
+    $ui.hint(9);
+    $ui.guess(8);
+    ok($logic.hasHint(2) === false, 'Hint in other grid cell cleared by guess');
+});
+
+module("UI hint");
+
+test("hint", function() {
+    $logic.initialize(problem, mask);
+    var index = 0;
+    $logic.selectedIndex(index);
+    var hintValue = 5;
+    $ui.hint(hintValue);
+    var cell = $('#c' + index);
+    var cellValue = cell.text();
+    ok(cellValue.indexOf('5') != -1, 'Hint added to HTML');
+});
+
+test("hint toggle", function() {
+    $logic.initialize(problem, mask);
+    var index = 0;
+    $logic.selectedIndex(index);
+    var hintValue = 5;
+    $ui.hint(hintValue);
+    $ui.hint(hintValue);
+    var cell = $('#c' + index);
+    var cellValue = cell.text();
+    ok(cellValue.indexOf('5') == -1, 'Hint cleared from HTML');
+});
+
+test("hint on hint", function() {
+    $logic.initialize(problem, mask);
+    var index = 0;
+    $logic.selectedIndex(index);
+    var hintValue = 5;
+    $ui.hint(hintValue);
+    $ui.hint(hintValue + 1);
+    var cell = $('#c' + index);
+    var cellValue = cell.text();
+    ok(cellValue.indexOf('56') != -1, 'Both hints added to HTML');
+});
+
+test("hint on guess", function() {
+    $logic.initialize(problem, mask);
+    var index = 0;
+    $logic.selectedIndex(index);
+    var hintValue = 5;
+    $ui.guess(hintValue);
+    $ui.hint(hintValue);
+    var cell = $('#c' + index);
+    var cellValue = cell.text();
+    ok(cellValue.indexOf('5') != -1, 'Hint replaced guess in HTML');
+});
+
+module("UI selection");
+
+test("selectCell", function() {
+    $logic.initialize(problem, mask);
+    for(var row = 0; row < 9; row++) {
+        for(var col = 0; col < 9; col++) {
+            var i = row*9 + col;
+            $ui.selectCell(i);
+            var cell = $('#c' + i);
+            equals(true, cell.hasClass('selectedCell'));
+            equals(false, cell.hasClass('evenGrid oddGrid'));
+            equals($logic.selectedIndex(), i);
+        }
+    }
+});
+
+test("unselectCell", function() {
+    $logic.initialize(problem, mask);
+    for(var row = 0; row < 9; row++) {
+        for(var col = 0; col < 9; col++) {
+            var i = row*9 + col;
+            $ui.selectCell(i);
+            $ui.unselectCell(i);
+            var cell = $('#c' + i);
+            equals(false, cell.hasClass('selectedCell'));
+            
+            var grid = $logic.getGridFromIndex(i);
+            if(grid % 2 == 0) {
+                equals(true, cell.hasClass('evenGrid'));
+                equals(false, cell.hasClass('oddGrid'));
+            } else {
+                equals(false, cell.hasClass('evenGrid'));
+                equals(true, cell.hasClass('oddGrid'));
+            }
+        }
+    }
+});
+
+});
+
+</script>
+
+</head>
+<body>
+
+<div id='someDiv' style='display: none;height: 100%; width: 100%;'>
+    loading...
+</div>
+ 
+<script type="text/javascript" src="http://jqueryjs.googlecode.com/svn/trunk/qunit/testrunner.js"></script>
+<h1>iSolace sudoku-ui unit tests</h1>
+<h2 id="banner"></h2>
+<h2 id="userAgent"></h2>
+
+<ol id="tests"></ol>
+
+<div id="main"></div>
+
+</body>
+</html>

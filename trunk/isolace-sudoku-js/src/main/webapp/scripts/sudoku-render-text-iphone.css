@@ -1,0 +1,47 @@
+div.palette, div.hintPalette {
+    width: 189px;
+    height: 21px;
+    font-size: 21;
+    position: absolute;
+}
+div.symbol, div.hintSymbol {
+    font-size: 70%;
+    width: 21px;
+    height: 100%;
+    color: black;
+    float: left;
+    text-align: center;
+}
+div.hint {
+    font-family: Tahoma, "New Courier";
+    font-size: 70%;
+    float: left;
+    width: 23%;
+    height: 25%;
+    margin-left: 2px;
+    margin-top: 1px;
+}
+    
+.hintCell {
+    font-size: 30%;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.guessCell {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    font-size: 80%;
+}
+
+.revealedCell {
+    color: #888888 ;
+}
+
+.unrevealedCell {
+    color: #505050;
+}
+
+.unrevealedCellConflicted {
+    color: red;
+}

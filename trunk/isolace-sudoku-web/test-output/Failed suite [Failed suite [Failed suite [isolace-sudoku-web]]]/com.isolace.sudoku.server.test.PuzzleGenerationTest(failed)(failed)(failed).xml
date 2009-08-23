@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.isolace.sudoku.server.test.PuzzleGenerationTest(failed)(failed)(failed)" failures="0" tests="1" time="0.408" errors="0">
+  <properties/>
+  <testcase name="testGerneratedPuzzles" time="0.384" classname="com.isolace.sudoku.server.test.PuzzleGenerationTest"/>
+</testsuite>
