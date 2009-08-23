@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="http://dev.jquery.com/view/trunk/qunit/testsuite.css" type="text/css" media="screen" />
+
+<script src="isolace.js"></script>
+<script src="sudoku-logic.js"></script>
+
+<script>
+
+var problem = [8,6,4,5,3,1,2,9,7,9,5,1,6,2,7,8,4,3,2,7,3,4,8,9,6,1,5,1,4,7,9,5,6,3,8,2,3,9,6,2,4,8,5,7,1,5,8,2,1,7,3,9,6,4,6,2,5,8,1,4,7,3,9,7,1,9,3,6,5,4,2,8,4,3,8,7,9,2,1,5,6];
+var mask = [2,7,11,12,15,18,21,23,26,29,31,34,35,36,39,40,44,45,46,49,51,54,56,60,62,64,67,68,73,77,78];
+$logic.initialize(problem, mask);
+
+$(document).ready(function(){
+    
+module("API");
+
+test("check if public API is defined", function() {
+     ok( $logic != undefined, "$logic defined" );
+     ok( $logic.initialize != undefined, "$logic.initialize defined" );
+     ok( $logic.getSolution != undefined, "$logic.getSolution defined" );
+     ok( $logic.guess != undefined, "$logic.guess defined" );
+     ok( $logic.hasHint != undefined, "$logic.hasHint defined" );
+     ok( $logic.setHint != undefined, "$logic.setHint defined" );
+});
+
+test("check if private API is defined", function() {
+     ok( $logic.getRowFromIndex != undefined, "$logic.getRowFromIndex defined" );
+     ok( $logic.getColFromIndex != undefined, "$logic.getColFromIndex defined" );
+     ok( $logic.getGridFromIndex != undefined, "$logic.getGridFromIndex defined" );
+     ok( $logic.getGridIndexes != undefined, "$logic.getGridIndexes defined" );
+     ok( $logic.uniqueInRow != undefined, "$logic.uniqueInRow defined" );
+     ok( $logic.uniqueInCol != undefined, "$logic.uniqueInCol defined" );
+     ok( $logic.uniqueInGrid != undefined, "$logic.uniqueInGrid defined" );
+});
+
+module("API implementations");
+
+test("getSolution() length", function() {
+    var solution = $logic.getSolution();
+    ok(solution.length == 81, "Solution length is 81.");
+});
+
+test("getSolution()", function() {
+    var solution = $logic.getSolution();
+    var allEqual = true;
+    for(var i = 0; i < solution.length; i++) {
+        if(solution[i] != 0) {
+            if(solution[i] != problem[i]) {
+                allEqual = false;
+                break;
+            }
+        }
+    }
+    ok(allEqual, "Solution properly initiated.");
+});
+
+test("guess", function() {
+    $logic.initialize(problem, mask);
+    $logic.guess(0, 3);
+    equals($logic.getSolution(0), 3);
+});
+test("guess over hint", function() {
+    $logic.initialize(problem, mask);
+    $logic.setHint(0, 3);
+    $logic.guess(0, 3);
+    equals($logic.getSolution(0), 3);
+});
+test("guess removes hints of same value in grid", function() {
+    $logic.initialize(problem, mask);
+    $logic.setHint(0, 3);
+    $logic.guess(0, 3);
+    equals($logic.getSolution(0), 3);
+});
+
+test("revealed", function() {
+    $logic.initialize(problem, mask);
+    var aok = true;
+    for(var i = 0; i < mask.length; i++) {
+        var revealed = $logic.revealed(mask[i]);
+        if(!revealed) {
+            aok = false;
+            break;
+        }
+    }
+    ok(aok, "All items in mask revealed.");
+});
+test("solved", function() {
+    $logic.initialize(problem, mask);
+    window.console.log('problem: ' + problem);
+    for(var i = 0; i < 81; i++)
+        $logic.guess(i, problem[i]);
+    window.console.log('solution: ' + $logic.getSolution());
+    
+    equals($logic.solved(), true);
+});
+test("solved false", function() {
+    $logic.initialize(problem, mask);
+    for(var i = 0; i < 81; i++)
+        $logic.guess(i, problem[i]);
+    $logic.guess(14, 1);
+    equals($logic.solved(), false);
+});
+test("conflicts row", function() {
+    $logic.initialize(problem, mask);
+    $logic.guess(0, 8);
+    equals($logic.conflicts(4, 8), true);
+});
+test("conflicts row", function() {
+    $logic.initialize(problem, mask);
+    $logic.guess(4, 3);
+    equals($logic.conflicts(4, 3), false);
+});
+test("conflicts col", function() {
+    $logic.initialize(problem, mask);
+    equals($logic.conflicts(0, 3), true);
+});
+test("conflicts col", function() {
+    $logic.initialize(problem, mask);
+    $logic.guess(4, 3);
+    equals($logic.conflicts(4, 3), false);
+});
+test("conflicts grid", function() {
+    $logic.initialize(problem, mask);
+    $logic.guess(0, 8);
+    equals($logic.conflicts(18, 8), true);
+});
+test("conflicts grid", function() {
+    $logic.initialize(problem, mask);
+    $logic.guess(4, 3);
+    equals($logic.conflicts(4, 3), false);
+});
+module("Private Sudoku utility functions");
+
+test("uniqueInRow", function() {
+    $logic.initialize(problem, mask);
+    var solution = $logic.getSolution();
+    equals($logic.uniqueInRow(solution, 0, 8), true);
+});
+
+test("uniqueInRow false", function() {
+    $logic.initialize(problem, mask);
+    $logic.guess(0, 8);
+    var solution = $logic.getSolution();
+    equals($logic.uniqueInRow(solution, 4, 8), false);
+});
+
+test("uniqueInCol", function() {
+    $logic.initialize(problem, mask);
+    var solution = $logic.getSolution();
+    equals($logic.uniqueInCol(solution, 0, 1), true);
+});
+
+test("uniqueInCol false", function() {
+    $logic.initialize(problem, mask);
+    $logic.guess(0, 3);
+    var solution = $logic.getSolution();
+    equals($logic.uniqueInCol(solution, 18, 3), false);
+});
+
+test("getGridIndexes 0", function() {
+    var a = $logic.getGridIndexes(0);
+    var grid0Index = [0, 1, 2, 9, 10, 11, 18, 19, 20];
+    same(a, grid0Index);
+});
+
+test("getGridIndexes 8", function() {
+    var a = $logic.getGridIndexes(8);
+    var grid0Index = [60, 61, 62, 69, 70, 71, 78, 79, 80];
+    same(a, grid0Index);
+});
+
+test("uniqueInGrid", function() {
+    $logic.initialize(problem, mask);
+    var solution = $logic.getSolution();
+    equals($logic.uniqueInGrid(solution, 0, 8), true);
+});
+
+test("uniqueInGrid false", function() {
+    $logic.initialize(problem, mask);
+    $logic.guess(0, 3);
+    var solution = $logic.getSolution();
+    equals($logic.uniqueInGrid(solution, 18, 3), false);
+});
+
+test("getRowFromIndex", function() {
+    for(var row = 0; row < 9; row++) {
+        for(var col = 0; col < 9; col++) {
+            var i = row*9 + col;
+            equals($logic.getRowFromIndex(i), row);
+        }
+    }
+});
+
+test("getColFromIndex", function() {
+    for(var row = 0; row < 9; row++) {
+        for(var col = 0; col < 9; col++) {
+            var i = row*9 + col;
+            equals($logic.getColFromIndex(i), col);
+        }
+    }
+});
+
+
+test("getGridFromIndex", function() {
+    for(var row = 0; row < 9; row++) {
+        for(var col = 0; col < 9; col++) {
+            var i = row*9 + col;
+            var grid = $logic.getGridFromIndex(i);
+            var gridText = '' + grid;
+            ok(true, gridText);
+        }
+    }
+});
+
+});
+
+</script>
+
+</head>
+<body>
+
+<script type="text/javascript" src="http://jqueryjs.googlecode.com/svn/trunk/qunit/testrunner.js"></script>
+<h1>iSolace sudoku-logic unit tests</h1>
+<h2 id="banner"></h2>
+<h2 id="userAgent"></h2>
+
+<ol id="tests"></ol>
+
+<div id="main"></div>
+
+</body>
+</html>

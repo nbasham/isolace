@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.isolace.sudoku.server.test.PuzzleGenerationTest" failures="2" tests="2" time="9.833" errors="0">
+  <properties/>
+  <testcase name="testInvalidPuzzle" time="0.109" classname="com.isolace.sudoku.server.test.PuzzleGenerationTest">
+    <failure type="java.lang.AssertionError" message="expected:&lt;true&gt; but was:&lt;false&gt;">
+      <![CDATA[java.lang.AssertionError: expected:<true> but was:<false>
+	at com.isolace.sudoku.server.test.PuzzleGenerationTest.testInvalidPuzzle(PuzzleGenerationTest.java:24)
+... Removed 26 stack frames]]>
+    </failure>
+  </testcase>
+  <testcase name="testGerneratedPuzzles" time="9.645" classname="com.isolace.sudoku.server.test.PuzzleGenerationTest">
+    <failure type="java.lang.IllegalArgumentException" message="Unable to compute grid from index 64.">
+      <![CDATA[java.lang.IllegalArgumentException: Unable to compute grid from index 64.
+	at com.isolace.sudoku.server.PuzzleGeneration.gridFromIndex(PuzzleGeneration.java:40)
+	at com.isolace.sudoku.server.PuzzleGeneration.validPuzzle(PuzzleGeneration.java:117)
+	at com.isolace.sudoku.server.test.PuzzleGenerationTest.testGerneratedPuzzles(PuzzleGenerationTest.java:16)
+... Removed 22 stack frames]]>
+    </failure>
+  </testcase>
+</testsuite>

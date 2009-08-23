@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.isolace.sudoku.server.test.PuzzleDaoTest" failures="0" tests="1" time="0.036" errors="0">
+  <properties/>
+  <testcase name="testPuzzleDao" time="0.0060" classname="com.isolace.sudoku.server.test.PuzzleDaoTest"/>
+</testsuite>
