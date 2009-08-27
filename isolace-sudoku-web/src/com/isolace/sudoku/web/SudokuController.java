@@ -4,6 +4,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ public class SudokuController {
 
     @Autowired
     public PuzzleDao puzzleDao;
+    private static final Logger logger = Logger.getLogger(SudokuController.class);
     private static final String INDEX = "index";
     private static final String LEVEL = "level";
 
@@ -36,14 +38,10 @@ public class SudokuController {
     //  http://localhost:8080/sudoku/start
     @RequestMapping(value = "/start", method=RequestMethod.GET)
     public String start(HttpServletRequest request, HttpServletResponse response, Model model) {
-        String level = getCookieValue(request, LEVEL, "2");
-        String index = SudokuController.getCookieValue(request, INDEX, "3");
-        CookieGenerator cookie = new CookieGenerator();
-        cookie.setCookieMaxAge(Integer.MAX_VALUE);
-        cookie.setCookieName(LEVEL);
-        cookie.addCookie(response, level);
-        cookie.setCookieName(INDEX);
-        cookie.addCookie(response, index);
+        String level = SudokuController.getCookieValue(request, response, LEVEL, "0");
+        String index = SudokuController.getCookieValue(request, response, INDEX + level, "0");
+        setCookie(request, response, LEVEL, level);
+        setCookie(request, response, INDEX + level, index);
         model.addAttribute("level", level);
         model.addAttribute("index", index);
         return "start";
@@ -60,11 +58,23 @@ public class SudokuController {
 
     //  http://localhost:8080/sudoku/play/level/0/index/0
     @RequestMapping(value = "/play/level/{level}/index/{index}", method=RequestMethod.GET)
-    public String game(@PathVariable int level, @PathVariable int index, Model model) {
+    public String game(@PathVariable int level, @PathVariable int index, HttpServletRequest request, HttpServletResponse response, Model model) {
+        setCookie(request, response, LEVEL, "" + level);
+        setCookie(request, response, INDEX + level, "" + (index + 1));
         Puzzle puzzle = this.puzzleDao.get(level, index);
         model.addAttribute("puzzle", intArrayToString(puzzle.getPuzzle()));
         model.addAttribute("revealed", intArrayToString(puzzle.getRevealed()));
         return "sudoku";
+    }
+
+    private static CookieGenerator setCookie(HttpServletRequest request, HttpServletResponse response, String key, String value) {
+        CookieGenerator cookie = new CookieGenerator();
+        cookie.setCookieDomain(request.getHeader("host"));
+        cookie.setCookieMaxAge(60*60*24*365*10);
+        cookie.setCookieName(key);
+        cookie.addCookie(response, value);
+        System.out.println("Setting cookie '" + key + "' with value '" + value + "'.");
+        return cookie;
     }
 
     private static final String intArrayToString(int[] a) {
@@ -81,8 +91,19 @@ public class SudokuController {
         
         return sb.toString();
     }
-    private static final String getCookieValue(HttpServletRequest request, String key, String defaultValue) {
+    private static final String getCookieValue(HttpServletRequest request, HttpServletResponse response, String key, String defaultValue) {
         Cookie cookie = WebUtils.getCookie(request, key);
-        return cookie == null ? defaultValue : cookie.getValue();
+        if(cookie == null) {
+            setCookie(request, response, key, defaultValue);
+            System.out.println("No cookie found for " + key + " creating one and using default value " + defaultValue);
+            return defaultValue;
+        } else {
+            String value = cookie.getValue();
+            System.out.println("Cookie found for " + key + " with value " + value);
+            return value;
+        }
+    }
+    private static final int getCookieInt(HttpServletRequest request, HttpServletResponse response, String key, String defaultValue) {
+        return Integer.parseInt(getCookieValue(request, response, key, defaultValue));
     }
 }
