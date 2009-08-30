@@ -20,7 +20,7 @@ ISOLACE.namespace("sudoku");
 ISOLACE.sudoku.logic = function() {
 	this.answer = undefined;
 	this.revealedIndexes = undefined;
-	this.solution = [];
+	this.solution = undefined;
 	this.currentIndex = -1;
 };
 

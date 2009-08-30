@@ -209,13 +209,13 @@ public class SudokuControllerTest {
     /**
      * URI gameOver
      */
-    @Test
-    public void testGameOver() throws Exception {
-        SudokuController controller = new SudokuController();
-        controller.setPuzzleDao(this.puzzleDao);
-        Model model = new ExtendedModelMap();
-        this.request.setRequestURI("sudoku/play/level/0/index/0/time/23432");
-        String view = controller.gameOver(System.currentTimeMillis(), this.request, this.response, model);
-        assertEquals(view, "sudoku");
-    }
+//    @Test
+//    public void testGameOver() throws Exception {
+//        SudokuController controller = new SudokuController();
+//        controller.setPuzzleDao(this.puzzleDao);
+//        Model model = new ExtendedModelMap();
+//        this.request.setRequestURI("sudoku/play/level/0/index/0/time/23432");
+//        String view = controller.gameOver(System.currentTimeMillis(), this.request, this.response, model);
+//        assertEquals(view, "sudoku");
+//    }
 }

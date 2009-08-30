@@ -405,12 +405,12 @@ ISOLACE.sudoku.ui.prototype.guess = function(value) {
 
 	if ($ui.sudokuLogic.solved()) {
 	    var playingTime = $ui.playTime;
-        $.ajax('/sudoku/gameOver/time/' + playingTime);
+	    $.ajax({url: '/sudoku/gameOver/level/' + GAME.level + '/index/' + GAME.index + '/time/' + playingTime});
 		clearInterval($ui.playTimer);
         $ui.unselectCell(selectedIndex);
         //$('.guessCell').each(function() {YAHOO.util.Event.removeListener(this.id);alert(this.id, 'mouseover')});
         // show timer or message with time
-		$ui.showMessage('You did it!');
+		$ui.showMessage('You did it!!');
 	}
 };
 

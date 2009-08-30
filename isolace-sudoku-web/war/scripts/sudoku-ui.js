@@ -95,37 +95,37 @@ ISOLACE.sudoku.ui.prototype.getTimerHTML = function(top, left) {
  */
 ISOLACE.sudoku.ui.prototype.startGame = function(logic) {
     $ui.sudokuLogic = logic;
-	$('.cell').each( function(i, el) {
+    $('.cell').each( function(i, el) {
 
-		if ($ui.sudokuLogic.getSolution(i) === 0) {
-			$(el).addClass('unrevealedCell');
+        if ($ui.sudokuLogic.getSolution(i) === 0) {
+            $(el).addClass('unrevealedCell');
             $(el).bind("mouseenter", {
                 index :i
             }, $ui.handleSelectEvent);
             $(el).bind("mouseleave", {
                 index :i
             }, $ui.handleUnselectEvent);
-		} else {
-		    $renderer.updateRevealedCell(i, $ui.sudokuLogic.getSolution(i));
-		}
+        } else {
+            $renderer.updateRevealedCell(i, $ui.sudokuLogic.getSolution(i));
+        }
 
-		if ($ui.sudokuLogic.getGridFromIndex(i) % 2 === 0) {
-			$(el).addClass('evenGrid');
-		} else {
-			$(el).addClass('oddGrid');
-		}
+        if ($ui.sudokuLogic.getGridFromIndex(i) % 2 === 0) {
+            $(el).addClass('evenGrid');
+        } else {
+            $(el).addClass('oddGrid');
+        }
 
-		var row = $ui.sudokuLogic.getRowFromIndex(i);
-		if (row == 2 || row == 5) {
-			$(el).addClass('rowBorder');
-		}
-		var col = $ui.sudokuLogic.getColFromIndex(i);
-		if (col == 2 || col == 5) {
-			$(el).addClass('colBorder');
-		}
-	});
-	$ui.mapKeysToEvents();
-	$ui.startTimer();
+        var row = $ui.sudokuLogic.getRowFromIndex(i);
+        if (row == 2 || row == 5) {
+            $(el).addClass('rowBorder');
+        }
+        var col = $ui.sudokuLogic.getColFromIndex(i);
+        if (col == 2 || col == 5) {
+            $(el).addClass('colBorder');
+        }
+    });
+    $ui.mapKeysToEvents();
+    $ui.startTimer();
 };
 
 /**
@@ -134,9 +134,9 @@ ISOLACE.sudoku.ui.prototype.startGame = function(logic) {
  * @method moveLeft
  */
 ISOLACE.sudoku.ui.prototype.moveLeft = function() {
-	var sel = $ui.sudokuLogic.selectedIndex();
-	sel = $ui.dec(sel, 1);
-	$ui.selectCell(sel);
+    var sel = $ui.sudokuLogic.selectedIndex();
+    sel = $ui.dec(sel, 1);
+    $ui.selectCell(sel);
 };
 
 /**
@@ -146,12 +146,12 @@ ISOLACE.sudoku.ui.prototype.moveLeft = function() {
  * @method moveLeftToNextOpen
  */
 ISOLACE.sudoku.ui.prototype.moveLeftToNextOpen = function() {
-	var sel = $ui.sudokuLogic.selectedIndex();
-	sel = $ui.dec(sel, 1);
-	while($ui.sudokuLogic.revealed(sel)) {
-		sel = $ui.dec(sel, 1);
-	}
-	$ui.selectCell(sel);
+    var sel = $ui.sudokuLogic.selectedIndex();
+    sel = $ui.dec(sel, 1);
+    while($ui.sudokuLogic.revealed(sel)) {
+        sel = $ui.dec(sel, 1);
+    }
+    $ui.selectCell(sel);
 };
 
 /**
@@ -160,9 +160,9 @@ ISOLACE.sudoku.ui.prototype.moveLeftToNextOpen = function() {
  * @method moveUp
  */
 ISOLACE.sudoku.ui.prototype.moveUp = function() {
-	var sel = $ui.sudokuLogic.selectedIndex();
-	sel = $ui.dec(sel, 9);
-	$ui.selectCell(sel);
+    var sel = $ui.sudokuLogic.selectedIndex();
+    sel = $ui.dec(sel, 9);
+    $ui.selectCell(sel);
 };
 
 /**
@@ -172,12 +172,12 @@ ISOLACE.sudoku.ui.prototype.moveUp = function() {
  * @method moveUpToNextOpen
  */
 ISOLACE.sudoku.ui.prototype.moveUpToNextOpen = function() {
-	var sel = $ui.sudokuLogic.selectedIndex();
-	sel = $ui.dec(sel, 9);
-	while($ui.sudokuLogic.revealed(sel)) {
-		sel = $ui.dec(sel, 9);
-	}
-	$ui.selectCell(sel);
+    var sel = $ui.sudokuLogic.selectedIndex();
+    sel = $ui.dec(sel, 9);
+    while($ui.sudokuLogic.revealed(sel)) {
+        sel = $ui.dec(sel, 9);
+    }
+    $ui.selectCell(sel);
 };
 
 /**
@@ -186,9 +186,9 @@ ISOLACE.sudoku.ui.prototype.moveUpToNextOpen = function() {
  * @method moveRight
  */
 ISOLACE.sudoku.ui.prototype.moveRight = function() {
-	var sel = $ui.sudokuLogic.selectedIndex();
-	sel = $ui.inc(sel, 1);
-	$ui.selectCell(sel);
+    var sel = $ui.sudokuLogic.selectedIndex();
+    sel = $ui.inc(sel, 1);
+    $ui.selectCell(sel);
 };
 
 /**
@@ -198,12 +198,12 @@ ISOLACE.sudoku.ui.prototype.moveRight = function() {
  * @method moveRightToNextOpen
  */
 ISOLACE.sudoku.ui.prototype.moveRightToNextOpen = function() {
-	var sel = $ui.sudokuLogic.selectedIndex();
-	sel = $ui.inc(sel, 1);
-	while($ui.sudokuLogic.revealed(sel)) {
-		sel = $ui.inc(sel, 1);
-	}
-	$ui.selectCell(sel);
+    var sel = $ui.sudokuLogic.selectedIndex();
+    sel = $ui.inc(sel, 1);
+    while($ui.sudokuLogic.revealed(sel)) {
+        sel = $ui.inc(sel, 1);
+    }
+    $ui.selectCell(sel);
 };
 
 /**
@@ -212,9 +212,9 @@ ISOLACE.sudoku.ui.prototype.moveRightToNextOpen = function() {
  * @method moveDown
  */
 ISOLACE.sudoku.ui.prototype.moveDown = function() {
-	var sel = $ui.sudokuLogic.selectedIndex();
-	sel = $ui.inc(sel, 9);
-	$ui.selectCell(sel);
+    var sel = $ui.sudokuLogic.selectedIndex();
+    sel = $ui.inc(sel, 9);
+    $ui.selectCell(sel);
 };
 
 /**
@@ -224,12 +224,12 @@ ISOLACE.sudoku.ui.prototype.moveDown = function() {
  * @method moveDownToNextOpen
  */
 ISOLACE.sudoku.ui.prototype.moveDownToNextOpen = function() {
-	var sel = $ui.sudokuLogic.selectedIndex();
-	sel = $ui.inc(sel, 9);
-	while($ui.sudokuLogic.revealed(sel)) {
-		sel = $ui.inc(sel, 9);
-	}
-	$ui.selectCell(sel);
+    var sel = $ui.sudokuLogic.selectedIndex();
+    sel = $ui.inc(sel, 9);
+    while($ui.sudokuLogic.revealed(sel)) {
+        sel = $ui.inc(sel, 9);
+    }
+    $ui.selectCell(sel);
 };
 
 /**
@@ -254,12 +254,12 @@ ISOLACE.sudoku.ui.prototype.ignore = function() {
  * @method setupKeyHandler
  */
 ISOLACE.sudoku.ui.prototype.setupKeyHandler = function(f, keys) {
-	var handler = function(type, args, obj) {
-		YAHOO.util.Event.stopEvent(args[1]);
-		f(args[0] - 48);
-	};
-	var listener = new YAHOO.util.KeyListener(document, keys, handler);
-	listener.enable();
+    var handler = function(type, args, obj) {
+        YAHOO.util.Event.stopEvent(args[1]);
+        f(args[0] - 48);
+    };
+    var listener = new YAHOO.util.KeyListener(document, keys, handler);
+    listener.enable();
 };
 
 /**
@@ -269,15 +269,15 @@ ISOLACE.sudoku.ui.prototype.setupKeyHandler = function(f, keys) {
  * @method mapKeysToEvents
  */
 ISOLACE.sudoku.ui.prototype.mapKeysToEvents = function() {
-	$ui.setupKeyHandler($ui.hint, { shift: true, keys: $ui.KEY_NUMBERS});
-	$ui.setupKeyHandler($ui.guess, { shift: false, keys: $ui.KEY_NUMBERS});
-	$ui.setupKeyHandler($ui.moveLeft, {keys: $ui.KEY_LEFT_ARROW});
-	$ui.setupKeyHandler($ui.moveLeft, { shift: true, keys: $ui.KEY_TAB});
-	$ui.setupKeyHandler($ui.moveRight, {keys: [$ui.KEY_TAB, $ui.KEY_RIGHT_ARROW]});
-	$ui.setupKeyHandler($ui.moveUp, {keys: $ui.KEY_UP_ARROW});
-	$ui.setupKeyHandler($ui.moveUp, { shift: true, keys: $ui.KEY_RETURN});
-	$ui.setupKeyHandler($ui.moveDown, {keys: [$ui.KEY_RETURN, $ui.KEY_DOWN_ARROW]});
-	$ui.setupKeyHandler($ui.ignore, {keys: $ui.KEY_BACKSPACE});
+    $ui.setupKeyHandler($ui.hint, { shift: true, keys: $ui.KEY_NUMBERS});
+    $ui.setupKeyHandler($ui.guess, { shift: false, keys: $ui.KEY_NUMBERS});
+    $ui.setupKeyHandler($ui.moveLeft, {keys: $ui.KEY_LEFT_ARROW});
+    $ui.setupKeyHandler($ui.moveLeft, { shift: true, keys: $ui.KEY_TAB});
+    $ui.setupKeyHandler($ui.moveRight, {keys: [$ui.KEY_TAB, $ui.KEY_RIGHT_ARROW]});
+    $ui.setupKeyHandler($ui.moveUp, {keys: $ui.KEY_UP_ARROW});
+    $ui.setupKeyHandler($ui.moveUp, { shift: true, keys: $ui.KEY_RETURN});
+    $ui.setupKeyHandler($ui.moveDown, {keys: [$ui.KEY_RETURN, $ui.KEY_DOWN_ARROW]});
+    $ui.setupKeyHandler($ui.ignore, {keys: $ui.KEY_BACKSPACE});
 };
 
 /**
@@ -298,23 +298,23 @@ ISOLACE.sudoku.ui.prototype.startTimer = function() {
  * @see ISOLACE.sudoku.ui.startTimer
  */
 ISOLACE.sudoku.ui.prototype.updateTimer = function() {
-	var timeStr = '';
-	var min = Math.floor($ui.playTime / 60);
-	var sec = $ui.playTime % 60;
-	if(min < 10) {
-		timeStr = '0' + min;
-	} else {
-		timeStr = '' + min;
-	}
-	timeStr += ':';
-	if(sec < 10) {
-		timeStr += '0' + sec;
-	} else {
-		timeStr += '' + sec;
-	}
-	$ui.playTime++;
-	$('.timer').text(timeStr);
-	
+    var timeStr = '';
+    var min = Math.floor($ui.playTime / 60);
+    var sec = $ui.playTime % 60;
+    if(min < 10) {
+        timeStr = '0' + min;
+    } else {
+        timeStr = '' + min;
+    }
+    timeStr += ':';
+    if(sec < 10) {
+        timeStr += '0' + sec;
+    } else {
+        timeStr += '' + sec;
+    }
+    $ui.playTime++;
+    $('.timer').text(timeStr);
+    
 };
 
 /**
@@ -328,12 +328,12 @@ ISOLACE.sudoku.ui.prototype.updateTimer = function() {
  * @return {int} Incremented value.
  */
 ISOLACE.sudoku.ui.prototype.inc = function(value, amount) {
-	value += amount;
-	if (value < 81) {
-		return value;
-	} else {
-		return Math.abs(81 - value);
-	}
+    value += amount;
+    if (value < 81) {
+        return value;
+    } else {
+        return Math.abs(81 - value);
+    }
 };
 
 /**
@@ -347,12 +347,12 @@ ISOLACE.sudoku.ui.prototype.inc = function(value, amount) {
  * @return {int} Decremented value.
  */
 ISOLACE.sudoku.ui.prototype.dec = function(value, amount) {
-	value -= amount;
-	if (value >= 0) {
-		return value;
-	} else {
-		return 81 + value;
-	}
+    value -= amount;
+    if (value >= 0) {
+        return value;
+    } else {
+        return 81 + value;
+    }
 };
 
 /**
@@ -392,24 +392,26 @@ ISOLACE.sudoku.ui.prototype.updateBoard = function() {
  * @method guess
  */
 ISOLACE.sudoku.ui.prototype.guess = function(value) {
-	var selectedIndex = $ui.sudokuLogic.selectedIndex();
-	if (selectedIndex < 0) {
-	    $ui.showMessage('Select a cell before guessing.');
-		return;
-	}
-	if ($ui.sudokuLogic.revealed(selectedIndex)) {
-		return;
-	}
-	$ui.sudokuLogic.guess(selectedIndex, value);
-	$ui.updateBoard();
+    var selectedIndex = $ui.sudokuLogic.selectedIndex();
+    if (selectedIndex < 0) {
+        $ui.showMessage('Select a cell before guessing.');
+        return;
+    }
+    if ($ui.sudokuLogic.revealed(selectedIndex)) {
+        return;
+    }
+    $ui.sudokuLogic.guess(selectedIndex, value);
+    $ui.updateBoard();
 
-	if ($ui.sudokuLogic.solved()) {
-		clearInterval($ui.playTimer);
+    if ($ui.sudokuLogic.solved()) {
+        var playingTime = $ui.playTime;
+        $.ajax({url: '/sudoku/gameOver/level/' + GAME.level + '/index/' + GAME.index + '/time/' + playingTime});
+        clearInterval($ui.playTimer);
         $ui.unselectCell(selectedIndex);
         //$('.guessCell').each(function() {YAHOO.util.Event.removeListener(this.id);alert(this.id, 'mouseover')});
         // show timer or message with time
-		$ui.showMessage('You did it!');
-	}
+        $ui.showMessage('You did it!!');
+    }
 };
 
 /**
@@ -419,16 +421,16 @@ ISOLACE.sudoku.ui.prototype.guess = function(value) {
  * @method hint
  */
 ISOLACE.sudoku.ui.prototype.hint = function(hintValue) {
-	var selectedIndex = $ui.sudokuLogic.selectedIndex();
-	if (selectedIndex < 0) {
-	    $ui.showMessage('Select a cell before choosing a hint.');
-		return;
-	}
-	if ($ui.sudokuLogic.revealed(selectedIndex)) {
-		return;
-	}
-	$ui.sudokuLogic.setHint(selectedIndex, hintValue);
-	$ui.updateBoard();
+    var selectedIndex = $ui.sudokuLogic.selectedIndex();
+    if (selectedIndex < 0) {
+        $ui.showMessage('Select a cell before choosing a hint.');
+        return;
+    }
+    if ($ui.sudokuLogic.revealed(selectedIndex)) {
+        return;
+    }
+    $ui.sudokuLogic.setHint(selectedIndex, hintValue);
+    $ui.updateBoard();
 };
 
 /**
@@ -440,11 +442,11 @@ ISOLACE.sudoku.ui.prototype.hint = function(hintValue) {
 ISOLACE.sudoku.ui.prototype.unselectCell = function(index) {
     var cell = $('#c' + index);
     $selectioner.removeSelectionDecoration(cell, index);
-	
-	// update grid style
+    
+    // update grid style
     var grid = $ui.sudokuLogic.getGridFromIndex(index);
-	if (grid % 2 === 0) {
-	    cell.addClass('evenGrid');
+    if (grid % 2 === 0) {
+        cell.addClass('evenGrid');
     } else {
         cell.addClass('oddGrid');
     }
@@ -458,17 +460,17 @@ ISOLACE.sudoku.ui.prototype.unselectCell = function(index) {
  */
 ISOLACE.sudoku.ui.prototype.selectCell = function(index) {
     $ui.unselectCell($ui.sudokuLogic.selectedIndex());
-	$ui.sudokuLogic.selectedIndex(index);
+    $ui.sudokuLogic.selectedIndex(index);
     var cell = $('#c' + index);
     $selectioner.addSelectionDecoration(cell, index);
-	
-	// update grid style
-	var grid = $ui.sudokuLogic.getGridFromIndex(index);
-	if (grid % 2 === 0) {
-	    cell.removeClass('evenGrid');
-	} else {
-	    cell.removeClass('oddGrid');
-	}
+    
+    // update grid style
+    var grid = $ui.sudokuLogic.getGridFromIndex(index);
+    if (grid % 2 === 0) {
+        cell.removeClass('evenGrid');
+    } else {
+        cell.removeClass('oddGrid');
+    }
 };
 
 /**

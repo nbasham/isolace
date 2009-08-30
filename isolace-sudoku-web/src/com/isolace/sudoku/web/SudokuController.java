@@ -84,18 +84,15 @@ public class SudokuController {
         }
         setCookie(request, response, INDEX + level, "" + incrementedIndex);
         Puzzle puzzle = this.puzzleDao.get(level, incrementedIndex);
+        model.addAttribute(LEVEL, level);
+        model.addAttribute(INDEX, incrementedIndex);
         model.addAttribute("puzzle", intArrayToString(puzzle.getPuzzle()));
         model.addAttribute("revealed", intArrayToString(puzzle.getRevealed()));
         return "sudoku";
     }
 
-    //  http://localhost:8080/sudoku/gameOver/time/NNNNN
-    @RequestMapping(value = "/gameOver/time/{time}", method=RequestMethod.GET)
-    public String gameOver(@PathVariable long time, HttpServletRequest request, HttpServletResponse response, Model model) {
-        Cookie cookie = WebUtils.getCookie(request, LEVEL);
-        int level = Integer.parseInt(cookie.getValue());
-        cookie = WebUtils.getCookie(request, INDEX + level);
-        int index = Integer.parseInt(cookie.getValue());
+    @RequestMapping(value = "/gameOver/level/{level}/index/{index}/time/{time}", method=RequestMethod.GET)
+    public String gameOver(@PathVariable int level, @PathVariable int index, @PathVariable long time, HttpServletRequest request, HttpServletResponse response, Model model) {
         PersistenceManager pm = PMF.get().getPersistenceManager();
         UserService userService = UserServiceFactory.getUserService();
         try {
@@ -104,7 +101,7 @@ public class SudokuController {
         } finally {
             pm.close();
         }
-        return "sudoku";
+        return null;
     }
 
     public static CookieGenerator setCookie(HttpServletRequest request, HttpServletResponse response, String key, String value) {
@@ -113,7 +110,7 @@ public class SudokuController {
         cookie.setCookieMaxAge(60*60*24*365*10);
         cookie.setCookieName(key);
         cookie.addCookie(response, value);
-        System.out.println("Setting cookie '" + key + "' with value '" + value + "'.");
+        logger.info("Setting cookie '" + key + "' with value '" + value + "'.");
         return cookie;
     }
 
@@ -135,11 +132,11 @@ public class SudokuController {
         Cookie cookie = WebUtils.getCookie(request, key);
         if(cookie == null) {
             setCookie(request, response, key, defaultValue);
-            System.out.println("No cookie found for " + key + " creating one and using default value " + defaultValue);
+            logger.info("No cookie found for " + key + " creating one and using default value " + defaultValue);
             return defaultValue;
         } else {
             String value = cookie.getValue();
-            System.out.println("Cookie found for " + key + " with value " + value);
+            logger.info("Cookie found for " + key + " with value " + value);
             return value;
         }
     }

@@ -21,15 +21,22 @@
 
 <script type="text/javascript">
 
+var GAME = {
+        level: <%= request.getAttribute("level") %>,
+        index: <%= request.getAttribute("index") %>,
+        puzzle: <%= request.getAttribute("puzzle") %>,
+        revealed: <%= request.getAttribute("revealed") %>
+};
+
 $(document).ready(function () {
 
-    var puzzle = <%= request.getAttribute("puzzle") %>;
-    var revealed = <%= request.getAttribute("revealed") %>;
-    $logic.initialize(puzzle, revealed);
+    var revealed = GAME.revealed;
+    if(GAME.index == 101)
+        revealed = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79];
+    $logic.initialize(GAME.puzzle, revealed);
     $('#gameDiv').append($ui.getTimerHTML(10, 14));
     $('#gameDiv').append($ui.getBoardHTML(10, 100));
     $ui.startGame($logic);   
-
 });
 
 </script>
