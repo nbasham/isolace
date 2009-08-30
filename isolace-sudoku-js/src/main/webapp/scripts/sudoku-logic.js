@@ -54,11 +54,15 @@ ISOLACE.sudoku.logic.prototype.conflicts = function(index, value) {
 /**
  * Initialize the Sudoku logic. This is done when starting a new game.
  * 
+ * @param problem The 81 int array representing the Sudoku puzzle.
+ * @param mask The int array describing which indexes will be revealed.
+ * @param {optional} existingSolution If restoring a previously played
+ *          game, existingSolution is the previous state.
  * @method initialize
  * @exception Invalid problem
  * @exception Invalid mask
  */
-ISOLACE.sudoku.logic.prototype.initialize = function(problem, mask) {
+ISOLACE.sudoku.logic.prototype.initialize = function(problem, mask, existingSolution) {
 	if (problem === undefined || problem.length != 81) {
 		throw new Exception("Invalid problem");
 	}
@@ -68,13 +72,17 @@ ISOLACE.sudoku.logic.prototype.initialize = function(problem, mask) {
 	answer = problem;
 	revealedIndexes = mask;
 	// window.console.log('revealedIndexes: ' + revealedIndexes);
-	solution = [];
-	for ( var i = 0; i < problem.length; i++) {
-		solution.push(0);
-		if ($.inArray(i, mask) != -1) {
-			solution[i] = problem[i];
-		}
-	}
+    if (this.solution === undefined) {
+        solution = [];
+        for ( var i = 0; i < problem.length; i++) {
+            solution.push(0);
+            if ($.inArray(i, mask) != -1) {
+                solution[i] = problem[i];
+            }
+        }
+    } else {
+        solution = existingSolution;
+    }
 };
 
 /**
@@ -133,6 +141,7 @@ ISOLACE.sudoku.logic.prototype.guess = function(index, value) {
 			}
 
 		}
+		//$undo.add($logic.getState());
 	} else {
 		//window.console.log('Index ' + index + ' is a revealed index so ignoring this guess.');
 	}
@@ -187,6 +196,7 @@ ISOLACE.sudoku.logic.prototype.setHint = function(index, value) {
 		solution[index] -= hintValue;
 		//window.console.log('setHint() hint: ' + value + ' solution: ' + solution[index] + ' value: ' + (-1 * value));
 	}
+    //$undo.add($logic.getState());
 };
 
 /**
@@ -234,12 +244,25 @@ ISOLACE.sudoku.logic.prototype.solved = function() {
 };
 
 /**
+ * Utility function to get an object that describes the current state of the game.
+ * @private
+ */
+ISOLACE.sudoku.logic.prototype.getState = function() {
+    var state = {};
+    state.answer = this.answer;
+    state.revealedIndexes = this.revealedIndexes;
+    state.solution = this.solution;
+
+    return state;
+};
+
+/**
  * Utility function to determine what row a given index resides in.
  * @private
  */
 ISOLACE.sudoku.logic.prototype.getRowFromIndex = function(index) {
-	var i = index / 9;
-	return Math.floor(i);
+    var i = index / 9;
+    return Math.floor(i);
 };
 
 /**

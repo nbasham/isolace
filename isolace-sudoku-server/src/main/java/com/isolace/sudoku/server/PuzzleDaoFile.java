@@ -14,7 +14,7 @@ import org.springframework.core.io.Resource;
 @SuppressWarnings("unchecked")
 public class PuzzleDaoFile implements PuzzleDao {
 
-    private static List<Puzzle> puzzles;
+    private List<Puzzle> puzzles;
     private int[] numPuzzles = new int[4];
     private String classPath;
     
@@ -63,6 +63,9 @@ public class PuzzleDaoFile implements PuzzleDao {
     }
     
     public int getNumPuzzles(int level) {
+        if(puzzles == null) {
+            init();
+        }
         return numPuzzles[level];
     }
 

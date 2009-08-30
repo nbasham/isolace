@@ -10,13 +10,13 @@
 <link rel="stylesheet" href="/stylesheets/sudoku-selection-background.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/stylesheets/sudoku-render-text.css" type="text/css" media="screen" />
 
-<script src="/scripts/jquery-1.3.2.js"></script>
+<script type="text/javascript" src="/scripts/jquery-1.3.2.js"></script>
 <script type="text/javascript" src="/scripts/yahoo-dom-event.js"></script>
-<script src="/scripts/isolace.js"></script>
-<script src="/scripts/sudoku-logic.js"></script>
-<script src="/scripts/sudoku-ui.js"></script>
-<script src="/scripts/sudoku-render-text.js"></script>
-<script src="/scripts/sudoku-selection-background.js"></script>
+<script type="text/javascript" src="/scripts/isolace.js"></script>
+<script type="text/javascript" src="/scripts/sudoku-logic.js"></script>
+<script type="text/javascript" src="/scripts/sudoku-ui.js"></script>
+<script type="text/javascript" src="/scripts/sudoku-render-text.js"></script>
+<script type="text/javascript" src="/scripts/sudoku-selection-background.js"></script>
 
 
 <script type="text/javascript">

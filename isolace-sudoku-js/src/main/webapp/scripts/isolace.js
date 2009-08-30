@@ -45,3 +45,9 @@ ISOLACE.namespace = function() {
 
 	return o;
 };
+
+function log(msg) {
+    if ($.browser.safari) {
+        window.console.log(msg);
+     }
+}

@@ -25,7 +25,7 @@ public class PuzzleDaoTest {
      * Tests to make sure all of the puzzles returned by PuzzleDao are valid.
      */
     @Test
-    public void testPuzzleDao() {
+    public void testValidPuzzleDao() {
         int index = 0;
         for (int level = Puzzle.EASY_LEVEL; level <= Puzzle.CHALLENGE_LEVEL; level++) {
             int numPuzzles = this.puzzleDao.getNumPuzzles(level);
@@ -37,5 +37,16 @@ public class PuzzleDaoTest {
             }
         }
         System.out.println("Tested " + index + " puzzles.");
+    }
+
+    /**
+     * Tests to make sure that lazy puzzle loading occurs if getNumPuzzles is called first..
+     */
+    @Test
+    public void testGetNumPuzzles() {
+        PuzzleDao localPuzzleDao = new PuzzleDaoFile("puzzles-100x4.txt");
+        for (int level = Puzzle.EASY_LEVEL; level <= Puzzle.CHALLENGE_LEVEL; level++) {
+            assertTrue(localPuzzleDao.getNumPuzzles(level) > 0);
+        }
     }
 }

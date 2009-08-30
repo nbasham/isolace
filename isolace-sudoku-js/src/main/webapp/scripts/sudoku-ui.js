@@ -404,6 +404,8 @@ ISOLACE.sudoku.ui.prototype.guess = function(value) {
 	$ui.updateBoard();
 
 	if ($ui.sudokuLogic.solved()) {
+	    var playingTime = $ui.playTime;
+        $.ajax('/sudoku/gameOver/time/' + playingTime);
 		clearInterval($ui.playTimer);
         $ui.unselectCell(selectedIndex);
         //$('.guessCell').each(function() {YAHOO.util.Event.removeListener(this.id);alert(this.id, 'mouseover')});
