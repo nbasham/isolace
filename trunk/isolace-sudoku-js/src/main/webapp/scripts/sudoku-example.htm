@@ -5,17 +5,18 @@
 <link rel="stylesheet" href="reset-fonts-grids.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="sudoku.css" type="text/css" media="screen" />
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="yahoo-dom-event.js"></script>
-<script src="isolace.js"></script>
-<script src="sudoku-logic.js"></script>
-<script src="sudoku-ui.js"></script>
+<script type="text/javascript" src="isolace.js"></script>
+<script type="text/javascript" src="isolace-undo.js"></script>
+<script type="text/javascript" src="sudoku-logic.js"></script>
+<script type="text/javascript" src="sudoku-ui.js"></script>
 
 <link rel="stylesheet" href="sudoku-render-text.css" type="text/css" media="screen" />
-<script src="sudoku-render-text.js"></script>
+<script type="text/javascript" src="sudoku-render-text.js"></script>
 
 <link rel="stylesheet" href="sudoku-selection-background.css" type="text/css" media="screen" />
-<script src="sudoku-selection-background.js"></script>
+<script type="text/javascript" src="sudoku-selection-background.js"></script>
 
 
 <script type="text/javascript">
@@ -31,6 +32,21 @@ $(document).ready(function () {
     $ui.startGame($logic);
 });
 
+function undo() {
+    var o = $undo.undo();
+    $logic.initialize(o.answer, o.revealedIndexes, o.solution);
+//    if(!$undo.canUndo) {
+//        $('#undo').hide();
+//    }
+}
+
+function redo() {
+    var o = $undo.redo();
+    $logic.initialize(o.answer, o.revealedIndexes, o.solution);
+//    if(!$undo.canUndo) {
+//        $('#undo').hide();
+//    }
+}
 </script>
 
 <style type="text/css">
@@ -44,7 +60,8 @@ body, li, a {
 </head>
 
 <body>
-
+<a id='undo' href='javascript:undo();'>Undo</a>
+<a id = 'redo' href='javascript:redo();'>Redo</a>
 <div id='someDiv' style='height: 100%; width: 100%;'>
     &nbsp;
 </div>

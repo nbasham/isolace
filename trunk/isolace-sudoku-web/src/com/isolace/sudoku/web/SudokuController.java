@@ -1,5 +1,9 @@
 package com.isolace.sudoku.web;
 
+import java.io.IOException;
+import java.util.Date;
+
+import javax.jdo.PersistenceManager;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.CookieGenerator;
 import org.springframework.web.util.WebUtils;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.isolace.gae.PMF;
+import com.isolace.sudoku.GameRecord;
 import com.isolace.sudoku.server.Puzzle;
 import com.isolace.sudoku.server.PuzzleDao;
 
@@ -22,9 +30,9 @@ public class SudokuController {
 
     @Autowired
     public PuzzleDao puzzleDao;
+    public static final String INDEX = "index";
+    public static final String LEVEL = "level";
     private static final Logger logger = Logger.getLogger(SudokuController.class);
-    private static final String INDEX = "index";
-    private static final String LEVEL = "level";
 
     
     /**
@@ -36,15 +44,25 @@ public class SudokuController {
     }
 
     //  http://localhost:8080/sudoku/start
-    @RequestMapping(value = "/start", method=RequestMethod.GET)
+    @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(HttpServletRequest request, HttpServletResponse response, Model model) {
-        String level = SudokuController.getCookieValue(request, response, LEVEL, "0");
-        String index = SudokuController.getCookieValue(request, response, INDEX + level, "0");
-        setCookie(request, response, LEVEL, level);
-        setCookie(request, response, INDEX + level, index);
-        model.addAttribute("level", level);
-        model.addAttribute("index", index);
-        return "start";
+        if (request.getUserPrincipal() != null) {
+            String level = SudokuController.getCookieValue(request, response, LEVEL, "0");
+            String index = SudokuController.getCookieValue(request, response, INDEX + level, "0");
+            setCookie(request, response, LEVEL, level);
+            setCookie(request, response, INDEX + level, index);
+            model.addAttribute(LEVEL, level);
+            model.addAttribute(INDEX, index);
+            return "start";
+        } else {
+            UserService userService = UserServiceFactory.getUserService();
+            try {
+                response.sendRedirect(userService.createLoginURL(request.getRequestURI()));
+            } catch (IOException e) {
+                logger.warn("Unable to redirect to log in page.");
+            }
+        }
+        return null;
     }
 
     //  http://localhost:8080/sudoku/level/0/index/0
@@ -55,19 +73,41 @@ public class SudokuController {
         return "sudoku/json";
     }
 
-
     //  http://localhost:8080/sudoku/play/level/0/index/0
     @RequestMapping(value = "/play/level/{level}/index/{index}", method=RequestMethod.GET)
-    public String game(@PathVariable int level, @PathVariable int index, HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String play(@PathVariable int level, @PathVariable int index, HttpServletRequest request, HttpServletResponse response, Model model) {
         setCookie(request, response, LEVEL, "" + level);
-        setCookie(request, response, INDEX + level, "" + (index + 1));
-        Puzzle puzzle = this.puzzleDao.get(level, index);
+        int incrementedIndex = (index + 1);
+        int numPuzzlesAtLevel = this.puzzleDao.getNumPuzzles(level);
+        if(incrementedIndex >= numPuzzlesAtLevel) {
+            incrementedIndex = index % numPuzzlesAtLevel;
+        }
+        setCookie(request, response, INDEX + level, "" + incrementedIndex);
+        Puzzle puzzle = this.puzzleDao.get(level, incrementedIndex);
         model.addAttribute("puzzle", intArrayToString(puzzle.getPuzzle()));
         model.addAttribute("revealed", intArrayToString(puzzle.getRevealed()));
         return "sudoku";
     }
 
-    private static CookieGenerator setCookie(HttpServletRequest request, HttpServletResponse response, String key, String value) {
+    //  http://localhost:8080/sudoku/gameOver/time/NNNNN
+    @RequestMapping(value = "/gameOver/time/{time}", method=RequestMethod.GET)
+    public String gameOver(@PathVariable long time, HttpServletRequest request, HttpServletResponse response, Model model) {
+        Cookie cookie = WebUtils.getCookie(request, LEVEL);
+        int level = Integer.parseInt(cookie.getValue());
+        cookie = WebUtils.getCookie(request, INDEX + level);
+        int index = Integer.parseInt(cookie.getValue());
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        UserService userService = UserServiceFactory.getUserService();
+        try {
+                GameRecord game = new GameRecord(userService.getCurrentUser(), level, index, time, new Date());
+                pm.makePersistent(game);
+        } finally {
+            pm.close();
+        }
+        return "sudoku";
+    }
+
+    public static CookieGenerator setCookie(HttpServletRequest request, HttpServletResponse response, String key, String value) {
         CookieGenerator cookie = new CookieGenerator();
         cookie.setCookieDomain(request.getHeader("host"));
         cookie.setCookieMaxAge(60*60*24*365*10);
@@ -77,7 +117,7 @@ public class SudokuController {
         return cookie;
     }
 
-    private static final String intArrayToString(int[] a) {
+    public static final String intArrayToString(int[] a) {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         int len = a.length;

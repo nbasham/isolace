@@ -19,7 +19,7 @@ public class PuzzleController extends HttpServlet {
     @Autowired
     public PuzzleDao puzzleDao;
     private static final Logger logger = Logger.getLogger(PuzzleController.class);
-    
+
     /**
      * Injected PuzzleDao to facilitate access to Sudoku puzzles.
      * @param puzzleDao
@@ -33,6 +33,8 @@ public class PuzzleController extends HttpServlet {
         int index = ServletRequestUtils.getIntParameter(req, "index", 0);
         resp.setContentType("text/json");
         Puzzle p = this.puzzleDao.get(level, index);
-        resp.getWriter().println(Puzzle.toJSON(p));
+        String json = Puzzle.toJSON(p);
+        logger.info("Sending JSON: " + json);
+        resp.getWriter().println(json);
     }
 }

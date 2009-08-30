@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-
 import com.isolace.common.ArrayUtil;
 
 /**
@@ -20,25 +19,6 @@ public class PuzzleGeneration {
     private static int MEDIUM_PUZZLE_NUM_CLUES = 30;
     private static int HARD_PUZZLE_NUM_CLUES = 27;
     private static int CHALLENGE_PUZZLE_NUM_CLUES = 24;
-    private static int[][] GRID_INDEXES = {
-        { 0, 1, 2, 9, 10, 11, 18, 19, 20 },
-        { 3, 4, 5, 12, 13, 14, 21, 22, 23 },
-        { 6, 7, 8, 15, 16, 17, 24, 25, 26 },
-        { 27, 28, 29, 36, 37, 38, 45, 46, 47 }, 
-        { 30, 31, 32, 39, 40, 41, 48, 49, 50 },
-        { 33, 34, 35, 42, 43, 44, 51, 52, 53 },
-        { 54, 55, 56, 63, 64, 65, 72, 73, 74 },
-        { 57, 58, 59, 66, 67, 68, 75, 76, 77 },
-        { 60, 61, 62, 69, 70, 71, 78, 79, 80 }
-    };
-    
-    private static int gridFromIndex(int index) {
-        for (int row = 0; row < 9; row++) {
-            if(ArrayUtil.contains(GRID_INDEXES[row], index))
-                return row;
-        }
-        throw new IllegalArgumentException("Unable to compute grid from index " + index + ".");
-    }
 
     /**
      * Gets the number of revealed item a level has.
@@ -61,93 +41,18 @@ public class PuzzleGeneration {
     
     public static final boolean validPuzzle(int[] puzzle) {
         for (int index = 0; index < puzzle.length; index++) {
-            int c = puzzle[index];
-            //  check row
-            int row = index / 9;
-            int rowOffset = row * 9;
-            int rowOffsetEnd = rowOffset + 9;
-            for (int i = rowOffset; i < rowOffsetEnd; i++) {
-                if(i == index) {
-                    continue;
-                }
-                if (puzzle[i] == c) {
-                    System.out.println("Row " + row + " at index " + index + " is not unique.");
-                    for (int r = rowOffset; r < rowOffsetEnd; r++) {
-                        System.out.print(puzzle[r]);
-                    }
-                    System.out.println();
-                    return false;
-                }
-            }
-            //  check col
-            int col = index % 9;
-            for (int i = col; i < puzzle.length; i += 9) {
-                if(i == index) {
-                    continue;
-                }
-                if (puzzle[i] == c) {
-                    System.out.println("Column " + col + " at index " + index + " is not unique.");
-                    for (int co = col; co < puzzle.length; co += 9) {
-                        System.out.print(puzzle[co]);
-                    }
-                    System.out.println();
-                    return false;
-                }
-            }
-
-            int grid = gridFromIndex(index);
-            int[] gridIndexes = GRID_INDEXES[grid];
-            for (int i = 0; i < gridIndexes.length; i++) {
-                int gridIdex = gridIndexes[i];
-                if(gridIdex != index) {
-                    if(puzzle[gridIdex] == c) {
-                        System.out.print(c + " is not unique in grid: ");
-                        for (int g = 0; g < gridIndexes.length; g++) {
-                            System.out.print(puzzle[g]);
-                        }
-                        System.out.println();
-                        System.out.println("Index " + index + " is equal to index " + gridIdex + " in grid " + grid + ".");
-                        Puzzle.printIndexes();
-                        Puzzle.printAsPuzzle(puzzle);
-                        return false;
-                    }
-                }
+            int cellValue = puzzle[index];
+            if(PuzzleValidation.conflicts(puzzle, index, cellValue)) {
+                return false;
             }
         }
         return true;
     }
 
-    private static final boolean validCandidate(int candidate, int index, int[] puzzle) {
-        int row = index / 9;
-        int rowOffset = row * 9;
-        int rowOffsetEnd = rowOffset + 9;
-        if (index < rowOffsetEnd) {
-            rowOffsetEnd = index;
-        }
-        //System.out.println("rowOffset: " + rowOffset + " rowOffsetEnd: " + rowOffsetEnd);
-        for (int i = rowOffset; i < rowOffsetEnd; i++) {
-            if (puzzle[i] == candidate) {
-                return false;
-            }
-        }
-
-        int col = index % 9;
-        for (int i = col; i < index; i += 9) {
-            if (puzzle[i] == candidate) {
-                return false;
-            }
-        }
-
-        if(!validGridCandidate(puzzle, index, candidate)) {
-            return false;
-        }
-
-        return true;
-    }
 
     public static boolean validGridCandidate(int[] puzzle, int index,int candidate) {
-        int grid = gridFromIndex(index);
-        int[] gridIndexes = GRID_INDEXES[grid];
+        int grid = PuzzleValidation.indexToGrid(index);
+        int[] gridIndexes = PuzzleValidation.GRID_SEQUENCES[grid];
         for (int i = 0; i < gridIndexes.length; i++) {
             int gridIndex = gridIndexes[i];
             if(gridIndex < index) {
@@ -271,6 +176,33 @@ public class PuzzleGeneration {
         return revealed;
     }
     
+    private static boolean validCandidate(int candidate, int index, int[] puzzle) {
+        int row = index / 9;
+        int rowOffset = row * 9;
+        int rowOffsetEnd = rowOffset + 9;
+        if (index < rowOffsetEnd) {
+            rowOffsetEnd = index;
+        }
+        //System.out.println("rowOffset: " + rowOffset + " rowOffsetEnd: " + rowOffsetEnd);
+        for (int i = rowOffset; i < rowOffsetEnd; i++) {
+            if (puzzle[i] == candidate) {
+                return false;
+            }
+        }
+    
+        int col = index % 9;
+        for (int i = col; i < index; i += 9) {
+            if (puzzle[i] == candidate) {
+                return false;
+            }
+        }
+    
+        if(!PuzzleGeneration.validGridCandidate(puzzle, index, candidate)) {
+            return false;
+        }
+    
+        return true;
+    }
     /**
      * Generate a puzzle. This is a slow, brute force method to
      * generated puzzles. The speed could be greatly enhanced
@@ -320,13 +252,11 @@ public class PuzzleGeneration {
         return puzzle;
     }
 
-    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         List<Puzzle> puzzles = new ArrayList<Puzzle>();
         for (int level = Puzzle.EASY_LEVEL; level <= Puzzle.CHALLENGE_LEVEL; level++) {
             int index = 0;
             while (index < 1000) {
-//            for (int index = 0; index < 1; index++) {
                 int[] puzzle = PuzzleGeneration.generate();
                 if(!validPuzzle(puzzle)) {
                     System.out.println("Skipping invalid puzzle.");
