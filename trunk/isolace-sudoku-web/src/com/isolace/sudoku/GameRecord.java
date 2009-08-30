@@ -24,7 +24,7 @@ public class GameRecord {
     private final int puzzleIndex;
     @Persistent
     private final Long elapsedTime;
-    @Persistent
+    @Persistent 
     private final Date date;
 
     public GameRecord(User user, int puzzleLevel, int puzzleIndex, Long elapsedTime, Date date) {
@@ -36,12 +36,12 @@ public class GameRecord {
         this.date = date;
     }
 
-    public User getUser() {
-        return user;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public int getPuzzleLevel() {
