@@ -1,12 +1,12 @@
 div.palette, div.hintPalette {
-    width: 189px;
-    height: 21px;
-    font-size: 21;
+    width: 311px;
+    height: 32px;
+    font-size: 32;
     position: absolute;
 }
 div.symbol, div.hintSymbol {
     font-size: 70%;
-    width: 21px;
+    width: 33px;
     height: 100%;
     color: black;
     float: left;

@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="isolace-sudoku-web">
-  <test verbose="2" name="com.isolace.sudoku.web.test.SudokuControllerTest" annotations="JDK">
-    <classes>
-      <class name="com.isolace.sudoku.web.test.SudokuControllerTest"/>
-    </classes>
-  </test>
-</suite>

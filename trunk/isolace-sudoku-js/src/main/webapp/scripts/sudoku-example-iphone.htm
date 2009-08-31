@@ -26,8 +26,8 @@ $(document).ready(function () {
     $logic.initialize(problem, mask);
 //    $('#someDiv').append($ui.getTimerHTML(10, 700));
     $('#iphoneDiv').append($ui.getBoardHTML(0, 0));
-    $('#iphoneDiv').append($renderer.getPalette(200, 0));
-    $('#iphoneDiv').append($renderer.getHintPalette(230, 0));
+    $('#iphoneDiv').append($renderer.getPalette(320, 0));
+    $('#iphoneDiv').append($renderer.getHintPalette(350, 0));
     $ui.startGame($logic);
 });
 
@@ -47,7 +47,7 @@ body, li, a {
 
 <body style='background-color: black;'>
 
-<div id='iphoneDiv' style='background-color: white; position: absolute; top: 0; left: 0; height: 280px; width: 195px;'>
+<div id='iphoneDiv' style='background-color: white; position: absolute; top: 10; left: 8; height: 400px; width: 320px;'>
     &nbsp;
 </div>
 
