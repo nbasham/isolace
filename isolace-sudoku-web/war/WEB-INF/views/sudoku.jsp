@@ -18,7 +18,6 @@
 <script type="text/javascript" src="/scripts/sudoku-render-text.js"></script>
 <script type="text/javascript" src="/scripts/sudoku-selection-background.js"></script>
 
-
 <script type="text/javascript">
 
 var GAME = {
