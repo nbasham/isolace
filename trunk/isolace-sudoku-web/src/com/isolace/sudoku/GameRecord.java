@@ -17,15 +17,15 @@ public class GameRecord {
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Long id;
     @Persistent
-    private final int puzzleLevel;
+    private int puzzleLevel;
     @Persistent
-    private final User user;
+    private User user;
     @Persistent
-    private final int puzzleIndex;
+    private int puzzleIndex;
     @Persistent
-    private final Long elapsedTime;
+    private Long elapsedTime;
     @Persistent 
-    private final Date date;
+    private Date date;
 
     public GameRecord(User user, int puzzleLevel, int puzzleIndex, Long elapsedTime, Date date) {
         super();
@@ -59,4 +59,31 @@ public class GameRecord {
     public Date getDate() {
         return date;
     }
+
+    public void setPuzzleLevel(int puzzleLevel) {
+        this.puzzleLevel = puzzleLevel;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setPuzzleIndex(int puzzleIndex) {
+        this.puzzleIndex = puzzleIndex;
+    }
+
+    public void setElapsedTime(Long elapsedTime) {
+        this.elapsedTime = elapsedTime;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "GameRecord " + id + " for user " + user + " puzzle level " + puzzleLevel + " index " + puzzleIndex + " time " + elapsedTime + " played on " + date;
+    }
+    
+    
 }

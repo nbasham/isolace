@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/antlr-3.0.1.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/com.springsource.javax.annotation-1.0.0.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/com.springsource.org.apache.log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/com.springsource.org.aspectj.runtime-1.6.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/com.springsource.org.aspectj.tools-1.6.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/com.springsource.org.aspectj.weaver-1.6.3.RELEASE.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-logging.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/org.springframework.js-2.0.6.RELEASE.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/json-lib-2.2.3-jdk15-sources.jar"/>
@@ -72,5 +66,9 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/org.springframework.web.portlet-sources-3.0.0.M4.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/org.springframework.web.servlet-3.0.0.M4.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/org.springframework.web.servlet-sources-3.0.0.M4.jar"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (1)"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/org.springframework.binding-2.0.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/org.springframework.js-2.0.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/org.springframework.webflow-2.0.8.RELEASE.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
