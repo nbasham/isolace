@@ -1,14 +1,18 @@
 package com.isolace.sudoku.web;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +36,7 @@ public class SudokuController {
     public PuzzleDao puzzleDao;
     public static final String INDEX = "index";
     public static final String LEVEL = "level";
-    private static final Logger logger = Logger.getLogger(SudokuController.class);
+    private static final Logger logger = Logger.getLogger(SudokuController.class.getName());
 
     
     /**
@@ -59,7 +63,7 @@ public class SudokuController {
             try {
                 response.sendRedirect(userService.createLoginURL(request.getRequestURI()));
             } catch (IOException e) {
-                logger.warn("Unable to redirect to log in page.");
+                logger.warning("Unable to redirect to log in page.");
             }
         }
         return null;
@@ -93,15 +97,50 @@ public class SudokuController {
 
     @RequestMapping(value = "/gameOver/level/{level}/index/{index}/time/{time}", method=RequestMethod.GET)
     public String gameOver(@PathVariable int level, @PathVariable int index, @PathVariable long time, HttpServletRequest request, HttpServletResponse response, Model model) {
+        logger.info("gameOver/level/" + level + "/index/" + index + "/time/" + time);
         PersistenceManager pm = PMF.get().getPersistenceManager();
         UserService userService = UserServiceFactory.getUserService();
         try {
-                GameRecord game = new GameRecord(userService.getCurrentUser(), level, index, time, new Date());
-                pm.makePersistent(game);
+            logger.info("About to write game record index " + index);
+            GameRecord game = new GameRecord(userService.getCurrentUser(), level, index, time, new Date());
+            pm.makePersistent(game);
+            logger.info("Persisted " + game.toString());
+        } catch(Exception e) {
+            logger.warning("Error writing game record. " + e.getMessage());
         } finally {
             pm.close();
         }
         return null;
+    }
+
+    private static final String TABLE_ROW_TEMPLATE = "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr><br/>";
+    //  SELECT * FROM GameRecord WHERE user = USER('nbasham@gmail.com')
+    @RequestMapping(value = "/scores", method=RequestMethod.GET)
+    public String scores(HttpServletRequest request, HttpServletResponse response, Model model) {
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        UserService userService = UserServiceFactory.getUserService();
+        try {
+            Query query = pm.newQuery(GameRecord.class);
+            //query.setFilter("");
+            //String query = "SELECT * FROM GameRecord WHERE user = USER('" + userService.getCurrentUser().getEmail() + "')";
+            //String query = "WHERE user = USER('" + userService.getCurrentUser().getEmail() + "')";
+            logger.info("Quering on " + query);
+            List<GameRecord> gameRecords = (List<GameRecord>) query.execute();
+            model.addAttribute("games", gameRecords);
+            StringBuilder sb = new StringBuilder();
+            SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM d, yyyy");
+            for (GameRecord r : gameRecords) {
+                logger.info(r.toString());
+                String row = String.format(TABLE_ROW_TEMPLATE, r.getUser().getNickname(), r.getPuzzleLevel(), r.getPuzzleIndex(), r.getElapsedTime(), formatter.format(r.getDate()));
+                sb.append(row);
+            }
+            model.addAttribute("rows", sb.toString());
+        } catch(Exception e) {
+            logger.warning("Error reading game records.");
+        } finally {
+            pm.close();
+        }
+        return "scores";
     }
 
     public static CookieGenerator setCookie(HttpServletRequest request, HttpServletResponse response, String key, String value) {

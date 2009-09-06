@@ -19,10 +19,46 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
-
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/sudoku/*</url-pattern>
     </servlet-mapping>
+    
+        <!-- Serves static resource content from .jar files such as spring-js.jar -->
+    <servlet>
+        <servlet-name>Resource Servlet</servlet-name>
+        <servlet-class>org.springframework.js.resource.ResourceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Resource Servlet</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
+    <!--
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/*</url-pattern>
+    </servlet-mapping>  
+    -->
+    
+    <taglib>
+        <taglib-uri>/WEB-INF/c.tld</taglib-uri>
+        <taglib-location>/WEB-INF/tld/c.tld</taglib-location>
+    </taglib>
+    <taglib>
+        <taglib-uri>/WEB-INF/fmt.tld</taglib-uri>
+        <taglib-location>/WEB-INF/tld/fmt.tld</taglib-location>
+    </taglib>
+    <taglib>
+        <taglib-uri>/WEB-INF/fn.tld</taglib-uri>
+        <taglib-location>/WEB-INF/tld/fn.tld</taglib-location>
+    </taglib>
+    <taglib>
+        <taglib-uri>/spring</taglib-uri>
+        <taglib-location>/WEB-INF/tld/spring.tld</taglib-location>
+    </taglib>
+    <taglib>
+        <taglib-uri>/spring</taglib-uri>
+        <taglib-location>/WEB-INF/tld/spring-form.tld</taglib-location>
+    </taglib>
 </web-app>

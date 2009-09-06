@@ -23,14 +23,17 @@ $(document).ready(function () {
 </head>
 
 <body>
-<a href="javascript:startGame();">Start Sudoku</a>
+    <a href="javascript:startGame();">Start Sudoku</a>
+    <select id='levelList'>
+      <option value="0">Easy</option>
+      <option value="1">Medium</option>
+      <option value="2">Hard</option>
+      <option value="3">Challenger</option>
+    </select>
 
-<select id='levelList'>
-  <option value="0">Easy</option>
-  <option value="1">Medium</option>
-  <option value="2">Hard</option>
-  <option value="3">Challenger</option>
-</select>
+    <br/>
+
+    <a href="/sudoku/scores">View Scores</a>
 
 </body>
 </html>

@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.ServletRequestUtils;
 
@@ -18,7 +17,6 @@ public class PuzzleController extends HttpServlet {
 
     @Autowired
     public PuzzleDao puzzleDao;
-    private static final Logger logger = Logger.getLogger(PuzzleController.class);
 
     /**
      * Injected PuzzleDao to facilitate access to Sudoku puzzles.
@@ -34,7 +32,7 @@ public class PuzzleController extends HttpServlet {
         resp.setContentType("text/json");
         Puzzle p = this.puzzleDao.get(level, index);
         String json = Puzzle.toJSON(p);
-        logger.info("Sending JSON: " + json);
+        //logger.info("Sending JSON: " + json);
         resp.getWriter().println(json);
     }
 }

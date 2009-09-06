@@ -405,7 +405,13 @@ ISOLACE.sudoku.ui.prototype.guess = function(value) {
 
     if ($ui.sudokuLogic.solved()) {
         var playingTime = $ui.playTime;
-        $.ajax({url: '/sudoku/gameOver/level/' + GAME.level + '/index/' + GAME.index + '/time/' + playingTime});
+        var url = '/sudoku/gameOver/level/' + GAME.level + '/index/' + GAME.index + '/time/' + playingTime;
+        $.ajax({
+            url: url,
+            complete: function(XMLHttpRequest, textStatus) {
+                //alert(textStatus);
+              }
+            });
         clearInterval($ui.playTimer);
         $ui.unselectCell(selectedIndex);
         //$('.guessCell').each(function() {YAHOO.util.Event.removeListener(this.id);alert(this.id, 'mouseover')});
