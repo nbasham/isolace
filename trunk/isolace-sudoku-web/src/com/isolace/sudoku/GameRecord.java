@@ -84,6 +84,4 @@ public class GameRecord {
     public String toString() {
         return "GameRecord " + id + " for user " + user + " puzzle level " + puzzleLevel + " index " + puzzleIndex + " time " + elapsedTime + " played on " + date;
     }
-    
-    
 }
