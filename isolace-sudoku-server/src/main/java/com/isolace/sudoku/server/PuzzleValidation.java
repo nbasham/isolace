@@ -139,4 +139,15 @@ public class PuzzleValidation {
         return false;
     }
 
+    //  TODO this should test the entire puzzle e.g. are revealed indexes from 0 to 80 vs. 1 to 81
+    public static final boolean isValid(int[] puzzle) {
+        for (int index = 0; index < puzzle.length; index++) {
+            int cellValue = puzzle[index];
+            if(conflicts(puzzle, index, cellValue)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

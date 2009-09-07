@@ -63,11 +63,17 @@ public class PuzzleSolver {
             found = checkForGimmes(null);
             iterations++;
         }
-        checkGridsForPairs(out);
-        Puzzle.printAsPuzzle(this.solution);
-        ArrayUtil.printArray(this.solution);
-        ArrayUtil.printArray(this.puzzle);
-        System.out.println("Iterations " + iterations);
+//        checkGridsForPairs(out);
+//        Puzzle.printAsPuzzle(this.solution);
+//        ArrayUtil.printArray(this.solution);
+//        ArrayUtil.printArray(this.puzzle);
+        int count = 0;
+        for (int i : this.solution) {
+            if(i != 0) {
+                count++;
+            }
+        }
+        System.out.println("  Found " + count + " in " + iterations + " iterations.");
         return true;
     }
     

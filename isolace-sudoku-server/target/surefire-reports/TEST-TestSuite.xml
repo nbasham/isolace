@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.846" errors="0" skipped="0" tests="8" name="TestSuite">
+<testsuite failures="0" time="4.505" errors="0" skipped="0" tests="9" name="TestSuite">
   <properties>
     <property name="java.vendor" value="Apple Inc."/>
     <property name="localRepository" value="/Users/iSolace/.m2/repository"/>
@@ -20,10 +20,11 @@
     <property name="awt.nativeDoubleBuffering" value="true"/>
     <property name="env.PATH" value="/usr/bin:/bin:/usr/sbin:/sbin"/>
     <property name="user.language" value="en"/>
+    <property name="env.APP_ICON_53597" value="../Resources/Eclipse.icns"/>
     <property name="sun.boot.library.path" value="/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Libraries"/>
-    <property name="classworlds.conf" value="/Users/iSolace/Documents/isolace-dev/.metadata/.plugins/org.maven.ide.eclipse/launches/m2conf3039286916980832414.tmp"/>
-    <property name="env.APP_ICON_5302" value="../Resources/Eclipse.icns"/>
+    <property name="classworlds.conf" value="/Users/iSolace/Documents/isolace-dev/.metadata/.plugins/org.maven.ide.eclipse/launches/m2conf8338454770905468026.tmp"/>
     <property name="java.version" value="1.6.0_13"/>
+    <property name="env.JAVA_STARTED_ON_FIRST_THREAD_53597" value="1"/>
     <property name="user.timezone" value="America/Los_Angeles"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
@@ -43,7 +44,6 @@
     <property name="java.vm.version" value="11.3-b02-83"/>
     <property name="java.awt.printerjob" value="apple.awt.CPrinterJob"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="env.JAVA_MAIN_CLASS_29020" value="org.codehaus.classworlds.Launcher"/>
     <property name="awt.toolkit" value="apple.awt.CToolkit"/>
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
@@ -56,10 +56,9 @@
     <property name="maven.home" value="EMBEDDED"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.class.path" value="/Developer/Applications/eclipse-3.5/plugins/org.maven.ide.components.maven_embedder_2.1.0.20080530-2300/jars/plexus-classworlds-1.2-alpha-12.jar"/>
-    <property name="env.JAVA_STARTED_ON_FIRST_THREAD_5289" value="1"/>
+    <property name="env.JAVA_MAIN_CLASS_62117" value="org.codehaus.classworlds.Launcher"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.vm.specification.version" value="1.0"/>
-    <property name="m2eclipse.workspace.state" value="/Users/iSolace/Documents/isolace-dev/.metadata/.plugins/org.maven.ide.eclipse/workspacestate.properties"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="env.HOME" value="/Users/iSolace"/>
@@ -71,26 +70,25 @@
     <property name="os.arch" value="x86_64"/>
     <property name="java.awt.graphicsenv" value="apple.awt.CGraphicsEnvironment"/>
     <property name="java.ext.dirs" value="/Library/Java/Extensions:/System/Library/Java/Extensions:/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Home/lib/ext"/>
-    <property name="user.dir" value="/Users/iSolace/Documents/isolace-dev/isolace-sudoku-server"/>
     <property name="mrj.version" value="1050.1.6.0_13-211"/>
+    <property name="user.dir" value="/Users/iSolace/Documents/isolace-dev/isolace-sudoku-server"/>
     <property name="line.separator" value="
 "/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="env.APP_ICON_53261" value="../Resources/Eclipse.icns"/>
     <property name="basedir" value="/Users/iSolace/Documents/isolace-dev/isolace-sudoku-server"/>
     <property name="maven.mode.standalone" value="true"/>
+    <property name="env.JAVA_STARTED_ON_FIRST_THREAD_53261" value="1"/>
     <property name="file.encoding" value="MacRoman"/>
-    <property name="env.APP_ICON_10437" value="../Resources/Eclipse.icns"/>
-    <property name="env.JAVA_STARTED_ON_FIRST_THREAD_5302" value="1"/>
     <property name="java.specification.version" value="1.6"/>
-    <property name="env.APP_ICON_5289" value="../Resources/Eclipse.icns"/>
-    <property name="env.JAVA_STARTED_ON_FIRST_THREAD_10437" value="1"/>
   </properties>
-  <testcase time="0.296" classname="com.isolace.sudoku.server.test.PuzzleDaoTest" name="testValidPuzzleDao"/>
-  <testcase time="0.114" classname="com.isolace.sudoku.server.test.PuzzleDaoTest" name="testGetNumPuzzles"/>
+  <testcase time="3.465" classname="com.isolace.sudoku.server.test.PuzzleDaoTest" name="testValidPuzzleDao"/>
+  <testcase time="0.124" classname="com.isolace.sudoku.server.test.PuzzleDaoTest" name="testGetNumPuzzles"/>
   <testcase time="0" classname="com.isolace.sudoku.server.test.PuzzleGenerationTest" name="testValidPuzzle"/>
   <testcase time="0" classname="com.isolace.sudoku.server.test.PuzzleGenerationTest" name="testInvalidPuzzle"/>
-  <testcase time="0" classname="com.isolace.sudoku.server.test.PuzzleGenerationTest" name="testValidGridCandidate"/>
-  <testcase time="0" classname="com.isolace.sudoku.server.test.PuzzleGenerationTest" name="testValidGridCandidateFail"/>
-  <testcase time="0.063" classname="com.isolace.sudoku.server.test.PuzzleSolverTest" name="testSolver"/>
-  <testcase time="0.026" classname="com.isolace.sudoku.server.test.PuzzleTest" name="testJSON"/>
+  <testcase time="0.001" classname="com.isolace.sudoku.server.test.PuzzleGenerationTest" name="testValidGridCandidate"/>
+  <testcase time="0.001" classname="com.isolace.sudoku.server.test.PuzzleGenerationTest" name="testValidGridCandidateFail"/>
+  <testcase time="0.008" classname="com.isolace.sudoku.server.test.PuzzleMaskGenerationTest" name="testValidPuzzleDao"/>
+  <testcase time="0.034" classname="com.isolace.sudoku.server.test.PuzzleSolverTest" name="testSolver"/>
+  <testcase time="0.036" classname="com.isolace.sudoku.server.test.PuzzleTest" name="testJSON"/>
 </testsuite>

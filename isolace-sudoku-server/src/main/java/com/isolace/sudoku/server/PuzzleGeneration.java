@@ -39,17 +39,6 @@ public class PuzzleGeneration {
         }
     }
     
-    public static final boolean validPuzzle(int[] puzzle) {
-        for (int index = 0; index < puzzle.length; index++) {
-            int cellValue = puzzle[index];
-            if(PuzzleValidation.conflicts(puzzle, index, cellValue)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
     public static boolean validGridCandidate(int[] puzzle, int index,int candidate) {
         int grid = PuzzleValidation.indexToGrid(index);
         int[] gridIndexes = PuzzleValidation.GRID_SEQUENCES[grid];
@@ -64,59 +53,7 @@ public class PuzzleGeneration {
         return true;
     }
 
-    /**
-     * A puzzle should have just one solution. This method looks for pairs of
-     * numbers that are inter-changeable allowing for more than one solution.
-     * 
-     * @param puzzle The puzzle to be analyzed.
-     * @return Array of indexes that can result in more than one solution.
-     */
-    public static final int[] getAmbiguousIndexes(int[] puzzle) {
-        int[] temp = new int[81];
-        int count = 0;
-        for(int index = 0; index < 81; index++) {
-            int candidate = puzzle[index];
-            int row = index / 9;
-            int col = index % 9;
-            int rowOffset = row * 9;
-            int rowOffsetEnd = rowOffset + 9;
-            if (index < rowOffsetEnd) {
-                rowOffsetEnd = index;
-            }
-            if (row != 0 && row != 3 && row != 6 && col > 2) {
-                int above = puzzle[index - 9];
-                for (int i = rowOffset; i < rowOffsetEnd; i++) {
-                    if (puzzle[i] == above) {
-                        int above2 = puzzle[i - 9];
-                        if (above2 == candidate) {
-                            temp[count] = index;
-                            count++;
-                            //System.out.println("Index"  + index + " " + candidate + " below " + puzzle[index-9]);
-                        }
-                    }
-                }
-            }
 
-            if (col != 0 && col != 3 && col != 6) {
-                int left = puzzle[index - 1];
-                for (int i = col - 1; i < row * 9; i += 9) {
-                    if (puzzle[i] == candidate) {
-                        int right = puzzle[i + 1];
-                        if (right == left) {
-                            temp[count] = index;
-                            count++;
-                            //System.out.println("Index"  + index + " " + candidate + " right " + puzzle[index - 1]);
-                        }
-                    }
-                }
-            }
-        }
-        int[] ambiguous = new int[count];
-        for (int i = 0; i < count; i++) {
-            ambiguous[i] = temp[i];
-        }
-        return ambiguous;
-    }
     
     /**
      * Returns an array of indexes to be revealed to the user at
@@ -126,6 +63,7 @@ public class PuzzleGeneration {
      * @param level Game level.
      * @param puzzle Game puzzle.
      * @param ambiguous Array of ambiguous indexes.
+     * TODO is return array from 0 to 80 inclusive?
      * @return An array of indexes to be revealed
      * @see #getAmbiguousIndexes(int[])
      */
@@ -163,8 +101,9 @@ public class PuzzleGeneration {
         }
         
         //  fill remaining items in with unique random values
+        // TODO 82??? should be 81
         while (index < revealed.length) {
-            int candidate = r.nextInt(82);
+            int candidate = r.nextInt(81);
             if(!ArrayUtil.contains(revealed, candidate)) {
                 revealed[index] = candidate;
                 index++;
@@ -258,15 +197,16 @@ public class PuzzleGeneration {
             int index = 0;
             while (index < 1000) {
                 int[] puzzle = PuzzleGeneration.generate();
-                if(!validPuzzle(puzzle)) {
+                if(!PuzzleValidation.isValid(puzzle)) {
                     System.out.println("Skipping invalid puzzle.");
                     continue;
                 }
-                int[] ambiguos = PuzzleGeneration.getAmbiguousIndexes(puzzle);
+                int[] ambiguos = PuzzleMaskGeneration.getAmbiguousIndexes(puzzle);
                 int[] revealed = PuzzleGeneration.generateRevealed(level, puzzle, ambiguos);
                 Puzzle p = new Puzzle(puzzle, revealed, level, index);
                 puzzles.add(p);
-                System.out.println("Added level " + level + " index " + index);
+                System.out.print("Added level " + level + " index " + index);
+                new PuzzleSolver(puzzle, revealed).canSolve(null);
                 //ArrayUtil.printArray(puzzle);
                 //ArrayUtil.printArray(revealed);
                 index++;

@@ -6,33 +6,37 @@
     </groups>
     <test name="Command line test">
       <class name="com.isolace.sudoku.server.test.PuzzleSolverTest">
-        <test-method status="PASS" signature="testSolver()" name="testSolver" duration-ms="64" started-at="2009-08-29T19:12:22Z" finished-at="2009-08-29T19:12:22Z">
+        <test-method status="PASS" signature="testSolver()" name="testSolver" duration-ms="34" started-at="2009-09-07T00:04:56Z" finished-at="2009-09-07T00:04:56Z">
+        </test-method>
+      </class>
+      <class name="com.isolace.sudoku.server.test.PuzzleMaskGenerationTest">
+        <test-method status="PASS" signature="testValidPuzzleDao()" name="testValidPuzzleDao" duration-ms="8" started-at="2009-09-07T00:04:56Z" finished-at="2009-09-07T00:04:56Z">
         </test-method>
       </class>
       <class name="com.isolace.sudoku.server.test.PuzzleTest">
-        <test-method status="PASS" signature="testJSON()" name="testJSON" duration-ms="26" started-at="2009-08-29T19:12:22Z" finished-at="2009-08-29T19:12:22Z">
+        <test-method status="PASS" signature="setUp()" name="setUp" is-config="true" duration-ms="0" started-at="2009-09-07T00:04:56Z" finished-at="2009-09-07T00:04:56Z">
         </test-method>
-        <test-method status="PASS" signature="setUp()" name="setUp" is-config="true" duration-ms="0" started-at="2009-08-29T19:12:22Z" finished-at="2009-08-29T19:12:22Z">
+        <test-method status="PASS" signature="testJSON()" name="testJSON" duration-ms="36" started-at="2009-09-07T00:04:56Z" finished-at="2009-09-07T00:04:56Z">
         </test-method>
       </class>
       <class name="com.isolace.sudoku.server.test.PuzzleDaoTest">
-        <test-method status="PASS" signature="setUp()" name="setUp" is-config="true" duration-ms="4" started-at="2009-08-29T19:12:22Z" finished-at="2009-08-29T19:12:22Z">
+        <test-method status="PASS" signature="setUp()" name="setUp" is-config="true" duration-ms="0" started-at="2009-09-07T00:04:56Z" finished-at="2009-09-07T00:04:56Z">
         </test-method>
-        <test-method status="PASS" signature="testGetNumPuzzles()" name="testGetNumPuzzles" duration-ms="114" started-at="2009-08-29T19:12:22Z" finished-at="2009-08-29T19:12:22Z">
+        <test-method status="PASS" signature="setUp()" name="setUp" is-config="true" duration-ms="17" started-at="2009-09-07T00:04:53Z" finished-at="2009-09-07T00:04:53Z">
         </test-method>
-        <test-method status="PASS" signature="setUp()" name="setUp" is-config="true" duration-ms="0" started-at="2009-08-29T19:12:22Z" finished-at="2009-08-29T19:12:22Z">
+        <test-method status="PASS" signature="testGetNumPuzzles()" name="testGetNumPuzzles" duration-ms="124" started-at="2009-09-07T00:04:56Z" finished-at="2009-09-07T00:04:56Z">
         </test-method>
-        <test-method status="PASS" signature="testValidPuzzleDao()" name="testValidPuzzleDao" duration-ms="293" started-at="2009-08-29T19:12:22Z" finished-at="2009-08-29T19:12:22Z">
+        <test-method status="PASS" signature="testValidPuzzleDao()" name="testValidPuzzleDao" duration-ms="3454" started-at="2009-09-07T00:04:53Z" finished-at="2009-09-07T00:04:56Z">
         </test-method>
       </class>
       <class name="com.isolace.sudoku.server.test.PuzzleGenerationTest">
-        <test-method status="PASS" signature="testValidGridCandidate()" name="testValidGridCandidate" duration-ms="0" started-at="2009-08-29T19:12:22Z" finished-at="2009-08-29T19:12:22Z">
+        <test-method status="PASS" signature="testValidGridCandidateFail()" name="testValidGridCandidateFail" duration-ms="0" started-at="2009-09-07T00:04:56Z" finished-at="2009-09-07T00:04:56Z">
         </test-method>
-        <test-method status="PASS" signature="testValidPuzzle()" name="testValidPuzzle" duration-ms="0" started-at="2009-08-29T19:12:22Z" finished-at="2009-08-29T19:12:22Z">
+        <test-method status="PASS" signature="testValidPuzzle()" name="testValidPuzzle" duration-ms="0" started-at="2009-09-07T00:04:56Z" finished-at="2009-09-07T00:04:56Z">
         </test-method>
-        <test-method status="PASS" signature="testInvalidPuzzle()" name="testInvalidPuzzle" duration-ms="0" started-at="2009-08-29T19:12:22Z" finished-at="2009-08-29T19:12:22Z">
+        <test-method status="PASS" signature="testValidGridCandidate()" name="testValidGridCandidate" duration-ms="1" started-at="2009-09-07T00:04:56Z" finished-at="2009-09-07T00:04:56Z">
         </test-method>
-        <test-method status="PASS" signature="testValidGridCandidateFail()" name="testValidGridCandidateFail" duration-ms="0" started-at="2009-08-29T19:12:22Z" finished-at="2009-08-29T19:12:22Z">
+        <test-method status="PASS" signature="testInvalidPuzzle()" name="testInvalidPuzzle" duration-ms="0" started-at="2009-09-07T00:04:56Z" finished-at="2009-09-07T00:04:56Z">
         </test-method>
       </class>
     </test>
