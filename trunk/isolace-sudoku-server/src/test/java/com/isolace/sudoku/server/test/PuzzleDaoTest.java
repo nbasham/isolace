@@ -8,7 +8,8 @@ import org.testng.annotations.Test;
 import com.isolace.sudoku.server.Puzzle;
 import com.isolace.sudoku.server.PuzzleDao;
 import com.isolace.sudoku.server.PuzzleDaoFile;
-import com.isolace.sudoku.server.PuzzleGeneration;
+import com.isolace.sudoku.server.PuzzleSolver;
+import com.isolace.sudoku.server.PuzzleValidation;
 
 public class PuzzleDaoTest {
 
@@ -18,7 +19,7 @@ public class PuzzleDaoTest {
      */
     @BeforeMethod
     public void setUp() {
-        this.puzzleDao = new PuzzleDaoFile("puzzles-100x4.txt");
+        this.puzzleDao = new PuzzleDaoFile("puzzles.txt");
     }
 
     /**
@@ -31,7 +32,8 @@ public class PuzzleDaoTest {
             int numPuzzles = this.puzzleDao.getNumPuzzles(level);
             for (int i = 0; i < numPuzzles; i++) {
                 Puzzle p = this.puzzleDao.get(level, i);
-                boolean b = PuzzleGeneration.validPuzzle(p.getPuzzle());
+                boolean b = PuzzleValidation.isValid(p.getPuzzle());
+                new PuzzleSolver(p.getPuzzle(), p.getRevealed()).canSolve(null);
                 assertTrue(b);
                 index++;
             }
@@ -44,7 +46,7 @@ public class PuzzleDaoTest {
      */
     @Test
     public void testGetNumPuzzles() {
-        PuzzleDao localPuzzleDao = new PuzzleDaoFile("puzzles-100x4.txt");
+        PuzzleDao localPuzzleDao = new PuzzleDaoFile("puzzles.txt");
         for (int level = Puzzle.EASY_LEVEL; level <= Puzzle.CHALLENGE_LEVEL; level++) {
             assertTrue(localPuzzleDao.getNumPuzzles(level) > 0);
         }

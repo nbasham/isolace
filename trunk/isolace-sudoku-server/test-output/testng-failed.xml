@@ -1,11 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="5" skipfailedinvocationCounts="false" verbose="1" name="Failed suite [isolace-sudoku-server]" junit="false" parallel="false" annotations="JDK">
-  <test name="com.isolace.sudoku.server.test.PuzzleDaoTest(failed)" junit="false" parallel="false" annotations="JDK">
+  <test name="com.isolace.sudoku.server.test.PuzzleSolverTest(failed)" junit="false" parallel="false" annotations="JDK">
     <classes>
-      <class name="com.isolace.sudoku.server.test.PuzzleDaoTest">
+      <class name="com.isolace.sudoku.server.test.PuzzleSolverTest">
         <methods>
-          <include name="setUp"/>
-          <include name="testGetNumPuzzles"/>
+          <include name="testSolver"/>
         </methods>
       </class>
     </classes>

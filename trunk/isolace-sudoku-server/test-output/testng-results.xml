@@ -6,13 +6,13 @@
     </groups>
     <test name="com.isolace.sudoku.server.test.PuzzleDaoTest">
       <class name="com.isolace.sudoku.server.test.PuzzleDaoTest">
-        <test-method status="PASS" signature="setUp()" name="setUp" is-config="true" duration-ms="20" started-at="2009-08-29T19:06:11Z" finished-at="2009-08-29T19:06:11Z">
+        <test-method status="PASS" signature="testGetNumPuzzles()" name="testGetNumPuzzles" duration-ms="162" started-at="2009-09-07T00:03:49Z" finished-at="2009-09-07T00:03:49Z">
         </test-method>
-        <test-method status="PASS" signature="testGetNumPuzzles()" name="testGetNumPuzzles" duration-ms="7183" started-at="2009-08-29T19:06:15Z" finished-at="2009-08-29T19:06:22Z">
+        <test-method status="PASS" signature="setUp()" name="setUp" is-config="true" duration-ms="6" started-at="2009-09-07T00:03:48Z" finished-at="2009-09-07T00:03:48Z">
         </test-method>
-        <test-method status="PASS" signature="testValidPuzzleDao()" name="testValidPuzzleDao" duration-ms="3476" started-at="2009-08-29T19:06:11Z" finished-at="2009-08-29T19:06:15Z">
+        <test-method status="PASS" signature="setUp()" name="setUp" is-config="true" duration-ms="0" started-at="2009-09-07T00:03:49Z" finished-at="2009-09-07T00:03:49Z">
         </test-method>
-        <test-method status="PASS" signature="setUp()" name="setUp" is-config="true" duration-ms="0" started-at="2009-08-29T19:06:15Z" finished-at="2009-08-29T19:06:15Z">
+        <test-method status="PASS" signature="testValidPuzzleDao()" name="testValidPuzzleDao" duration-ms="990" started-at="2009-09-07T00:03:48Z" finished-at="2009-09-07T00:03:49Z">
         </test-method>
       </class>
     </test>

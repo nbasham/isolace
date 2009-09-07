@@ -18,7 +18,7 @@ public class PuzzleTest {
      */
     @BeforeMethod
     public void setUp() {
-        this.puzzleDao = new PuzzleDaoFile("puzzles-100x4.txt");
+        this.puzzleDao = new PuzzleDaoFile("puzzles.txt");
     }
 
     @Test
