@@ -1,8 +1,8 @@
-<jsp:directive.include file="/WEB-INF/views/includes.jsp"/>
+<jsp:directive.include file="/WEB-INF/views/includes.jsp" />
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-
-<%@ page import="com.isolace.sudoku.GameRecord" %>
-<%@ page import="java.util.List" %>
+<%@ page import="com.isolace.sudoku.Score"%>
+<%@ page import="java.util.List"%>
+<%@ page isELIgnored="false"%>
 
 <html>
 
@@ -11,17 +11,25 @@
 
 <body>
 
-        <table width="300px">
-            <tr>
-                <thead>
-                    <th>Nickname</th>
-                    <th>Level</th>
-                    <th>Game Number</th>
-                    <th>Time</th>
-                    <th>Date</th>
-                </thead>
-            </tr>
-            <%= request.getAttribute("rows") %>
-        </table>
+<table width="500px">
+    <tr>
+    <thead>
+        <th>Nickname</th>
+        <th>Level</th>
+        <th>Time</th>
+        <th>Date</th>
+    </thead>
+    </tr>
+    <c:forEach var="score" items="${scores}">
+        <tr>
+            <td>${score.user}</td>
+            <td>${score.level}</td>
+            <td>${score.time}</td>
+            <td>${score.date}</td>
+        </tr>
+    </c:forEach>
+</table>
+<br />
+<a href="/sudoku/start">Main Menu</a>
 </body>
 </html>

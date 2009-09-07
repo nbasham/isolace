@@ -1,7 +1,6 @@
 package com.isolace.sudoku.web;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.CookieGenerator;
 import org.springframework.web.util.WebUtils;
 
@@ -26,6 +26,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.isolace.gae.PMF;
 import com.isolace.sudoku.GameRecord;
+import com.isolace.sudoku.Score;
 import com.isolace.sudoku.server.Puzzle;
 import com.isolace.sudoku.server.PuzzleDao;
 
@@ -37,7 +38,6 @@ public class SudokuController {
     public static final String INDEX = "index";
     public static final String LEVEL = "level";
     private static final Logger logger = Logger.getLogger(SudokuController.class.getName());
-
     
     /**
      * Injected PuzzleDao to facilitate access to Sudoku puzzles.
@@ -51,6 +51,7 @@ public class SudokuController {
     @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(HttpServletRequest request, HttpServletResponse response, Model model) {
         if (request.getUserPrincipal() != null) {
+            logger.info("Main menu - " + UserServiceFactory.getUserService().getCurrentUser().getNickname());
             String level = SudokuController.getCookieValue(request, response, LEVEL, "0");
             String index = SudokuController.getCookieValue(request, response, INDEX + level, "0");
             setCookie(request, response, LEVEL, level);
@@ -63,7 +64,7 @@ public class SudokuController {
             try {
                 response.sendRedirect(userService.createLoginURL(request.getRequestURI()));
             } catch (IOException e) {
-                logger.warning("Unable to redirect to log in page.");
+                logger.warning("Unable to redirect to log in page. " + e.getMessage());
             }
         }
         return null;
@@ -113,34 +114,34 @@ public class SudokuController {
         return null;
     }
 
-    private static final String TABLE_ROW_TEMPLATE = "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr><br/>";
-    //  SELECT * FROM GameRecord WHERE user = USER('nbasham@gmail.com')
     @RequestMapping(value = "/scores", method=RequestMethod.GET)
-    public String scores(HttpServletRequest request, HttpServletResponse response, Model model) {
+    public ModelAndView scores(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mv = new ModelAndView("scores");
+        List<Score>scores = new ArrayList<Score>();
         PersistenceManager pm = PMF.get().getPersistenceManager();
         UserService userService = UserServiceFactory.getUserService();
         try {
-            Query query = pm.newQuery(GameRecord.class);
-            //query.setFilter("");
-            //String query = "SELECT * FROM GameRecord WHERE user = USER('" + userService.getCurrentUser().getEmail() + "')";
-            //String query = "WHERE user = USER('" + userService.getCurrentUser().getEmail() + "')";
+            String query = "select from com.isolace.sudoku.GameRecord where user == '" + userService.getCurrentUser() + "'";
             logger.info("Quering on " + query);
-            List<GameRecord> gameRecords = (List<GameRecord>) query.execute();
-            model.addAttribute("games", gameRecords);
-            StringBuilder sb = new StringBuilder();
-            SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM d, yyyy");
-            for (GameRecord r : gameRecords) {
-                logger.info(r.toString());
-                String row = String.format(TABLE_ROW_TEMPLATE, r.getUser().getNickname(), r.getPuzzleLevel(), r.getPuzzleIndex(), r.getElapsedTime(), formatter.format(r.getDate()));
-                sb.append(row);
+            //   order by date desc
+            Query q = pm.newQuery(GameRecord.class, "user == u"); 
+            q.declareParameters("com.google.appengine.api.users.User u"); 
+            @SuppressWarnings("unchecked")
+            List<GameRecord> gameRecords = (List<GameRecord>) q.execute(userService.getCurrentUser());
+            logger.info("Quering returned  " + gameRecords.size() + " results.");
+
+            for (GameRecord game : gameRecords) {
+                logger.info(game.toString());
+                Score score = new Score(game);
+                scores.add(score);
             }
-            model.addAttribute("rows", sb.toString());
         } catch(Exception e) {
-            logger.warning("Error reading game records.");
+            logger.warning("Error reading game records. " + e.getMessage());
         } finally {
             pm.close();
         }
-        return "scores";
+        mv.addObject("scores", scores);
+        return mv;
     }
 
     public static CookieGenerator setCookie(HttpServletRequest request, HttpServletResponse response, String key, String value) {

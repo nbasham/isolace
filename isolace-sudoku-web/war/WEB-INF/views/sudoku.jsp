@@ -52,18 +52,22 @@ body, li, a {
 
 <body>
 
-<div id='gameDiv' style='height: 100%; width: 100%;'>
-    &nbsp;
-</div>
-
-<div style='display: block; position: absolute; top: 130; left: 700; font-size: 14px'>
-Marker - shift 1 to shift 9<br/>
-Move left - left arrow, shift tab<br/>
-Move right - right arrow, tab<br/>
-Move up - up arrow, shift return<br/>
-Move down - down arrow, return<br/>
-<a style='font-size: 14px' href="javascript:$('#timer').toggle();">Toggle timer</a>
-</div>
+    <div id='gameDiv' style='height: 100%; width: 100%;'>
+        &nbsp;
+    </div>
+    
+    <div style='display: block; position: absolute; top: 130; left: 700; font-size: 14px'>
+        <a style='font-size: 14px' href="/sudoku/start">Main Menu</a>
+        <br/>
+        <br/>
+        <br/>
+        Marker - shift 1 to shift 9<br/>
+        Move left - left arrow, shift tab<br/>
+        Move right - right arrow, tab<br/>
+        Move up - up arrow, shift return<br/>
+        Move down - down arrow, return<br/>
+    <a style='font-size: 14px' href="javascript:$('#timer').toggle();">Toggle timer</a>
+    </div>
 
 </body>
 </html>
