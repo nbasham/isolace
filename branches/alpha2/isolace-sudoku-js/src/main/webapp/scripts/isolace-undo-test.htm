@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="http://dev.jquery.com/view/trunk/qunit/testsuite.css" type="text/css" media="screen" />
+<script type="text/javascript" src="yahoo-dom-event.js"></script>
+<script src="isolace.js"></script>
+<script src="isolace-undo.js"></script>
+<script src="sudoku-logic.js"></script>
+
+<script>
+
+var problem = [8,6,4,5,3,1,2,9,7,9,5,1,6,2,7,8,4,3,2,7,3,4,8,9,6,1,5,1,4,7,9,5,6,3,8,2,3,9,6,2,4,8,5,7,1,5,8,2,1,7,3,9,6,4,6,2,5,8,1,4,7,3,9,7,1,9,3,6,5,4,2,8,4,3,8,7,9,2,1,5,6];
+var mask = [2,7,11,12,15,18,21,23,26,29,31,34,35,36,39,40,44,45,46,49,51,54,56,60,62,64,67,68,73,77,78];
+
+$logic.initialize(problem, mask);
+
+$(document).ready(function(){
+    
+module("Undo");
+
+/*
+ * Add object a
+ * Check that can undo
+ * Undo, undo object == a
+ * Undo, undo object == null
+ * Check that cannot undo
+ * Check that can redo
+ * Redo, redo object == a
+ * Redo, redo object == null
+ */
+test("undo/redo", function() {
+    var a = $logic.getState();
+    $undo.add(a);
+    ok($undo.canUndo());
+    equals($undo.undo(), a);
+    equals($undo.undo(), null);
+    ok(!$undo.canUndo());
+    ok($undo.canRedo());
+    equals($undo.redo(), a);
+    equals($undo.redo(), null);
+});
+
+});
+
+</script>
+
+</head>
+<body>
+ 
+<script type="text/javascript" src="http://jqueryjs.googlecode.com/svn/trunk/qunit/testrunner.js"></script>
+<h1>iSolace undo unit tests</h1>
+<h2 id="banner"></h2>
+<h2 id="userAgent"></h2>
+
+<ol id="tests"></ol>
+
+<div id="main"></div>
+
+</body>
+</html>
