@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <script src="../../../../scripts/jquery-1.4.js"></script>
+    
+    <link rel="stylesheet" href="../../../qunit.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../../../qunit.js"></script>
+
+    <script src="../../../../../../main/webapp/scripts/isolace/isolace.js"></script>
+    <script src="../../../../../../main/webapp/scripts/isolace/sudoku/Util.js"></script>
+    <script src="../../../../../../main/webapp/scripts/isolace/sudoku/Events.js"></script>
+    <script src="../../../../../../main/webapp/scripts/isolace/sudoku/model/Puzzle.js"></script>
+    <script src="../../../../../../main/webapp/scripts/isolace/sudoku/model/BoardState.js"></script>
+    <script src="../../../../../../main/webapp/scripts/isolace/sudoku/controller/TimerController.js"></script>
+    <script src="../../../../../../main/webapp/scripts/isolace/sudoku/controller/BoardController.js"></script>
+
+    <script>
+
+    //  file:///Users/iSolace/Documents/isolace-dev/isolace-sudoku-js/src/test/webapp/scripts/isolace/sudoku/controller/BoardController-test.htm
+    
+        var values = [8,6,4,5,3,1,2,9,7,9,5,1,6,2,7,8,4,3,2,7,3,4,8,9,6,1,5,1,4,7,9,5,6,3,8,2,3,9,6,2,4,8,5,7,1,5,8,2,1,7,3,9,6,4,6,2,5,8,1,4,7,3,9,7,1,9,3,6,5,4,2,8,4,3,8,7,9,2,1,5,6];
+        var revealedIndexes = [2,7,11,12,15,18,21,23,26,29,31,34,35,36,39,40,44,45,46,49,51,54,56,60,62,64,67,68,73,77,78];
+        var puzzle = new ISOLACE.sudoku.Puzzle(values, revealedIndexes);
+
+        $(document).ready(function() {
+            
+            module("isolace/sudoku/controller/BoardController");
+            
+            test("constructor", function() {
+                var bc = new ISOLACE.sudoku.BoardController(puzzle);
+                ok(bc, "BoardController instanciated");
+            });
+
+            test("guess from event", function() {
+                var bc = new ISOLACE.sudoku.BoardController(puzzle);
+                var e = jQuery.Event($Events.GUESS());
+                e['value'] = 8;
+                e['index'] = 0;
+                $(document).trigger(e);
+                equals(bc.state.state[0], 8, "Guess value set via event");
+            });
+
+            test("guess", function() {
+                var bc = new ISOLACE.sudoku.BoardController(puzzle);
+                bc.guess(8, 0);
+                equals(bc.state.state[0], 8, "Guess value set");
+            });
+
+            test("guess toggle", function() {
+                var bc = new ISOLACE.sudoku.BoardController(puzzle);
+                bc.guess(8, 0);
+                bc.guess(8, 0);
+                equals(bc.state.state[0], 0, "Guess value toggled");
+            });
+
+            test("guess clears markers in grid", function() {
+                var bc = new ISOLACE.sudoku.BoardController(puzzle);
+                bc.mark(8, 1);
+                bc.guess(8, 0);
+                ok(!bc.state.hasMarkerValue(8,1), "Marker cleared by guess");
+            });
+
+            asyncTest("guess fires state changed event", function() {
+                expect(1);
+                 $(document).one($Events.STATE_CHANGE(), function() {
+                    ok(true, "guess fires state changed event");
+                    start();
+                    });
+                 var bc = new ISOLACE.sudoku.BoardController(puzzle);
+                 bc.guess(8, 0);
+            });
+
+            test("mark", function() {
+                var bc = new ISOLACE.sudoku.BoardController(puzzle);
+                bc.mark(8, 0);
+                ok(bc.state.hasMarkerValue(8,0), "Marker set");
+            });
+
+
+            test("mark from event", function() {
+                var bc = new ISOLACE.sudoku.BoardController(puzzle);
+                $Events.fireMark(8, 0);
+                ok(bc.state.hasMarkerValue(8,0), "Marker set via event");
+            });
+            test("mark toggle", function() {
+                var bc = new ISOLACE.sudoku.BoardController(puzzle);
+                bc.mark(8, 0);
+                bc.mark(8, 0);
+                ok(!bc.state.hasMarkerValue(8,0), "Marker cleared");
+            });
+
+            asyncTest("mark fires state changed event", function() {
+                expect(1);
+                 $(document).one($Events.STATE_CHANGE(), function() {
+                    ok(true, "Mark fires state changed event");
+                    start();
+                    });
+                 var bc = new ISOLACE.sudoku.BoardController(puzzle);
+                 bc.mark(8, 0);
+            });
+
+            asyncTest("solved event fired", function() {
+                expect(1);
+                $(document).one($Events.SOLVED(), function() {
+                   ok(true, "solved event fired");
+                   start();
+                   });
+                var bc = new ISOLACE.sudoku.BoardController(puzzle);
+                for(var i = 0; i < 80; i++) {
+                    if($.inArray(i, revealedIndexes) == -1) {
+                        bc.guess(values[i], i);
+                    }
+                }
+                bc.guess(values[80], 80);
+            });
+
+
+        });
+
+    </script>
+
+</head>
+
+<body>
+    <h1 id="qunit-header">Sudoku JavaScript Unit Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+</body>
+
+</html>
