@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <script src="jquery-1.3.2.js"></script>
+    <script type="text/javascript" src="yahoo-dom-event.js"></script>
+    
+    <link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="qunit.js"></script>
+
+    <link rel="stylesheet" href="sudoku-test.css" type="text/css" media="screen" />
+    <script src="../../../main/webapp/scripts/isolace.js"></script>
+    <script src="../../../main/webapp/scripts/isolace/sudoku/Event.js"></script>
+    <script src="../../../main/webapp/scripts/isolace/sudoku/Util.js"></script>
+    <script src="../../../main/webapp/scripts/isolace/sudoku/Timer.js"></script>
+    <script src="../../../main/webapp/scripts/isolace/sudoku/TimerPanel.js"></script>
+    <script src="../../../main/webapp/scripts/isolace/sudoku/Puzzle.js"></script>
+    <script src="../../../main/webapp/scripts/isolace/sudoku/State.js"></script>
+    <script src="../../../main/webapp/scripts/isolace/sudoku/Logic.js"></script>
+    <script src="../../../main/webapp/scripts/isolace/sudoku/BorderCellSelector.js"></script>
+    <script src="../../../main/webapp/scripts/isolace/sudoku/BoardPanelEvents.js"></script>
+    <script src="../../../main/webapp/scripts/isolace/sudoku/BoardPanel.js"></script>
+    <script src="../../../main/webapp/scripts/isolace/sudoku/Cell.js"></script>
+    <script src="../../../main/webapp/scripts/isolace/sudoku/HintCell.js"></script>
+
+    <script>
+
+    //  file:///Users/iSolace/Documents/isolace-dev/isolace-sudoku-js/src/test/webapp/scripts/sudoku-test.htm
+    
+        var values = [8,6,4,5,3,1,2,9,7,9,5,1,6,2,7,8,4,3,2,7,3,4,8,9,6,1,5,1,4,7,9,5,6,3,8,2,3,9,6,2,4,8,5,7,1,5,8,2,1,7,3,9,6,4,6,2,5,8,1,4,7,3,9,7,1,9,3,6,5,4,2,8,4,3,8,7,9,2,1,5,6];
+        var revealedIndexes = [2,7,11,12,15,18,21,23,26,29,31,34,35,36,39,40,44,45,46,49,51,54,56,60,62,64,67,68,73,77,78];
+        var puzzle = new ISOLACE.sudoku.Puzzle(values, revealedIndexes);
+
+        $(document).ready(function() {
+            
+            module("isolace/sudoku/BoadPanel");
+            
+            test("BoadPanel", function() {
+                var panel = new ISOLACE.sudoku.BoardPanel(puzzle, {});
+                panel.logic.attemptGuess(9, 0);
+                for(var i = 0; i < 9; i++) {
+                    panel.logic.attemptHint(i+1, 1);
+                }
+                ok(panel != null, "BoadPanel instanciated");
+            });
+       
+            module("isolace/sudoku/Puzzle");
+            
+            test("Puzzle values", function() {
+                equals(puzzle.getValues(), values, "Values set properly");
+            });
+        
+            test("Puzzle isEditable true", function() {
+                ok(puzzle.isEditable(0), "Called isEditable on an editable cell");
+            });
+            
+            test("Puzzle isEditable false", function() {
+                ok(!puzzle.isEditable(2), "Called isEditable on a non editable cell");
+            });
+        
+            module("isolace/sudoku/State");
+            
+            test("State getState", function() {
+                var initialState = puzzle.getInitialState();
+                var state = new ISOLACE.sudoku.State(initialState);
+                equals(state.getState(), initialState, "State set properly");
+            });
+        
+            test("State setValueAtIndex", function() {
+                var initialState = puzzle.getInitialState();
+                var state = new ISOLACE.sudoku.State(initialState);
+                state.setValueAtIndex(9, 0);
+                equals(state.getState()[0], 9, "State value set at index");
+            });
+            
+            test("State conflicts false", function() {
+                var value = 8;
+                var initialState = puzzle.getInitialState();
+                var state = new ISOLACE.sudoku.State(initialState);
+                ok(!state.conflicts(value, 0), "No conflict");
+            });
+            
+            test("State conflicts row", function() {
+                var value = 9;
+                var initialState = puzzle.getInitialState();
+                var state = new ISOLACE.sudoku.State(initialState);
+                ok(state.conflicts(value, 0), "Row conflict");
+            });
+            
+            test("State conflicts col", function() {
+                var value = 9;
+                var initialState = puzzle.getInitialState();
+                var state = new ISOLACE.sudoku.State(initialState);
+                var logic = new ISOLACE.sudoku.Logic(puzzle);
+                state.setValueAtIndex(9, 72);
+                ok(state.conflicts(value, 0), "Column conflict");
+            });
+            
+            test("State conflicts grid", function() {
+                var value = 9;
+                var initialState = puzzle.getInitialState();
+                var state = new ISOLACE.sudoku.State(initialState);
+                var logic = new ISOLACE.sudoku.Logic(puzzle);
+                state.setValueAtIndex(9, 20);
+                ok(state.conflicts(value, 0), "Grid conflict");
+            });
+            
+            module("isolace/sudoku/Logic");
+            
+            test("Logic getInitialState for revealed", function() {
+                var logic = new ISOLACE.sudoku.Logic(puzzle);
+                var state = logic.getState();
+                var index = revealedIndexes[0];
+                ok(!state.isEditable(index), "Get initialState for revealed");
+            });
+            
+            test("Logic getInitialState not revealed", function() {
+                var logic = new ISOLACE.sudoku.Logic(puzzle);
+                ok(logic.state.isEditable(0), "Get initialState for not revealed");
+            });
+            
+            test("Logic attemptGuess valid", function() {
+                var value = 9;
+                var index = 0;
+                var logic = new ISOLACE.sudoku.Logic(puzzle);
+                logic.attemptGuess(value, index);
+                var cells = logic.getCells();
+                for(var i = 0; i < 81; i++) {
+                    var cell = cells[i];
+                    ISOLACE.log(cell.asString());
+                }
+                equals(cells[index].getValue(), value, "Attempted valid guess, cell value should change");
+            });
+            
+            test("Logic attemptGuess on revealed cell", function() {
+                var value = 9;
+                var index = 2;
+                var logic = new ISOLACE.sudoku.Logic(puzzle);
+                logic.attemptGuess(value, index);
+                var cells = logic.getCells();
+                equals(cells[index].getValue(), 4, "Attempted guess on a revealed cell, value should not change");
+            });
+    
+            test("Logic attemptHint valid", function() {
+                var value = 9;
+                var hintValue = 1 << (value-1);
+                var index = 0;
+                var logic = new ISOLACE.sudoku.Logic(puzzle);
+                logic.attemptHint(value, index);
+                var cells = logic.getCells();
+                var hintArray = cells[index].getValue();
+                var hintCell = hintArray[value - 1];
+                equals(hintCell.getValue(), value, "Attempted valid hint, cell value should change");
+            });
+            
+            test("Logic attemptHint toggle", function() {
+                var value = 9;
+                var hintValue = 1 << (value-1);
+                var index = 0;
+                var logic = new ISOLACE.sudoku.Logic(puzzle);
+                var cells = logic.getCells();
+                var i0 = cells[index].getValue();
+                logic.attemptHint(value, index);
+                var i1 = cells[index].getValue();
+                logic.attemptHint(value, index);
+                var i2 = cells[index].getValue();
+                equals(cells[index].getValue(), 0, "Hints should toggle when applied twice");
+            });
+            
+            test("Logic attemptHint on revealed cell", function() {
+                var index = revealedIndexes[0];
+                var value = values[index];
+                var logic = new ISOLACE.sudoku.Logic(puzzle);
+                logic.attemptHint(value, index);
+                var cells = logic.getCells();
+                equals(cells[index].getValue(), value, "Attempted hint on a revealed cell, value should not change");
+            });
+
+            test("Logic attemptGuess on hint", function() {
+                var value = 9;
+                var index = 0;
+                var logic = new ISOLACE.sudoku.Logic(puzzle);
+                logic.attemptHint(value, index);
+                logic.attemptGuess(value, index);
+                var cells = logic.getCells();
+                equals(cells[index].getValue(), value, "Attempted valid guess, cell value should change");
+            });
+            
+            test("Logic attemptHint on guess", function() {
+                var value = 9;
+                var hintValue = 1 << (value-1);
+                var index = 0;
+                var logic = new ISOLACE.sudoku.Logic(puzzle);
+                logic.attemptGuess(value, index);
+                logic.attemptHint(value, index);
+                var cells = logic.getCells();
+                var hintArray = cells[index].getValue();
+                var hintCell = hintArray[value - 1];
+                equals(hintCell.getValue(), value, "Attempted valid hint, cell value should change");
+            });
+            
+            test("Logic attemptGuess clears hint", function() {
+                var value = 9;
+                var logic = new ISOLACE.sudoku.Logic(puzzle);
+                logic.attemptHint(value, 0);
+                logic.attemptGuess(value, 1);
+                var cells = logic.getCells();
+                equals(cells[0].getValue(), 0, "Valid guess, should clear hint");
+            });
+            
+            module("isolace/sudoku/TimerPanel");
+            
+            asyncTest("TimerPanel time updated", function() {
+                var panel = new ISOLACE.sudoku.TimerPanel();
+                panel.start();
+                var htm = $('#timer').html();
+                setTimeout(function(){
+                    ok(htm != $('#timer').html(), "TimerPanel time updated");
+                    panel.stop();
+                    start();
+                  }, 2000);
+            });
+        
+            module("isolace/sudoku/Timer");
+            
+            asyncTest("Timer notify listener", function() {
+                var timer = new ISOLACE.sudoku.Timer();
+                timer.start();
+                $(document).one(ISOLACE.sudoku.TIMER_EVENT, function() {
+                    ok(true, "Timer notified listener");
+                    timer.stop();
+                    start();
+                    });
+            });
+        
+            asyncTest("Timer increments", function() {
+                var timer = new ISOLACE.sudoku.Timer();
+                timer.start();
+                var startTime = timer.getSeconds();
+                setTimeout(function(){
+                    ok(startTime < timer.getSeconds(), "Timer increments");
+                    timer.stop();
+                    start();
+                  }, 2000);
+            });
+        
+            asyncTest("Timer pauses", function() {
+                var timer = new ISOLACE.sudoku.Timer();
+                timer.start();
+                timer.pause();
+                var startTime = timer.getSeconds();
+                setTimeout(function(){
+                    equals(startTime, timer.getSeconds(), "Timer pauses");
+                    timer.stop();
+                    start();
+                  }, 2000);
+            });
+        
+            asyncTest("Timer unpauses", function() {
+                var timer = new ISOLACE.sudoku.Timer();
+                timer.start();
+                timer.pause();
+                timer.unpause();
+                var startTime = timer.getSeconds();
+                setTimeout(function(){
+                    ok(startTime < timer.getSeconds(), "Timer unpauses");
+                    timer.stop();
+                    start();
+                  }, 2000);
+            });
+
+        });
+
+    </script>
+
+</head>
+
+<body>
+    <h1 id="qunit-header">Sudoku JavaScript Unit Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id='boardPanel' class='boardPanel'>&nbsp;</div>
+    <div id='timer' class='timer'>&nbsp;</div>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+.board {
+    position: absolute;
+    top: 1000px;
+    left: 100px;
+    border: 1px solid #333;
+    font-size: 64px;
+    border: 2px solid black;
+}
+    
+.timer {
+    position: absolute;
+    top: 1000px;
+    left: 700px;
+    border: 1px solid #333;
+    font-size: 64px;
+    border: 2px solid black;
+}
+
+.cellrow {
+    height: 64px;
+    border: 0px solid orange;
+}
+
+.cell {
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    height: 64px;
+    width: 64px;
+    float: left;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 80%;
+}
+
+.evenGrid {
+    background-color: #ffffff;
+}
+
+.oddGrid {
+    background-color: #eee;
+}
+
+.rowBorder {
+    border-bottom: 2px solid black;
+}
+
+.colBorder {
+    border-right: 2px solid black;
+}
+
+.selectedCell {
+    border-color: red;
+    border-style: solid;
+    border-width: 2px;
+}
+
+div.palette, div.hintPalette {
+    width: 288px;
+    height: 32px;
+    font-size: 32;
+    position: absolute;
+}
+div.symbol, div.hintSymbol {
+    font-size: 80%;
+    width: 32px;
+    height: 100%;
+    color: black;
+    float: left;
+    text-align: center;
+}
+div.hint {
+    font-family: Tahoma, "New Courier";
+    font-size: 33%;
+    float: left;
+    width: 31%;
+    height: 31%;
+    margin-left: 1px;
+    margin-top: 1px;
+}
+    
+.hintCell {
+    font-size: 33%;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.guessCell {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    font-size: 80%;
+}
+
+.revealedCell {
+    color: #888888 ;
+}
+
+.unrevealedCell {
+    color: #505050;
+}
+
+.unrevealedCellConflicted {
+    color: red;
+}
