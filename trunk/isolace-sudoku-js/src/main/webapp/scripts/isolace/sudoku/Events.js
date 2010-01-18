@@ -1,7 +1,10 @@
 ISOLACE.namespace("sudoku");
 
 /**
- * Sudoku event definitions, firers and handlers.
+ * Sudoku event definitions, firers and handlers. Since JavaScript event
+ * types are arbitrary strings, and the event implementations rely on jQuery
+ * events the intent of this class is to encapsulate those definitions and
+ * bottlenecking event implementations to help with logging and profiling.
  * 
  * @namespace ISOLACE.sudoku
  * @constructor
@@ -80,6 +83,12 @@ ISOLACE.sudoku.Events.prototype.fire = function(type, payload) {
     $(document).trigger(e);
 };
 
+/**
+ * Fire GUESS event.
+ * @method fireGuess
+ * @param {int} value The value of the guess. 
+ * @param {int} index The cell index of the guess. 
+ */
 ISOLACE.sudoku.Events.prototype.fireGuess = function(value, index) {
     $Events.fire($Events.GUESS(), {value: value, index: index});
 };
@@ -90,6 +99,12 @@ ISOLACE.sudoku.Events.prototype.handleGuess = function(context, f) {
     });
 };
 
+/**
+ * Fire MARK event.
+ * @method fireMark
+ * @param {int} value The value of the mark. 
+ * @param {int} index The cell index of the mark. 
+ */
 ISOLACE.sudoku.Events.prototype.fireMark = function(value, index) {
     $Events.fire($Events.MARK(), {value: value, index: index});
 };
@@ -100,6 +115,11 @@ ISOLACE.sudoku.Events.prototype.handleMark = function(context, f) {
     });
 };
 
+/**
+ * Fire SHOW_BOARD event.
+ * @method fireShowBoard
+ * @param {int} level The puzzle level to use (i.e EASY, MEDIUM or HARD). 
+ */
 ISOLACE.sudoku.Events.prototype.fireShowBoard = function(level) {
     $Events.fire($Events.SHOW_BOARD(), {level: level});
 };
@@ -110,6 +130,10 @@ ISOLACE.sudoku.Events.prototype.handleShowBoard = function(context, f) {
     });
 };
 
+/**
+ * Fire SHOW_MAIN_MENU event.
+ * @method fireShowMainMenu
+ */
 ISOLACE.sudoku.Events.prototype.fireShowMainMenu = function() {
     $Events.fire($Events.SHOW_MAIN_MENU());
 };
@@ -120,6 +144,11 @@ ISOLACE.sudoku.Events.prototype.handleShowMainMenu = function(context, f) {
     });
 };
 
+/**
+ * Fire SOLVED event.
+ * @method fireSolved
+ * @param {int} seconds The number of seconds it took to solve the puzzle. 
+ */
 ISOLACE.sudoku.Events.prototype.fireSolved = function(seconds) {
     $Events.fire($Events.SOLVED(), {seconds: seconds});
 };
@@ -130,6 +159,11 @@ ISOLACE.sudoku.Events.prototype.handleSolved = function(context, f) {
     });
 };
 
+/**
+ * Fire STATE_CHANGE event.
+ * @method fireStateChange
+ * @param {BoardState} boardState The current state of the board. 
+ */
 ISOLACE.sudoku.Events.prototype.fireStateChange = function(boardState) {
     $Events.fire($Events.STATE_CHANGE(), {boardState: boardState});
 };
@@ -140,6 +174,11 @@ ISOLACE.sudoku.Events.prototype.handleStateChange = function(context, f) {
     });
 };
 
+/**
+ * Fire TIMER_INCREMENT event every second.
+ * @method fireTimerIncrement
+ * @param {int} seconds The number of seconds the game has been played. 
+ */
 ISOLACE.sudoku.Events.prototype.fireTimerIncrement = function(seconds) {
     $Events.fire($Events.TIMER_INCREMENT(), {seconds: seconds});
 };
@@ -150,6 +189,10 @@ ISOLACE.sudoku.Events.prototype.handleTimerIncrement = function(context, f) {
     });
 };
 
+/**
+ * Fire TIMER_PAUSE event.
+ * @method fireTimerPause
+ */
 ISOLACE.sudoku.Events.prototype.fireTimerPause = function() {
     $Events.fire($Events.TIMER_PAUSE());
 };
@@ -160,6 +203,10 @@ ISOLACE.sudoku.Events.prototype.handleTimerPause = function(context, f) {
     });
 };
 
+/**
+ * Fire TIMER_START event.
+ * @method fireTimerStart
+ */
 ISOLACE.sudoku.Events.prototype.fireTimerStart = function() {
     $Events.fire($Events.TIMER_START());
 };
@@ -170,6 +217,10 @@ ISOLACE.sudoku.Events.prototype.handleTimerStart = function(context, f) {
     });
 };
 
+/**
+ * Fire TIMER_STOP event.
+ * @method fireTimerStop 
+ */
 ISOLACE.sudoku.Events.prototype.fireTimerStop = function() {
     $Events.fire($Events.TIMER_STOP());
 };
@@ -180,6 +231,10 @@ ISOLACE.sudoku.Events.prototype.handleTimerStop = function(context, f) {
     });
 };
 
+/**
+ * Fire TIMER_UNPAUSE event.
+ * @method fireTimerUnpause
+ */
 ISOLACE.sudoku.Events.prototype.fireTimerUnpause = function() {
     $Events.fire($Events.TIMER_UNPAUSE());
 };
