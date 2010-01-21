@@ -48,10 +48,6 @@ ISOLACE.sudoku.BoardController.prototype.guess = function(value, index) {
     this.removeMarkersFromGrid(value, index);
     //$undo.add($logic.getState());
     $Events.fireStateChange(this.state);
-    if(this.solved()) {
-        $Events.fireTimerStop();
-        $Events.fireSolved(this.timerController.getSeconds());
-    }
 };
 
 /**

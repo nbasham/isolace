@@ -26,6 +26,7 @@ ISOLACE.sudoku.MainMenuView.prototype.getLevel = function() {
  * @method show
  */
 ISOLACE.sudoku.MainMenuView.prototype.show = function() {
+    $Log.debug("showing menu");
     $("#mainMenuView").dialog( {
         modal : false,
         resizable : false

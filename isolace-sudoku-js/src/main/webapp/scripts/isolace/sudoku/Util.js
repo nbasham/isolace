@@ -15,6 +15,32 @@ ISOLACE.sudoku.Util = function() {
 };
 
 /**
+ * Format seconds to mmm:ss.
+ * @private
+ * @method formatTime
+ * @param {int} seconds The seconds to format.
+ * @return Seconds formatted as mmm:ss.
+ */
+ISOLACE.sudoku.Util.prototype.formatTime = function(seconds) {
+    var timeStr = '';
+    var min = Math.floor(seconds / 60);
+    var sec = seconds % 60;
+    if(min < 10) {
+        timeStr = '0' + min;
+    } else {
+        timeStr = '' + min;
+    }
+    timeStr += ':';
+    if(sec < 10) {
+        timeStr += '0' + sec;
+    } else {
+        timeStr += '' + sec;
+    }
+    
+    return timeStr;
+};
+
+/**
  * Utility function to determine what row a given index resides in.
  * @private
  */

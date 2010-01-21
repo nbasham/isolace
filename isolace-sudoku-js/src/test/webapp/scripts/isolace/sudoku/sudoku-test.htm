@@ -2,17 +2,20 @@
                     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <script src="../../../scripts/yahoo-dom-event.js"></script>
-    <script src="../../../scripts/jquery-1.4.js"></script>
+    <script src="../../../../../main/webapp/scripts/yahoo-dom-event.js"></script>
+    <script src="../../../../../main/webapp/scripts/jquery-1.4.js"></script>
+    <script src="../../../../../main/webapp/scripts/log4javascript_uncompressed.js"></script>
     
     <link rel="stylesheet" href="../../qunit.css" type="text/css" media="screen" />
     <script type="text/javascript" src="../../qunit.js"></script>
 
     <script src="../../../../../main/webapp/scripts/isolace/isolace.js"></script>
+    <script src="../../../../../main/webapp/scripts/isolace/Log.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/Util.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/Events.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/model/Puzzle.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/model/BoardState.js"></script>
+    <script src="../../../../../main/webapp/scripts/isolace/sudoku/controller/UndoController.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/controller/TimerController.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/controller/BoardController.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/view/render/TextRenderer.js"></script>
@@ -31,15 +34,16 @@
         var puzzle = new ISOLACE.sudoku.Puzzle(values, revealedIndexes);
         var initialState = puzzle.getInitialState();
         var state = new ISOLACE.sudoku.BoardState(initialState);
-
     </script>
 
+    <script src="./controller/UndoController-test.js"></script>
+<!--
     <script src="./controller/BoardController-test.js"></script>
     <script src="./model/BoardState-test.js"></script>
     <link rel="stylesheet" href="./view/BoardView-test.css" type="text/css" media="screen" />
     <script src="./view/BoardView-test.js"></script>
     <script src="./controller/TimerController-test.js"></script>
-
+-->
 </head>
 
 <body>

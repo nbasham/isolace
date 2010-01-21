@@ -13,9 +13,8 @@ ISOLACE.namespace("sudoku");
  */
 ISOLACE.sudoku.TimerView = function() {
     $Events.handleTimerIncrement(this, this.update);
-    $('#timerView').html('00:00');
+    $('#timerView').html("<img src='../images/timer-0.png' /><img src='../images/timer-0.png' /><img src='../images/timer-seperator.png' /><img src='../images/timer-0.png' /><img src='../images/timer-0.png' />");
     var me = this;
-    $Events.handleSolved(this, this.stop);
 };
 
 /**
@@ -26,22 +25,6 @@ ISOLACE.sudoku.TimerView = function() {
 ISOLACE.sudoku.TimerView.prototype.getHtml = function() {
     return this.htm;
 };
-
-/**
- * Start the timer.
- * @method start
- */
-//ISOLACE.sudoku.TimerView.prototype.start = function() {
-//    $Events.fireTimerStart();
-//};
-
-/**
- * Stop the timer.
- * @method stop
- */
-//ISOLACE.sudoku.TimerView.prototype.stop = function() {
-//    $Events.fireTimerStop();
-//};
 
 /**
  * Pause the timer.
@@ -65,30 +48,15 @@ ISOLACE.sudoku.TimerView.prototype.unpause = function() {
  * @method update
  */
 ISOLACE.sudoku.TimerView.prototype.update = function(seconds) {
-    var time = this.format(seconds);
-    $('#timerView').html(time);
-};
-
-/**
- * Format the seconds to mmm:ss.
- * @private
- * @method format
- */
-ISOLACE.sudoku.TimerView.prototype.format = function(seconds) {
-    var timeStr = '';
-    var min = Math.floor(seconds / 60);
-    var sec = seconds % 60;
-    if(min < 10) {
-        timeStr = '0' + min;
-    } else {
-        timeStr = '' + min;
+    $('#timerView').html('');
+    var time = $SUDOKU_UTIL.formatTime(seconds);
+    var timeElements = time.split('');
+    for( var i = 0; i < timeElements.length; i++) {
+        var el = timeElements[i];
+        if(el == ':') {
+            el = 'seperator';
+        }
+        var src = '../images/timer-' + el + '.png';
+        $('#timerView').append("<img src='" + src + "' />");
     }
-    timeStr += ':';
-    if(sec < 10) {
-        timeStr += '0' + sec;
-    } else {
-        timeStr += '' + sec;
-    }
-    
-    return timeStr;
 };

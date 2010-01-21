@@ -206,3 +206,18 @@ function assertInRange(value, lower, upper) {
     }
 }
 
+/**
+ * Throw an exception if value is undefined.
+ * 
+ * @method assertDefined
+ * @param {object} value Value to check.
+ */
+function assertDefined(value) {
+    var a = arguments;
+    if(value === undefined) {
+        var message = "Undefined value.";
+        $Log.error(message);
+        throw(message);
+    }
+}
+
