@@ -26,6 +26,25 @@ ISOLACE.sudoku.BoardState = function(state) {
 };
 
 /**
+ * Normalize state by removing conventions applied to cell values by BoardState.
+ * 
+ * @method normalize
+ * @return {array[int]} An array values 0 to 9 inclusive describing the state of the board.
+ */
+ISOLACE.sudoku.BoardState.prototype.equals = function(bs) {
+    if(bs === undefined || bs === null || bs.state.length != this.state.length) {
+        return false;
+    }
+    for(var i = 0; i < 81; i++) {
+        if(bs.state[i] != this.state[i]) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
+/**
  * @private
  * Normalize state by removing conventions applied to cell values by BoardState.
  * 

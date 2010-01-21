@@ -255,7 +255,6 @@ ISOLACE.sudoku.BoardViewEvents.prototype.dec = function(value, amount) {
 ISOLACE.sudoku.BoardViewEvents.prototype.handleSelectEvent = function(e) {
     var me = e.data.me;
     me.selectedCellIndex = e.data.index;
-    ISOLACE.log('Selection index set to ' + e.data.index);
     me.boardView.selector.select(me.selectedCellIndex);
 };
 

@@ -27,15 +27,14 @@ ISOLACE.sudoku.BoardView = function(puzzle, options) {
     this.initializeOptions(this.options);
     this.stylizeGridColors();
     this.stylizeGridBorders();
-
-    this.controller = new ISOLACE.sudoku.BoardController(puzzle);
-    $Events.handleSolved(this, this.puzzleSolved);
-    var jsLintLikesThis = new ISOLACE.sudoku.BoardViewEvents(this, puzzle);
-    var jsLintLikesThis2 = new ISOLACE.sudoku.TimerView();
 };
 
-ISOLACE.sudoku.BoardView.prototype.show = function() {
-    this.renderer.render(this.controller.state);
+ISOLACE.sudoku.BoardView.prototype.render = function(boardState) {
+    this.renderer.render(boardState);
+};
+
+ISOLACE.sudoku.BoardView.prototype.show = function(boardState) {
+    this.renderer.render(boardState);
 };
 
 ISOLACE.sudoku.BoardView.prototype.hide = function() {
@@ -43,20 +42,10 @@ ISOLACE.sudoku.BoardView.prototype.hide = function() {
 };
 
 ISOLACE.sudoku.BoardView.prototype.start = function() {
-    $Log.log("Hello world!", "info",  "myapp"); 
     if(this.showTimer) {
         $('#timerView').css('display', 'block');
     }
     $Events.fireTimerStart();
-};
-
-ISOLACE.sudoku.BoardView.prototype.puzzleSolved = function(seconds) {
-    var me = this;
-    $("#solvedView").dialog( {
-        modal : true,
-        title : 'Puzzle Solved',
-        buttons: { "Ok": function() { $(this).dialog("close"); $Events.fireShowMainMenu } }
-    }).html('You solved the puzzle in ' + seconds + ' seconds.');
 };
 
 /**
@@ -123,12 +112,12 @@ ISOLACE.sudoku.BoardView.prototype.initializeOptions = function(o) {
     this.showTimer = o.showTimer;
     
     if(o.renderer === undefined) {
-        o.renderer = new ISOLACE.sudoku.TextRenderer();
+        o.renderer = new ISOLACE.sudoku.ImageRenderer();
     }
     this.renderer = o.renderer;
     
     if(o.selector === undefined) {
-        o.selector = new ISOLACE.sudoku.BorderSelector();
+        o.selector = new ISOLACE.sudoku.ImageSelector();
     }
     this.selector = o.selector;
 };

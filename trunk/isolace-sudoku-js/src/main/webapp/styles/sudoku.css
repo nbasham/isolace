@@ -9,12 +9,16 @@
     
 .timerView {
     position: absolute;
-    top: 10px;
-    left: 700px;
-    border: 1px solid #333;
-    font-size: 64px;
-    border: 2px solid black;
+    top: 616px;
+    left: 600px;
     display: none;
+}
+
+.undoView {
+    position: absolute;
+    top: 616px;
+    left: 320px;
+    display: block;
 }
 
 .cellrow {
