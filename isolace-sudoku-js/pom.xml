@@ -9,7 +9,7 @@
     <url>http://code.google.com/p/isolace-sudoku-js/</url>
 
     <properties>
-        <javascript.dir>src/main/webapp/scripts/</javascript.dir>
+        <javascript.dir>src/main/webapp/scripts/isolace/</javascript.dir>
     </properties>
 
 
