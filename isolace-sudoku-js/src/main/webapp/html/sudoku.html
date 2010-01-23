@@ -10,6 +10,7 @@
     <script src="../scripts/log4javascript_uncompressed.js"></script>
     <script src="../scripts/jquery-1.4.js"></script>
     <script src="../scripts/jquery-ui-1.7.2.custom.min.js"></script>
+    <script src="../scripts/jquery.cookie.js"></script>
     
     <link rel="stylesheet" href="../styles/cupertino/jquery-ui-1.7.2.custom.css" type="text/css" media="screen" />
 
@@ -70,13 +71,15 @@
 
     <script src="../scripts/isolace/isolace.js"></script>
     <script src="../scripts/isolace/Log.js"></script>
+    <script src="../scripts/isolace/sudoku/puzzleData.js"></script>
     <script src="../scripts/isolace/sudoku/Util.js"></script>
+    <script src="../scripts/isolace/sudoku/Persistence.js"></script>
     <script src="../scripts/isolace/sudoku/Events.js"></script>
     <script src="../scripts/isolace/sudoku/model/Puzzle.js"></script>
     <script src="../scripts/isolace/sudoku/model/BoardState.js"></script>
     <script src="../scripts/isolace/sudoku/controller/UndoController.js"></script>
     <script src="../scripts/isolace/sudoku/controller/TimerController.js"></script>
-    <script src="../scripts/isolace/sudoku/controller/BoardController.js"></script>
+    <script src="../scripts/isolace/sudoku/controller/BoardManager.js"></script>
     <script src="../scripts/isolace/sudoku/controller/GameController.js"></script>
     <script src="../scripts/isolace/sudoku/view/render/ImageRenderer.js"></script>
     <script src="../scripts/isolace/sudoku/view/render/TextRenderer.js"></script>
@@ -96,6 +99,7 @@
 
         $(document).ready(function() {
             try {
+                //$Persistence.incPuzzleIndex(-1);
                 window.gameController = new ISOLACE.sudoku.GameController();
                 window.gameController.showMainMenu();
             } catch(e) {
@@ -111,8 +115,8 @@
     </div>
     <div id='timerView' class='timerView'>&nbsp;</div>
     <div id='undoView' class='undoView' style='display: none;' >
-        <button id="undoButton" class="fg-button ui-state-default ui-state-disabled ui-corner-all" type="button">Undo</button>
-        <button id="redoButton" class="fg-button ui-state-default ui-state-disabled ui-corner-all" type="button">Redo</button>
+        <button id="undoButton" class="fg-button ui-state-default ui-corner-all" type="button">Undo</button>
+        <button id="redoButton" class="fg-button ui-state-default ui-corner-all" type="button">Redo</button>
     </div>
     <div id='solvedView' style='display: none;' ></div>
     <div id="mainMenuView" style='display: none;' >
@@ -127,7 +131,7 @@
             </select>
             </p>
             <p align=right>
-                <button id="showBoardButton" class="ui-button ui-state-default ui-corner-all" >Begin</button>
+                <button id="showBoardButton" class="fg-button ui-state-default ui-corner-all" >Begin</button>
             </p>
 
             <hr/>

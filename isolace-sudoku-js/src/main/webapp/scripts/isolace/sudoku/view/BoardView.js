@@ -18,10 +18,9 @@ ISOLACE.namespace("sudoku");
  *      showTimer {boolean} - true if timer view should be displayed. Default is true.
  * </pre>
  */
-ISOLACE.sudoku.BoardView = function(puzzle, options) {
-    this.puzzle = puzzle;
+ISOLACE.sudoku.BoardView = function(options) {
     this.options = options;
-    $('*').unbind();
+    //$('*').unbind();
     $('#boardView').html(this.generateHtml());
     
     this.initializeOptions(this.options);

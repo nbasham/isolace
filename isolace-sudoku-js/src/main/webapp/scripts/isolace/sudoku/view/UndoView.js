@@ -6,6 +6,7 @@ ISOLACE.sudoku.UndoView = function() {
     $('#redoButton').bind('click', function() {
         $Events.fireUndo(true);
     });
+    this.handleChange(false, false);
 };
 
 /**

@@ -65,20 +65,21 @@
 <span class='line'> 58</span> 
 <span class='line'> 59</span> </span><span class="COMM">/**
 <span class='line'> 60</span>  * Gets the initial State for a given puzzle. Returns an int[81]
-<span class='line'> 61</span>  * with 0 values except for the initially revealed values.
-<span class='line'> 62</span>  * 
-<span class='line'> 63</span>  * @method getInitialState
-<span class='line'> 64</span>  * @return {int[]} The initial State of this puzzle. An int[81]
-<span class='line'> 65</span>  * with 0 values except for the initially revealed values.
-<span class='line'> 66</span>  */</span><span class="WHIT">
-<span class='line'> 67</span> </span><span class="NAME">ISOLACE.sudoku.Puzzle.prototype.getInitialState</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 68</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">state</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 69</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">values</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this.getValues</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 70</span>     </span><span class="KEYW">for</span><span class="PUNC">(</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">i</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="NAME">i</span><span class="WHIT"> </span><span class="PUNC">&lt;</span><span class="WHIT"> </span><span class="NUMB">81</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="NAME">i</span><span class="PUNC">++</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 71</span>         </span><span class="NAME">state.push</span><span class="PUNC">(</span><span class="NUMB">0</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 72</span>         </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">this.isEditable</span><span class="PUNC">(</span><span class="NAME">i</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 73</span>             </span><span class="NAME">state</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">values</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NUMB">9</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 74</span>         </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'> 75</span>     </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'> 76</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">state</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 77</span> </span><span class="PUNC">}</span><span class="PUNC">;</span></pre></body></html>
+<span class='line'> 61</span>  * array that has either values from  10 to 18 at the revealed indexes or
+<span class='line'> 62</span>  * values of 0 at the remaining indexes to be guessed at.
+<span class='line'> 63</span>  * 
+<span class='line'> 64</span>  * @method getInitialState
+<span class='line'> 65</span>  * @return {int[]} The initial State of this puzzle. An int[81]
+<span class='line'> 66</span>  * with 0 values except for the initially revealed values.
+<span class='line'> 67</span>  */</span><span class="WHIT">
+<span class='line'> 68</span> </span><span class="NAME">ISOLACE.sudoku.Puzzle.prototype.getInitialState</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 69</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">state</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 70</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">values</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this.getValues</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 71</span>     </span><span class="KEYW">for</span><span class="PUNC">(</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">i</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="NAME">i</span><span class="WHIT"> </span><span class="PUNC">&lt;</span><span class="WHIT"> </span><span class="NUMB">81</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="NAME">i</span><span class="PUNC">++</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 72</span>         </span><span class="NAME">state.push</span><span class="PUNC">(</span><span class="NUMB">0</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 73</span>         </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="PUNC">!</span><span class="NAME">this.isEditable</span><span class="PUNC">(</span><span class="NAME">i</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 74</span>             </span><span class="NAME">state</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">values</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NUMB">9</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 75</span>         </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 76</span>     </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 77</span>     </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">state</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 78</span> </span><span class="PUNC">}</span><span class="PUNC">;</span></pre></body></html>

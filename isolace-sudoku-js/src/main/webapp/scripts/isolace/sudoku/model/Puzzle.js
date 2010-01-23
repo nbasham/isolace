@@ -58,7 +58,8 @@ ISOLACE.sudoku.Puzzle.prototype.isEditable = function(index) {
 
 /**
  * Gets the initial State for a given puzzle. Returns an int[81]
- * with 0 values except for the initially revealed values.
+ * array that has either values from  10 to 18 at the revealed indexes or
+ * values of 0 at the remaining indexes to be guessed at.
  * 
  * @method getInitialState
  * @return {int[]} The initial State of this puzzle. An int[81]

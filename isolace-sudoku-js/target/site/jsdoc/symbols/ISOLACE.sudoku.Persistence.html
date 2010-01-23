@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - ISOLACE.Log</title>
+		<title>JsDoc Reference - ISOLACE.sudoku.Persistence</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -245,26 +245,25 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace ISOLACE.Log
+				Namespace ISOLACE.sudoku.Persistence
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
 			<p class="description">
 				
 			
-				ISOLACE
-Wraps a 3rd party logger implementation.
-The current implementation is log4javascript.
-Tried YUI and jsLog, but preffered log4javascript.
+				ISOLACE.sudoku
+Wraps persistence implementation. For now using cookies, will migrate to 
+a server side solution using Google's AppEngine.
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/_Users_iSolace_Documents_isolace-dev_isolace-sudoku-js_src_main_webapp_scripts_isolace_Log.js.html">Log.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/_Users_iSolace_Documents_isolace-dev_isolace-sudoku-js_src_main_webapp_scripts_isolace_sudoku_Persistence.js.html">Persistence.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class ISOLACE.Log.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class ISOLACE.sudoku.Persistence.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -277,9 +276,9 @@ Tried YUI and jsLog, but preffered log4javascript.
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/ISOLACE.Log.html#constructor">ISOLACE.Log</a></b>
+								<b><a href="../symbols/ISOLACE.sudoku.Persistence.html#constructor">ISOLACE.sudoku.Persistence</a></b>
 							</div>
-							<div class="description">Wraps a 3rd party logger implementation.</div>
+							<div class="description">Wraps persistence implementation.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -293,7 +292,7 @@ Tried YUI and jsLog, but preffered log4javascript.
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class ISOLACE.Log.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class ISOLACE.sudoku.Persistence.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -306,54 +305,18 @@ Tried YUI and jsLog, but preffered log4javascript.
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Log.html#console">console</a></b>(message)
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Persistence.html#getPuzzleIndex">getPuzzleIndex</a></b>()
 								</div>
-								<div class="description">Log message to console and browser console (if it exists).</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Log.html#debug">debug</a></b>(message)
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Persistence.html#incPuzzleIndex">incPuzzleIndex</a></b>(puzzleIndex)
 								</div>
-								<div class="description">Log message to console and browser console (if it exists).</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Log.html#error">error</a></b>(message)
-								</div>
-								<div class="description">Log message to console and browser console (if it exists).</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Log.html#info">info</a></b>(message)
-								</div>
-								<div class="description">Log message to console and browser console (if it exists).</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Log.html#log">log</a></b>(message, level)
-								</div>
-								<div class="description">Log message to console and browser console (if it exists).</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Log.html#warn">warn</a></b>(message)
-								</div>
-								<div class="description">Log message to console and browser console (if it exists).</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -372,13 +335,12 @@ Tried YUI and jsLog, but preffered log4javascript.
 				</div>
 				
 				<div class="fixedFont">
-						<b>ISOLACE.Log</b>
+						<b>ISOLACE.sudoku.Persistence</b>
 				</div>
 				
 				<div class="description">
-					Wraps a 3rd party logger implementation.
-The current implementation is log4javascript.
-Tried YUI and jsLog, but preffered log4javascript.
+					Wraps persistence implementation. For now using cookies, will migrate to 
+a server side solution using Google's AppEngine.
 					<br /><i>Author: </i>Norman Basham, iSolace, Copyright (c) 2009-2010. ALL RIGHTS RESERVED<br/>.
 				</div>
 				
@@ -405,15 +367,15 @@ Tried YUI and jsLog, but preffered log4javascript.
 					Method Detail
 				</div>
 				
-					<a name="console"> </a>
+					<a name="getPuzzleIndex"> </a>
 					<div class="fixedFont">
 					
-					
-					<b>console</b>(message)
+					<span class="light">{int}</span>
+					<b>getPuzzleIndex</b>()
 					
 					</div>
 					<div class="description">
-						Log message to console and browser console (if it exists).
+						
 						
 						
 					</div>
@@ -422,35 +384,31 @@ Tried YUI and jsLog, but preffered log4javascript.
 					
 					
 						
+						
+						
+						
+						
 							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
+							<dt class="heading">Returns:</dt>
 							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>message</b>
-									
-								</dt>
-								<dd>The message to log .</dd>
+								<dd><span class="light fixedFont">{int}</span> The current puzzle index.</dd>
 							
 							</dl>
-						
-						
-						
-						
 						
 						
 						
 
 					<hr />
 				
-					<a name="debug"> </a>
+					<a name="incPuzzleIndex"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>debug</b>(message)
+					<b>incPuzzleIndex</b>(puzzleIndex)
 					
 					</div>
 					<div class="description">
-						Log message to console and browser console (if it exists).
+						
 						
 						
 					</div>
@@ -463,164 +421,10 @@ Tried YUI and jsLog, but preffered log4javascript.
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{string}</span> <b>message</b>
+									<span class="light fixedFont">{int}</span> <b>puzzleIndex</b>
 									
 								</dt>
-								<dd>The message to log .</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="error"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>error</b>(message)
-					
-					</div>
-					<div class="description">
-						Log message to console and browser console (if it exists).
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>message</b>
-									
-								</dt>
-								<dd>The message to log.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="info"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>info</b>(message)
-					
-					</div>
-					<div class="description">
-						Log message to console and browser console (if it exists).
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>message</b>
-									
-								</dt>
-								<dd>The message to log.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="log"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>log</b>(message, level)
-					
-					</div>
-					<div class="description">
-						Log message to console and browser console (if it exists).
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>message</b>
-									
-								</dt>
-								<dd>The message to log .</dd>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>level</b>
-									
-								</dt>
-								<dd>The level to log message at (e.g. warn).</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="warn"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>warn</b>(message)
-					
-					</div>
-					<div class="description">
-						Log message to console and browser console (if it exists).
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>message</b>
-									
-								</dt>
-								<dd>The message to log.</dd>
+								<dd></dd>
 							
 							</dl>
 						
@@ -641,7 +445,7 @@ Tried YUI and jsLog, but preffered log4javascript.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blank">JsDoc Toolkit</a> 2.0.0 on Fri Jan 22 2010 20:12:59 GMT-0800 (PST)
+			Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blank">JsDoc Toolkit</a> 2.0.0 on Fri Jan 22 2010 20:13:00 GMT-0800 (PST)
 		</div>
 	</body>
 </html>

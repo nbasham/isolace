@@ -99,6 +99,30 @@ ISOLACE.sudoku.BoardState.prototype.conflicts = function(value, index) {
 };
 
 /**
+ * After a successful guess remove markers with this value from grid.
+ * @private
+ * @method removeMarkersFromGrid
+ * @param {int} value Value between 1 and 9 inclusive to check for.
+ * @param {int} index Index (0 to 80 inclusive) of the cell to check.
+ */
+ISOLACE.sudoku.BoardState.prototype.removeMarkersFromGrid = function(value, index) {
+    var grid = $SUDOKU_UTIL.getGridFromIndex(index);
+    var a = $SUDOKU_UTIL.getGridIndexes(grid);
+    for(var i = 0; i < 9; i++) {
+        var gridIndex = a[i];
+        if(index == gridIndex) {
+            continue;
+        }
+        var hasMarkerValue = this.hasMarkerValue(value, gridIndex);
+        if(hasMarkerValue) {
+            //  this will toggle the marker to off
+            this.setMarkerValue(value, gridIndex);
+            $Log.debug('Removed marker of value ' + value + ' from cell ' + gridIndex + '.');
+        }
+    }
+};
+
+/**
  * Set cell to value, if that value already exists remove it.
  * 
  * @method setValue
@@ -111,10 +135,13 @@ ISOLACE.sudoku.BoardState.prototype.setValue = function(value, index) {
     var isEditable = this.isEditable(index);
     assertTrue(isEditable, "Can't set a value on a revealed cell.");
     if(this.state[index] == value) {
+        $Log.debug('Clear index ' + index + ' of value ' + value);
         this.state[index] = 0;
     } else {
         this.state[index] = value;
+        $Log.debug('Set index ' + index + ' to value ' + value);
     }
+    this.removeMarkersFromGrid(value, index);
 };
 
 /**
@@ -161,12 +188,15 @@ ISOLACE.sudoku.BoardState.prototype.hasMarker = function(index) {
  * already exists remove it.
  * 
  * @method setMarkerValue
+ * @private
  * @param {int} value Value between 1 and 9 inclusive to check for.
  * @param {int} index Index (0 to 80 inclusive) of the cell to check.
  */
 ISOLACE.sudoku.BoardState.prototype.setMarkerValue = function(value, index) {
     assertInRange(value, 1, 9);
     assertInRange(index, 0, 80);
+    var isEditable = this.isEditable(index);
+    assertTrue(isEditable, "Can't set a marker on a revealed cell.");
     
     //  clear existing guess
     if(this.state[index] > 0) {
@@ -175,8 +205,10 @@ ISOLACE.sudoku.BoardState.prototype.setMarkerValue = function(value, index) {
     var mask = 1 <<  (value-1);
     if(this.hasMarkerValue(value, index)) {
         this.state[index] += mask;
+        $Log.debug('Clear marker at index ' + index + ' with value ' + value);
     } else {
         this.state[index] -= mask;
+        $Log.debug('Set marker at index ' + index + ' to value ' + value);
     }
 };
 
@@ -198,5 +230,3 @@ ISOLACE.sudoku.BoardState.prototype.hasMarkerValue = function(value, index) {
     }
     return false;
 };
-
-

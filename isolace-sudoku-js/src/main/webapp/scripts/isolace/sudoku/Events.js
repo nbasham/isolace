@@ -1,10 +1,12 @@
 ISOLACE.namespace("sudoku");
 
 /**
- * Event definitions, firers and handlers. Since JavaScript event types are
- * arbitrary strings, and the event implementations rely on jQuerythe intent of
- * this class is to encapsulate those definitions and bottleneck event
- * implementations.
+ * Event definitions, firers and handlers. The intent of this class is to:
+ * <ul>
+ * <li>Hide jQuery implementation</li>
+ * <li>Encapsulate arbitrary JavaScript event types</li>
+ * <li>Provide a bottleneck</li>
+ * </ul>
  * @namespace ISOLACE.sudoku
  * @constructor
  * @author Norman Basham, iSolace, Copyright (c) 2009-2010. ALL RIGHTS RESERVED<br/>
