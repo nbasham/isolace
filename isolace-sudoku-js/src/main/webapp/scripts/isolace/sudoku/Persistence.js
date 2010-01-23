@@ -49,7 +49,7 @@ ISOLACE.sudoku.Persistence.prototype.getPuzzleIndex = function() {
     var puzzleIndex = this.get('puzzleIndex');
     if(puzzleIndex === null) {
         puzzleIndex = 0;
-        this.incPuzzleIndex(-1);
+        this.set('puzzleIndex', puzzleIndex);
     }
     return parseInt(puzzleIndex);
 };
