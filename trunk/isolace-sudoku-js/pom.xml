@@ -65,7 +65,7 @@
                     <!-- this is actually the default -->
                     <includes>**/*.js</includes>
                     <!-- maybe you need to exclude compressed JS files -->
-                    <excludes>yahoo-dom-event.js</excludes>
+                    <excludes>**/*Data.js</excludes>
                     <!-- this is actually the default -->
                     <caseSensitive>true</caseSensitive>
                     <!-- for more configuration properties, see the goals documentation -->

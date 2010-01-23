@@ -29,6 +29,7 @@ ISOLACE.sudoku.ImageRenderer.prototype.render = function(boardState) {
             this.renderCell(boardState, i);
         }
     }
+    $Log.debug('Rendered: ' + boardState.state);
 };
 
 /**

@@ -143,3 +143,7 @@ test("conflicts grid", function() {
     ok(state.conflicts(values[0], 20), "Grid conflict");
 });
 
+test("solved", function() {
+    var state = new ISOLACE.sudoku.BoardState(values);
+    ok(state.solved(puzzle), "Puzzle solved");
+});

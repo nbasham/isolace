@@ -1,5 +1,5 @@
 //  TURN OFF BROWSER POPUP BLOCKING
-ISOLACE.LOG = false;
+ISOLACE.LOG = true;
 
 /**
  * Wraps a 3rd party logger implementation.
@@ -44,16 +44,16 @@ ISOLACE.Log.prototype.log = function(message, level) {
             this.log.debug(message);
         } else {
             level = level.toLowerCase();
-            if(level = 'debug') {
-                this.log.debug(message);
-            } else if(level = 'info') {
-                this.log.info(message);
-            } else if(level = 'warn') {
-                this.log.warn(message);
-            } else if(level = 'error') {
-                this.log.error(message);
+            if(level == 'debug') {
+                this.debug(message);
+            } else if(level == 'info') {
+                this.info(message);
+            } else if(level == 'warn') {
+                this.warn(message);
+            } else if(level == 'error') {
+                this.error(message);
             } else {
-                this.log.debug(message);
+                this.debug(message);
             }
         }
         this.console(message);
