@@ -1,5 +1,5 @@
 //  TURN OFF BROWSER POPUP BLOCKING
-ISOLACE.LOG = true;
+ISOLACE.LOG = false;
 
 /**
  * Wraps a 3rd party logger implementation.
