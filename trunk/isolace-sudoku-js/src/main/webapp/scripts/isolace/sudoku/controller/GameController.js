@@ -14,6 +14,7 @@ ISOLACE.sudoku.GameController = function() {
     this.boardManager = new ISOLACE.sudoku.BoardManager(options);
     $Events.handleShowMainMenu(this, this.showMainMenu);
     $Events.handleShowBoard(this, this.showBoard);
+    this.showBoard();
 };
 
 /**
@@ -36,7 +37,7 @@ ISOLACE.sudoku.GameController.prototype.hideMainMenu = function() {
  * Show the main menu.
  * @method showMenu
  */
-ISOLACE.sudoku.GameController.prototype.showBoard = function(level) {
+ISOLACE.sudoku.GameController.prototype.showBoard = function() {
     this.hideMainMenu();
     this.options = {};
     this.boardManager.show(this.options);

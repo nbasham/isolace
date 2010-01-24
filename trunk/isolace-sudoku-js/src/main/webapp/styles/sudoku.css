@@ -1,36 +1,68 @@
-.board {
-    position: absolute;
-    top: 10px;
-    left: 100px;
-    border: 1px solid #333;
-    font-size: 64px;
-    border: 2px solid black;
-}
-    
-.timerView {
-    position: absolute;
-    top: 616px;
-    left: 600px;
-    display: none;
+.bodyContent {
+    width: 50em;
+    height: 58em;
+    margin-left: auto ;
+    margin-right: auto ;
 }
 
-.undoView {
+.boardContent {
+    width: 446px;
+    height: 472px;
+    margin: 0;
+    padding: 0;
+}
+
+#boardView {
+    height: 443px;
+    border: 2px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    float: left;
+    margin-bottom: 6px;
+}
+
+#boardControlView {
+    margin-top: 4px;
+}
+
+.timerView {
+    margin-top: 6px;
+    float: right;
+}
+
+.infoView {
+    float: left;
+}
+
+#selector {
     position: absolute;
-    top: 616px;
-    left: 320px;
+    height: 48px;
+    width: 48px;
+}
+    
+.undoView {
+    float: left;
+    display: block;
+    padding-top: 4px;
+}
+
+#pickerView {
+    position: absolute;
+    top: 650px;
+    left: 212px;
     display: block;
 }
 
 .cellrow {
-    height: 64px;
+    height: 48px;
     border: 0px solid orange;
 }
 
 .cell {
     border-right: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
-    height: 64px;
-    width: 64px;
+    height: 48px;
+    width: 48px;
     float: left;
     position: relative;
     text-align: center;
@@ -43,7 +75,7 @@
 }
 
 .oddGrid {
-    background-color: #eee;
+    background-color: #f2f5f7;
 }
 
 .rowBorder {

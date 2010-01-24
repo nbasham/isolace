@@ -52,7 +52,7 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderMarkerCell = function(boardState, i
             if(boardState.conflicts(value, index)) {
                 this.setImage(cell, value + '-marker-conflict');
             } else {
-                this.setImage(cell, value + '-marker-normal');
+                this.setImage(cell, value + '-marker');
             }
         }
     }
@@ -68,9 +68,9 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderCell = function(boardState, index) 
     var isEditable = boardState.isEditable(index);
     if(isEditable) {
         if(boardState.conflicts(value, index)) {
-            this.setImage(cell, value + '-conflict');
+            this.setImage(cell, value + '-guess-conflict');
         } else {
-            this.setImage(cell, value + '-normal');
+            this.setImage(cell, value + '-guess');
         }
     } else {
         this.setImage(cell, value + '-revealed');
@@ -84,7 +84,7 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderCell = function(boardState, index) 
  * @private
  */
 ISOLACE.sudoku.ImageRenderer.prototype.setImage = function(cell, imageName) {
-    var imagePath = '../images/'  + imageName + '.png';
+    var imagePath = '../images/45/numbers/'  + imageName + '.png';
     cell.css('background-image', 'url(' + imagePath + ')');
     cell.css('background-repeat', 'no-repeat');
     cell.css('background-position', 'center center');
