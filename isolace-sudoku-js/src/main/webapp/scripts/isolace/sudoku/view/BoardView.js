@@ -22,10 +22,8 @@ ISOLACE.sudoku.BoardView = function(options) {
     this.options = options;
     //$('*').unbind();
     $('#boardView').html(this.generateHtml());
-    
-    this.initializeOptions(this.options);
-    this.stylizeGridColors();
     this.stylizeGridBorders();
+    this.initializeOptions(this.options);
 };
 
 ISOLACE.sudoku.BoardView.prototype.render = function(boardState) {
@@ -54,30 +52,21 @@ ISOLACE.sudoku.BoardView.prototype.generateHtml = function() {
     var cellIndex = 0;
     var html = '';
     html += "<div id='board' class='board'>";
-    for(var row = 0; row < 9; row++) {
+    for( var row = 0; row < 9; row++) {
         html += "<div class='cellrow'>";
-        for(var col = 0; col < 9; col++) {
-            html += "<div id='c" + cellIndex + "' class='cell'>&nbsp;</div>";
+        for( var col = 0; col < 9; col++) {
+            var gridClass = 'oddGrid';
+            if($SUDOKU_UTIL.getGridFromIndex(cellIndex) % 2 === 0) {
+                gridClass = 'evenGrid';
+            }
+            html += "<div id='c" + cellIndex + "' class='cell " + gridClass + "'>&nbsp;</div>";
             cellIndex++;
         }
         html += "</div>";
     }
     html += "</div>";
-    
-    return html;
-};
 
-/**
- * @private
- */
-ISOLACE.sudoku.BoardView.prototype.stylizeGridColors = function() {
-    $('.cell').each( function(i, el) {
-        if ($SUDOKU_UTIL.getGridFromIndex(i) % 2 === 0) {
-            $(el).addClass('evenGrid');
-        } else {
-            $(el).addClass('oddGrid');
-        }
-    });
+    return html;
 };
 
 /**
@@ -95,7 +84,6 @@ ISOLACE.sudoku.BoardView.prototype.stylizeGridBorders = function() {
         }
     });
 };
-
 
 /**
  * @private

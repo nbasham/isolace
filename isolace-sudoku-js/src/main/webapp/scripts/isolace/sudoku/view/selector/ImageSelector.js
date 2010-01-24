@@ -25,7 +25,7 @@ ISOLACE.sudoku.ImageSelector.prototype.select = function(index) {
     }
     var cell = $('#c' + index);
     var t = cell.offset().top;
-    var l = cell.offset().left;
+    var l = cell.position().left;
     this.selector.css('top', t);
     this.selector.css('left', l);
     this.selector.css('display', 'block');
@@ -47,12 +47,8 @@ ISOLACE.sudoku.ImageSelector.prototype.unselect = function(cell, index) {
  */
 ISOLACE.sudoku.ImageSelector.prototype.createSelectorElement = function() {
     this.selector = $('<img/>', {
-        src: '../images/select.png',
-        css: {
-            position: "absolute",
-            height: "64px",
-            width: "64px"
-        }
-    }).appendTo("#boardView");
+        src: '../images/45/numbers/select.png',
+        id: 'selector'
+    }).appendTo('.board');
 };
 

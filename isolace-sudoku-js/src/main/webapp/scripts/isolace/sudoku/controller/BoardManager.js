@@ -22,7 +22,7 @@ ISOLACE.sudoku.BoardManager.prototype.show = function() {
     $Events.handleShowBoard(this, this.showBoard);
     $Events.handleUndo(this, this.handleUndo);
     $Events.handleStateChange(this, this.handleStateChanged);
-    this.puzzle = this.getNextPuzzle(level);
+    this.puzzle = this.getNextPuzzle();
     var jsLintLikesThis = new ISOLACE.sudoku.TimerController();
     var jsLintLikesThis2 = new ISOLACE.sudoku.TimerView();
     this.initBoard();
@@ -138,9 +138,10 @@ ISOLACE.sudoku.BoardManager.prototype.handleStateChanged = function(boardState) 
  * puzzle at the given level.
  * @method getNextPuzzle
  */
-ISOLACE.sudoku.BoardManager.prototype.getNextPuzzle = function(level) {
+ISOLACE.sudoku.BoardManager.prototype.getNextPuzzle = function() {
     var values;
     var revealedIndexes;
+    var index = $Persistence.getPuzzleIndex();
     if(false) {
         values = [8,6,4,5,3,1,2,9,7,9,5,1,6,2,7,8,4,3,2,7,3,4,8,9,6,1,5,1,4,7,9,5,6,3,8,2,3,9,6,2,4,8,5,7,1,5,8,2,1,7,3,9,6,4,6,2,5,8,1,4,7,3,9,7,1,9,3,6,5,4,2,8,4,3,8,7,9,2,1,5,6];
         revealedIndexes = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79];
@@ -148,7 +149,6 @@ ISOLACE.sudoku.BoardManager.prototype.getNextPuzzle = function(level) {
     } else {
         values = [];
         revealedIndexes = [];
-        var index = $Persistence.getPuzzleIndex();
         var puzzleArray = ISOLACE.sudoku.puzzles[index];
         for( var i = 0; i < puzzleArray.length; i++) {
             var cell = puzzleArray[i];
@@ -164,6 +164,8 @@ ISOLACE.sudoku.BoardManager.prototype.getNextPuzzle = function(level) {
 //            revealedIndexes.push(i);
 //        }
     }
+    //   move this
+    $('#infoView').html('Puzzle ' + index);
     var puzzle = new ISOLACE.sudoku.Puzzle(values, revealedIndexes);
     return puzzle;
 };

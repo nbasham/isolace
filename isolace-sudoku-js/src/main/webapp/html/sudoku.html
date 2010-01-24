@@ -12,7 +12,7 @@
     <script src="../scripts/jquery-ui-1.7.2.custom.min.js"></script>
     <script src="../scripts/jquery.cookie.js"></script>
     
-    <link rel="stylesheet" href="../styles/cupertino/jquery-ui-1.7.2.custom.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../styles/facebook/jquery-ui-1.7.2.custom.css" type="text/css" media="screen" />
 
     <style type="text/css"> 
         .fg-button { outline: 0; margin:0 4px 0 0; padding: .4em 1em; text-decoration:none !important; cursor:pointer; position: relative; text-align: center; zoom: 1; }
@@ -43,6 +43,9 @@
     </style>    
 
     <script type="text/javascript">
+        $(function() {
+            $("#tabs").tabs();
+        });
         $(function(){
             //all hover and click logic for buttons
             $(".fg-button:not(.ui-state-disabled)")
@@ -110,38 +113,72 @@
     </script>
 
 </head>
-<body>
-    <div id='boardView' class='boardView'>
+<body class='bodyContent'>
+<p align='center'><img src='../images/sudoku.png' /></p>
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">About</a></li>
+        <li><a href="#tabs-2">Play</a></li>
+        <li><a href="#tabs-3">Options</a></li>
+    </ul>
+    <div id="tabs-1">
+        <p>Welcome to Sudoku, we're just getting started...</p>
+        <br/>
+        <p>Thanks to our QA team Kelly and Joanne!</p>
     </div>
-    <div id='timerView' class='timerView'>&nbsp;</div>
-    <div id='undoView' class='undoView' style='display: none;' >
-        <button id="undoButton" class="fg-button ui-state-default ui-corner-all" type="button">Undo</button>
-        <button id="redoButton" class="fg-button ui-state-default ui-corner-all" type="button">Redo</button>
-    </div>
-    <div id='solvedView' style='display: none;' ></div>
-    <div id="mainMenuView" style='display: none;' >
-            <br/>
-            <label >Start a new game:</label><br/>
-            <p align=center>
-            <label for="level">Level</label>
-            <select  name="level" id="level" class="ui-widget select ui-corner-all">
-                <option class="text ui-widget input" value=0 selected="selected">Easy</option>
-                <option class="text ui-widget input" value=1>Medium</option>
-                <option class="text ui-widget input" value=2>Hard</option>
-            </select>
-            </p>
-            <p align=right>
-                <button id="showBoardButton" class="fg-button ui-state-default ui-corner-all" >Begin</button>
-            </p>
+    <div id="tabs-2">
+        <div class='boardContent'>
+ 
+ 
+            <div id='boardView' class='boardView'>
+            </div>
 
-            <hr/>
+            <div id='boardControlView'>
+                <div class="fg-buttonset fg-buttonset-multi">
+                   <button id='undoButton' style='margin-right: 8px' class="fg-button ui-state-default fg-button-icon-left ui-corner-all" title="Undo your last move"><span class="ui-icon ui-icon-arrowrefresh-1-w"></span>Undo</button>
+                   <button id='redoButton' class="fg-button ui-state-default fg-button-icon-left ui-corner-all" title="Redo your last move"><span class="ui-icon ui-icon-arrowrefresh-1-e"></span>Redo</button>
+                </div>
+                <div id='timerView' class='timerView'>&nbsp;</div>
+            </div>
+
+        </div>
+        
+        <div id='solvedView' style='display: none;' ></div>
+    
+        <div id='pickerView' style='display: none;'>
+        <div sytle='position: relative; float: left;'>
+            <div class="fg-buttonset">
+            <!--
+                <button class="fg-button ui-state-default ui-priority-primary ui-corner-left"><span class='markerPicker'>1</span></button>
+                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>2</span></button>
+                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>3</span></button>
+                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>4</span></button>
+                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>5</span></button>
+                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>6</span></button>
+                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>7</span></button>
+                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>8</span></button>
+                <button class="fg-button ui-state-default ui-priority-primary ui-corner-right"><span class='markerPicker'>9</span></button>
             <br/>
-            <label >Navigate:</label><br/>
-            <p align=center>
-                <a href='#' class='.ui-widget input' >Help</a><br/>
-                <a href='#' class='.ui-widget input' >View High Scores</a><br/>
-                <a href='#' class='.ui-widget input' >View My High Scores</a><br/>
-            </p>
+             -->
+                <button class="fg-button ui-state-default ui-priority-primary ui-corner-left">1</button>
+                <button class="fg-button ui-state-default ui-priority-primary">2</button>
+                <button class="fg-button ui-state-default ui-priority-primary">3</button>
+                <button class="fg-button ui-state-default ui-priority-primary">4</button>
+                <button class="fg-button ui-state-default ui-priority-primary">5</button>
+                <button class="fg-button ui-state-default ui-priority-primary">6</button>
+                <button class="fg-button ui-state-default ui-priority-primary">7</button>
+                <button class="fg-button ui-state-default ui-priority-primary">8</button>
+                <button class="fg-button ui-state-default ui-priority-primary ui-corner-right">9</button>
+            </div>
+            <button id='pickerMarkerButton' class="fg-button ui-state-default fg-button-icon-solo fg-button-toggleable ui-corner-all" ><span class="ui-icon ui-icon-pencil"></span>&nbsp;</button>
+            </div>
+        </div>
     </div>
+    <div id="tabs-3">
+        <p>Comming soon...</p>
+        <div id='infoView' class='infoView'>&nbsp;</div>
+    </div>
+</div>
+
 </body>
 </html>

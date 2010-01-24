@@ -13,7 +13,7 @@ ISOLACE.namespace("sudoku");
  */
 ISOLACE.sudoku.TimerView = function() {
     $Events.handleTimerIncrement(this, this.update);
-    $('#timerView').html("<img src='../images/timer-0.png' /><img src='../images/timer-0.png' /><img src='../images/timer-seperator.png' /><img src='../images/timer-0.png' /><img src='../images/timer-0.png' />");
+    $('#timerView').html("<img src='../images/45/numbers/timer-0.png' /><img src='../images/45/numbers/timer-0.png' /><img src='../images/45/numbers/timer-seperator.png' /><img src='../images/45/numbers/timer-0.png' /><img src='../images/45/numbers/timer-0.png' />");
     var me = this;
 };
 
@@ -56,7 +56,7 @@ ISOLACE.sudoku.TimerView.prototype.update = function(seconds) {
         if(el == ':') {
             el = 'seperator';
         }
-        var src = '../images/timer-' + el + '.png';
+        var src = '../images/45/numbers/timer-' + el + '.png';
         $('#timerView').append("<img src='" + src + "' />");
     }
 };
