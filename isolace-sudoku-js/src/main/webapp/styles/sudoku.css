@@ -92,21 +92,7 @@
     border-width: 2px;
 }
 
-div.palette, div.hintPalette {
-    width: 288px;
-    height: 32px;
-    font-size: 32;
-    position: absolute;
-}
-div.symbol, div.hintSymbol {
-    font-size: 80%;
-    width: 32px;
-    height: 100%;
-    color: black;
-    float: left;
-    text-align: center;
-}
-div.hint {
+div.marker {
     font-family: Tahoma, "New Courier";
     font-size: 33%;
     float: left;
@@ -114,18 +100,6 @@ div.hint {
     height: 31%;
     margin-left: 1px;
     margin-top: 1px;
-}
-    
-.hintCell {
-    font-size: 33%;
-    text-align: left;
-    word-wrap: break-word;
-}
-
-.guessCell {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    font-size: 80%;
 }
 
 .revealedCell {

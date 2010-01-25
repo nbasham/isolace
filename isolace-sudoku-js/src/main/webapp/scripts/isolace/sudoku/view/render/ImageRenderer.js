@@ -41,7 +41,7 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderMarkerCell = function(boardState, i
     var s = '';
     for(var markerIndex = 0; markerIndex < 9; markerIndex++) {
         var value = markerIndex + 1;
-        s += "<div class='hint marker" + index + '-' + value + "'>&nbsp;</div>";
+        s += "<div class='marker" + index + '-' + value + "'>&nbsp;</div>";
     }
     parentCell.html(s);
 

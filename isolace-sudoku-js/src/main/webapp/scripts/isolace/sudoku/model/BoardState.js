@@ -94,8 +94,8 @@ ISOLACE.sudoku.BoardState.prototype.conflicts = function(value, index) {
     assertInRange(value, 1, 9);
     assertInRange(index, 0, 80);
     var stateArray = this.normalize();
-
-    return $SUDOKU_UTIL.conflicts(stateArray, value, index);
+    var conflicts = $SUDOKU_UTIL.conflicts(stateArray, value, index);
+    return conflicts;
 };
 
 /**
