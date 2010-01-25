@@ -68,7 +68,7 @@
                     <excludes>**/*Data.js</excludes>
                     <!-- this is actually the default -->
                     <caseSensitive>true</caseSensitive>
-                    <outputBaseDirectory>/doc</outputBaseDirectory>
+                    <outputBaseDirectory>${basedir}/doc</outputBaseDirectory>
                     <!-- for more configuration properties, see the goals documentation -->
                 </configuration>
             </plugin>
