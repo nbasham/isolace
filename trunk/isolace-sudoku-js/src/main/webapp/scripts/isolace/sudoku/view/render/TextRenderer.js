@@ -45,12 +45,12 @@ ISOLACE.sudoku.TextRenderer.prototype.renderMarkerCell = function(boardState, in
         var value = markerIndex + 1;
         if(boardState.hasMarkerValue(value, index)) {
             if(boardState.conflicts(value, index)) {
-                s += "<div class='hint unrevealedCellConflicted'>" + value + "</div>";
+                s += "<div class='marker unrevealedCellConflicted'>" + value + "</div>";
             } else {
-                s += "<div class='hint unrevealedCell'>" + value + "</div>";
+                s += "<div class='marker unrevealedCell'>" + value + "</div>";
             }
         } else {
-            s += "<div class='hint'>&nbsp;</div>";
+            s += "<div class='marker'>&nbsp;</div>";
         }
     }
     this.jcells[index].html(s);

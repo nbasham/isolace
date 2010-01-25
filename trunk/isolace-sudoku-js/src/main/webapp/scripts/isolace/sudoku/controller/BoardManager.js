@@ -97,6 +97,9 @@ ISOLACE.sudoku.BoardManager.prototype.handleUndo = function(isRedo) {
 ISOLACE.sudoku.BoardManager.prototype.handleGuess = function(value, index) {
     this.state.setValue(value, index);
     $Events.fireStateChange(this.state);
+    if(this.state.getValue(index) != this.puzzle.getValue(index)) {
+        //  incorrect guess
+    }
 };
 
 /**
