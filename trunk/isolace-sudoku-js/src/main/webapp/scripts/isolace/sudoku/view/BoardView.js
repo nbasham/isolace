@@ -42,7 +42,6 @@ ISOLACE.sudoku.BoardView.prototype.start = function() {
     if(this.showTimer) {
         $('#timerView').css('display', 'block');
     }
-    $Events.fireTimerStart();
 };
 
 /**

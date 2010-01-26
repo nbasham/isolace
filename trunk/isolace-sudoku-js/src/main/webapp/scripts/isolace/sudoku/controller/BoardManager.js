@@ -20,11 +20,10 @@ ISOLACE.sudoku.BoardManager = function(options) {
  */
 ISOLACE.sudoku.BoardManager.prototype.show = function() {
     $Events.handleShowBoard(this, this.showBoard);
-    $Events.handleUndo(this, this.handleUndo);
     $Events.handleStateChange(this, this.handleStateChanged);
     this.puzzle = this.getNextPuzzle();
-    var jsLintLikesThis = new ISOLACE.sudoku.TimerController();
-    var jsLintLikesThis2 = new ISOLACE.sudoku.TimerView();
+    var jsLintLikesThis = new ISOLACE.TimerController();
+    var jsLintLikesThis2 = new ISOLACE.TimerView();
     this.initBoard();
     this.initUndo();
 };
@@ -48,9 +47,10 @@ ISOLACE.sudoku.BoardManager.prototype.initBoard = function() {
     var boardView = new ISOLACE.sudoku.BoardView(this.options);
     var jsLintLikesThis = new ISOLACE.sudoku.BoardViewEvents(boardView, this.puzzle);
     var initialState = this.puzzle.getInitialState();
-    this.state = new ISOLACE.sudoku.BoardState(initialState);
+    this.state = new ISOLACE.sudoku.BoardState(this.puzzle.getValues(), initialState);
     boardView.show(this.state);
     boardView.start();
+    $TimerEvent.fireTimerStart();
     $Events.handleGuess(this, this.handleGuess);
     $Events.handleMark(this, this.handleMark);
     this.boardView = boardView;
@@ -62,29 +62,12 @@ ISOLACE.sudoku.BoardManager.prototype.initBoard = function() {
  * @private
  */
 ISOLACE.sudoku.BoardManager.prototype.initUndo = function() {
-    var undoController = new ISOLACE.sudoku.UndoController(this.puzzle.getInitialState());
-    var undoView = new ISOLACE.sudoku.UndoView(undoController);
-    $Events.handleUndoUI(undoView, undoView.handleChange);
-    this.undoController = undoController;
-};
-
-ISOLACE.sudoku.BoardManager.prototype.handleUndo = function(isRedo) {
-    var stateArray;
-    if(isRedo) {
-        stateArray = this.undoController.redo();
-    } else {
-        stateArray = this.undoController.undo();
-    }
-    assertDefined(stateArray);
-    if(stateArray !== null) {
-        
-        $Log.debug("Reseting board state because of undo event. " + stateArray);
-        this.state = new ISOLACE.sudoku.BoardState(stateArray);
+    var undoController = new ISOLACE.UndoController(this.puzzle.getInitialState());
+    var undoView = new ISOLACE.UndoView();
+    $UndoEvent.handleUndoEvent(this, function(stateArray) {
+        this.state = new ISOLACE.sudoku.BoardState(this.puzzle.getValues(), stateArray);
         this.boardView.render(this.state);
-        $Events.fireUndoUI(this.undoController.canUndo(), this.undoController.canRedo());
-    } else {
-        $Log.debug("UI should prevent this from being possible by deactivating when undo/redo is not possible.");
-    }
+    });
 };
 
 /**
@@ -97,9 +80,6 @@ ISOLACE.sudoku.BoardManager.prototype.handleUndo = function(isRedo) {
 ISOLACE.sudoku.BoardManager.prototype.handleGuess = function(value, index) {
     this.state.setValue(value, index);
     $Events.fireStateChange(this.state);
-    if(this.state.getValue(index) != this.puzzle.getValue(index)) {
-        //  incorrect guess
-    }
 };
 
 /**
@@ -121,17 +101,17 @@ ISOLACE.sudoku.BoardManager.prototype.handleMark = function(value, index) {
  * @method handleStateChanged
  */
 ISOLACE.sudoku.BoardManager.prototype.handleStateChanged = function(boardState) {
-    var solved = this.state.solved(this.puzzle);
+    var solved = this.state.solved();
     if(solved) {
         $Persistence.incPuzzleIndex();
-        $Events.fireTimerStop();
+        $TimerEvent.fireTimerStop();
         $("#solvedView").dialog( {
             modal : true,
             title : 'Puzzle Solved',
             buttons: { "Ok": function() { $(this).dialog("close"); location.reload(); } }
         }).html('You solved the puzzle.');
     } else {
-        this.undoController.add(this.state.state);
+        $UndoEvent.fireSubmitUndoRecordEvent(this.state.state);
     }
 };
 
@@ -162,10 +142,13 @@ ISOLACE.sudoku.BoardManager.prototype.getNextPuzzle = function() {
                 values.push(cell);
             }
         }
-//        revealedIndexes.length = 0;
-//        for( var i = 0; i < 80; i++) {
-//            revealedIndexes.push(i);
-//        }
+        var revealAllButOne = false;
+        if(revealAllButOne) {
+            revealedIndexes.length = 0;
+            for( var i = 0; i < 80; i++) {
+                revealedIndexes.push(i);
+            }
+        }
     }
     //   move this
     $('#infoView').html('Puzzle ' + index);
