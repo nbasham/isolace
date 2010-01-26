@@ -109,6 +109,7 @@ ISOLACE.Log.prototype.error = function(message) {
 /**
  * Log message to console and browser console (if it exists).
  * @method debug
+ * @private
  * @param {string} message The message to log .
  */
 ISOLACE.Log.prototype.console = function(message) {

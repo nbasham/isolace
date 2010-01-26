@@ -22,6 +22,7 @@ ISOLACE.sudoku.BoardManager.prototype.show = function() {
     $Events.handleShowBoard(this, this.showBoard);
     $Events.handleStateChange(this, this.handleStateChanged);
     this.puzzle = this.getNextPuzzle();
+    this.symbolCountView = new ISOLACE.sudoku.SymbolCountView();
     var jsLintLikesThis = new ISOLACE.TimerController();
     var jsLintLikesThis2 = new ISOLACE.TimerView();
     this.initBoard();
@@ -49,6 +50,7 @@ ISOLACE.sudoku.BoardManager.prototype.initBoard = function() {
     var initialState = this.puzzle.getInitialState();
     this.state = new ISOLACE.sudoku.BoardState(this.puzzle.getValues(), initialState);
     boardView.show(this.state);
+    this.symbolCountView.update(initialState);
     boardView.start();
     $TimerEvent.fireTimerStart();
     $Events.handleGuess(this, this.handleGuess);
@@ -67,6 +69,7 @@ ISOLACE.sudoku.BoardManager.prototype.initUndo = function() {
     $UndoEvent.handleUndoEvent(this, function(stateArray) {
         this.state = new ISOLACE.sudoku.BoardState(this.puzzle.getValues(), stateArray);
         this.boardView.render(this.state);
+        this.symbolCountView.update(stateArray);
     });
 };
 
@@ -97,7 +100,7 @@ ISOLACE.sudoku.BoardManager.prototype.handleMark = function(value, index) {
 /**
  * Handle a state changed event.
  * 
- * We update the undo que with the boardState array. 
+ * We update the undo queue with the boardState array. 
  * @method handleStateChanged
  */
 ISOLACE.sudoku.BoardManager.prototype.handleStateChanged = function(boardState) {
@@ -112,6 +115,7 @@ ISOLACE.sudoku.BoardManager.prototype.handleStateChanged = function(boardState) 
         }).html('You solved the puzzle.');
     } else {
         $UndoEvent.fireSubmitUndoRecordEvent(this.state.state);
+        this.symbolCountView.update(this.state.state);
     }
 };
 
