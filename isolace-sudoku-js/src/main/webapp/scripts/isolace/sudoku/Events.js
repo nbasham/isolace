@@ -33,27 +33,6 @@ ISOLACE.sudoku.Events = function() {
     this.STATE_CHANGE = function() {
         return 'ISOLACE.sudoku.EVENT_STATE_CHANGE';
     };
-    this.TIMER_INCREMENT = function() {
-        return 'ISOLACE.sudoku.EVENT_TIMER_INCREMENT';
-    };
-    this.TIMER_PAUSE = function() {
-        return 'ISOLACE.sudoku.EVENT_TIMER_PAUSE';
-    };
-    this.TIMER_START = function() {
-        return 'ISOLACE.sudoku.EVENT_TIMER_START';
-    };
-    this.TIMER_STOP = function() {
-        return 'ISOLACE.sudoku.EVENT_TIMER_STOP';
-    };
-    this.TIMER_UNPAUSE = function() {
-        return 'ISOLACE.sudoku.EVENT_TIMER_UNPAUSE';
-    };
-    this.UNDO = function() {
-        return 'ISOLACE.sudoku.EVENT_UNDO';
-    };
-    this.UNDO_UI = function() {
-        return 'ISOLACE.sudoku.EVENT_UNDO_UI';
-    };
 };
 
 /**
@@ -65,12 +44,9 @@ ISOLACE.sudoku.Events = function() {
  */
 ISOLACE.sudoku.Events.prototype.handle = function(eventType, context, callback) {
     $(document).bind(eventType, function(e) {
-        var args = [];
         if(e.payload !== undefined) {
-            // make an array from e.payload to pass as arg array to apply
-            // PROBLEM: e.payload is obj and don't know how to order arg array
         }
-        callback.apply(context, args);
+        callback.call(context, e);
     });
 };
 
@@ -227,157 +203,6 @@ ISOLACE.sudoku.Events.prototype.fireStateChange = function(boardState) {
 ISOLACE.sudoku.Events.prototype.handleStateChange = function(context, f) {
     $(document).bind($Events.STATE_CHANGE(), function(e) {
         f.call(context, e.boardState);
-    });
-};
-
-/**
- * Fire TIMER_INCREMENT event every second.
- * @method fireTimerIncrement
- * @param {int} seconds The number of seconds the game has been played.
- */
-ISOLACE.sudoku.Events.prototype.fireTimerIncrement = function(seconds) {
-    $Events.fire($Events.TIMER_INCREMENT(), {
-        seconds : seconds
-    });
-};
-
-/**
- * Bind a handler to the TIMER_INCREMENT event. The handler expects one argument (seconds).
- * @method handleTimerIncrement
- * @param {object} context The context to set when calling the handler (usually this).
- * @param {function} f The function you wish to invoke when the event is fired.
- */
-ISOLACE.sudoku.Events.prototype.handleTimerIncrement = function(context, f) {
-    $(document).bind($Events.TIMER_INCREMENT(), function(e) {
-        f.call(context, e.seconds);
-    });
-};
-
-/**
- * Fire TIMER_PAUSE event.
- * @method fireTimerPause
- */
-ISOLACE.sudoku.Events.prototype.fireTimerPause = function() {
-    $Events.fire($Events.TIMER_PAUSE());
-};
-
-/**
- * Bind a handler to the TIMER_PAUSE event.
- * @method handleTimerPause
- * @param {object} context The context to set when calling the handler (usually this).
- * @param {function} f The function you wish to invoke when the event is fired.
- */
-ISOLACE.sudoku.Events.prototype.handleTimerPause = function(context, f) {
-    $(document).bind($Events.TIMER_PAUSE(), function(e) {
-        f.call(context);
-    });
-};
-
-/**
- * Fire TIMER_START event.
- * @method fireTimerStart
- */
-ISOLACE.sudoku.Events.prototype.fireTimerStart = function() {
-    $Events.fire($Events.TIMER_START());
-};
-
-/**
- * Bind a handler to the TIMER_START event.
- * @method handleTimerStart
- * @param {object} context The context to set when calling the handler (usually this).
- * @param {function} f The function you wish to invoke when the event is fired.
- */
-ISOLACE.sudoku.Events.prototype.handleTimerStart = function(context, f) {
-    $(document).bind($Events.TIMER_START(), function(e) {
-        f.call(context);
-    });
-};
-
-/**
- * Fire TIMER_STOP event.
- * @method fireTimerStop
- */
-ISOLACE.sudoku.Events.prototype.fireTimerStop = function() {
-    $Events.fire($Events.TIMER_STOP());
-};
-
-/**
- * Bind a handler to the TIMER_STOP event.
- * @method handleTimerStop
- * @param {object} context The context to set when calling the handler (usually this).
- * @param {function} f The function you wish to invoke when the event is fired.
- */
-ISOLACE.sudoku.Events.prototype.handleTimerStop = function(context, f) {
-    $(document).bind($Events.TIMER_STOP(), function(e) {
-        f.call(context);
-    });
-};
-
-/**
- * Fire TIMER_UNPAUSE event.
- * @method fireTimerUnpause
- */
-ISOLACE.sudoku.Events.prototype.fireTimerUnpause = function() {
-    $Events.fire($Events.TIMER_UNPAUSE());
-};
-
-/**
- * Bind a handler to the TIMER_UNPAUSE event.
- * @method handleTimerUnpause
- * @param {object} context The context to set when calling the handler (usually this).
- * @param {function} f The function you wish to invoke when the event is fired.
- */
-ISOLACE.sudoku.Events.prototype.handleTimerUnpause = function(context, f) {
-    $(document).bind($Events.TIMER_UNPAUSE(), function(e) {
-        f.call(context);
-    });
-};
-
-/**
- * Fire UNDO event.
- * @method fireUndo
- * @param {boolean} isRedo Flag to determine if this is a redo (vs. undo) event.
- */
-ISOLACE.sudoku.Events.prototype.fireUndo = function(isRedo) {
-    $Events.fire($Events.UNDO(), {
-        isRedo : isRedo
-    });
-};
-
-/**
- * Bind a handler to the UNDO event. The handler expects one argument (isRedo).
- * @method handleUndo
- * @param {object} context The context to set when calling the handler (usually this).
- * @param {function} f The function you wish to invoke when the event is fired.
- */
-ISOLACE.sudoku.Events.prototype.handleUndo = function(context, f) {
-    $(document).bind($Events.UNDO(), function(e) {
-        f.call(context, e.isRedo);
-    });
-};
-
-/**
- * Fire UNDO_UI event.
- * @method fireUndoUI
- * @param {boolean} canUndo Is an undo possible.
- * @param {boolean} canRedo Is an redo possible.
- */
-ISOLACE.sudoku.Events.prototype.fireUndoUI = function(canUndo, canRedo) {
-    $Events.fire($Events.UNDO_UI(), {
-        canUndo : canUndo,
-        canRedo : canRedo
-    });
-};
-
-/**
- * Bind a handler to the UNDO_UI event. The handler expects two arguments (canUndo, canRedo).
- * @method handleUndoUI
- * @param {object} context The context to set when calling the handler (usually this).
- * @param {function} f The function you wish to invoke when the event is fired.
- */
-ISOLACE.sudoku.Events.prototype.handleUndoUI = function(context, f) {
-    $(document).bind($Events.UNDO_UI(), function(e) {
-        f.call(context, e.canUndo, e.canRedo);
     });
 };
 

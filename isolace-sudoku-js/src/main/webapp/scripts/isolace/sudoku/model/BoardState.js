@@ -21,7 +21,8 @@ ISOLACE.namespace("sudoku");
  * @author Norman Basham, iSolace, Copyright (c) 2009-2010. ALL RIGHTS RESERVED<br/>
  * @version 0.1
  */
-ISOLACE.sudoku.BoardState = function(state) {
+ISOLACE.sudoku.BoardState = function(solution, state) {
+    this.solution = solution;
     this.state = state;
 };
 
@@ -35,13 +36,9 @@ ISOLACE.sudoku.BoardState.prototype.equals = function(bs) {
     if(bs === undefined || bs === null || bs.state.length != this.state.length) {
         return false;
     }
-    for(var i = 0; i < 81; i++) {
-        if(bs.state[i] != this.state[i]) {
-            return false;
-        }
-    }
+    var equal = arrayEquals(bs.state, this.state);
 
-    return true;
+    return equal;
 };
 
 /**
@@ -73,10 +70,10 @@ ISOLACE.sudoku.BoardState.prototype.normalize = function() {
  * @param {Puzzle} puzzle The current Sudoku Puzzle.
  * @return {boolean} True if all cells have the correct guess.
  */
-ISOLACE.sudoku.BoardState.prototype.solved = function(puzzle) {
+ISOLACE.sudoku.BoardState.prototype.solved = function() {
     var stateArray = this.normalize();
-    var solved = $SUDOKU_UTIL.solved(puzzle, stateArray);
-    return solved;
+    var equal = arrayEquals(stateArray, this.solution);
+    return equal;
 };
 
 /**
@@ -95,7 +92,13 @@ ISOLACE.sudoku.BoardState.prototype.conflicts = function(value, index) {
     assertInRange(index, 0, 80);
     var stateArray = this.normalize();
     var conflicts = $SUDOKU_UTIL.conflicts(stateArray, value, index);
-    return conflicts;
+    var wrongAnswer = false;
+    var rawValue = this.state[index];
+    if(rawValue > 0) {
+        wrongAnswer = this.solution[index] != rawValue;
+    }
+
+    return conflicts || wrongAnswer;
 };
 
 /**

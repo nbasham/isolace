@@ -1,11 +1,10 @@
-//  TURN OFF BROWSER POPUP BLOCKING
+// WHEN SETTING TO TRUE, TURN OFF BROWSER POPUP BLOCKING
 ISOLACE.LOG = false;
 
 /**
- * Wraps a 3rd party logger implementation.
- * The current implementation is log4javascript.
- * Tried YUI and jsLog, but preffered log4javascript.
- * @class Log
+ * Creates a Log object.
+ * @class Wraps a 3rd party logger implementation. The current implementation is
+ *        log4javascript. Tried YUI and jsLog, but preffered log4javascript.
  * @namespace ISOLACE
  * @constructor
  * @author Norman Basham, iSolace, Copyright (c) 2009-2010. ALL RIGHTS RESERVED<br/>
@@ -36,12 +35,12 @@ ISOLACE.Log = function() {
  * Log message to console and browser console (if it exists).
  * @method log
  * @param {string} message The message to log .
- * @param {string} level  The level to log message at (e.g. warn).
+ * @param {string} level The level to log message at (e.g. warn).
  */
 ISOLACE.Log.prototype.log = function(message, level) {
     if(ISOLACE.LOG) {
         if(level === undefined || typeof (level) != 'string') {
-            this.log.debug(message);
+            this.debug(message);
         } else {
             level = level.toLowerCase();
             if(level == 'debug') {
@@ -56,7 +55,6 @@ ISOLACE.Log.prototype.log = function(message, level) {
                 this.debug(message);
             }
         }
-        this.console(message);
     }
 };
 
@@ -125,8 +123,8 @@ ISOLACE.Log.prototype.console = function(message) {
 
 if(typeof $Log == "undefined" || !$Log) {
     /**
-     * A singleton instance is automatically created as a convenience
-     * vs. creating a new ISOLACE.Log for each instance.
+     * A singleton instance is automatically created as a convenience vs.
+     * creating a new ISOLACE.Log for each instance.
      * @class ISOLACE
      * @static
      */

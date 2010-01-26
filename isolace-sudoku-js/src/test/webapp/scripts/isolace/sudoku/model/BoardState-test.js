@@ -144,6 +144,6 @@ test("conflicts grid", function() {
 });
 
 test("solved", function() {
-    var state = new ISOLACE.sudoku.BoardState(values);
+    var state = new ISOLACE.sudoku.BoardState(values, values);
     ok(state.solved(puzzle), "Puzzle solved");
 });

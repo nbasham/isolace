@@ -190,6 +190,8 @@ ul.inheritsList
 <h2>Classes</h2>
 <ul class="classList">
 	
+	<li><a href="../symbols/%24Event.html">$Event</a></li>
+	
 	<li><a href="../symbols/%24Events.html">$Events</a></li>
 	
 	<li><a href="../symbols/%24Log.html">$Log</a></li>
@@ -198,11 +200,17 @@ ul.inheritsList
 	
 	<li><a href="../symbols/%24SUDOKU_UTIL.html">$SUDOKU_UTIL</a></li>
 	
+	<li><a href="../symbols/%24TimerEvent.html">$TimerEvent</a></li>
+	
+	<li><a href="../symbols/%24UndoEvent.html">$UndoEvent</a></li>
+	
 	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
 	
 	<li><a href="../symbols/Function.html">Function</a></li>
 	
 	<li><a href="../symbols/ISOLACE.html">ISOLACE</a></li>
+	
+	<li><a href="../symbols/ISOLACE.Event.html">ISOLACE.Event</a></li>
 	
 	<li><a href="../symbols/ISOLACE.Log.html">ISOLACE.Log</a></li>
 	
@@ -232,9 +240,17 @@ ul.inheritsList
 	
 	<li><a href="../symbols/ISOLACE.sudoku.TextRenderer.html">ISOLACE.sudoku.TextRenderer</a></li>
 	
-	<li><a href="../symbols/ISOLACE.sudoku.TimerController.html">ISOLACE.sudoku.TimerController</a></li>
+	<li><a href="../symbols/ISOLACE.TimerController.html">ISOLACE.TimerController</a></li>
 	
-	<li><a href="../symbols/ISOLACE.sudoku.TimerView.html">ISOLACE.sudoku.TimerView</a></li>
+	<li><a href="../symbols/ISOLACE.TimerEvent.html">ISOLACE.TimerEvent</a></li>
+	
+	<li><a href="../symbols/ISOLACE.TimerView.html">ISOLACE.TimerView</a></li>
+	
+	<li><a href="../symbols/ISOLACE.UndoController.html">ISOLACE.UndoController</a></li>
+	
+	<li><a href="../symbols/ISOLACE.UndoEvent.html">ISOLACE.UndoEvent</a></li>
+	
+	<li><a href="../symbols/ISOLACE.UndoView.html">ISOLACE.UndoView</a></li>
 	
 </ul>
 <hr />
@@ -363,69 +379,6 @@ Event definitions, firers and handlers. The intent of this class is to:
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#fireTimerIncrement">fireTimerIncrement</a></b>(seconds)
-								</div>
-								<div class="description">Fire TIMER_INCREMENT event every second.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#fireTimerPause">fireTimerPause</a></b>()
-								</div>
-								<div class="description">Fire TIMER_PAUSE event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#fireTimerStart">fireTimerStart</a></b>()
-								</div>
-								<div class="description">Fire TIMER_START event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#fireTimerStop">fireTimerStop</a></b>()
-								</div>
-								<div class="description">Fire TIMER_STOP event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#fireTimerUnpause">fireTimerUnpause</a></b>()
-								</div>
-								<div class="description">Fire TIMER_UNPAUSE event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#fireUndo">fireUndo</a></b>(isRedo)
-								</div>
-								<div class="description">Fire UNDO event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#fireUndoUI">fireUndoUI</a></b>(canUndo, canRedo)
-								</div>
-								<div class="description">Fire UNDO_UI event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#handleGuess">handleGuess</a></b>(context, f)
 								</div>
 								<div class="description">Bind a handler to the GUESS event.</div>
@@ -474,69 +427,6 @@ Event definitions, firers and handlers. The intent of this class is to:
 								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#handleStateChange">handleStateChange</a></b>(context, f)
 								</div>
 								<div class="description">Bind a handler to the STATE_CHANGE event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#handleTimerIncrement">handleTimerIncrement</a></b>(context, f)
-								</div>
-								<div class="description">Bind a handler to the TIMER_INCREMENT event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#handleTimerPause">handleTimerPause</a></b>(context, f)
-								</div>
-								<div class="description">Bind a handler to the TIMER_PAUSE event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#handleTimerStart">handleTimerStart</a></b>(context, f)
-								</div>
-								<div class="description">Bind a handler to the TIMER_START event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#handleTimerStop">handleTimerStop</a></b>(context, f)
-								</div>
-								<div class="description">Bind a handler to the TIMER_STOP event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#handleTimerUnpause">handleTimerUnpause</a></b>(context, f)
-								</div>
-								<div class="description">Bind a handler to the TIMER_UNPAUSE event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#handleUndo">handleUndo</a></b>(context, f)
-								</div>
-								<div class="description">Bind a handler to the UNDO event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#handleUndoUI">handleUndoUI</a></b>(context, f)
-								</div>
-								<div class="description">Bind a handler to the UNDO_UI event.</div>
 							</td>
 						</tr>
 					
@@ -814,227 +704,6 @@ Event definitions, firers and handlers. The intent of this class is to:
 
 					<hr />
 				
-					<a name="fireTimerIncrement"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>fireTimerIncrement</b>(seconds)
-					
-					</div>
-					<div class="description">
-						Fire TIMER_INCREMENT event every second.
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{int}</span> <b>seconds</b>
-									
-								</dt>
-								<dd>The number of seconds the game has been played.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="fireTimerPause"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>fireTimerPause</b>()
-					
-					</div>
-					<div class="description">
-						Fire TIMER_PAUSE event.
-						
-						
-					</div>
-					
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="fireTimerStart"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>fireTimerStart</b>()
-					
-					</div>
-					<div class="description">
-						Fire TIMER_START event.
-						
-						
-					</div>
-					
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="fireTimerStop"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>fireTimerStop</b>()
-					
-					</div>
-					<div class="description">
-						Fire TIMER_STOP event.
-						
-						
-					</div>
-					
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="fireTimerUnpause"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>fireTimerUnpause</b>()
-					
-					</div>
-					<div class="description">
-						Fire TIMER_UNPAUSE event.
-						
-						
-					</div>
-					
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="fireUndo"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>fireUndo</b>(isRedo)
-					
-					</div>
-					<div class="description">
-						Fire UNDO event.
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{boolean}</span> <b>isRedo</b>
-									
-								</dt>
-								<dd>Flag to determine if this is a redo (vs. undo) event.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="fireUndoUI"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>fireUndoUI</b>(canUndo, canRedo)
-					
-					</div>
-					<div class="description">
-						Fire UNDO_UI event.
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{boolean}</span> <b>canUndo</b>
-									
-								</dt>
-								<dd>Is an undo possible.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{boolean}</span> <b>canRedo</b>
-									
-								</dt>
-								<dd>Is an redo possible.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name="handleGuess"> </a>
 					<div class="fixedFont">
 					
@@ -1291,307 +960,6 @@ Event definitions, firers and handlers. The intent of this class is to:
 						
 						
 
-					<hr />
-				
-					<a name="handleTimerIncrement"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>handleTimerIncrement</b>(context, f)
-					
-					</div>
-					<div class="description">
-						Bind a handler to the TIMER_INCREMENT event. The handler expects one argument (seconds).
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>context</b>
-									
-								</dt>
-								<dd>The context to set when calling the handler (usually this).</dd>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>f</b>
-									
-								</dt>
-								<dd>The function you wish to invoke when the event is fired.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="handleTimerPause"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>handleTimerPause</b>(context, f)
-					
-					</div>
-					<div class="description">
-						Bind a handler to the TIMER_PAUSE event.
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>context</b>
-									
-								</dt>
-								<dd>The context to set when calling the handler (usually this).</dd>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>f</b>
-									
-								</dt>
-								<dd>The function you wish to invoke when the event is fired.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="handleTimerStart"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>handleTimerStart</b>(context, f)
-					
-					</div>
-					<div class="description">
-						Bind a handler to the TIMER_START event.
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>context</b>
-									
-								</dt>
-								<dd>The context to set when calling the handler (usually this).</dd>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>f</b>
-									
-								</dt>
-								<dd>The function you wish to invoke when the event is fired.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="handleTimerStop"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>handleTimerStop</b>(context, f)
-					
-					</div>
-					<div class="description">
-						Bind a handler to the TIMER_STOP event.
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>context</b>
-									
-								</dt>
-								<dd>The context to set when calling the handler (usually this).</dd>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>f</b>
-									
-								</dt>
-								<dd>The function you wish to invoke when the event is fired.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="handleTimerUnpause"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>handleTimerUnpause</b>(context, f)
-					
-					</div>
-					<div class="description">
-						Bind a handler to the TIMER_UNPAUSE event.
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>context</b>
-									
-								</dt>
-								<dd>The context to set when calling the handler (usually this).</dd>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>f</b>
-									
-								</dt>
-								<dd>The function you wish to invoke when the event is fired.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="handleUndo"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>handleUndo</b>(context, f)
-					
-					</div>
-					<div class="description">
-						Bind a handler to the UNDO event. The handler expects one argument (isRedo).
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>context</b>
-									
-								</dt>
-								<dd>The context to set when calling the handler (usually this).</dd>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>f</b>
-									
-								</dt>
-								<dd>The function you wish to invoke when the event is fired.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="handleUndoUI"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>handleUndoUI</b>(context, f)
-					
-					</div>
-					<div class="description">
-						Bind a handler to the UNDO_UI event. The handler expects two arguments (canUndo, canRedo).
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>context</b>
-									
-								</dt>
-								<dd>The context to set when calling the handler (usually this).</dd>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>f</b>
-									
-								</dt>
-								<dd>The function you wish to invoke when the event is fired.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
 					
 				
 			
@@ -1602,7 +970,7 @@ Event definitions, firers and handlers. The intent of this class is to:
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blank">JsDoc Toolkit</a> 2.0.0 on Mon Jan 25 2010 08:11:08 GMT-0800 (PST)
+			Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blank">JsDoc Toolkit</a> 2.0.0 on Tue Jan 26 2010 10:57:15 GMT-0800 (PST)
 		</div>
 	</body>
 </html>

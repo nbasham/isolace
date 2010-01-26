@@ -68,57 +68,6 @@ ISOLACE.namespace = function() {
     };
 })(jQuery);
 
-/**
- * Normalized logging. Only tested with Firefox.
- *
- * @method log
- * @static
- * @param {string} message The message to log.
- */
-ISOLACE.log = function(message) {
-    if(ISOLACE.DEBUG) {
-        if($.browser.mozilla) {
-            console.log(message);
-        } else if($.browser.safari) {
-            window.console.log(message);
-        } else if($.browser.msie) {
-            serverLog(message);
-        }
-    }
-};
-
-/**
- * Log a JavaScript message on the server side in the Java console. IE
- * does not yet have a logging console.
- *
- * REQUIRES -jslog program argument
- *
- * @method serverLog
- * @private
- * @param  {string} message The message to log.
- * @param {object}  jsonObject A JSON object to log.
- */
-function serverLog(s, p) {
-    var logParams = {};
-    logParams.message = s;
-    if (p) {
-        var flatP;
-        for ( var property in p) {
-            flatP += property + ': ' + p[property];
-        }
-        window.status = flatP;
-        logParams.message += flatP;
-    }
-    var params = jQuery.param(logParams).replace(/\+/g, "%20");
-    var ajaxParams = {
-        type : "GET",
-        url : '/isolace/log',
-        async : false
-    };
-    ajaxParams.data = params + '&' + Math.random();
-    jQuery.ajax(ajaxParams);
-}
-
 ISOLACE.arrayToString = function(a) {
     var s = '[';
     if(a !== undefined && a !== null) {
@@ -133,6 +82,30 @@ ISOLACE.arrayToString = function(a) {
     
     return s;
 };
+
+/**
+ * Check if two arrays are equal. This is only implemented for arrays containing primitive values.
+ * 
+ * @param {array} a1 One of the arrays to compare.
+ * @param {array} a2 One of the arrays to compare.
+ * @method arrayEquals
+ * @return {boolean} True if the array values are equal.
+ */
+function arrayEquals(a1, a2) {
+    if(a1 === undefined || a2 === undefined || a1.length === undefined || a2.length === undefined) {
+        return false;
+    }
+    if(a1.length != a2.length) {
+        return false;
+    }
+    for(var i = 0; i < a1.length; i++) {
+        if(a1[i] != a2[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
 
 /**
  * Add a bind method to all functions. Stole this from prototype,
@@ -156,68 +129,4 @@ Function.prototype.bind = function(context) {
     };
 };
 
-/**
- * Throw an exception if value is true.
- * 
- * @method assertTrue
- * @param {boolean} value Value to check.
- * @param {string} message optional Message to report if assert is thrown.
- */
-function assertTrue(value, message) {
-    if(value !== true) {
-        if(message === undefined) {
-            message = 'Assertion failed.';
-        }
-        $Log.error(message);
-        throw(message);
-    }
-}
-
-/**
- * Throw an exception if value is true.
- * 
- * @method assertFalse
- * @param {boolean} value Value to check.
- * @param {string} message optional Message to report if assert is thrown.
- */
-function assertFalse(value, message) {
-    if(value !== false) {
-        if(message === undefined) {
-            message = 'Assertion failed.';
-        }
-        $Log.error(message);
-        throw(message);
-    }
-}
-
-/**
- * Throw an exception if value is out of range.
- * 
- * @method assertInRange
- * @param {int} value Value to check.
- * @param {int} lower Lower limit of range, inclusive.
- * @param {int} upper Upper limit of range, inclusive.
- */
-function assertInRange(value, lower, upper) {
-    if(value < lower || value > upper) {
-        var message = "'" + value + "' out of range (must be between " + lower + " and " + upper + " inclusive).";
-        $Log.error(message);
-        throw(message);
-    }
-}
-
-/**
- * Throw an exception if value is undefined.
- * 
- * @method assertDefined
- * @param {object} value Value to check.
- */
-function assertDefined(value) {
-    var a = arguments;
-    if(value === undefined) {
-        var message = "Undefined value.";
-        $Log.error(message);
-        throw(message);
-    }
-}
 

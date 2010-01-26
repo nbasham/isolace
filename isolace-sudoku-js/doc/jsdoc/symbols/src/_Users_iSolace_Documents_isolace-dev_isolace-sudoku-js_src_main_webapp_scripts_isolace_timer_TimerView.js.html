@@ -1,0 +1,43 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/**
+<span class='line'>  2</span>  * Create a TimerView object.
+<span class='line'>  3</span>  * @class Handles all HTML UI around the timer panel. Styles e.g. position and
+<span class='line'>  4</span>  *        size are controlled by CSS class 'timer'. HTMLElement with id 'timer'
+<span class='line'>  5</span>  *        is updated each second.
+<span class='line'>  6</span>  * @namespace ISOLACE
+<span class='line'>  7</span>  * @constructor
+<span class='line'>  8</span>  * @author Norman Basham, iSolace, Copyright (c) 2009-2010. ALL RIGHTS RESERVED&lt;br/>
+<span class='line'>  9</span>  * @version 0.1
+<span class='line'> 10</span>  */</span><span class="WHIT">
+<span class='line'> 11</span> </span><span class="NAME">ISOLACE.TimerView</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 12</span>     </span><span class="NAME">$TimerEvent.handleTimerIncrement</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">this.update</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 13</span>     </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#timerView'</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 14</span>             </span><span class="PUNC">.</span><span class="NAME">html</span><span class="PUNC">(</span><span class="WHIT">
+<span class='line'> 15</span>                     </span><span class="STRN">"&lt;img src='../images/45/numbers/timer-0.png' />&lt;img src='../images/45/numbers/timer-0.png' />&lt;img src='../images/45/numbers/timer-seperator.png' />&lt;img src='../images/45/numbers/timer-0.png' />&lt;img src='../images/45/numbers/timer-0.png' />"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 16</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 17</span> 
+<span class='line'> 18</span> </span><span class="COMM">/**
+<span class='line'> 19</span>  * Increment the second count.
+<span class='line'> 20</span>  * @private
+<span class='line'> 21</span>  * @method update
+<span class='line'> 22</span>  */</span><span class="WHIT">
+<span class='line'> 23</span> </span><span class="NAME">ISOLACE.TimerView.prototype.update</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">seconds</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 24</span>     </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#timerView'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">html</span><span class="PUNC">(</span><span class="STRN">''</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 25</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">time</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">$SUDOKU_UTIL.formatTime</span><span class="PUNC">(</span><span class="NAME">seconds</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 26</span>     </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">timeElements</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">time.split</span><span class="PUNC">(</span><span class="STRN">''</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 27</span>     </span><span class="KEYW">for</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">i</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="NAME">i</span><span class="WHIT"> </span><span class="PUNC">&lt;</span><span class="WHIT"> </span><span class="NAME">timeElements.length</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="NAME">i</span><span class="PUNC">++</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 28</span>         </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">el</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">timeElements</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 29</span>         </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">el</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="STRN">':'</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 30</span>             </span><span class="NAME">el</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">'seperator'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 31</span>         </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 32</span>         </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">src</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">'../images/45/numbers/timer-'</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">el</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">'.png'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 33</span>         </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#timerView'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">append</span><span class="PUNC">(</span><span class="STRN">"&lt;img src='"</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">src</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">"' />"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 34</span>     </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 35</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 36</span> </span></pre></body></html>
