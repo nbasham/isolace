@@ -17,22 +17,30 @@ ISOLACE.sudoku.SymbolCountView = function() {
  */
 ISOLACE.sudoku.SymbolCountView.prototype.update = function(state) {
     var symbolCount = $SUDOKU_UTIL.getSymbolCount(state);
-    var html = 'Usage:' + '<br/>';
+    var html = '';
+    for( var i = 0; i <= 9; i++) {
+        if(i == 0) {
+            html += "<div style='height: 1px; width: 15px; float: left;'>&nbsp; </div>";
+        } else {
+            html += "<img class='fiftyPercent' style='float: left;' src='../images/45/numbers/" + i + "-marker.png' />";
+        }
+    }
+    html += '<br/>';
     for( var i = 0; i < symbolCount.length; i++) {
         var symbol = i + 1;
         var count = symbolCount[i];
         var imagePath = '../images/45/numbers/'  + symbol + '-marker.png';
+        var style = '';
         if(count > 8) {
             style = 'fiftyPercent';
         }
         var img = "<img class='" + style + "' style='float: left;' src='" + imagePath + "' />";
         var bar = '';
-        var style = '';
         for( var j = 0; j < count; j++) {
-            bar += img;
-            //bar += "<span style='float: left;' class='ui-icon ui-icon-circlesmall-close'></span>";
+            //bar += img;
+            bar += "<span style='width: 14px; float: left;' class='ui-icon ui-icon-stop " + style + "'></span>";
         }
-        html += bar + '<br/>';
+        html += img + bar + '<br/>';
     }
     $('#symbolCountView').html(html);
 };
