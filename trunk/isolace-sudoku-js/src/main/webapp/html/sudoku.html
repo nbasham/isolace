@@ -98,6 +98,7 @@
     <script src="../scripts/isolace/sudoku/view/BoardViewEvents.js"></script>
     <script src="../scripts/isolace/sudoku/view/MainMenuView.js"></script>
     <script src="../scripts/isolace/sudoku/view/BoardView.js"></script>
+    <script src="../scripts/isolace/sudoku/SymbolCountView.js"></script>
 
     <script>
     
@@ -134,10 +135,13 @@
     <div id="tabs-2">
         <div class='boardContent'>
  
- 
-            <div id='boardView' class='boardView'>
+    <div class='boardLayout'>
+            <div id='boardView' class='boardView' style='float: left'>
             </div>
-
+            <div class='boardControls'>
+                <div id='symbolCountView'>&nbsp;</div>
+            </div>
+    </div>
             <div id='boardControlView'>
                 <div class="fg-buttonset fg-buttonset-multi">
                    <button id='undoButton' style='margin-right: 8px' class="fg-button ui-state-default fg-button-icon-left ui-corner-all" title="Undo your last move"><span class="ui-icon ui-icon-arrowrefresh-1-w"></span>Undo</button>

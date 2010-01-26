@@ -57,6 +57,27 @@ ISOLACE.sudoku.Util.prototype.getHintArray = function(value) {
 };
 
 /**
+ * Get the number of times each symbol is currently used.
+ * 
+ * @method getSymbolCount
+ * @param {array[int]} 81 values (0 to 9).
+ * @return {array[int]} An array with values from 0 to 9.
+ */
+ISOLACE.sudoku.Util.prototype.getSymbolCount = function(state) {
+    var symbolCount = [0,0,0,0,0,0,0,0,0];
+    for(var i = 0; i < state.length; i++) {
+        var value = state[i];
+        if(value > 9) {
+            value -= 9;
+        }
+        if(value > 0) {
+            symbolCount[value-1]++;
+        }
+    }
+    return symbolCount;
+};
+
+/**
  * Checks to see if the puzzle has been successfully solved.
  * 
  * @method solved
