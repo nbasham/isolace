@@ -10,7 +10,22 @@ test("get/set string", function() {
 });
 
 test("get/set number", function() {
-    var randomNumber0to100 = Math.floor(Math.random()*101)
+    var randomNumber0to100 = Math.floor(Math.random()*101);
     $Persistence.set('test_key', randomNumber0to100);
     equals($Persistence.get('test_key'), randomNumber0to100, "Number value persisted");
+});
+
+test("remove", function() {
+    var randomNumber0to100 = Math.floor(Math.random()*101);
+    $Persistence.set('test_key22', randomNumber0to100);
+    $Persistence.remove('test_key22');
+    equals($Persistence.get('test_key22'), null, "Number value removed");
+});
+
+test("add after remove", function() {
+    var randomNumber0to100 = Math.floor(Math.random()*101);
+    $Persistence.set('test_key22', randomNumber0to100);
+    $Persistence.remove('test_key22');
+    $Persistence.set('test_key22', randomNumber0to100);
+    equals($Persistence.get('test_key22'), randomNumber0to100, "Number value removed");
 });

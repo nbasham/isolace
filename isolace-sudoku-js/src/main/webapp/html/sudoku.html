@@ -11,6 +11,15 @@
     <script src="../scripts/jquery-1.4.js"></script>
     <script src="../scripts/jquery-ui-1.7.2.custom.min.js"></script>
     <script src="../scripts/jquery.cookie.js"></script>
+    <script src="../scripts/json2.js"></script>
+    
+    <script src="../scripts/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="../styles/datatable_table.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../styles/datatable_page.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../styles/datatable_table_jui.css" type="text/css" media="screen" />
+    
+    <script src="../scripts/visualize.jQuery.js"></script>
+    <link rel="stylesheet" href="../styles/visualize.jQuery.css" type="text/css" media="screen" />
     
     <link rel="stylesheet" href="../styles/facebook/jquery-ui-1.7.2.custom.css" type="text/css" media="screen" />
 
@@ -80,6 +89,9 @@
     <script src="../scripts/isolace/undo/UndoEvent.js"></script>
     <script src="../scripts/isolace/undo/UndoController.js"></script>
     <script src="../scripts/isolace/undo/UndoView.js"></script>
+    <script src="../scripts/isolace/score/Score.js"></script>
+    <script src="../scripts/isolace/score/Scores.js"></script>
+    <script src="../scripts/isolace/score/ScoresView.js"></script>
     <script src="../scripts/isolace/timer/TimerEvent.js"></script>
     <script src="../scripts/isolace/timer/TimerController.js"></script>
     <script src="../scripts/isolace/timer/TimerView.js"></script>
@@ -126,6 +138,7 @@
         <li><a href="#tabs-1">About</a></li>
         <li><a href="#tabs-2">Play</a></li>
         <li><a href="#tabs-3">Options</a></li>
+        <li><a href="#tabs-4">Scores</a></li>
     </ul>
     <div id="tabs-1">
         <p>Welcome to Sudoku, we're just getting started...</p>
@@ -139,7 +152,7 @@
             <div id='boardView' class='boardView' style='float: left'>
             </div>
             <div class='boardControls'>
-                <div id='symbolCountView' class='ui-corner-all'>&nbsp;</div>
+                <div id='symbolCountView' class='ui-corner-all' title="This panel display how many times each number has been used. When you've completed guessing for a number it appears greyed out.">&nbsp;</div>
             </div>
     </div>
             <div id='boardControlView'>
@@ -147,7 +160,7 @@
                    <button id='undoButton' style='margin-right: 8px' class="fg-button ui-state-default fg-button-icon-left ui-corner-all" title="Undo your last move"><span class="ui-icon ui-icon-arrowrefresh-1-w"></span>Undo</button>
                    <button id='redoButton' class="fg-button ui-state-default fg-button-icon-left ui-corner-all" title="Redo your last move"><span class="ui-icon ui-icon-arrowrefresh-1-e"></span>Redo</button>
                 </div>
-                <div id='timerView' class='timerView'>&nbsp;</div>
+                <div id='timerView' class='timerView' title='Displays how much time has elapsed since you started the game (minues:seconds)'>&nbsp;</div>
             </div>
 
         </div>
@@ -186,6 +199,11 @@
     <div id="tabs-3">
         <p>Comming soon...</p>
         <div id='infoView' class='infoView'>&nbsp;</div>
+    </div>
+    <div id="tabs-4">
+        <div id='scoresView'>
+            <table id='scoresViewTable' cellpadding="0" cellspacing="0" border="0" class="display"></table>
+        </div>
     </div>
 </div>
 

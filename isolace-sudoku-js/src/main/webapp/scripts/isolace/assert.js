@@ -33,6 +33,23 @@ function assertFalse(value, message) {
 }
 
 /**
+ * Throw an exception if value is true.
+ * 
+ * @method assertNumber
+ * @param {number} value Value to check.
+ * @param {string} message optional Message to report if assert is thrown.
+ */
+function assertNumber(value, message) {
+    if(typeof value !== 'number') {
+        if(message === undefined) {
+            message = 'Assertion failed, value is not of type number.';
+        }
+        $Log.error(message);
+        throw(message);
+    }
+}
+
+/**
  * Throw an exception if value is out of range.
  * 
  * @method assertInRange
