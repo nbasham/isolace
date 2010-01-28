@@ -21,10 +21,13 @@ ISOLACE.sudoku.Persistence = function() {
  * @method get
  * @private
  * @param {string} key 
- * @return {*} The value.
+ * @return {*} The value, null if not found.
  */
 ISOLACE.sudoku.Persistence.prototype.get = function(key) {
     var value = $.cookie(key);
+    if(value === '') {
+        value = null;
+    }
     $Log.debug('Read [' + key + '] = ' + value);
     return value;
 };
@@ -39,6 +42,17 @@ ISOLACE.sudoku.Persistence.prototype.get = function(key) {
 ISOLACE.sudoku.Persistence.prototype.set = function(key, value) {
     $.cookie(key, '' + value, this.options);
     $Log.debug('Wrote [' + key + '] = ' + value);
+};
+
+/**
+ * Internal bottleneck to delete a cookie.
+ * @method remove
+ * @private
+ * @param {string} key 
+ */
+ISOLACE.sudoku.Persistence.prototype.remove = function(key) {
+    $.cookie(key, '', this.options);
+    $Log.debug('Deleted cookie [' + key + '] = ');
 };
 
 /**

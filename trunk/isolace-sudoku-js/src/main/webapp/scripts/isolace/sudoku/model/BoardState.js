@@ -131,6 +131,7 @@ ISOLACE.sudoku.BoardState.prototype.removeMarkersFromGrid = function(value, inde
  * @method setValue
  * @param {int} value Value between 1 and 9 inclusive to check for.
  * @param {int} index Index (0 to 80 inclusive) of the cell to check.
+ * @return True if guess is correct, false if incorrect.
  */
 ISOLACE.sudoku.BoardState.prototype.setValue = function(value, index) {
     assertInRange(value, 1, 9);
@@ -145,6 +146,8 @@ ISOLACE.sudoku.BoardState.prototype.setValue = function(value, index) {
         $Log.debug('Set index ' + index + ' to value ' + value);
     }
     this.removeMarkersFromGrid(value, index);
+    var correctGuess = this.solution[index] == value;
+    return correctGuess;
 };
 
 /**

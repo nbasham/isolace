@@ -11,6 +11,7 @@ ISOLACE.namespace("sudoku");
  */
 ISOLACE.sudoku.BoardManager = function(options) {
     this.options = options;
+    var scoresView = new ISOLACE.ScoresView();
 };
 
 /**
@@ -23,8 +24,8 @@ ISOLACE.sudoku.BoardManager.prototype.show = function() {
     $Events.handleStateChange(this, this.handleStateChanged);
     this.puzzle = this.getNextPuzzle();
     this.symbolCountView = new ISOLACE.sudoku.SymbolCountView();
-    var jsLintLikesThis = new ISOLACE.TimerController();
-    var jsLintLikesThis2 = new ISOLACE.TimerView();
+    this.timerController = new ISOLACE.TimerController();
+    var jsLintLikesThis1 = new ISOLACE.TimerView();
     this.initBoard();
     this.initUndo();
 };
@@ -45,6 +46,7 @@ ISOLACE.sudoku.BoardManager.prototype.hide = function() {
  * @private
  */
 ISOLACE.sudoku.BoardManager.prototype.initBoard = function() {
+    this.numMissed = 0;
     var boardView = new ISOLACE.sudoku.BoardView(this.options);
     var jsLintLikesThis = new ISOLACE.sudoku.BoardViewEvents(boardView, this.puzzle);
     var initialState = this.puzzle.getInitialState();
@@ -81,7 +83,10 @@ ISOLACE.sudoku.BoardManager.prototype.initUndo = function() {
  * @param {int} index Index (0 to 80 inclusive) of the cell to check.
  */
 ISOLACE.sudoku.BoardManager.prototype.handleGuess = function(value, index) {
-    this.state.setValue(value, index);
+    var correctGuess = this.state.setValue(value, index);
+    if(!correctGuess) {
+        this.numMissed++;
+    }
     $Events.fireStateChange(this.state);
 };
 
@@ -104,18 +109,22 @@ ISOLACE.sudoku.BoardManager.prototype.handleMark = function(value, index) {
  * @method handleStateChanged
  */
 ISOLACE.sudoku.BoardManager.prototype.handleStateChanged = function(boardState) {
+    this.symbolCountView.update(this.state.state);
     var solved = this.state.solved();
     if(solved) {
+        var index = $Persistence.getPuzzleIndex();
+        var time = this.timerController.getSeconds();
+        var score = $Scores.add(index, time, this.numMissed);
+        
         $Persistence.incPuzzleIndex();
         $TimerEvent.fireTimerStop();
         $("#solvedView").dialog( {
             modal : true,
             title : 'Puzzle Solved',
             buttons: { "Ok": function() { $(this).dialog("close"); location.reload(); } }
-        }).html('You solved the puzzle.');
+        }).html('You solved the puzzle. Your score is ' + score.getScore());
     } else {
         $UndoEvent.fireSubmitUndoRecordEvent(this.state.state);
-        this.symbolCountView.update(this.state.state);
     }
 };
 
@@ -146,6 +155,7 @@ ISOLACE.sudoku.BoardManager.prototype.getNextPuzzle = function() {
                 values.push(cell);
             }
         }
+        //  for debugging
         var revealAllButOne = false;
         if(revealAllButOne) {
             revealedIndexes.length = 0;

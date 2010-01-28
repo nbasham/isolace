@@ -7,8 +7,13 @@
     <script src="../../../../../main/webapp/scripts/log4javascript_uncompressed.js"></script>
     <script src="../../../../../main/webapp/scripts/jquery.cookie.js"></script>
     <script src="../../../../../main/webapp/scripts/jquery-ui-1.7.2.custom.min.js"></script>
+    <script src="../../../../../main/webapp/scripts/json2.js"></script>
     <link rel="stylesheet" href="../../../../../main/webapp/styles/facebook/jquery-ui-1.7.2.custom.css" type="text/css" media="screen" />
-    
+    <script src="../../../../../main/webapp/scripts/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="../../../../../main/webapp/styles/datatable_table.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../../../main/webapp/styles/datatable_page.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../../../main/webapp/styles/datatable_table_jui.css" type="text/css" media="screen" />
+
     <link rel="stylesheet" href="../../qunit.css" type="text/css" media="screen" />
     <script type="text/javascript" src="../../qunit.js"></script>
 
@@ -16,6 +21,9 @@
     <script src="../../../../../main/webapp/scripts/isolace/Log.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/assert.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/Event.js"></script>
+    <script src="../../../../../main/webapp/scripts/isolace/score/Score.js"></script>
+    <script src="../../../../../main/webapp/scripts/isolace/score/Scores.js"></script>
+    <script src="../../../../../main/webapp/scripts/isolace/score/ScoresView.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/undo/UndoEvent.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/undo/UndoController.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/undo/UndoView.js"></script>
@@ -29,14 +37,12 @@
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/model/Puzzle.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/model/BoardState.js"></script>
 
-    <script src="../../../../../main/webapp/scripts/isolace/sudoku/controller/TimerController.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/controller/BoardManager.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/view/render/ImageRenderer.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/view/render/TextRenderer.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/view/selector/BorderSelector.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/view/selector/ImageSelector.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/view/BoardViewEvents.js"></script>
-    <script src="../../../../../main/webapp/scripts/isolace/sudoku/view/TimerView.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/view/BoardView.js"></script>
 
     <script>
@@ -51,14 +57,15 @@
         var state = new ISOLACE.sudoku.BoardState(values, initialState);
     </script>
 
+    <script src="../score/score-test.js"></script>
+<!--
+    <script src="./Persistence-test.js"></script>
     <script src="./Util-test.js"></script>
     <script src="./model/BoardState-test.js"></script>
     <script src="../undo/undo-test.js"></script>
-    <script src="./Persistence-test.js"></script>
     <script src="./controller/BoardManager-test.js"></script>
     <link rel="stylesheet" href="./view/BoardView-test.css" type="text/css" media="screen" />
     <script src="./view/BoardView-test.js"></script>
-<!--
     <script src="../timer/timer-test.js"></script>
 -->
 </head>
