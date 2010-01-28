@@ -115,6 +115,7 @@ ISOLACE.sudoku.BoardManager.prototype.handleStateChanged = function(boardState) 
         var index = $Persistence.getPuzzleIndex();
         var time = this.timerController.getSeconds();
         var score = $Scores.add(index, time, this.numMissed);
+        var formattedScore = $SUDOKU_UTIL.formatTime(score);
         
         $Persistence.incPuzzleIndex();
         $TimerEvent.fireTimerStop();
@@ -122,7 +123,7 @@ ISOLACE.sudoku.BoardManager.prototype.handleStateChanged = function(boardState) 
             modal : true,
             title : 'Puzzle Solved',
             buttons: { "Ok": function() { $(this).dialog("close"); location.reload(); } }
-        }).html('You solved the puzzle. Your score is ' + score.getScore());
+        }).html('You solved the puzzle. Your score is ' + formattedScore);
     } else {
         $UndoEvent.fireSubmitUndoRecordEvent(this.state.state);
     }
