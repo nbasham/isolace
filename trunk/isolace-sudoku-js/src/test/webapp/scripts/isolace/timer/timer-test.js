@@ -76,6 +76,7 @@ module("isolace/timer/TimerController", {
   setup: function() {
     this.tc = new ISOLACE.TimerController();
     this.tc.start();
+    this.tc.unpause();
     this.startTime = this.tc.getSeconds();
   },
   teardown: function() {

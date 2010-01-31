@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - ISOLACE.sudoku.Events</title>
+		<title>JsDoc Reference - ISOLACE.Score</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -271,30 +271,26 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace ISOLACE.sudoku.Events
+				Class ISOLACE.Score
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
 			<p class="description">
 				
 			
-				ISOLACE.sudoku
-Event definitions, firers and handlers. The intent of this class is to:
-<ul>
-<li>Hide jQuery implementation</li>
-<li>Encapsulate arbitrary JavaScript event types</li>
-<li>Provide a bottleneck</li>
-</ul>
+				Score is an immutable object that contains the elements that comprise
+       a score. This will have to be application specific, and Score should
+       perform the role of an interface.
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/_Users_iSolace_Documents_isolace-dev_isolace-sudoku-js_src_main_webapp_scripts_isolace_sudoku_Events.js.html">Events.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/_Users_iSolace_Documents_isolace-dev_isolace-sudoku-js_src_main_webapp_scripts_isolace_score_Score.js.html">Score.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class ISOLACE.sudoku.Events.">
-				<caption>Namespace Summary</caption>
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class ISOLACE.Score.">
+				<caption>Class Summary</caption>
 				<thead>
 					<tr>
 						<th scope="col">Constructor Attributes</th>
@@ -306,9 +302,9 @@ Event definitions, firers and handlers. The intent of this class is to:
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/ISOLACE.sudoku.Events.html#constructor">ISOLACE.sudoku.Events</a></b>
+								<b><a href="../symbols/ISOLACE.Score.html#constructor">ISOLACE.Score</a></b>(puzzleId, date, time, numMissed)
 							</div>
-							<div class="description">Event definitions, firers and handlers.</div>
+							<div class="description">Constructs an Score object.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -322,7 +318,7 @@ Event definitions, firers and handlers. The intent of this class is to:
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class ISOLACE.sudoku.Events.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class ISOLACE.Score.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -335,72 +331,54 @@ Event definitions, firers and handlers. The intent of this class is to:
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#fireGuess">fireGuess</a></b>(value, index)
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#getDate">getDate</a></b>()
 								</div>
-								<div class="description">Fire GUESS event.</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#fireMark">fireMark</a></b>(value, index)
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#getNumMissed">getNumMissed</a></b>()
 								</div>
-								<div class="description">Fire MARK event.</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#fireSolved">fireSolved</a></b>(seconds)
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#getPenalty">getPenalty</a></b>()
 								</div>
-								<div class="description">Fire SOLVED event.</div>
+								<div class="description">Get the amount to access for each incorrect guess.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#fireStateChange">fireStateChange</a></b>(boardState)
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#getPuzzleId">getPuzzleId</a></b>()
 								</div>
-								<div class="description">Fire STATE_CHANGE event.</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#handleGuess">handleGuess</a></b>(context, f)
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#getScore">getScore</a></b>()
 								</div>
-								<div class="description">Bind a handler to the GUESS event.</div>
+								<div class="description">Calculate the score based on time and penalty time.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#handleMark">handleMark</a></b>(context, f)
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#getTime">getTime</a></b>()
 								</div>
-								<div class="description">Bind a handler to the MARK event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#handleSolved">handleSolved</a></b>(context, f)
-								</div>
-								<div class="description">Bind a handler to the SOLVED event.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Events.html#handleStateChange">handleStateChange</a></b>(context, f)
-								</div>
-								<div class="description">Bind a handler to the STATE_CHANGE event.</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
@@ -415,26 +393,50 @@ Event definitions, firers and handlers. The intent of this class is to:
 			
 			<div class="details"><a name="constructor"> </a>
 				<div class="sectionTitle">
-					Namespace Detail
+					Class Detail
 				</div>
 				
 				<div class="fixedFont">
-						<b>ISOLACE.sudoku.Events</b>
+						<b>ISOLACE.Score</b>(puzzleId, date, time, numMissed)
 				</div>
 				
 				<div class="description">
-					Event definitions, firers and handlers. The intent of this class is to:
-<ul>
-<li>Hide jQuery implementation</li>
-<li>Encapsulate arbitrary JavaScript event types</li>
-<li>Provide a bottleneck</li>
-</ul>
+					Constructs an Score object.
 					<br /><i>Author: </i>Norman Basham, iSolace, Copyright (c) 2009-2010. ALL RIGHTS RESERVED<br/>.
 				</div>
 				
 				
 				
 				
+					
+						<dl class="detailList">
+						<dt class="heading">Parameters:</dt>
+						
+							<dt>
+								<span class="light fixedFont">{number}</span>  <b>puzzleId</b>
+								
+							</dt>
+								<dd>The unique puzzle identifier.</dd>
+						
+							<dt>
+								<span class="light fixedFont">{number}</span>  <b>date</b>
+								
+							</dt>
+								<dd>The date/time the puzzle was solved in milliseconds since 1970.</dd>
+						
+							<dt>
+								<span class="light fixedFont">{number}</span>  <b>time</b>
+								
+							</dt>
+								<dd>The number of seconds it took to solve the puzzle.</dd>
+						
+							<dt>
+								<span class="light fixedFont">{number}</span>  <b>numMissed</b>
+								
+							</dt>
+								<dd>The number of incorrect guesses.</dd>
+						
+						</dl>
 					
 					
 					
@@ -455,15 +457,15 @@ Event definitions, firers and handlers. The intent of this class is to:
 					Method Detail
 				</div>
 				
-					<a name="fireGuess"> </a>
+					<a name="getDate"> </a>
 					<div class="fixedFont">
 					
-					
-					<b>fireGuess</b>(value, index)
+					<span class="light">{number}</span>
+					<b>getDate</b>()
 					
 					</div>
 					<div class="description">
-						Fire GUESS event.
+						
 						
 						
 					</div>
@@ -472,22 +474,71 @@ Event definitions, firers and handlers. The intent of this class is to:
 					
 					
 						
+						
+						
+						
+						
 							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
+							<dt class="heading">Returns:</dt>
 							
-								<dt>
-									<span class="light fixedFont">{int}</span> <b>value</b>
-									
-								</dt>
-								<dd>The value of the guess.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{int}</span> <b>index</b>
-									
-								</dt>
-								<dd>The cell index of the guess.</dd>
+								<dd>The date/time the puzzle was solved in milliseconds since 1970.</dd>
 							
 							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getNumMissed"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>getNumMissed</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>The number incorrect guess attempted while solving this puzzle.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getPenalty"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>getPenalty</b>()
+					
+					</div>
+					<div class="description">
+						Get the amount to access for each incorrect guess.
+						
+						
+					</div>
+					
+					
+					
+					
 						
 						
 						
@@ -498,15 +549,15 @@ Event definitions, firers and handlers. The intent of this class is to:
 
 					<hr />
 				
-					<a name="fireMark"> </a>
+					<a name="getPuzzleId"> </a>
 					<div class="fixedFont">
 					
-					
-					<b>fireMark</b>(value, index)
+					<span class="light">{number}</span>
+					<b>getPuzzleId</b>()
 					
 					</div>
 					<div class="description">
-						Fire MARK event.
+						
 						
 						
 					</div>
@@ -515,41 +566,31 @@ Event definitions, firers and handlers. The intent of this class is to:
 					
 					
 						
+						
+						
+						
+						
 							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
+							<dt class="heading">Returns:</dt>
 							
-								<dt>
-									<span class="light fixedFont">{int}</span> <b>value</b>
-									
-								</dt>
-								<dd>The value of the mark.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{int}</span> <b>index</b>
-									
-								</dt>
-								<dd>The cell index of the mark.</dd>
+								<dd>The puzzle id this score applies to.</dd>
 							
 							</dl>
-						
-						
-						
-						
 						
 						
 						
 
 					<hr />
 				
-					<a name="fireSolved"> </a>
+					<a name="getScore"> </a>
 					<div class="fixedFont">
 					
-					
-					<b>fireSolved</b>(seconds)
+					<span class="light">{number}</span>
+					<b>getScore</b>()
 					
 					</div>
 					<div class="description">
-						Fire SOLVED event.
+						Calculate the score based on time and penalty time.
 						
 						
 					</div>
@@ -558,35 +599,31 @@ Event definitions, firers and handlers. The intent of this class is to:
 					
 					
 						
+						
+						
+						
+						
 							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
+							<dt class="heading">Returns:</dt>
 							
-								<dt>
-									<span class="light fixedFont">{int}</span> <b>seconds</b>
-									
-								</dt>
-								<dd>The number of seconds it took to solve the puzzle.</dd>
+								<dd>The total time, in seconds, including penalties.</dd>
 							
 							</dl>
-						
-						
-						
-						
 						
 						
 						
 
 					<hr />
 				
-					<a name="fireStateChange"> </a>
+					<a name="getTime"> </a>
 					<div class="fixedFont">
 					
-					
-					<b>fireStateChange</b>(boardState)
+					<span class="light">{number}</span>
+					<b>getTime</b>()
 					
 					</div>
 					<div class="description">
-						Fire STATE_CHANGE event.
+						
 						
 						
 					</div>
@@ -594,193 +631,17 @@ Event definitions, firers and handlers. The intent of this class is to:
 					
 					
 					
+						
+						
+						
+						
 						
 							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
+							<dt class="heading">Returns:</dt>
 							
-								<dt>
-									<span class="light fixedFont">{BoardState}</span> <b>boardState</b>
-									
-								</dt>
-								<dd>The current state of the board.</dd>
+								<dd>The number of seconds it took to solve this puzzle.</dd>
 							
 							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="handleGuess"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>handleGuess</b>(context, f)
-					
-					</div>
-					<div class="description">
-						Bind a handler to the GUESS event. The handler expects two arguments (value, index).
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>context</b>
-									
-								</dt>
-								<dd>The context to set when calling the handler (usually this).</dd>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>f</b>
-									
-								</dt>
-								<dd>The function you wish to invoke when the event is fired.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="handleMark"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>handleMark</b>(context, f)
-					
-					</div>
-					<div class="description">
-						Bind a handler to the MARK event. The handler expects two arguments (value, index).
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>context</b>
-									
-								</dt>
-								<dd>The context to set when calling the handler (usually this).</dd>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>f</b>
-									
-								</dt>
-								<dd>The function you wish to invoke when the event is fired.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="handleSolved"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>handleSolved</b>(context, f)
-					
-					</div>
-					<div class="description">
-						Bind a handler to the SOLVED event. The handler expects one argument (seconds).
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>context</b>
-									
-								</dt>
-								<dd>The context to set when calling the handler (usually this).</dd>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>f</b>
-									
-								</dt>
-								<dd>The function you wish to invoke when the event is fired.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="handleStateChange"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>handleStateChange</b>(context, f)
-					
-					</div>
-					<div class="description">
-						Bind a handler to the STATE_CHANGE event. The handler expects one argument (BorderState).
-						
-						
-					</div>
-					
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>context</b>
-									
-								</dt>
-								<dd>The context to set when calling the handler (usually this).</dd>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>f</b>
-									
-								</dt>
-								<dd>The function you wish to invoke when the event is fired.</dd>
-							
-							</dl>
-						
-						
-						
-						
 						
 						
 						

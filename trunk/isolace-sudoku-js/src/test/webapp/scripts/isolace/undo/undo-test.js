@@ -157,6 +157,8 @@ test("constructor binds SubmitUndoRecordEvent", function() {
     equals(len, newLen - 1, 'handleUndoEvent was handled');
 });
 
+
+
 asyncTest("constructor binds UndoRequestEvent which fires UndoEvent", function() {
     expect(2);
     var expectedValue;

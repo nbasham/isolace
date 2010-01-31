@@ -23,7 +23,7 @@
     <script src="../../../../../main/webapp/scripts/isolace/Event.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/score/Score.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/score/Scores.js"></script>
-    <script src="../../../../../main/webapp/scripts/isolace/score/ScoresView.js"></script>
+    <script src="../../../../../main/webapp/scripts/isolace/score/ScorePanel.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/undo/UndoEvent.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/undo/UndoController.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/undo/UndoView.js"></script>
@@ -33,11 +33,10 @@
 
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/Util.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/Persistence.js"></script>
-    <script src="../../../../../main/webapp/scripts/isolace/sudoku/Events.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/model/Puzzle.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/model/BoardState.js"></script>
 
-    <script src="../../../../../main/webapp/scripts/isolace/sudoku/controller/BoardManager.js"></script>
+    <script src="../../../../../main/webapp/scripts/isolace/sudoku/game/GameEvent.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/view/render/ImageRenderer.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/view/render/TextRenderer.js"></script>
     <script src="../../../../../main/webapp/scripts/isolace/sudoku/view/selector/BorderSelector.js"></script>
@@ -56,17 +55,18 @@
         var initialState = puzzle.getInitialState();
         var state = new ISOLACE.sudoku.BoardState(values, initialState);
     </script>
-
-    <script src="../score/score-test.js"></script>
 <!--
+    TODO: putting undo-test before timer-test causes test failures
+-->
+    <script src="../timer/timer-test.js"></script>
+    <script src="../undo/undo-test.js"></script>
+    <link rel="stylesheet" href="./view/BoardView-test.css" type="text/css" media="screen" />
+    <script src="./view/BoardView-test.js"></script>
+    <script src="../score/score-test.js"></script>
     <script src="./Persistence-test.js"></script>
     <script src="./Util-test.js"></script>
     <script src="./model/BoardState-test.js"></script>
-    <script src="../undo/undo-test.js"></script>
-    <script src="./controller/BoardManager-test.js"></script>
-    <link rel="stylesheet" href="./view/BoardView-test.css" type="text/css" media="screen" />
-    <script src="./view/BoardView-test.js"></script>
-    <script src="../timer/timer-test.js"></script>
+<!--
 -->
 </head>
 
