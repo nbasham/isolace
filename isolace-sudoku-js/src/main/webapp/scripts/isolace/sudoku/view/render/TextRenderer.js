@@ -15,7 +15,7 @@ ISOLACE.sudoku.TextRenderer = function() {
         var cell = $('#c' + i);
         this.jcells.push(cell);
     }
-    $Events.handleStateChange(this, this.render);
+    $GameEvent.handleStateChange(this, this.render);
 };
 
 /**
