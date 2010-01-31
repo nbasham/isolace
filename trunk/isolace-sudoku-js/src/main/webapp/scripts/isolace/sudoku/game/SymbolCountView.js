@@ -16,6 +16,9 @@ ISOLACE.sudoku.SymbolCountView = function() {
  * @private {array} state An array representing the current state of the board.
  */
 ISOLACE.sudoku.SymbolCountView.prototype.update = function(state) {
+    if(this.revealed === undefined) {
+        this.getRevealCounts(state);
+    }
     var symbolCount = $SUDOKU_UTIL.getSymbolCount(state);
     var html = '';
     for( var i = 0; i <= 9; i++) {
@@ -36,11 +39,32 @@ ISOLACE.sudoku.SymbolCountView.prototype.update = function(state) {
         }
         var img = "<img class='" + style + "' style='float: left;' src='" + imagePath + "' />";
         var bar = '';
+        var numRevealed = this.revealed[i];
         for( var j = 0; j < count; j++) {
+            var icon = ' fiftyPercent ui-icon-stop';
             //bar += img;
-            bar += "<span style='width: 14px; float: left;' class='ui-icon ui-icon-stop " + style + "'></span>";
+            if(j < numRevealed) {
+                icon = ' ui-icon-stop';
+            }
+            bar += "<span style='width: 14px; float: left;' class='ui-icon " + style + icon + "'></span>";
         }
         html += img + bar + '<br/>';
     }
     $('#symbolCountView').html(html);
 };
+
+/**
+ * Update symbol count HTML.
+ * @private
+ * @method update
+ * @private {array} state An array representing the current state of the board.
+ */
+ISOLACE.sudoku.SymbolCountView.prototype.getRevealCounts = function(state) {
+    this.revealed = [0,0,0,0,0,0,0,0,0];
+    for( var i = 0; i < state.length; i++) {
+        var value = state[i];
+        if(value > 0) {
+            this.revealed[value-10]++;
+        }
+    }
+}
