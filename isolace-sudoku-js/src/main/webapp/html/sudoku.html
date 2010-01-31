@@ -12,6 +12,7 @@
     <script src="../scripts/jquery-ui-1.7.2.custom.min.js"></script>
     <script src="../scripts/jquery.cookie.js"></script>
     <script src="../scripts/json2.js"></script>
+    <script src="http://static.ak.fbcdn.net/connect/en_US/core.js"></script>
     
     <script src="../scripts/jquery.dataTables.js"></script>
     <link rel="stylesheet" href="../styles/datatable_table.css" type="text/css" media="screen" />
@@ -111,6 +112,7 @@
     <script src="../scripts/isolace/sudoku/view/BoardView.js"></script>
     <script src="../scripts/isolace/sudoku/game/SymbolCountView.js"></script>
     <script src="../scripts/isolace/sudoku/game/GameKeyEvent.js"></script>
+    <script src="../scripts/isolace/FacebookLogin.js"></script>
 
     <script>
     
@@ -136,19 +138,19 @@
         <li><a href="#tabs-1">About</a></li>
         <li><a href="#tabs-2">Play</a></li>
         <li><a href="#tabs-3">Options</a></li>
-        <li><a href="#tabs-4">Scores</a></li>
+        <li><a href="#tabs-4">My scores</a></li>
+        <li><a href="#tabs-5">Facebook</a></li>
     </ul>
     <div id="tabs-1">
         <br/>
-        <p><u>Updates</u><br/>
-            <ul style='list-style-type: circle;'>
+        <p><u>Updates</u><br/><br/>
+            <ul>
          <div class='ui-state-error'>
             <li> - The shift key no longer sets a marker.</li>
             <li> - Typing the letter 'm' toggles you in and out of marker mode.</li>
-            <li> - You can use the arrow keys, return and tab to navigate from cell to cell.</li>
+            <li> - You can use the arrow keys to navigate from cell to cell.</li>
         </div>
             </ul>
-            If you get an error the first time you try to play refresh your browser. Please let me know if these updates are an improvment.
         </p>
         <br/>
         <p><u>Welcome</u><br/>We're working on a great way to play Sudoku. We're just starting and plan on rolling out lots of new features, so come back reguraly.</p>
@@ -217,6 +219,16 @@
             <table id='scorePanelTable' cellpadding="0" cellspacing="0" border="0" class="display"></table>
         </div>
     </div>
+    <div id="tabs-5">
+        <h1>Connect JavaScript - jQuery Login Example</h1>
+        <div>
+            <button id="login">Login</button>
+            <button id="logout">Logout</button>
+            <button id="disconnect">Disconnect</button>
+        </div>
+        <div id="user-info" style="display: none;"></div>        
+        <div id="fb-root"></div>
+</div>
 </div>
 
 </body>
