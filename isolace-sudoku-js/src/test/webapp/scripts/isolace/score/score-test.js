@@ -68,24 +68,24 @@ test("performance", function() {
 
 module("isolace/score/ScoreView", {
     setup: function() {
-        $('#scoresViewTable').remove();
-        jQuery("<table style='width: 100%;' cellpadding='0' cellspacing='0' border='0' class='display' id='scoresViewTable'></table>").appendTo('body');
+        $('#scorePanelTable').remove();
+        jQuery("<table style='width: 100%;' cellpadding='0' cellspacing='0' border='0' class='display' id='scorePanelTable'></table>").appendTo('body');
         $Scores = new ISOLACE.Scores();
     },
     teardown: function() {
     }
 });
 
-test("ScoresView no data", function() {
-    var view = new ISOLACE.ScoresView();
-    ok(view, "ScoresView instantiated");
+test("ScorePanel no data", function() {
+    var view = new ISOLACE.ScorePanel();
+    ok(view, "ScorePanel instantiated");
 });
 
-test("ScoresView lots of data", function() {
+test("ScorePanel lots of data", function() {
     var numToAdd = 20;
     addScoreData(numToAdd);
-    var view = new ISOLACE.ScoresView();
-    ok(view, "ScoresView instantiated");
+    var view = new ISOLACE.ScorePanel();
+    ok(view, "ScorePanel instantiated");
 });
 
 
