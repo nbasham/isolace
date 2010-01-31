@@ -55,6 +55,11 @@
     float: right;
 }
 
+.markIcon {
+    margin-top: 6px;
+    float: left;
+}
+
 .infoView {
     float: left;
 }
@@ -63,6 +68,13 @@
     position: absolute;
     height: 48px;
     width: 48px;
+}
+    
+#selectorMarker {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    display: 'none';
 }
     
 .undoView {

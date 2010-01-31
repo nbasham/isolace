@@ -65,11 +65,11 @@ ISOLACE.sudoku.BoardViewEvents.prototype.mapKeysToEvents = function() {
 };
 
 ISOLACE.sudoku.BoardViewEvents.prototype.guess = function(value) {
-    $Events.fireGuess(value, this.selectedCellIndex);
+    $GameEvent.fireGuess(value, this.selectedCellIndex);
 };
 
 ISOLACE.sudoku.BoardViewEvents.prototype.mark = function(value) {
-    $Events.fireMark(value, this.selectedCellIndex);
+    $GameEvent.fireMark(value, this.selectedCellIndex);
 };
 
 /**
@@ -84,7 +84,7 @@ ISOLACE.sudoku.BoardViewEvents.prototype.mark = function(value) {
  */
 ISOLACE.sudoku.BoardViewEvents.prototype.setupKeyHandler = function(f, keys) {
     var handler = function(type, args, obj) {
-        YAHOO.util.Event.stopEvent(args[1]);
+        //YAHOO.util.Event.stopEvent(args[1]);
         f(args[0] - 48);
     };
     var listener = new YAHOO.util.KeyListener(document, keys, handler);

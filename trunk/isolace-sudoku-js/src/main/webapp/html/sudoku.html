@@ -91,26 +91,26 @@
     <script src="../scripts/isolace/undo/UndoView.js"></script>
     <script src="../scripts/isolace/score/Score.js"></script>
     <script src="../scripts/isolace/score/Scores.js"></script>
-    <script src="../scripts/isolace/score/ScoresView.js"></script>
+    <script src="../scripts/isolace/score/ScorePanel.js"></script>
     <script src="../scripts/isolace/timer/TimerEvent.js"></script>
     <script src="../scripts/isolace/timer/TimerController.js"></script>
     <script src="../scripts/isolace/timer/TimerView.js"></script>
     <script src="../scripts/isolace/sudoku/puzzleData.js"></script>
     <script src="../scripts/isolace/sudoku/Util.js"></script>
     <script src="../scripts/isolace/sudoku/Persistence.js"></script>
-    <script src="../scripts/isolace/sudoku/Events.js"></script>
+    <script src="../scripts/isolace/sudoku/PanelController.js"></script>
     <script src="../scripts/isolace/sudoku/model/Puzzle.js"></script>
     <script src="../scripts/isolace/sudoku/model/BoardState.js"></script>
-    <script src="../scripts/isolace/sudoku/controller/BoardManager.js"></script>
-    <script src="../scripts/isolace/sudoku/controller/GameController.js"></script>
+    <script src="../scripts/isolace/sudoku/game/GameEvent.js"></script>
+    <script src="../scripts/isolace/sudoku/game/GamePanel.js"></script>
     <script src="../scripts/isolace/sudoku/view/render/ImageRenderer.js"></script>
     <script src="../scripts/isolace/sudoku/view/render/TextRenderer.js"></script>
     <script src="../scripts/isolace/sudoku/view/selector/BorderSelector.js"></script>
     <script src="../scripts/isolace/sudoku/view/selector/ImageSelector.js"></script>
     <script src="../scripts/isolace/sudoku/view/BoardViewEvents.js"></script>
-    <script src="../scripts/isolace/sudoku/view/MainMenuView.js"></script>
     <script src="../scripts/isolace/sudoku/view/BoardView.js"></script>
-    <script src="../scripts/isolace/sudoku/SymbolCountView.js"></script>
+    <script src="../scripts/isolace/sudoku/game/SymbolCountView.js"></script>
+    <script src="../scripts/isolace/sudoku/game/GameKeyEvent.js"></script>
 
     <script>
     
@@ -120,9 +120,7 @@
 
         $(document).ready(function() {
             try {
-                //$Persistence.incPuzzleIndex(-1);
-                window.gameController = new ISOLACE.sudoku.GameController();
-                window.gameController.showMainMenu();
+                window.panelController = new ISOLACE.PanelController();
             } catch(e) {
                 alert(e.message);
             }
@@ -132,7 +130,7 @@
 
 </head>
 <body class='bodyContent'>
-<p align='center'><img src='../images/sudoku.png' /></p>
+<p align='center'><img title='revision 65' src='../images/sudoku.png' /></p>
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1">About</a></li>
@@ -141,6 +139,17 @@
         <li><a href="#tabs-4">Scores</a></li>
     </ul>
     <div id="tabs-1">
+        <br/>
+        <p><u>Updates</u><br/>
+            <ul style='list-style-type: circle;'>
+         <div class='ui-state-error'>
+            <li> - The shift key no longer sets a marker.</li>
+            <li> - Typing the letter 'm' toggles you in and out of marker mode.</li>
+            <li> - You can use the arrow keys, return and tab to navigate from cell to cell.</li>
+        </div>
+            </ul>
+            Please let me know if these updates are an improvment.
+        </p>
         <br/>
         <p><u>Welcome</u><br/>We're working on a great way to play Sudoku. We're just starting and plan on rolling out lots of new features, so come back reguraly.</p>
         <br/>
@@ -162,7 +171,6 @@
                 <div class="fg-buttonset fg-buttonset-multi">
                    <button id='undoButton' style='margin-right: 8px' class="fg-button ui-state-default fg-button-icon-left ui-corner-all" title="Undo your last move"><span class="ui-icon ui-icon-arrowrefresh-1-w"></span>Undo</button>
                    <button id='redoButton' style='margin-right: 32px' class="fg-button ui-state-default fg-button-icon-left ui-corner-all" title="Redo your last move"><span class="ui-icon ui-icon-arrowrefresh-1-e"></span>Redo</button>
-                   <button style='display: none;' id='markerButton' class="fg-button ui-state-default fg-button-icon-left fg-button-toggleable ui-corner-all" title="Enter a marker instead of a guess"><span class="ui-icon ui-icon-pencil"></span>Marker</button>
                 </div>
                 <div id='timerView' class='timerView' title='Displays how much time has elapsed since you started the game (minues:seconds)'>&nbsp;</div>
             </div>
@@ -205,8 +213,8 @@
         <div id='infoView' class='infoView'>&nbsp;</div>
     </div>
     <div id="tabs-4">
-        <div id='scoresView'>
-            <table id='scoresViewTable' cellpadding="0" cellspacing="0" border="0" class="display"></table>
+        <div id='scorePanel'>
+            <table id='scorePanelTable' cellpadding="0" cellspacing="0" border="0" class="display"></table>
         </div>
     </div>
 </div>

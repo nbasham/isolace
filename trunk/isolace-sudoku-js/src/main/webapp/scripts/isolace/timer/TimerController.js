@@ -9,7 +9,7 @@
 ISOLACE.TimerController = function() {
     this.time = 0;
     this.timerId = undefined;
-    this.paused = false;
+    this.paused = true;
     $TimerEvent.handleTimerPause(this, this.pause);
     $TimerEvent.handleTimerStart(this, this.start);
     $TimerEvent.handleTimerStop(this, this.stop);

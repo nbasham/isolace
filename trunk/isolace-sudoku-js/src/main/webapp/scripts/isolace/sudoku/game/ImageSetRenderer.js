@@ -1,14 +1,14 @@
 /**
- * Render cells using images.
- * @class ImageRenderer
- * @namespace ISOLACE.sudoku.view.render
+ * Creates a ImageSetRenderer object.
+ * @class ImageSetRenderer takes a set of 10 images to render as revealed, guess
+ *        and marker symbols.
  * @constructor
  * @author Norman Basham, iSolace, Copyright (c) 2009-2010. ALL RIGHTS RESERVED<br/>
  * @version 0.1
-*/
-ISOLACE.sudoku.ImageRenderer = function() {
+ */
+ISOLACE.sudoku.ImageSetRenderer = function() {
     this.jcells = [];
-    for(var i = 0; i < 81; i++) {
+    for( var i = 0; i < 81; i++) {
         var cell = $('#c' + i);
         this.jcells.push(cell);
     }
@@ -20,8 +20,8 @@ ISOLACE.sudoku.ImageRenderer = function() {
  * @method render
  * @param {BoardState} boardState The current state of the Sudoku board.
  */
-ISOLACE.sudoku.ImageRenderer.prototype.render = function(boardState) {
-    for(var i = 0; i < 81; i++) {
+ISOLACE.sudoku.ImageSetRenderer.prototype.render = function(boardState) {
+    for( var i = 0; i < 81; i++) {
         var hasMarker = boardState.hasMarker(i);
         if(hasMarker) {
             this.renderMarkerCell(boardState, i);
@@ -35,17 +35,17 @@ ISOLACE.sudoku.ImageRenderer.prototype.render = function(boardState) {
 /**
  * @private
  */
-ISOLACE.sudoku.ImageRenderer.prototype.renderMarkerCell = function(boardState, index) {
+ISOLACE.sudoku.ImageSetRenderer.prototype.renderMarkerCell = function(boardState, index) {
     var parentCell = this.jcells[index];
     this.setImage(parentCell, '');
     var s = '';
-    for(var markerIndex = 0; markerIndex < 9; markerIndex++) {
+    for( var markerIndex = 0; markerIndex < 9; markerIndex++) {
         var value = markerIndex + 1;
         s += "<div class='marker marker" + index + '-' + value + "'>&nbsp;</div>";
     }
     parentCell.html(s);
 
-    for(var markerIndex = 0; markerIndex < 9; markerIndex++) {
+    for( var markerIndex = 0; markerIndex < 9; markerIndex++) {
         var value = markerIndex + 1;
         var cell = $('.marker' + index + '-' + value);
         if(boardState.hasMarkerValue(value, index)) {
@@ -61,7 +61,7 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderMarkerCell = function(boardState, i
 /**
  * @private
  */
-ISOLACE.sudoku.ImageRenderer.prototype.renderCell = function(boardState, index) {
+ISOLACE.sudoku.ImageSetRenderer.prototype.renderCell = function(boardState, index) {
     this.jcells[index].html('&nbsp;');
     var cell = this.jcells[index];
     var value = boardState.getValue(index);
@@ -75,7 +75,7 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderCell = function(boardState, index) 
     } else {
         this.setImage(cell, value + '-revealed');
     }
-    if(value === 0) {        
+    if(value === 0) {
         this.setImage(cell, '');
     }
 };
@@ -83,10 +83,14 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderCell = function(boardState, index) 
 /**
  * @private
  */
-ISOLACE.sudoku.ImageRenderer.prototype.setImage = function(cell, imageName) {
-    var imagePath = '../images/45/numbers/'  + imageName + '.png';
+ISOLACE.sudoku.ImageSetRenderer.prototype.setImage = function(cell, index, isMarker) {
+    var imagePath = '../images/45/football/' + index + '.jpg';
+    if(isMarker) {
+        cell.css('background-size', '15px');
+    } else {
+        cell.css('background-size', '100%');
+    }
     cell.css('background-image', 'url(' + imagePath + ')');
     cell.css('background-repeat', 'no-repeat');
     cell.css('background-position', 'center center');
 };
-

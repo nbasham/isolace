@@ -4,7 +4,7 @@ ISOLACE.LOG = false;
 /**
  * Creates a Log object.
  * @class Wraps a 3rd party logger implementation. The current implementation is
- *        log4javascript. Tried YUI and jsLog, but preffered log4javascript.
+ *        log4javascript. Tried YUI and jsLog, but preferred log4javascript.
  * @namespace ISOLACE
  * @constructor
  * @author Norman Basham, iSolace, Copyright (c) 2009-2010. ALL RIGHTS RESERVED<br/>
