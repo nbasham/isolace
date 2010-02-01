@@ -6,15 +6,14 @@
  * @author Norman Basham, iSolace, Copyright (c) 2009-2010. ALL RIGHTS RESERVED<br/>
  * @version 0.1
  */
-ISOLACE.ScorePanel = function(options) {
+ISOLACE.ScorePanel = function() {
 };
 
 /**
  * Initialize the panel.
  * @method load
- * @param {object} options The game options.
  */
-ISOLACE.ScorePanel.prototype.load = function(options) {
+ISOLACE.ScorePanel.prototype.load = function() {
 
     //$('#scorePanelTable').remove();
     //jQuery("<table style='width: 100%;' cellpadding='0' cellspacing='0' border='0' class='display' id='scorePanelTable'></table>").appendTo('body');
@@ -22,12 +21,12 @@ ISOLACE.ScorePanel.prototype.load = function(options) {
     var scores = $Scores.get();
     var scoreCount = scores.length;
     var sPaginationType = 'two_button';
-    if(scoreCount > 11) {
-        sPaginationType = "full_numbers";
-    }
+//    if(scoreCount > 11) {
+//        sPaginationType = "full_numbers";
+//    }
     var scoresData = [];
     for( var i = 0; i < scores.length; i++) {
-        var score = scores[i];
+        var score = scores[scores.length - 1 - i];
         var scoreArray = this.scoreToRowData(score);
         scoresData.push(scoreArray);
     }

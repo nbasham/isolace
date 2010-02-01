@@ -1,5 +1,5 @@
 .bodyContent {
-    width: 62em;
+    width: 50em;
     height: 58em;
     margin-left: auto ;
     margin-right: auto ;
@@ -48,8 +48,20 @@
 #symbolCountView {
     float: left;
     border: 1px solid #999;
+    height: 170px;
+    min-width: 141px;
 }
-    
+
+.symbolCountHeader {
+    float: left;
+    width: 14px;
+    height: 17px;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+}
+
 .timerView {
     margin-top: 6px;
     float: right;
@@ -60,8 +72,22 @@
     float: left;
 }
 
+#optionsContent {
+    margin: 12px;
+}
+
+.optionsSymbolTypeImage {
+    height: 96px;
+    width: 96px;
+    border: 2px solid transparent;
+}
+
+.optionsSymbolTypeImageSelected {
+    border: 2px solid #3B5998;
+}
+
 .infoView {
-    float: left;
+    float: bottom;
 }
 
 #selector {
@@ -158,4 +184,65 @@ div.marker {
     opacity: 0.5;
 }
 
+.sixtyPercent {
+    filter:alpha(opacity=60);
+    -moz-opacity:0.6;
+    -khtml-opacity: 0.6;
+    opacity: 0.6;
+}
+
 button>.ui-state-active { border: 1px solid #d3d3d3; background: #3B5998 url(images/ui-bg_glass_50_3B5998_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #ffffff; outline: none; }
+
+.color {
+    width: 80%;
+    height: 80%;
+    background-color: transparent;
+    margin: 5px;
+}
+
+.colorMarkerConflict {
+    width: 4px;
+    height: 4px;
+    border: 1px solid white;
+    margin: 4px;
+    background-color: red;
+}
+
+.colorSymbolCount {
+    width: 13px;
+    height: 14px;
+    float: left;
+    border-left: 1px solid white;
+}
+
+div.zero {
+    background-color: transparent;
+}
+div.one {
+    background-color: #D62469;
+}
+div.two {
+    background-color: #F87F1F;
+}
+div.three {
+    background-color: #F9C71E;
+}
+div.four {
+    background-color: #AFCE3B;
+}
+div.five {
+    background-color: #187349;
+}
+div.six {
+    background-color: #00ABED;
+}
+div.seven {
+    background-color: #0665AE;
+}
+div.eight {
+    background-color: #64095E;
+}
+div.nine {
+    background-color: black;
+}
+

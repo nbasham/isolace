@@ -192,11 +192,15 @@ ul.inheritsList
 	
 	<li><a href="../symbols/%24Event.html">$Event</a></li>
 	
-	<li><a href="../symbols/%24Events.html">$Events</a></li>
+	<li><a href="../symbols/%24GameEvent.html">$GameEvent</a></li>
 	
 	<li><a href="../symbols/%24Log.html">$Log</a></li>
 	
+	<li><a href="../symbols/%24Options.html">$Options</a></li>
+	
 	<li><a href="../symbols/%24Persistence.html">$Persistence</a></li>
+	
+	<li><a href="../symbols/%24Renderer.html">$Renderer</a></li>
 	
 	<li><a href="../symbols/%24Scores.html">$Scores</a></li>
 	
@@ -214,9 +218,13 @@ ul.inheritsList
 	
 	<li><a href="../symbols/ISOLACE.Event.html">ISOLACE.Event</a></li>
 	
+	<li><a href="../symbols/ISOLACE.GameEvent.html">ISOLACE.GameEvent</a></li>
+	
 	<li><a href="../symbols/ISOLACE.GamePanel.html">ISOLACE.GamePanel</a></li>
 	
 	<li><a href="../symbols/ISOLACE.Log.html">ISOLACE.Log</a></li>
+	
+	<li><a href="../symbols/ISOLACE.Options.html">ISOLACE.Options</a></li>
 	
 	<li><a href="../symbols/ISOLACE.PanelController.html">ISOLACE.PanelController</a></li>
 	
@@ -234,17 +242,17 @@ ul.inheritsList
 	
 	<li><a href="../symbols/ISOLACE.sudoku.BorderSelector.html">ISOLACE.sudoku.BorderSelector</a></li>
 	
-	<li><a href="../symbols/ISOLACE.sudoku.Events.html">ISOLACE.sudoku.Events</a></li>
+	<li><a href="../symbols/ISOLACE.sudoku.ColorRenderer.html">ISOLACE.sudoku.ColorRenderer</a></li>
 	
 	<li><a href="../symbols/ISOLACE.sudoku.ImageRenderer.html">ISOLACE.sudoku.ImageRenderer</a></li>
 	
 	<li><a href="../symbols/ISOLACE.sudoku.ImageSelector.html">ISOLACE.sudoku.ImageSelector</a></li>
 	
-	<li><a href="../symbols/ISOLACE.sudoku.ImageSetRenderer.html">ISOLACE.sudoku.ImageSetRenderer</a></li>
-	
 	<li><a href="../symbols/ISOLACE.sudoku.Persistence.html">ISOLACE.sudoku.Persistence</a></li>
 	
 	<li><a href="../symbols/ISOLACE.sudoku.Puzzle.html">ISOLACE.sudoku.Puzzle</a></li>
+	
+	<li><a href="../symbols/ISOLACE.sudoku.Renderer.html">ISOLACE.sudoku.Renderer</a></li>
 	
 	<li><a href="../symbols/ISOLACE.sudoku.SymbolCountView.html">ISOLACE.sudoku.SymbolCountView</a></li>
 	
@@ -330,7 +338,7 @@ Create a GamePanel object.
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.GamePanel.html#handleStateChanged">handleStateChanged</a></b>(boardState)
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.GamePanel.html#handleStateChanged">handleStateChanged</a></b>(notUsedBoardState)
 								</div>
 								<div class="description">Handle a state changed event.</div>
 							</td>
@@ -339,7 +347,16 @@ Create a GamePanel object.
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.GamePanel.html#hide">hide</a></b>(options)
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.GamePanel.html#handleToggleMarkMode">handleToggleMarkMode</a></b>()
+								</div>
+								<div class="description">Handle a toggle mark mode event.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.GamePanel.html#hide">hide</a></b>()
 								</div>
 								<div class="description">Hide the panel.</div>
 							</td>
@@ -348,7 +365,7 @@ Create a GamePanel object.
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.GamePanel.html#load">load</a></b>(options)
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.GamePanel.html#load">load</a></b>()
 								</div>
 								<div class="description">Initialize the panel.</div>
 							</td>
@@ -357,7 +374,7 @@ Create a GamePanel object.
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/ISOLACE.GamePanel.html#show">show</a></b>(options)
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.GamePanel.html#show">show</a></b>()
 								</div>
 								<div class="description">Show the panel.</div>
 							</td>
@@ -413,7 +430,7 @@ Create a GamePanel object.
 					<div class="fixedFont">
 					
 					
-					<b>handleStateChanged</b>(boardState)
+					<b>handleStateChanged</b>(notUsedBoardState)
 					
 					</div>
 					<div class="description">
@@ -432,7 +449,7 @@ We update the undo queue with the boardState array.
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>boardState</b>
+									<b>notUsedBoardState</b>
 									
 								</dt>
 								<dd></dd>
@@ -448,11 +465,37 @@ We update the undo queue with the boardState array.
 
 					<hr />
 				
+					<a name="handleToggleMarkMode"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>handleToggleMarkMode</b>()
+					
+					</div>
+					<div class="description">
+						Handle a toggle mark mode event.
+						
+						
+					</div>
+					
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name="hide"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>hide</b>(options)
+					<b>hide</b>()
 					
 					</div>
 					<div class="description">
@@ -464,17 +507,6 @@ We update the undo queue with the boardState array.
 					
 					
 					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>options</b>
-									
-								</dt>
-								<dd>The game options.</dd>
-							
-							</dl>
 						
 						
 						
@@ -489,7 +521,7 @@ We update the undo queue with the boardState array.
 					<div class="fixedFont">
 					
 					
-					<b>load</b>(options)
+					<b>load</b>()
 					
 					</div>
 					<div class="description">
@@ -501,17 +533,6 @@ We update the undo queue with the boardState array.
 					
 					
 					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>options</b>
-									
-								</dt>
-								<dd>The game options.</dd>
-							
-							</dl>
 						
 						
 						
@@ -526,7 +547,7 @@ We update the undo queue with the boardState array.
 					<div class="fixedFont">
 					
 					
-					<b>show</b>(options)
+					<b>show</b>()
 					
 					</div>
 					<div class="description">
@@ -538,17 +559,6 @@ We update the undo queue with the boardState array.
 					
 					
 					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>options</b>
-									
-								</dt>
-								<dd>The game options.</dd>
-							
-							</dl>
 						
 						
 						
@@ -567,7 +577,7 @@ We update the undo queue with the boardState array.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blank">JsDoc Toolkit</a> 2.0.0 on Fri Jan 29 2010 15:41:59 GMT-0800 (PST)
+			Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blank">JsDoc Toolkit</a> 2.0.0 on Mon Feb 01 2010 11:13:10 GMT-0800 (PST)
 		</div>
 	</body>
 </html>

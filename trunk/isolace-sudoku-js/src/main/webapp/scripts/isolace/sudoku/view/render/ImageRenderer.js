@@ -1,3 +1,5 @@
+ISOLACE.namespace("sudoku");
+
 /**
  * Render cells using images.
  * @class ImageRenderer
@@ -7,36 +9,22 @@
  * @version 0.1
 */
 ISOLACE.sudoku.ImageRenderer = function() {
-    this.jcells = [];
-    for(var i = 0; i < 81; i++) {
-        var cell = $('#c' + i);
-        this.jcells.push(cell);
-    }
-    $GameEvent.handleStateChange(this, this.render);
 };
 
 /**
- * Render all cells based on boardState.
- * @method render
- * @param {BoardState} boardState The current state of the Sudoku board.
+ * Render a symbol for the SymbolCountView.
+ * @method renderCountSymbol
+ * @param {int} symbolIndex The index of the symbol to render.
  */
-ISOLACE.sudoku.ImageRenderer.prototype.render = function(boardState) {
-    for(var i = 0; i < 81; i++) {
-        var hasMarker = boardState.hasMarker(i);
-        if(hasMarker) {
-            this.renderMarkerCell(boardState, i);
-        } else {
-            this.renderCell(boardState, i);
-        }
-    }
-    $Log.debug('Rendered: ' + boardState.state);
+ISOLACE.sudoku.ImageRenderer.prototype.renderCountSymbol = function(symbolIndex) {
+    var countSymbol = "<span style='width: 14px; float: left;' class='ui-icon ui-icon-stop'></span>";
+    return countSymbol;
 };
 
 /**
- * @private
  */
 ISOLACE.sudoku.ImageRenderer.prototype.renderMarkerCell = function(boardState, index) {
-    var parentCell = this.jcells[index];
+    var parentCell = $('#c' + index);
     this.setImage(parentCell, '');
     var s = '';
     for(var markerIndex = 0; markerIndex < 9; markerIndex++) {
@@ -59,11 +47,10 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderMarkerCell = function(boardState, i
 };
 
 /**
- * @private
  */
 ISOLACE.sudoku.ImageRenderer.prototype.renderCell = function(boardState, index) {
-    this.jcells[index].html('&nbsp;');
-    var cell = this.jcells[index];
+    $('#c' + index).html('&nbsp;');
+    var cell = $('#c' + index);
     var value = boardState.getValue(index);
     var isEditable = boardState.isEditable(index);
     if(isEditable) {
