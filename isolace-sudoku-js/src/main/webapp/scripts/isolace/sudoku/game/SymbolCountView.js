@@ -41,12 +41,7 @@ ISOLACE.sudoku.SymbolCountView.prototype.update = function(state) {
         var bar = '';
         var numRevealed = this.revealed[i];
         for( var j = 0; j < count; j++) {
-            var icon = ' fiftyPercent ui-icon-stop';
-            //bar += img;
-            if(j < numRevealed) {
-                icon = ' ui-icon-stop';
-            }
-            bar += "<span style='width: 14px; float: left;' class='ui-icon " + style + icon + "'></span>";
+            bar += $Renderer.renderCountSymbol(i);
         }
         html += img + bar + '<br/>';
     }

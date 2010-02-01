@@ -4,10 +4,8 @@
  * @author Norman Basham, iSolace, Copyright (c) 2009-2010. ALL RIGHTS RESERVED<br/>
  * @version 0.1
  * @constructor
- * @param {options} options The Sudoku options.
  */
-ISOLACE.PanelController = function(options) {
-    this.options = options;
+ISOLACE.PanelController = function() {
     this.currentPanel = 0;
     
     this.panelControllers = [];
@@ -15,16 +13,16 @@ ISOLACE.PanelController = function(options) {
 //    var panel = new ISOLACE.AboutPanel();
     this.panelControllers.push(null);
 
-    panel = new ISOLACE.GamePanel(options);
+    panel = new ISOLACE.GamePanel();
     this.panelControllers.push(panel);
     
 //    panel = new ISOLACE.OptionPanel();
     this.panelControllers.push(null);
     
-    panel = new ISOLACE.ScorePanel(options);
+    panel = new ISOLACE.ScorePanel();
     this.panelControllers.push(panel);
     
-    this.load(this.options);
+    this.load();
     var me = this;
     $('#tabs').bind('tabsselect', function(event, ui) {
         me.changePanel(ui.index);
@@ -45,14 +43,13 @@ ISOLACE.PanelController.prototype.SCORE_PANEL = 3;
  * Load each panel, if it defined a load function.
  * @method load
  * @private
- * @param {options} options The Sudoku options.
  */
-ISOLACE.PanelController.prototype.load = function(options) {
+ISOLACE.PanelController.prototype.load = function() {
     $Log.debug('Loading panels');
     for( var panelIndex = 0; panelIndex < this.panelControllers.length; panelIndex++) {
         var panelContext = this.panelControllers[panelIndex];
         if(panelContext !== null && panelContext.load) {
-            panelContext.load.call(panelContext, options);
+            panelContext.load.call(panelContext);
         }
     }
 };
@@ -70,11 +67,11 @@ ISOLACE.PanelController.prototype.changePanel = function(panelIndexToShow) {
         if(panelContext !== null) {
             if(panelIndexToShow == panelIndex) {
                 if(panelContext.show) {
-                    panelContext.show.call(panelContext, this.options);
+                    panelContext.show.call(panelContext);
                 }
             } else {
                 if(panelContext.hide) {
-                    panelContext.hide.call(panelContext, this.options);
+                    panelContext.hide.call(panelContext);
                 }
             }
         }

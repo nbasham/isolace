@@ -21,7 +21,6 @@
     
     <script src="../scripts/visualize.jQuery.js"></script>
     <link rel="stylesheet" href="../styles/visualize.jQuery.css" type="text/css" media="screen" />
-    
     <link rel="stylesheet" href="../styles/facebook/jquery-ui-1.7.2.custom.css" type="text/css" media="screen" />
 
     <style type="text/css"> 
@@ -87,13 +86,21 @@
     <script src="../scripts/isolace/Log.js"></script>
     <script src="../scripts/isolace/assert.js"></script>
     <script src="../scripts/isolace/Event.js"></script>
+    <script src="../scripts/isolace/sudoku/game/GameEvent.js"></script>
+    <script src="../scripts/isolace/undo/UndoView.js"></script>
+    <script src="../scripts/isolace/timer/TimerEvent.js"></script>
+
+    <script src="../scripts/isolace/sudoku/game/ColorRenderer.js"></script>
+    <script src="../scripts/isolace/sudoku/view/render/ImageRenderer.js"></script>
+    <script src="../scripts/isolace/sudoku/view/render/TextRenderer.js"></script>
+    <script src="../scripts/isolace/sudoku/game/Renderer.js"></script>
+    <script src="../scripts/isolace/sudoku/model/Options.js"></script>
+
     <script src="../scripts/isolace/undo/UndoEvent.js"></script>
     <script src="../scripts/isolace/undo/UndoController.js"></script>
-    <script src="../scripts/isolace/undo/UndoView.js"></script>
     <script src="../scripts/isolace/score/Score.js"></script>
     <script src="../scripts/isolace/score/Scores.js"></script>
     <script src="../scripts/isolace/score/ScorePanel.js"></script>
-    <script src="../scripts/isolace/timer/TimerEvent.js"></script>
     <script src="../scripts/isolace/timer/TimerController.js"></script>
     <script src="../scripts/isolace/timer/TimerView.js"></script>
     <script src="../scripts/isolace/sudoku/puzzleData.js"></script>
@@ -102,17 +109,12 @@
     <script src="../scripts/isolace/sudoku/PanelController.js"></script>
     <script src="../scripts/isolace/sudoku/model/Puzzle.js"></script>
     <script src="../scripts/isolace/sudoku/model/BoardState.js"></script>
-    <script src="../scripts/isolace/sudoku/game/GameEvent.js"></script>
     <script src="../scripts/isolace/sudoku/game/GamePanel.js"></script>
-    <script src="../scripts/isolace/sudoku/view/render/ImageRenderer.js"></script>
-    <script src="../scripts/isolace/sudoku/view/render/TextRenderer.js"></script>
     <script src="../scripts/isolace/sudoku/view/selector/BorderSelector.js"></script>
     <script src="../scripts/isolace/sudoku/view/selector/ImageSelector.js"></script>
     <script src="../scripts/isolace/sudoku/view/BoardViewEvents.js"></script>
     <script src="../scripts/isolace/sudoku/view/BoardView.js"></script>
-    <script src="../scripts/isolace/sudoku/game/SymbolCountView.js"></script>
     <script src="../scripts/isolace/sudoku/game/GameKeyEvent.js"></script>
-    <script src="../scripts/isolace/FacebookLogin.js"></script>
 
     <script>
     
@@ -122,6 +124,7 @@
 
         $(document).ready(function() {
             try {
+                //$Options.setSymbolType('color');
                 window.panelController = new ISOLACE.PanelController();
             } catch(e) {
                 alert(e.message);
@@ -146,16 +149,16 @@
         <p><u>Updates</u><br/><br/>
             <ul>
          <div class='ui-state-error'>
-            <li> - The shift key no longer sets a marker.</li>
-            <li> - Typing the letter 'm' toggles you in and out of marker mode.</li>
-            <li> - You can use the arrow keys to navigate from cell to cell.</li>
+            <li> - The Options tab now lets you choose to play with 'number' or 'color' symbols. You can switch back and forth as often as you like.</li>
+            <li> - Scores are listed most recent first.</li>
+            <li> - The 'My Facebook' tab panel doesn't do anything...yet...</li>
         </div>
             </ul>
         </p>
         <br/>
         <p><u>Welcome</u><br/>We're working on a great way to play Sudoku. We're just starting and plan on rolling out lots of new features, so come back reguraly.</p>
         <br/>
-        <p><u>The Basics</u><br/>Move the mouse over a cell and type a number from 1 to 9 with your keyboard. Holding the shift key down will enter a marker in that cell, you can use markers to provide hints in each cell. Each wrong answer will add 30 seconds to your time. That's it! Have fun.</p>        
+        <p><u>The Basics</u><br/>Move the mouse over a cell and type a number from 1 to 9 with your keyboard. Typing 'm' will move you in and out of marker mode, you can use markers to provide hints in each cell. Each wrong answer will add 30 seconds to your time. That's it! Have fun.</p>        
         <br/>
         <p><u>Quality Assurance Extraordinaire</u><br/>Joanne and Kelly</p>
     </div>
@@ -211,8 +214,21 @@
         </div>
     </div>
     <div id="tabs-3">
-        <p>Comming soon...</p>
-        <div id='infoView' class='infoView'>&nbsp;</div>
+        <div id='optionsContent'>
+            <p align='left'>
+                <img id='numericBoardImage' class='optionsSymbolTypeImage optionsSymbolTypeImageSelected' title='Numeric' src='../images/numericBoard.png' onclick="$Options.handleSymbolTypeUpdate('numeric')" />
+                <img id='colorBoardImage' class='optionsSymbolTypeImage' title='Color' src='../images/colorBoard.png' onclick="$Options.handleSymbolTypeUpdate('color')" />
+            </p>
+            <div class="fg-buttonset fg-buttonset-single">
+                <button id='numericBoardButton' onclick="$Options.handleSymbolTypeUpdate('numeric')" style="margin-left: 2px; margin-right: 7px; width: 96px;" class="fg-button ui-state-default ui-state-active ui-priority-primary ui-corner-left">Numeric</button>
+                <button id='colorBoardButton' onclick="$Options.handleSymbolTypeUpdate('color')" style="margin-right: 9px; width: 96px;"  class="fg-button ui-state-default ui-priority-primary ui-corner-right">Color</button>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div id='infoView' class='infoView'>&nbsp;</div>
+        </div>
     </div>
     <div id="tabs-4">
         <div id='scorePanel'>

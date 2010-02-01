@@ -187,11 +187,15 @@ ul.inheritsList
 	
 	<li><a href="symbols/%24Event.html">$Event</a></li>
 	
-	<li><a href="symbols/%24Events.html">$Events</a></li>
+	<li><a href="symbols/%24GameEvent.html">$GameEvent</a></li>
 	
 	<li><a href="symbols/%24Log.html">$Log</a></li>
 	
+	<li><a href="symbols/%24Options.html">$Options</a></li>
+	
 	<li><a href="symbols/%24Persistence.html">$Persistence</a></li>
+	
+	<li><a href="symbols/%24Renderer.html">$Renderer</a></li>
 	
 	<li><a href="symbols/%24Scores.html">$Scores</a></li>
 	
@@ -209,9 +213,13 @@ ul.inheritsList
 	
 	<li><a href="symbols/ISOLACE.Event.html">ISOLACE.Event</a></li>
 	
+	<li><a href="symbols/ISOLACE.GameEvent.html">ISOLACE.GameEvent</a></li>
+	
 	<li><a href="symbols/ISOLACE.GamePanel.html">ISOLACE.GamePanel</a></li>
 	
 	<li><a href="symbols/ISOLACE.Log.html">ISOLACE.Log</a></li>
+	
+	<li><a href="symbols/ISOLACE.Options.html">ISOLACE.Options</a></li>
 	
 	<li><a href="symbols/ISOLACE.PanelController.html">ISOLACE.PanelController</a></li>
 	
@@ -229,17 +237,17 @@ ul.inheritsList
 	
 	<li><a href="symbols/ISOLACE.sudoku.BorderSelector.html">ISOLACE.sudoku.BorderSelector</a></li>
 	
-	<li><a href="symbols/ISOLACE.sudoku.Events.html">ISOLACE.sudoku.Events</a></li>
+	<li><a href="symbols/ISOLACE.sudoku.ColorRenderer.html">ISOLACE.sudoku.ColorRenderer</a></li>
 	
 	<li><a href="symbols/ISOLACE.sudoku.ImageRenderer.html">ISOLACE.sudoku.ImageRenderer</a></li>
 	
 	<li><a href="symbols/ISOLACE.sudoku.ImageSelector.html">ISOLACE.sudoku.ImageSelector</a></li>
 	
-	<li><a href="symbols/ISOLACE.sudoku.ImageSetRenderer.html">ISOLACE.sudoku.ImageSetRenderer</a></li>
-	
 	<li><a href="symbols/ISOLACE.sudoku.Persistence.html">ISOLACE.sudoku.Persistence</a></li>
 	
 	<li><a href="symbols/ISOLACE.sudoku.Puzzle.html">ISOLACE.sudoku.Puzzle</a></li>
+	
+	<li><a href="symbols/ISOLACE.sudoku.Renderer.html">ISOLACE.sudoku.Renderer</a></li>
 	
 	<li><a href="symbols/ISOLACE.sudoku.SymbolCountView.html">ISOLACE.sudoku.SymbolCountView</a></li>
 	
@@ -272,8 +280,8 @@ ul.inheritsList
 			<hr />
 			
 			<div>
-				<h2><a href="symbols/%24Events.html#constructor">$Events</a></h2>
-				ISOLACE.sudoku.Events
+				<h2><a href="symbols/%24GameEvent.html#constructor">$GameEvent</a></h2>
+				ISOLACE.GameEvent
 			</div>
 			<hr />
 			
@@ -284,8 +292,20 @@ ul.inheritsList
 			<hr />
 			
 			<div>
+				<h2><a href="symbols/%24Options.html#constructor">$Options</a></h2>
+				ISOLACE.Options
+			</div>
+			<hr />
+			
+			<div>
 				<h2><a href="symbols/%24Persistence.html#constructor">$Persistence</a></h2>
 				ISOLACE.sudoku.Persistence
+			</div>
+			<hr />
+			
+			<div>
+				<h2><a href="symbols/%24Renderer.html#constructor">$Renderer</a></h2>
+				ISOLACE.sudoku.Renderer
 			</div>
 			<hr />
 			
@@ -339,6 +359,12 @@ ul.inheritsList
 			<hr />
 			
 			<div>
+				<h2><a href="symbols/ISOLACE.GameEvent.html#constructor">ISOLACE.GameEvent</a></h2>
+				Game event definitions, firers and handlers.
+			</div>
+			<hr />
+			
+			<div>
 				<h2><a href="symbols/ISOLACE.GamePanel.html#constructor">ISOLACE.GamePanel</a></h2>
 				ISOLACE
 Create a GamePanel object.
@@ -349,6 +375,12 @@ Create a GamePanel object.
 				<h2><a href="symbols/ISOLACE.Log.html#constructor">ISOLACE.Log</a></h2>
 				ISOLACE
 Creates a Log object.
+			</div>
+			<hr />
+			
+			<div>
+				<h2><a href="symbols/ISOLACE.Options.html#constructor">ISOLACE.Options</a></h2>
+				Timer event definitions, firers and handlers.
 			</div>
 			<hr />
 			
@@ -408,9 +440,8 @@ Implements selecting a cell using a border.
 			<hr />
 			
 			<div>
-				<h2><a href="symbols/ISOLACE.sudoku.Events.html#constructor">ISOLACE.sudoku.Events</a></h2>
-				ISOLACE.sudoku
-Event definitions, firers and handlers.
+				<h2><a href="symbols/ISOLACE.sudoku.ColorRenderer.html#constructor">ISOLACE.sudoku.ColorRenderer</a></h2>
+				ColorRenderer renders symbols as colors.
 			</div>
 			<hr />
 			
@@ -429,13 +460,6 @@ Implements selecting a cell using a image.
 			<hr />
 			
 			<div>
-				<h2><a href="symbols/ISOLACE.sudoku.ImageSetRenderer.html#constructor">ISOLACE.sudoku.ImageSetRenderer</a></h2>
-				ImageSetRenderer takes a set of 10 images to render as revealed, guess
-       and marker symbols.
-			</div>
-			<hr />
-			
-			<div>
 				<h2><a href="symbols/ISOLACE.sudoku.Persistence.html#constructor">ISOLACE.sudoku.Persistence</a></h2>
 				ISOLACE.sudoku
 Wraps persistence implementation.
@@ -446,6 +470,12 @@ Wraps persistence implementation.
 				<h2><a href="symbols/ISOLACE.sudoku.Puzzle.html#constructor">ISOLACE.sudoku.Puzzle</a></h2>
 				ISOLACE.sudoku
 Puzzle defines the values of each cell of a  Sudoku game.
+			</div>
+			<hr />
+			
+			<div>
+				<h2><a href="symbols/ISOLACE.sudoku.Renderer.html#constructor">ISOLACE.sudoku.Renderer</a></h2>
+				Renderer renders symbols as colors.
 			</div>
 			<hr />
 			
@@ -506,7 +536,7 @@ Create a TimerView object.
 		</div>
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blankt">JsDoc Toolkit</a> 2.0.0 on Fri Jan 29 2010 15:42:00 GMT-0800 (PST)
+			Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blankt">JsDoc Toolkit</a> 2.0.0 on Mon Feb 01 2010 11:13:11 GMT-0800 (PST)
 		</div>
 	</body>
 </html>

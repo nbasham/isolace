@@ -14,9 +14,8 @@ ISOLACE.GamePanel = function() {
 /**
  * Initialize the panel.
  * @method load
- * @param {object} options The game options.
  */
-ISOLACE.GamePanel.prototype.load = function(options) {
+ISOLACE.GamePanel.prototype.load = function() {
     var me = this;
     $('#markButton').toggle(function() {
         me.markMode = true;
@@ -31,7 +30,6 @@ ISOLACE.GamePanel.prototype.load = function(options) {
     $GameEvent.handleToggleMarkMode(this, this.handleToggleMarkMode);
     $GameEvent.handleStateChange(this, this.handleStateChanged);
     this.puzzle = this.getNextPuzzle();
-    this.symbolCountView = new ISOLACE.sudoku.SymbolCountView();
     this.timerController = new ISOLACE.TimerController();
     var jsLintLikesThis1 = new ISOLACE.TimerView();
     this.initBoard();
@@ -41,18 +39,17 @@ ISOLACE.GamePanel.prototype.load = function(options) {
 /**
  * Show the panel.
  * @method show
- * @param {object} options The game options.
  */
-ISOLACE.GamePanel.prototype.show = function(options) {
+ISOLACE.GamePanel.prototype.show = function() {
+    $Renderer.render(this.state);
     this.timerController.unpause();
 };
 
 /**
  * Hide the panel.
  * @method hide
- * @param {object} options The game options.
  */
-ISOLACE.GamePanel.prototype.hide = function(options) {
+ISOLACE.GamePanel.prototype.hide = function() {
     this.timerController.pause();
 };
 
@@ -61,19 +58,17 @@ ISOLACE.GamePanel.prototype.hide = function(options) {
  * @method initBoard
  * @private
  */
-ISOLACE.GamePanel.prototype.initBoard = function(options) {
+ISOLACE.GamePanel.prototype.initBoard = function() {
     this.numMissed = 0;
-    var boardView = new ISOLACE.sudoku.BoardView(options);
+    var boardView = new ISOLACE.sudoku.BoardView();
     var jsLintLikesThis = new ISOLACE.sudoku.BoardViewEvents(boardView, this.puzzle);
     var initialState = this.puzzle.getInitialState();
     this.state = new ISOLACE.sudoku.BoardState(this.puzzle.getValues(), initialState);
-    boardView.show(this.state);
-    this.symbolCountView.update(initialState);
+    $Renderer.render(this.state);
     boardView.start();
     $TimerEvent.fireTimerStart();
     $GameEvent.handleGuess(this, this.handleGuess);
     $GameEvent.handleMark(this, this.handleMark);
-    this.boardView = boardView;
 };
 
 /**
@@ -86,8 +81,7 @@ ISOLACE.GamePanel.prototype.initUndo = function() {
     var undoView = new ISOLACE.UndoView();
     $UndoEvent.handleUndoEvent(this, function(stateArray) {
         this.state = new ISOLACE.sudoku.BoardState(this.puzzle.getValues(), stateArray);
-        this.boardView.render(this.state);
-        this.symbolCountView.update(stateArray);
+        $Renderer.render(this.state);
     });
 };
 
@@ -128,8 +122,7 @@ ISOLACE.GamePanel.prototype.handleMark = function(value, index) {
  * We update the undo queue with the boardState array. 
  * @method handleStateChanged
  */
-ISOLACE.GamePanel.prototype.handleStateChanged = function(boardState) {
-    this.symbolCountView.update(this.state.state);
+ISOLACE.GamePanel.prototype.handleStateChanged = function(notUsedBoardState) {
     var solved = this.state.solved();
     if(solved) {
         var index = $Persistence.getPuzzleIndex();
@@ -145,6 +138,7 @@ ISOLACE.GamePanel.prototype.handleStateChanged = function(boardState) {
             buttons: { "Ok": function() { $(this).dialog("close"); location.reload(); } }
         }).html('You solved the puzzle. Your score is ' + formattedScore);
     } else {
+        $Renderer.render(this.state);
         $UndoEvent.fireSubmitUndoRecordEvent(this.state.state);
     }
 };

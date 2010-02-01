@@ -25,8 +25,8 @@
 <span class='line'> 18</span>  *      showTimer {boolean} - true if timer view should be displayed. Default is true.
 <span class='line'> 19</span>  * &lt;/pre>
 <span class='line'> 20</span>  */</span><span class="WHIT">
-<span class='line'> 21</span> </span><span class="NAME">ISOLACE.sudoku.BoardView</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">options</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 22</span>     </span><span class="NAME">this.options</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">options</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 21</span> </span><span class="NAME">ISOLACE.sudoku.BoardView</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 22</span>     </span><span class="NAME">this.options</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 23</span>     </span><span class="COMM">//$('*').unbind();</span><span class="WHIT">
 <span class='line'> 24</span>     </span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#boardView'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">html</span><span class="PUNC">(</span><span class="NAME">this.generateHtml</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 25</span>     </span><span class="NAME">this.stylizeGridBorders</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
@@ -34,11 +34,11 @@
 <span class='line'> 27</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 28</span> 
 <span class='line'> 29</span> </span><span class="NAME">ISOLACE.sudoku.BoardView.prototype.render</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">boardState</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 30</span>     </span><span class="NAME">this.renderer.render</span><span class="PUNC">(</span><span class="NAME">boardState</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 30</span>     </span><span class="NAME">$Renderer.render</span><span class="PUNC">(</span><span class="NAME">boardState</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 31</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 32</span> 
 <span class='line'> 33</span> </span><span class="NAME">ISOLACE.sudoku.BoardView.prototype.show</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">boardState</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 34</span>     </span><span class="NAME">this.renderer.render</span><span class="PUNC">(</span><span class="NAME">boardState</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 34</span>     </span><span class="NAME">$Renderer.render</span><span class="PUNC">(</span><span class="NAME">boardState</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 35</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 36</span> 
 <span class='line'> 37</span> </span><span class="NAME">ISOLACE.sudoku.BoardView.prototype.hide</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
@@ -104,13 +104,8 @@
 <span class='line'> 97</span>     </span><span class="PUNC">}</span><span class="WHIT">
 <span class='line'> 98</span>     </span><span class="NAME">this.showTimer</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">o.showTimer</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 99</span>     
-<span class='line'>100</span>     </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">o.renderer</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>101</span>         </span><span class="NAME">o.renderer</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">ISOLACE.sudoku.ImageRenderer</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>100</span>     </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">o.selector</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>101</span>         </span><span class="NAME">o.selector</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">ISOLACE.sudoku.ImageSelector</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>102</span>     </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>103</span>     </span><span class="NAME">this.renderer</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">o.renderer</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>104</span>     
-<span class='line'>105</span>     </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">o.selector</span><span class="WHIT"> </span><span class="PUNC">===</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>106</span>         </span><span class="NAME">o.selector</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">ISOLACE.sudoku.ImageSelector</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>107</span>     </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>108</span>     </span><span class="NAME">this.selector</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">o.selector</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>109</span> </span><span class="PUNC">}</span><span class="PUNC">;</span></pre></body></html>
+<span class='line'>103</span>     </span><span class="NAME">this.selector</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">o.selector</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>104</span> </span><span class="PUNC">}</span><span class="PUNC">;</span></pre></body></html>

@@ -18,8 +18,8 @@ ISOLACE.namespace("sudoku");
  *      showTimer {boolean} - true if timer view should be displayed. Default is true.
  * </pre>
  */
-ISOLACE.sudoku.BoardView = function(options) {
-    this.options = options;
+ISOLACE.sudoku.BoardView = function() {
+    this.options = {};
     //$('*').unbind();
     $('#boardView').html(this.generateHtml());
     this.stylizeGridBorders();
@@ -27,11 +27,11 @@ ISOLACE.sudoku.BoardView = function(options) {
 };
 
 ISOLACE.sudoku.BoardView.prototype.render = function(boardState) {
-    this.renderer.render(boardState);
+    $Renderer.render(boardState);
 };
 
 ISOLACE.sudoku.BoardView.prototype.show = function(boardState) {
-    this.renderer.render(boardState);
+    $Renderer.render(boardState);
 };
 
 ISOLACE.sudoku.BoardView.prototype.hide = function() {
@@ -96,11 +96,6 @@ ISOLACE.sudoku.BoardView.prototype.initializeOptions = function(o) {
         o.showTimer = true;
     }
     this.showTimer = o.showTimer;
-    
-    if(o.renderer === undefined) {
-        o.renderer = new ISOLACE.sudoku.ImageRenderer();
-    }
-    this.renderer = o.renderer;
     
     if(o.selector === undefined) {
         o.selector = new ISOLACE.sudoku.ImageSelector();
