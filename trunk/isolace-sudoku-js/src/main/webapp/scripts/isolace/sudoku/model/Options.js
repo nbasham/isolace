@@ -44,14 +44,14 @@ ISOLACE.Options.prototype.handleSymbolTypeUpdate = function(symbolType) {
     if(symbolType == 'color') {
         $('#numericBoardImage').removeClass('optionsSymbolTypeImageSelected');
         $('#colorBoardImage').addClass('optionsSymbolTypeImageSelected');
-        $('#numericBoardButton').removeClass('ui-state-active');
-        $('#colorBoardButton').addClass('ui-state-active');
+        $('#numericBoardButton').removeClass('my-state-active');
+        $('#colorBoardButton').addClass('my-state-active');
         
     } else {
         $('#numericBoardImage').addClass('optionsSymbolTypeImageSelected');
         $('#colorBoardImage').removeClass('optionsSymbolTypeImageSelected');
-        $('#numericBoardButton').addClass('ui-state-active');
-        $('#colorBoardButton').removeClass('ui-state-active');
+        $('#numericBoardButton').addClass('my-state-active');
+        $('#colorBoardButton').removeClass('my-state-active');
     }
 };
 

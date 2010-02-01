@@ -23,6 +23,7 @@ ISOLACE.sudoku.Renderer.prototype.render = function(boardState) {
     for(var i = 0; i < 81; i++) {
         var cell = $('#c' + i);
         cell.css('background-image', '');
+        cell.css('background-color', 'transparent');
         var hasMarker = boardState.hasMarker(i);
         if(hasMarker) {
             this.getRenderer().renderMarkerCell(boardState, i);
