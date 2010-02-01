@@ -13,7 +13,7 @@
  */
 ISOLACE.Score = function(puzzleId, date, time, numMissed) {
     assertNumber(puzzleId, 'puzzleId should be numeric.');
-    assertNumber(date, 'date should be passed as milliseconds since 1970.')
+    assertNumber(date, 'date should be passed as milliseconds since 1970.');
     assertNumber(time, 'time should be numeric, a value representing the number of seconds it took to finsih the game.');
     assertNumber(numMissed, 'numMissed id should be numeric.');
     this.puzzleId = puzzleId;

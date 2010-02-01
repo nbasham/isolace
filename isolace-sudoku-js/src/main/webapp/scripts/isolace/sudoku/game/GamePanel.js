@@ -184,8 +184,8 @@ ISOLACE.GamePanel.prototype.getNextPuzzle = function() {
         var revealAllButOne = false;
         if(revealAllButOne) {
             revealedIndexes.length = 0;
-            for( var i = 0; i < 80; i++) {
-                revealedIndexes.push(i);
+            for( var j = 0; j < 80; j++) {
+                revealedIndexes.push(j);
             }
         }
     }

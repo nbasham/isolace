@@ -58,15 +58,15 @@ ISOLACE.sudoku.Renderer.prototype.renderSymbolCount = function(state) {
     }
     var symbolCount = $SUDOKU_UTIL.getSymbolCount(state);
     var html = '';
-    for( var i = 0; i <= 9; i++) {
-        if(i == 0) {
+    for(var i = 0; i <= 9; i++) {
+        if(i === 0) {
             html += "<div class='symbolCountHeader'>&nbsp; </div>";
         } else {
             html += "<img class='symbolCountHeader' src='../images/45/numbers/" + i + "-marker.png' />";
         }
     }
     html += '<br/>';
-    for( var i = 0; i < symbolCount.length; i++) {
+    for(var i = 0; i < symbolCount.length; i++) {
         var symbol = i + 1;
         var count = symbolCount[i];
         var imagePath = '../images/45/numbers/'  + symbol + '-marker.png';

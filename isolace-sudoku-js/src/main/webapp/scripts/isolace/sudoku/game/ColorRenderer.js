@@ -12,7 +12,7 @@ ISOLACE.sudoku.ColorRenderer = function() {
 };
 
 /**
- * Render a symbol for the SymbolCountView.
+ * Get the HTML to represent a symbol in the symbol count view.
  * @method renderCountSymbol
  * @param {int} symbolIndex The index of the symbol to render.
  */
@@ -63,6 +63,6 @@ ISOLACE.sudoku.ColorRenderer.prototype.renderCell = function(boardState, index) 
         klass += ' colorRevealed';
     }
 
-    var s = "<div class='" + klass + "'>&nbsp;</div>"
+    var s = "<div class='" + klass + "'>&nbsp;</div>";
     cell.empty().append(s);
 };

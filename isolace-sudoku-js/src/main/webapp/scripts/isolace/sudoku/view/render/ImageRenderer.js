@@ -12,7 +12,7 @@ ISOLACE.sudoku.ImageRenderer = function() {
 };
 
 /**
- * Render a symbol for the SymbolCountView.
+ * Get the HTML to represent a symbol in the symbol count view.
  * @method renderCountSymbol
  * @param {int} symbolIndex The index of the symbol to render.
  */
