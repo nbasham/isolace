@@ -48,7 +48,7 @@ ISOLACE.Scores.prototype.get = function() {
     var a = [];
     var scoresStr = $Persistence.get('scores');
     // scoresStr = null;
-    if(scoresStr == null) {
+    if(scoresStr === null) {
         return a;
     }
     scores = scoresStr.split('|');

@@ -146,7 +146,7 @@ ISOLACE.sudoku.BoardState.prototype.setValue = function(value, index) {
         $Log.debug('Set index ' + index + ' to value ' + value);
     }
     this.removeMarkersFromGrid(value, index);
-    var correctGuess = this.solution[index] == value || this.solution[index] == 0;
+    var correctGuess = this.solution[index] == value || this.solution[index] === 0;
     return correctGuess;
 };
 
