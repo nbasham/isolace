@@ -24,7 +24,6 @@ ISOLACE.UndoView = function() {
  * @param {boolean} canRedo True if a redo is possible.
  */
 ISOLACE.UndoView.prototype.updateUndoUIEvent = function(canUndo, canRedo) {
-    $('#undoButton').removeClass('ui-state-active');
     if(canUndo) {
         $('#undoButton').removeClass('ui-state-disabled').removeAttr('disabled');
     } else {

@@ -191,7 +191,7 @@ div.marker {
     opacity: 0.6;
 }
 
-button>.ui-state-active { border: 1px solid #d3d3d3; background: #3B5998 url(images/ui-bg_glass_50_3B5998_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #ffffff; outline: none; }
+.my-state-active { background: #3B5998 url(images/ui-bg_glass_50_3B5998_1x400.png) 50% 50% repeat-x !important; font-weight: bold !important; color: #fff !important; }
 
 .color {
     width: 80%;

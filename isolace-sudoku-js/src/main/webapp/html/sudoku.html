@@ -174,8 +174,8 @@
     </div>
             <div id='boardControlView'>
                 <div class="fg-buttonset fg-buttonset-multi">
-                   <button id='undoButton' style='margin-right: 8px' class="fg-button ui-state-default fg-button-icon-left ui-corner-all" title="Undo your last move"><span class="ui-icon ui-icon-arrowrefresh-1-w"></span>Undo</button>
-                   <button id='redoButton' style='margin-right: 32px' class="fg-button ui-state-default fg-button-icon-left ui-corner-all" title="Redo your last move"><span class="ui-icon ui-icon-arrowrefresh-1-e"></span>Redo</button>
+                   <button id='undoButton' style='margin-right: 8px' class="fg-button ui-state-default ui-state-disabled fg-button-icon-left ui-corner-all" title="Undo your last move"><span class="ui-icon ui-icon-arrowrefresh-1-w"></span>Undo</button>
+                   <button id='redoButton' style='margin-right: 32px' class="fg-button ui-state-default ui-state-disabled  fg-button-icon-left ui-corner-all" title="Redo your last move"><span class="ui-icon ui-icon-arrowrefresh-1-e"></span>Redo</button>
                 </div>
                 <div id='timerView' class='timerView' title='Displays how much time has elapsed since you started the game (minues:seconds)'>&nbsp;</div>
             </div>
@@ -220,7 +220,7 @@
                 <img id='colorBoardImage' class='optionsSymbolTypeImage' title='Color' src='../images/colorBoard.png' onclick="$Options.handleSymbolTypeUpdate('color')" />
             </p>
             <div class="fg-buttonset fg-buttonset-single">
-                <button id='numericBoardButton' onclick="$Options.handleSymbolTypeUpdate('numeric')" style="margin-left: 2px; margin-right: 7px; width: 96px;" class="fg-button ui-state-default ui-state-active ui-priority-primary ui-corner-left">Numeric</button>
+                <button id='numericBoardButton' onclick="$Options.handleSymbolTypeUpdate('numeric')" style="margin-left: 2px; margin-right: 7px; width: 96px;" class="fg-button ui-state-default my-state-active ui-priority-primary ui-corner-left">Numeric</button>
                 <button id='colorBoardButton' onclick="$Options.handleSymbolTypeUpdate('color')" style="margin-right: 9px; width: 96px;"  class="fg-button ui-state-default ui-priority-primary ui-corner-right">Color</button>
             </div>
             <br/>
