@@ -200,6 +200,13 @@ button>.ui-state-active { border: 1px solid #d3d3d3; background: #3B5998 url(ima
     margin: 5px;
 }
 
+.colorRevealed {
+    width: 60%;
+    height: 60%;
+    background-color: transparent;
+    margin: 10px;
+}
+
 .colorMarkerConflict {
     width: 4px;
     height: 4px;

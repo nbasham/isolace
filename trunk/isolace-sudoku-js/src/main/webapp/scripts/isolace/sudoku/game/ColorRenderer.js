@@ -60,7 +60,7 @@ ISOLACE.sudoku.ColorRenderer.prototype.renderCell = function(boardState, index) 
             cell.css('background-color', 'red');
         }
     } else {
-        klass += ' sixtyPercent';
+        klass += ' colorRevealed';
     }
 
     var s = "<div class='" + klass + "'>&nbsp;</div>"
