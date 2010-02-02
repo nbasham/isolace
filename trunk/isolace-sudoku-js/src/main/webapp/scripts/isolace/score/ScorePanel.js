@@ -7,6 +7,7 @@
  * @version 0.1
  */
 ISOLACE.ScorePanel = function() {
+    this.personalBest = 99999;
 };
 
 /**
@@ -25,8 +26,12 @@ ISOLACE.ScorePanel.prototype.load = function() {
 //        sPaginationType = "full_numbers";
 //    }
     var scoresData = [];
+    var personalBest = 999999;
     for( var i = 0; i < scores.length; i++) {
         var score = scores[scores.length - 1 - i];
+        if(score.getScore() < personalBest) {
+            personalBest = score.getScore();
+        }
         var scoreArray = this.scoreToRowData(score);
         scoresData.push(scoreArray);
     }
@@ -38,6 +43,7 @@ ISOLACE.ScorePanel.prototype.load = function() {
         "bJQueryUI": true,
         "bFilter": false,
         "bSort": false,
+        "sDom": '<"toolbar">frtip',
         "aaData": scoresData,
         "aaSorting": [[ 1, "desc" ]],
         "aoColumns": [
@@ -74,9 +80,15 @@ ISOLACE.ScorePanel.prototype.show = function(options) {
     if(numRows < scoreCount) {
         for( var numRows = 0; i < scoreCount; i++) {
             var score = scores[i];
+            if(score.getScore() < this.personalBest) {
+                this.personalBest = score.getScore();
+            }
             var scoreArray = this.scoreToRowData(score);
             this.table.fnAddData(scoreArray);
         }
+    }
+    if(scoreCount > 0) {
+        $("div.toolbar").html('Personal Best: ' + this.personalBest);
     }
 };
 

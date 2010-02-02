@@ -65,6 +65,7 @@
 .timerView {
     margin-top: 6px;
     float: right;
+    min-width: 110px;
 }
 
 .markIcon {
@@ -159,8 +160,8 @@ div.marker {
     font-family: Tahoma, "New Courier";
     font-size: 33%;
     float: left;
-    width: 31%;
-    height: 31%;
+    width: 14px;
+    height: 14px;
     margin-left: 1px;
     margin-top: 1px;
 }
@@ -191,7 +192,17 @@ div.marker {
     opacity: 0.6;
 }
 
-.my-state-active { background: #3B5998 url(images/ui-bg_glass_50_3B5998_1x400.png) 50% 50% repeat-x !important; font-weight: bold !important; color: #fff !important; }
+.facebook {
+    background-color: #3B5998;
+}
+
+
+.my-state-active { background: #3B5998 url(facebook/images/ui-bg_glass_50_3B5998_1x400.png) 50% 50% repeat-x !important; font-weight: bold !important; color: #fff !important; }
+.my-state-hover { color: #ddd !important; }
+
+.marker {
+    height: 14px;
+}
 
 .color {
     width: 80%;
@@ -252,4 +263,11 @@ div.eight {
 div.nine {
     background-color: black;
 }
+.timerViewImages{
+    float: right;
+}
 
+button.timerPause {
+    float: right;
+    height: 20px;
+}

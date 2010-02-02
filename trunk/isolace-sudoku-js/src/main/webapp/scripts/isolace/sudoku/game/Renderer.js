@@ -36,6 +36,15 @@ ISOLACE.sudoku.Renderer.prototype.render = function(boardState) {
 };
 
 /**
+ * Render all cells as paused.
+ * @method render
+ */
+ISOLACE.sudoku.Renderer.prototype.renderPaused = function() {
+    this.renderers.color.renderPaused();
+    $Log.debug('Rendered paused board.');
+};
+
+/**
  * @private
  */
 ISOLACE.sudoku.Renderer.prototype.getRenderer = function() {
@@ -99,7 +108,7 @@ ISOLACE.sudoku.Renderer.prototype.getRevealCounts = function(state) {
             this.revealed[value-10]++;
         }
     }
-}
+};
 
 if(typeof $Renderer == "undefined" || !$Renderer) {
     /**

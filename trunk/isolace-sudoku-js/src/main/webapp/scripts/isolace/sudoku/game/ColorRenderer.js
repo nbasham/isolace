@@ -48,6 +48,26 @@ ISOLACE.sudoku.ColorRenderer.prototype.renderMarkerCell = function(boardState, i
 
 /**
  */
+ISOLACE.sudoku.ColorRenderer.prototype.renderPaused = function() {
+    var pauseState = [1,2,2,0,0,0,2,2,2,2,2,0,0,0,0,0,2,2,2,0,0,1,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0,2,0,0,1,1,1,0,0,2,2,2,0,0,4,0,0,2,2,2,2,2,0,0,0,2,2,2];
+    for(var index = 0; index < 81; index++) {
+        var cell = $('#c' + index);
+        cell.css('background-image', '');
+        cell.html('&nbsp;');
+        var value = pauseState[index];
+        if(value === 0) {
+            cell.css('background-color', 'transparent');
+        } else {
+            cell.css('background-color', '#3B5998');
+        }
+
+        var s = "<div>&nbsp;</div>";
+        cell.empty().append(s);
+    }
+};
+
+/**
+ */
 ISOLACE.sudoku.ColorRenderer.prototype.renderCell = function(boardState, index) {
     var cell = $('#c' + index);
     cell.html('&nbsp;');
