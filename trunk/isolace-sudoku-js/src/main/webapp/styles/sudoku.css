@@ -29,10 +29,6 @@
     margin-bottom: 6px;
 }
 
-#scoresView {
-    width: 100%;
-}
-
 .boardControls {
     float: left;
     width: 236px;
@@ -211,11 +207,19 @@ div.marker {
     margin: 5px;
 }
 
-.colorRevealed {
+.colorRevealedIE {
     width: 60%;
     height: 60%;
     background-color: transparent;
     margin: 10px;
+}
+
+.colorRevealed {
+    width: 80%;
+    height: 80%;
+    background-color: transparent;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
 }
 
 .colorMarkerConflict {

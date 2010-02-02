@@ -81,6 +81,9 @@ ISOLACE.sudoku.ColorRenderer.prototype.renderCell = function(boardState, index) 
         }
     } else {
         klass += ' colorRevealed';
+        if($.browser.msie) {
+            klass += 'IE';
+        }
     }
 
     var s = "<div class='" + klass + "'>&nbsp;</div>";
