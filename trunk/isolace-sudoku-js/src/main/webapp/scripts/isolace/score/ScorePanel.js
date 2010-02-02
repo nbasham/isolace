@@ -42,7 +42,7 @@ ISOLACE.ScorePanel.prototype.load = function() {
         "bJQueryUI": true,
         "bFilter": false,
         "bSort": false,
-        "sDom": '<"toolbar">frtip',
+        //"sDom": '<"bestScore">frtip',
         "aaData": scoresData,
         "aaSorting": [[ 1, "desc" ]],
         "aoColumns": [
@@ -88,7 +88,7 @@ ISOLACE.ScorePanel.prototype.show = function(options) {
     }
     if(scoreCount > 0) {
         var bestScore = $SUDOKU_UTIL.formatTime(this.personalBest);
-        $("div.toolbar").html('<b>Your best score is ' + bestScore + '</b><hr/>');
+        $("#personalBest").html('<b>Your best score is ' + bestScore + '</b>');
     }
 };
 
