@@ -26,11 +26,10 @@ ISOLACE.ScorePanel.prototype.load = function() {
 //        sPaginationType = "full_numbers";
 //    }
     var scoresData = [];
-    var personalBest = 999999;
     for( var i = 0; i < scores.length; i++) {
         var score = scores[scores.length - 1 - i];
-        if(score.getScore() < personalBest) {
-            personalBest = score.getScore();
+        if(score.getScore() < this.personalBest) {
+            this.personalBest = score.getScore();
         }
         var scoreArray = this.scoreToRowData(score);
         scoresData.push(scoreArray);
@@ -88,7 +87,8 @@ ISOLACE.ScorePanel.prototype.show = function(options) {
         }
     }
     if(scoreCount > 0) {
-        $("div.toolbar").html('Personal Best: ' + this.personalBest);
+        var bestScore = $SUDOKU_UTIL.formatTime(this.personalBest);
+        $("div.toolbar").html('<b>Your best score is ' + bestScore + '</b><hr/>');
     }
 };
 
