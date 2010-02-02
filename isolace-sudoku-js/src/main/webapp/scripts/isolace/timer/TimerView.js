@@ -10,9 +10,11 @@
  */
 ISOLACE.TimerView = function() {
     $TimerEvent.handleTimerIncrement(this, this.update);
-    $('#timerView')
+    $('.timerViewImages')
             .html(
                     "<img src='../images/45/numbers/timer-0.png' /><img src='../images/45/numbers/timer-0.png' /><img src='../images/45/numbers/timer-seperator.png' /><img src='../images/45/numbers/timer-0.png' /><img src='../images/45/numbers/timer-0.png' />");
+    var me = this;
+    $('.timerPause').click(me.handleTimerPlayPause);
 };
 
 /**
@@ -21,7 +23,7 @@ ISOLACE.TimerView = function() {
  * @method update
  */
 ISOLACE.TimerView.prototype.update = function(seconds) {
-    $('#timerView').html('');
+    $('.timerViewImages').html('');
     var time = $SUDOKU_UTIL.formatTime(seconds);
     var timeElements = time.split('');
     for( var i = 0; i < timeElements.length; i++) {
@@ -30,6 +32,20 @@ ISOLACE.TimerView.prototype.update = function(seconds) {
             el = 'seperator';
         }
         var src = '../images/45/numbers/timer-' + el + '.png';
-        $('#timerView').append("<img src='" + src + "' />");
+        $('.timerViewImages').append("<img src='" + src + "' />");
     }
 };
+
+ISOLACE.TimerView.prototype.handleTimerPlayPause = function() {
+    var icon = $('.timerPlayPauseIcon');
+    var wasPause = icon.hasClass('ui-icon-pause');
+    if(wasPause) {
+        icon.removeClass('ui-icon-pause');
+        icon.addClass('ui-icon-play');
+        $TimerEvent.fireTimerPause();
+    } else {
+        icon.removeClass('ui-icon-play');
+        icon.addClass('ui-icon-pause');
+        $TimerEvent.fireTimerUnpause();
+    }
+}

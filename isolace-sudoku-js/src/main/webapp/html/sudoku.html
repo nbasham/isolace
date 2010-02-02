@@ -61,10 +61,10 @@
             $(".fg-button:not(.ui-state-disabled)")
             .hover(
                 function(){ 
-                    $(this).addClass("ui-state-hover"); 
+                    $(this).addClass("ui-state-hover my-state-hover"); 
                 },
                 function(){ 
-                    $(this).removeClass("ui-state-hover"); 
+                    $(this).removeClass("ui-state-hover my-state-hover"); 
                 }
             )
             .mousedown(function(){
@@ -135,31 +135,36 @@
 
 </head>
 <body class='bodyContent'>
-<p align='center'><img title='revision 79' src='../images/sudoku.png' /></p>
+<p align='center'><img title='2/1/10 6:22PM' src='../images/sudoku.png' /></p>
 <div id="tabs">
     <ul>
-        <li><a href="#tabs-1">About</a></li>
-        <li><a href="#tabs-2">Play</a></li>
-        <li><a href="#tabs-3">Options</a></li>
-        <li><a href="#tabs-4">My Scores</a></li>
-        <li><a href="#tabs-5">Facebook</a></li>
+        <li><a href="#tabs-1" title='Visit this tab for general information'>About</a></li>
+        <li><a href="#tabs-2" title='Visit this tab to play Sudoku'>Play</a></li>
+        <li><a href="#tabs-3" title='Visit this tab to set Sudoku game options'>Options</a></li>
+        <li><a href="#tabs-4" title='Visit this tab to see your score history'>My Scores</a></li>
+        <li><a href="#tabs-5" title='This tab is not currently working'>Facebook</a></li>
     </ul>
     <div id="tabs-1">
         <br/>
-        <p><u>Updates</u><br/><br/>
+        <u>Updates</u><br/><br/>
          <div class='ui-state-error'>
             Be sure to refresh your browser to get the latest version (command-r).<br/><br/>
             <ul>
-                <li>1. The Options tab now lets you choose to play with 'number' or 'color' symbols.</li>
-                <li>2. Scores are listed most recent first.</li>
-                <li>3. The 'My Facebook' tab panel doesn't do anything...yet...</li>
+                <li>1. Added play/pause for game timer.</li>
+                <li>2. Now show tooltip when mouse is over a tab (About, Play, Options, My Scores, Facebook).</li>
+                <li>3. The Options tab now lets you choose to play with 'number' or 'color' symbols.</li>
+                <li>4. Scores are listed most recent first.</li>
             </ul>
         </div>
-        </p>
         <br/>
         <p><u>Welcome</u><br/>We're working on a great way to play Sudoku. We're just starting and plan on rolling out lots of new features, so come back reguraly.</p>
         <br/>
-        <p><u>The Basics</u><br/>Move the mouse over a cell and type a number from 1 to 9 with your keyboard. Typing 'm' will move you in and out of marker mode, you can use markers to provide hints in each cell. Each wrong answer will add 30 seconds to your time. That's it! Have fun.</p>        
+        <p>
+            <u>The Basics</u><br/>
+            Move the mouse over a cell and type a number from 1 to 9 with your keyboard.
+            Typing 'm' will move you in and out of marker mode, you can use markers to provide hints in each cell.
+            Each wrong answer will add 30 seconds to your time. If you're not sure what something does hover the mouse over that item to see it's tooltip. That's it! Have fun.
+        </p>        
         <br/>
         <p><u>Quality Assurance Extraordinaire</u><br/>Joanne and Kelly</p>
     </div>
@@ -178,7 +183,10 @@
                    <button id='undoButton' style='margin-right: 8px' class="fg-button ui-state-default ui-state-disabled fg-button-icon-left ui-corner-all" title="Undo your last move"><span class="ui-icon ui-icon-arrowrefresh-1-w"></span>Undo</button>
                    <button id='redoButton' style='margin-right: 32px' class="fg-button ui-state-default ui-state-disabled  fg-button-icon-left ui-corner-all" title="Redo your last move"><span class="ui-icon ui-icon-arrowrefresh-1-e"></span>Redo</button>
                 </div>
-                <div id='timerView' class='timerView' title='Displays how much time has elapsed since you started the game (minues:seconds)'>&nbsp;</div>
+                <div id='timerView' class='timerView' title='Displays how much time has elapsed since you started the game (minues:seconds)'>
+                <div id='timerViewPause' class='timerViewPause' title='Pause and unpause the timer'><button style='float: left; height: 20px' class='timerPause ui-state-default fg-button fg-button-icon-solo ui-corner-all' ><span class='timerPlayPauseIcon ui-icon ui-icon-pause'></span></button></div>
+                    <div class='timerViewImages'>&nbsp;</div>
+                </div>
             </div>
 
         </div>

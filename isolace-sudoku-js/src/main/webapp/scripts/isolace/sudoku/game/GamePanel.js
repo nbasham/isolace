@@ -29,12 +29,27 @@ ISOLACE.GamePanel.prototype.load = function() {
     });
     $GameEvent.handleToggleMarkMode(this, this.handleToggleMarkMode);
     $GameEvent.handleStateChange(this, this.handleStateChanged);
+    $TimerEvent.handleTimerPause(this, this.pause);
+    $TimerEvent.handleTimerUnpause(this, this.unpause);
     this.puzzle = this.getNextPuzzle();
     this.timerController = new ISOLACE.TimerController();
     var jsLintLikesThis1 = new ISOLACE.TimerView();
     this.initBoard();
     this.initUndo();
 };
+
+ISOLACE.GamePanel.prototype.pause = function() {
+    $Renderer.renderPaused();
+    $('#undoButton').hide();
+    $('#redoButton').hide();
+};
+
+ISOLACE.GamePanel.prototype.unpause = function() {
+    $Renderer.render(this.state);
+    $('#undoButton').show();
+    $('#redoButton').show();
+};
+
 
 /**
  * Show the panel.

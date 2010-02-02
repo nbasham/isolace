@@ -23,19 +23,19 @@ ISOLACE.sudoku.BoardView = function() {
     //$('*').unbind();
     $('#boardView').html(this.generateHtml());
     this.stylizeGridBorders();
-    this.initializeOptions(this.options);
+    this.selector = new ISOLACE.sudoku.ImageSelector();
 };
 
 ISOLACE.sudoku.BoardView.prototype.render = function(boardState) {
-    $Renderer.render(boardState);
+//    $Renderer.render(boardState);
 };
 
 ISOLACE.sudoku.BoardView.prototype.show = function(boardState) {
-    $Renderer.render(boardState);
+//    $Renderer.render(boardState);
 };
 
 ISOLACE.sudoku.BoardView.prototype.hide = function() {
-    $('#boardView').hide();
+//    $('#boardView').hide();
 };
 
 ISOLACE.sudoku.BoardView.prototype.start = function() {
