@@ -41,6 +41,7 @@ asyncTest("Trigger redo", function() {
 
 module("isolace/undo/UndoEvent", {
   setup: function() {
+    this.uc = new ISOLACE.UndoController(puzzle.getInitialState());
   },
   teardown: function() {
       $UndoEvent.unbind();

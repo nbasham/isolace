@@ -202,8 +202,6 @@ ul.inheritsList
 	
 	<li><a href="../symbols/%24Renderer.html">$Renderer</a></li>
 	
-	<li><a href="../symbols/%24Scores.html">$Scores</a></li>
-	
 	<li><a href="../symbols/%24SUDOKU_UTIL.html">$SUDOKU_UTIL</a></li>
 	
 	<li><a href="../symbols/%24TimerEvent.html">$TimerEvent</a></li>
@@ -224,6 +222,8 @@ ul.inheritsList
 	
 	<li><a href="../symbols/ISOLACE.Log.html">ISOLACE.Log</a></li>
 	
+	<li><a href="../symbols/ISOLACE.OptionPanel.html">ISOLACE.OptionPanel</a></li>
+	
 	<li><a href="../symbols/ISOLACE.Options.html">ISOLACE.Options</a></li>
 	
 	<li><a href="../symbols/ISOLACE.PanelController.html">ISOLACE.PanelController</a></li>
@@ -232,11 +232,7 @@ ul.inheritsList
 	
 	<li><a href="../symbols/ISOLACE.ScorePanel.html">ISOLACE.ScorePanel</a></li>
 	
-	<li><a href="../symbols/ISOLACE.Scores.html">ISOLACE.Scores</a></li>
-	
 	<li><a href="../symbols/ISOLACE.sudoku.BoardState.html">ISOLACE.sudoku.BoardState</a></li>
-	
-	<li><a href="../symbols/ISOLACE.sudoku.BoardView.html">ISOLACE.sudoku.BoardView</a></li>
 	
 	<li><a href="../symbols/ISOLACE.sudoku.BoardViewEvents.html">ISOLACE.sudoku.BoardViewEvents</a></li>
 	
@@ -253,8 +249,6 @@ ul.inheritsList
 	<li><a href="../symbols/ISOLACE.sudoku.Puzzle.html">ISOLACE.sudoku.Puzzle</a></li>
 	
 	<li><a href="../symbols/ISOLACE.sudoku.Renderer.html">ISOLACE.sudoku.Renderer</a></li>
-	
-	<li><a href="../symbols/ISOLACE.sudoku.SymbolCountView.html">ISOLACE.sudoku.SymbolCountView</a></li>
 	
 	<li><a href="../symbols/ISOLACE.sudoku.TextRenderer.html">ISOLACE.sudoku.TextRenderer</a></li>
 	
@@ -286,8 +280,8 @@ ul.inheritsList
 			<p class="description">
 				
 			
-				Score is an immutable object that contains the elements that comprise
-       a score. This will have to be application specific, and Score should
+				Score is an object that contains the elements that comprise a score.
+       This will have to be application specific, and eventually Score should
        perform the role of an interface.
 				
 				
@@ -310,7 +304,7 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/ISOLACE.Score.html#constructor">ISOLACE.Score</a></b>(puzzleId, date, time, numMissed)
+								<b><a href="../symbols/ISOLACE.Score.html#constructor">ISOLACE.Score</a></b>()
 							</div>
 							<div class="description">Constructs an Score object.</div>
 						</td>
@@ -335,6 +329,15 @@ ul.inheritsList
 						</tr>
 					</thead>
 					<tbody>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#fromScoreCsv">fromScoreCsv</a></b>(scoreCsvStr)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
 					
 						<tr>
 							<td class="attributes">&nbsp;</td>
@@ -375,6 +378,15 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#getPuzzleLevel">getPuzzleLevel</a></b>()
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#getScore">getScore</a></b>()
 								</div>
 								<div class="description">Calculate the score based on time and penalty time.</div>
@@ -385,6 +397,60 @@ ul.inheritsList
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#getTime">getTime</a></b>()
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#setDate">setDate</a></b>(milliseconds)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#setNumMissed">setNumMissed</a></b>(numMissed)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#setPuzzleId">setPuzzleId</a></b>(puzzleId)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#setPuzzleLevel">setPuzzleLevel</a></b>(puzzleLevel)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#setTime">setTime</a></b>(time)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.Score.html#toScoreCsv">toScoreCsv</a></b>()
 								</div>
 								<div class="description"></div>
 							</td>
@@ -405,7 +471,7 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>ISOLACE.Score</b>(puzzleId, date, time, numMissed)
+						<b>ISOLACE.Score</b>()
 				</div>
 				
 				<div class="description">
@@ -416,35 +482,6 @@ ul.inheritsList
 				
 				
 				
-					
-						<dl class="detailList">
-						<dt class="heading">Parameters:</dt>
-						
-							<dt>
-								<span class="light fixedFont">{number}</span>  <b>puzzleId</b>
-								
-							</dt>
-								<dd>The unique puzzle identifier.</dd>
-						
-							<dt>
-								<span class="light fixedFont">{number}</span>  <b>date</b>
-								
-							</dt>
-								<dd>The date/time the puzzle was solved in milliseconds since 1970.</dd>
-						
-							<dt>
-								<span class="light fixedFont">{number}</span>  <b>time</b>
-								
-							</dt>
-								<dd>The number of seconds it took to solve the puzzle.</dd>
-						
-							<dt>
-								<span class="light fixedFont">{number}</span>  <b>numMissed</b>
-								
-							</dt>
-								<dd>The number of incorrect guesses.</dd>
-						
-						</dl>
 					
 					
 					
@@ -464,6 +501,43 @@ ul.inheritsList
 				<div class="sectionTitle">
 					Method Detail
 				</div>
+				
+					<a name="fromScoreCsv"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>fromScoreCsv</b>(scoreCsvStr)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>scoreCsvStr</b>
+									
+								</dt>
+								<dd>The comma separated values to be parsed into the Score object.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
 				
 					<a name="getDate"> </a>
 					<div class="fixedFont">
@@ -522,7 +596,7 @@ ul.inheritsList
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd>The number incorrect guess attempted while solving this puzzle.</dd>
+								<dd>The number incorrect guesses attempted while solving this puzzle.</dd>
 							
 							</dl>
 						
@@ -582,6 +656,39 @@ ul.inheritsList
 							<dt class="heading">Returns:</dt>
 							
 								<dd>The puzzle id this score applies to.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getPuzzleLevel"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>getPuzzleLevel</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>The puzzle level this score applies to. The puzzle level i.e NOVICE=0, EASY=1, MEDIUM=2, HARD=3.</dd>
 							
 							</dl>
 						
@@ -654,6 +761,226 @@ ul.inheritsList
 						
 						
 
+					<hr />
+				
+					<a name="setDate"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setDate</b>(milliseconds)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>milliseconds</b>
+									
+								</dt>
+								<dd>The date/time the puzzle was solved in
+           milliseconds since 1970.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setNumMissed"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setNumMissed</b>(numMissed)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>numMissed</b>
+									
+								</dt>
+								<dd>The number incorrect guesses attempted while solving
+           this puzzle.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setPuzzleId"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setPuzzleId</b>(puzzleId)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>puzzleId</b>
+									
+								</dt>
+								<dd>The puzzle id this score applies to.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setPuzzleLevel"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setPuzzleLevel</b>(puzzleLevel)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>puzzleLevel</b>
+									
+								</dt>
+								<dd>The puzzle level this score applies to. The puzzle level i.e NOVICE=0, EASY=1, MEDIUM=2, HARD=3.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setTime"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setTime</b>(time)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>time</b>
+									
+								</dt>
+								<dd>The number of seconds it took to solve this puzzle.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="toScoreCsv"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{string}</span>
+					<b>toScoreCsv</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>The comma separated values representing the Score object as a string.</dd>
+							
+							</dl>
+						
+						
+						
+
 					
 				
 			
@@ -664,7 +991,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blank">JsDoc Toolkit</a> 2.0.0 on Mon Feb 01 2010 11:13:10 GMT-0800 (PST)
+			Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blank">JsDoc Toolkit</a> 2.0.0 on Tue Feb 02 2010 16:48:07 GMT-0800 (PST)
 		</div>
 	</body>
 </html>

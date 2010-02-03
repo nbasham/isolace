@@ -85,6 +85,12 @@
     <script src="../scripts/isolace/isolace.js"></script>
     <script src="../scripts/isolace/Log.js"></script>
     <script src="../scripts/isolace/assert.js"></script>
+
+    <script src="../scripts/isolace/sudoku/data/puzzles.27.1000.data.js"></script>
+    <script src="../scripts/isolace/sudoku/data/puzzles.30.1000.data.js"></script>
+    <script src="../scripts/isolace/sudoku/data/puzzles.33.1000.data.js"></script>
+    <script src="../scripts/isolace/sudoku/data/puzzles.36.1000.data.js"></script>
+
     <script src="../scripts/isolace/Event.js"></script>
     <script src="../scripts/isolace/sudoku/game/GameEvent.js"></script>
     <script src="../scripts/isolace/undo/UndoView.js"></script>
@@ -99,25 +105,23 @@
     <script src="../scripts/isolace/undo/UndoEvent.js"></script>
     <script src="../scripts/isolace/undo/UndoController.js"></script>
     <script src="../scripts/isolace/score/Score.js"></script>
-    <script src="../scripts/isolace/score/Scores.js"></script>
     <script src="../scripts/isolace/score/ScorePanel.js"></script>
     <script src="../scripts/isolace/timer/TimerController.js"></script>
     <script src="../scripts/isolace/timer/TimerView.js"></script>
-    <script src="../scripts/isolace/sudoku/puzzleData.js"></script>
     <script src="../scripts/isolace/sudoku/Util.js"></script>
     <script src="../scripts/isolace/sudoku/Persistence.js"></script>
     <script src="../scripts/isolace/sudoku/PanelController.js"></script>
     <script src="../scripts/isolace/sudoku/model/Puzzle.js"></script>
     <script src="../scripts/isolace/sudoku/model/BoardState.js"></script>
     <script src="../scripts/isolace/sudoku/game/GamePanel.js"></script>
+    <script src="../scripts/isolace/sudoku/OptionPanel.js"></script>
     <script src="../scripts/isolace/sudoku/view/selector/BorderSelector.js"></script>
     <script src="../scripts/isolace/sudoku/view/selector/ImageSelector.js"></script>
     <script src="../scripts/isolace/sudoku/view/BoardViewEvents.js"></script>
-    <script src="../scripts/isolace/sudoku/view/BoardView.js"></script>
     <script src="../scripts/isolace/sudoku/game/GameKeyEvent.js"></script>
 
     <script>
-    
+
     
     //  file:///Users/iSolace/Documents/isolace-dev/isolace-sudoku-js/src/test/webapp/scripts/isolace/sudoku/view/BoardView-test.htm
     
@@ -135,7 +139,7 @@
 
 </head>
 <body class='bodyContent'>
-<p align='center'><img title='2/1/10 9:00PM' src='../images/sudoku.png' /></p>
+<p align='center'><img title='2/2/10 7:00PM' src='../images/sudoku.png' /></p>
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1" title='Visit this tab for general information'>About</a></li>
@@ -148,12 +152,12 @@
         <br/>
         <u>Updates</u><br/><br/>
          <div class='ui-state-error'>
-            Be sure to refresh your browser to get the latest version (command-r).<br/><br/>
+            IMPORTANT - Go to the options page and hit the Erase button, this will clear your old scores. You only need to do this once to remove the old scores which are in the wrong format. Be sure to refresh your browser afterwards (command-r).<br/><br/>
             <ul>
-                <li>1. Added play/pause for game timer.</li>
-                <li>2. Now show tooltip when mouse is over a tab (About, Play, Options, My Scores, Facebook).</li>
-                <li>3. The Options tab now lets you choose to play with 'number' or 'color' symbols.</li>
-                <li>4. Scores are listed most recent first.</li>
+                <li>1. The Options tab now lets you choose the puzzle level (novice to hard).</li>
+                <li>2. Added play/pause for game timer.</li>
+                <li>3. Now show tooltip when mouse is over a tab (About, Play, Options, My Scores, Facebook).</li>
+                <li>4. The Options tab now lets you choose to play with 'number' or 'color' symbols.</li>
             </ul>
         </div>
         <br/>
@@ -196,18 +200,6 @@
         <div id='pickerView' style='display: none;'>
         <div sytle='position: relative; float: left;'>
             <div class="fg-buttonset">
-            <!--
-                <button class="fg-button ui-state-default ui-priority-primary ui-corner-left"><span class='markerPicker'>1</span></button>
-                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>2</span></button>
-                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>3</span></button>
-                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>4</span></button>
-                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>5</span></button>
-                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>6</span></button>
-                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>7</span></button>
-                <button class="fg-button ui-state-default ui-priority-primary"><span class='markerPicker'>8</span></button>
-                <button class="fg-button ui-state-default ui-priority-primary ui-corner-right"><span class='markerPicker'>9</span></button>
-            <br/>
-             -->
                 <button class="fg-button ui-state-default ui-priority-primary ui-corner-left">1</button>
                 <button class="fg-button ui-state-default ui-priority-primary">2</button>
                 <button class="fg-button ui-state-default ui-priority-primary">3</button>
@@ -232,10 +224,17 @@
                 <button id='numericBoardButton' onclick="$Options.handleSymbolTypeUpdate('numeric')" style="margin-left: 2px; margin-right: 7px; width: 96px;" class="fg-button ui-state-default my-state-active ui-priority-primary ui-corner-left">Numeric</button>
                 <button id='colorBoardButton' onclick="$Options.handleSymbolTypeUpdate('color')" style="margin-right: 9px; width: 96px;"  class="fg-button ui-state-default ui-priority-primary ui-corner-right">Color</button>
             </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <br/><br/><br/><br/>
+            <div class="fg-buttonset fg-buttonset-single">
+                <button id='level0Button' onclick="$Persistence.setPuzzleLevel(0)" style="width: 96px;" class="fg-button ui-state-default ui-priority-primary ui-corner-left">Novice</button>
+                <button id='level1Button' onclick="$Persistence.setPuzzleLevel(1)" style="width: 96px;"  class="fg-button ui-state-default ui-priority-primary">Easy</button>
+                <button id='level2Button' onclick="$Persistence.setPuzzleLevel(2)" style="width: 96px;"  class="fg-button ui-state-default ui-priority-primary">Medium</button>
+                <button id='level3Button' onclick="$Persistence.setPuzzleLevel(3)" style="width: 96px;"  class="fg-button ui-state-default ui-priority-primary ui-corner-right">Hard</button>
+            </div>
+            <br/><br/><br/><br/>
+                <div class='.ui-widget-header'>Use this with caution, it clears all your scores.</div>
+                <button id='clearAllDataButton' onclick="$Persistence.clearAll()" style="width: 96px;" class="fg-button ui-state-default ui-priority-primary">Erase</button>
+            <br/><br/><br/><br/>
             <div id='infoView' class='infoView'>&nbsp;</div>
         </div>
     </div>

@@ -13,8 +13,13 @@ ISOLACE.TimerView = function() {
     $('.timerViewImages')
             .html(
                     "<img src='../images/45/numbers/timer-0.png' /><img src='../images/45/numbers/timer-0.png' /><img src='../images/45/numbers/timer-seperator.png' /><img src='../images/45/numbers/timer-0.png' /><img src='../images/45/numbers/timer-0.png' />");
-    var me = this;
-    $('.timerPause').click(me.handleTimerPlayPause);
+    $('.timerPause').toggle(function() {
+        $TimerEvent.fireTimerPlayPauseRequest(true);
+    },
+    function() {
+        $TimerEvent.fireTimerPlayPauseRequest(false);
+    });
+    $TimerEvent.handleTimerPlayPauseRequest(this, this.handleTimerPlayPauseRequest);
 };
 
 /**
@@ -36,10 +41,10 @@ ISOLACE.TimerView.prototype.update = function(seconds) {
     }
 };
 
-ISOLACE.TimerView.prototype.handleTimerPlayPause = function() {
+ISOLACE.TimerView.prototype.handleTimerPlayPauseRequest = function(isPauseRequest) {
     var icon = $('.timerPlayPauseIcon');
-    var wasPause = icon.hasClass('ui-icon-pause');
-    if(wasPause) {
+//    var wasPause = icon.hasClass('ui-icon-pause');
+    if(isPauseRequest) {
         icon.removeClass('ui-icon-pause');
         icon.addClass('ui-icon-play');
         $TimerEvent.fireTimerPause();

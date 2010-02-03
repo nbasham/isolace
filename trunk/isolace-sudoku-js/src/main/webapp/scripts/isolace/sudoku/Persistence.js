@@ -16,6 +16,21 @@ ISOLACE.sudoku.Persistence = function() {
     };
 };
 
+
+/**
+ * TODO see if there's a way to iterate over a domain's cookies
+ * Clears all stored values, use with care.
+ * @method clearAll
+ */
+ISOLACE.sudoku.Persistence.prototype.clearAll = function() {
+    this.remove('puzzleLevel');
+    this.remove('puzzleIndex0');
+    this.remove('puzzleIndex1');
+    this.remove('puzzleIndex2');
+    this.remove('puzzleIndex3');
+    this.remove('scores');
+};
+
 /**
  * Internal bottleneck to get a value.
  * @method get
@@ -56,14 +71,43 @@ ISOLACE.sudoku.Persistence.prototype.remove = function(key) {
 };
 
 /**
+ * @method getPuzzleLevel
+ * @return The current puzzle level.
+ * @type {int}
+ */
+ISOLACE.sudoku.Persistence.prototype.getPuzzleLevel = function() {
+    var puzzleLevel = this.get('puzzleLevel');
+    if(puzzleLevel === null) {
+        puzzleLevel = 0;
+        this.set('puzzleLevel', puzzleLevel);
+    }
+    return parseInt(puzzleLevel);
+};
+
+/**
+ * @method setPuzzleLevel
+ * @param {int} puzzleLevel The puzzle level.
+ */
+ISOLACE.sudoku.Persistence.prototype.setPuzzleLevel = function(puzzleLevel) {
+    assertNumber(puzzleLevel, 'setPuzzleLevel() requires a number parameter');
+    var currentLevel = this.getPuzzleLevel();
+    if(puzzleLevel != currentLevel) {
+        this.set('puzzleLevel', puzzleLevel);
+        $GameEvent.fireLevelChange(puzzleLevel);
+    }
+};
+
+/**
  * @method getPuzzleIndex
  * @return {int} The current puzzle index.
  */
 ISOLACE.sudoku.Persistence.prototype.getPuzzleIndex = function() {
-    var puzzleIndex = this.get('puzzleIndex');
+    var level = $Persistence.getPuzzleLevel();
+    var key = 'puzzleIndex' + level;
+    var puzzleIndex = this.get(key);
     if(puzzleIndex === null) {
         puzzleIndex = 0;
-        this.set('puzzleIndex', puzzleIndex);
+        this.set(key, puzzleIndex);
     }
     return parseInt(puzzleIndex);
 };
@@ -75,7 +119,77 @@ ISOLACE.sudoku.Persistence.prototype.getPuzzleIndex = function() {
  */
 ISOLACE.sudoku.Persistence.prototype.incPuzzleIndex = function() {
     var puzzleIndex = this.getPuzzleIndex() + 1;
-    this.set('puzzleIndex', puzzleIndex);
+    var level = $Persistence.getPuzzleLevel();
+    var key = 'puzzleIndex' + level;
+    this.set(key, puzzleIndex);
+};
+
+/**
+ * Add and save the given score. The score will be marked with the current
+ * date/time.
+ * @method addScore
+ * @param {number} time The number of seconds it took to solve the puzzle.
+ * @param {number} numMissed The number of incorrect guesses.
+ * @return The new score object.
+ * @type {Score}
+ */
+ISOLACE.sudoku.Persistence.prototype.addScore = function(time, numMissed) {
+    assertNumber(time, 'time must be numeric value');
+    assertNumber(numMissed, 'numMissed must be numeric value');
+    
+    var date = new Date().getTime();
+    var puzzleLevel = $Persistence.getPuzzleLevel();
+    var puzzleId = $Persistence.getPuzzleIndex();
+    var score = new ISOLACE.Score();
+    score.setDate(date);
+    score.setNumMissed(numMissed);
+    score.setPuzzleId(puzzleId);
+    score.setPuzzleLevel(puzzleLevel);
+    score.setTime(time);
+
+    var scores = $Persistence.getScores();
+    scores.push(score);
+    $Persistence.setScores(scores);
+
+    return score;
+};
+
+/**
+ * @method getScores
+ * @return An array of Score objects.
+ * @type {array[Score]}
+ */
+ISOLACE.sudoku.Persistence.prototype.getScores = function() {
+    var a = [];
+    var scoresStr = $Persistence.get('scores');
+    if(scoresStr === null) {
+        return a;
+    }
+    scores = scoresStr.split('|');
+    for(var i = 0; i < scores.length; i++) {
+        var score = new ISOLACE.Score();
+        score.fromScoreCsv(scores[i]);
+        a.push(score);
+    }
+
+    return a;
+};
+
+/**
+ * @method setScores
+ * @param {array[Score]} scores An array of Score objects.
+ */
+ISOLACE.sudoku.Persistence.prototype.setScores = function(scores) {
+    this.remove('scores', '');
+    var s = '';
+    for(var i = 0; i < scores.length; i++) {
+        if(s != '') {
+            s += '|';
+        }
+        var scoreCsvStr = scores[i].toScoreCsv();
+        s += scoreCsvStr;
+    }
+    var scoresStr = $Persistence.set('scores', s);
 };
 
 if(typeof $Persistence == "undefined" || !$Persistence) {

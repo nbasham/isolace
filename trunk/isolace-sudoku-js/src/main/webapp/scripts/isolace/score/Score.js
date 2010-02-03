@@ -1,26 +1,42 @@
 /**
  * Constructs an Score object.
- * @class Score is an immutable object that contains the elements that comprise
- *        a score. This will have to be application specific, and Score should
+ * @class Score is an object that contains the elements that comprise a score.
+ *        This will have to be application specific, and eventually Score should
  *        perform the role of an interface.
  * @author Norman Basham, iSolace, Copyright (c) 2009-2010. ALL RIGHTS RESERVED<br/>
  * @version 0.1
  * @constructor
- * @param {number} puzzleId The unique puzzle identifier.
- * @param {number} date The date/time the puzzle was solved in milliseconds since 1970.
- * @param {number} time The number of seconds it took to solve the puzzle.
- * @param {number} numMissed The number of incorrect guesses.
  */
-ISOLACE.Score = function(puzzleId, date, time, numMissed) {
-    assertNumber(puzzleId, 'puzzleId should be numeric.');
-    assertNumber(date, 'date should be passed as milliseconds since 1970.');
-    assertNumber(time, 'time should be numeric, a value representing the number of seconds it took to finsih the game.');
-    assertNumber(numMissed, 'numMissed id should be numeric.');
-    this.puzzleId = puzzleId;
-    this.date = date;
-    this.time = time;
-    this.numMissed = numMissed;
+ISOLACE.Score = function() {
+//    * @param {number} puzzleId The unique puzzle identifier.
+//    * @param {number} puzzleLevel The puzzle level i.e NOVICE=0, EASY=1, MEDIUM=2,
+//    *            HARD=3
+//    * @param {number} date The date/time the puzzle was solved in milliseconds
+//    *            since 1970.
+//    * @param {number} time The number of seconds it took to solve the puzzle.
+//    * @param {number} numMissed The number of incorrect guesses.
+    // (puzzleId, puzzleLevel, date, time, numMissed)
+    // assertNumber(puzzleId, 'puzzleId should be numeric.');
+    // assertNumber(puzzleLevel, 'level should be passed as milliseconds since
+    // 1970.');
+    // assertNumber(date, 'date should be passed as milliseconds since 1970.');
+    // assertNumber(time, 'time should be numeric, a value representing the
+    // number of seconds it took to finsih the game.');
+    // assertNumber(numMissed, 'numMissed id should be numeric.');
+    // this.puzzleId = puzzleId;
+    // this.puzzleLevel = puzzleLevel;
+    // this.date = date;
+    // this.time = time;
+    // this.numMissed = numMissed;
+    this.puzzleId = undefined;
+    this.puzzleLevel = undefined;
+    this.date = undefined;
+    this.time = undefined;
+    this.numMissed = undefined;
+
 };
+
+ISOLACE.Score.PENALTY = 30;
 
 /**
  * Calculate the score based on time and penalty time.
@@ -38,7 +54,7 @@ ISOLACE.Score.prototype.getScore = function() {
  * @method getPenalty
  */
 ISOLACE.Score.prototype.getPenalty = function() {
-    return 30;
+    return ISOLACE.Score.PENALTY;
 };
 
 /**
@@ -51,12 +67,46 @@ ISOLACE.Score.prototype.getPuzzleId = function() {
 };
 
 /**
+ * @method setPuzzleId
+ * @param {number} puzzleId The puzzle id this score applies to.
+ */
+ISOLACE.Score.prototype.setPuzzleId = function(puzzleId) {
+    this.puzzleId = puzzleId;
+};
+
+/**
+ * @method getPuzzleLevel
+ * @return The puzzle level this score applies to. The puzzle level i.e NOVICE=0, EASY=1, MEDIUM=2, HARD=3.
+ * @type number
+ */
+ISOLACE.Score.prototype.getPuzzleLevel = function() {
+    return this.puzzleLevel;
+};
+
+/**
+ * @method setPuzzleLevel
+ * @param {number} puzzleLevel The puzzle level this score applies to. The puzzle level i.e NOVICE=0, EASY=1, MEDIUM=2, HARD=3.
+ */
+ISOLACE.Score.prototype.setPuzzleLevel = function(puzzleLevel) {
+    this.puzzleLevel = puzzleLevel;
+};
+
+/**
  * @method getDate
  * @return The date/time the puzzle was solved in milliseconds since 1970.
  * @type number
  */
 ISOLACE.Score.prototype.getDate = function() {
     return this.date;
+};
+
+/**
+ * @method setDate
+ * @param {number} milliseconds The date/time the puzzle was solved in
+ *            milliseconds since 1970.
+ */
+ISOLACE.Score.prototype.setDate = function(milliseconds) {
+    this.date = milliseconds;
 };
 
 /**
@@ -69,11 +119,52 @@ ISOLACE.Score.prototype.getTime = function() {
 };
 
 /**
+ * @method setTime
+ * @param {number} time The number of seconds it took to solve this puzzle.
+ */
+ISOLACE.Score.prototype.setTime = function(time) {
+    this.time = time;
+};
+
+/**
  * @method getNumMissed
- * @return The number incorrect guess attempted while solving this puzzle.
+ * @return The number incorrect guesses attempted while solving this puzzle.
  * @type number
  */
 ISOLACE.Score.prototype.getNumMissed = function() {
     return this.numMissed;
+};
+
+/**
+ * @method setNumMissed
+ * @param {number} numMissed The number incorrect guesses attempted while solving
+ *            this puzzle.
+ */
+ISOLACE.Score.prototype.setNumMissed = function(numMissed) {
+    this.numMissed = numMissed;
+};
+
+/**
+ * @method toScoreCsv
+ * @return The comma separated values representing the Score object as a string.
+ * @type string
+ */
+ISOLACE.Score.prototype.toScoreCsv = function() {
+    var scoreCsvStr = this.getPuzzleId() + ',' + this.getPuzzleLevel() + ',' + this.getDate() + ',' + this.getTime()
+            + ',' + this.getNumMissed();
+    return scoreCsvStr;
+};
+
+/**
+ * @method fromScoreCsv
+ * @param {string} scoreCsvStr The comma separated values to be parsed into the Score object.
+ */
+ISOLACE.Score.prototype.fromScoreCsv = function(scoreCsvStr) {
+    var s = scoreCsvStr.split(',');
+    this.setPuzzleId(parseInt(s[0]));
+    this.setPuzzleLevel(parseInt(s[1]));
+    this.setDate(parseInt(s[2]));
+    this.setTime(parseInt(s[3]));
+    this.setNumMissed(parseInt(s[4]));
 };
 

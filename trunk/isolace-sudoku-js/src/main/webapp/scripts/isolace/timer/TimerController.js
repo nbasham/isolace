@@ -17,6 +17,15 @@ ISOLACE.TimerController = function() {
 };
 
 /**
+ * Reset timer clock to zero. 
+ * 
+ * @method reset
+ */
+ISOLACE.TimerController.prototype.reset = function() {
+    this.time = 0;
+};
+
+/**
  * Get the seconds elapsed since start minus any pause time. 
  * 
  * @method getSeconds
@@ -24,17 +33,6 @@ ISOLACE.TimerController = function() {
 ISOLACE.TimerController.prototype.getSeconds = function() {
     return this.time;
 };
-
-/**
- * If the timer is paused return true, else false.
- * 
- * @method isPaused
- * @return True if the timer is paused, else false.
- * @see pause unpause
- */
-//ISOLACE.TimerController.prototype.isPaused = function() {
-//    return this.paused === true;
-//};
 
 /**
  * Increment the second count.

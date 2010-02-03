@@ -16,8 +16,8 @@ ISOLACE.PanelController = function() {
     panel = new ISOLACE.GamePanel();
     this.panelControllers.push(panel);
     
-//    panel = new ISOLACE.OptionPanel();
-    this.panelControllers.push(null);
+    panel = new ISOLACE.OptionPanel();
+    this.panelControllers.push(panel);
     
     panel = new ISOLACE.ScorePanel();
     this.panelControllers.push(panel);
