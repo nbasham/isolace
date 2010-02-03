@@ -60,6 +60,82 @@ ISOLACE.Event.prototype.handle = function(eventType, context, callback) {
     });
 };
 
+ISOLACE.Event.prototype.isKeyCodeNumeric = function(keyCode) {
+    return $Event.keyCodeToNumber(keyCode) != -1;
+};
+
+ISOLACE.Event.prototype.keyCodeToNumber = function(keyCode) {
+    var number = -1;
+    switch(keyCode) {
+        case KeyEvent.DOM_VK_0:
+            number = 0;
+        break;
+        case KeyEvent.DOM_VK_NUMPAD0:
+            number = 0;
+        break;
+        case KeyEvent.DOM_VK_1:
+            number = 1;
+        break;
+        case KeyEvent.DOM_VK_NUMPAD1:
+            number = 1;
+        break;
+        case KeyEvent.DOM_VK_2:
+            number = 2;
+        break;
+        case KeyEvent.DOM_VK_NUMPAD2:
+            number = 2;
+        break;
+        case KeyEvent.DOM_VK_3:
+            number = 3;
+        break;
+        case KeyEvent.DOM_VK_NUMPAD3:
+            number = 3;
+        break;
+        case KeyEvent.DOM_VK_4:
+            number = 4;
+        break;
+        case KeyEvent.DOM_VK_NUMPAD4:
+            number = 4;
+        break;
+        case KeyEvent.DOM_VK_5:
+            number = 5;
+        break;
+        case KeyEvent.DOM_VK_NUMPAD5:
+            number = 5;
+        break;
+        case KeyEvent.DOM_VK_6:
+            number = 6;
+        break;
+        case KeyEvent.DOM_VK_NUMPAD6:
+            number = 6;
+        break;
+        case KeyEvent.DOM_VK_7:
+            number = 7;
+        break;
+        case KeyEvent.DOM_VK_NUMPAD7:
+            number = 7;
+        break;
+        case KeyEvent.DOM_VK_8:
+            number = 8;
+        break;
+        case KeyEvent.DOM_VK_NUMPAD8:
+            number = 8;
+        break;
+        case KeyEvent.DOM_VK_9:
+            number = 9;
+        break;
+        case KeyEvent.DOM_VK_NUMPAD9:
+            number = 9;
+        break;
+
+        default:
+            number = -1;
+        break;
+    }
+    
+    return number;
+};
+
 if(typeof $Event == "undefined" || !$Event) {
     /**
      * A singleton instance of ISOLACE.Event automatically created as a

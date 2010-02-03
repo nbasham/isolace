@@ -21,7 +21,6 @@ ISOLACE.GamePanel.prototype.load = function() {
     $TimerEvent.handleTimerPause(this, this.pause);
     $TimerEvent.handleTimerUnpause(this, this.unpause);
     $GameEvent.handleGuess(this, this.handleGuess);
-    $GameEvent.handleMark(this, this.handleMark);
     $UndoEvent.handleUndoEvent(this, function(stateArray) {
         this.state = new ISOLACE.sudoku.BoardState(this.puzzle.getValues(), stateArray);
         $Renderer.render(this.state);
@@ -31,6 +30,8 @@ ISOLACE.GamePanel.prototype.load = function() {
     var jsLintLikesThis1 = new ISOLACE.TimerView();
     this.initBoard();
     this.initUndo();
+    this.selector = new ISOLACE.sudoku.CellSelector(this.puzzle);
+    
 };
 
 ISOLACE.GamePanel.prototype.handleLevelChange = function(level) {
@@ -40,18 +41,23 @@ ISOLACE.GamePanel.prototype.handleLevelChange = function(level) {
     this.undoController.reset(initialState);
     $Renderer.render(this.state);
     this.timerController.reset();
+    this.selector.reset(puzzle);
 };
 
 ISOLACE.GamePanel.prototype.pause = function() {
-    $Renderer.renderPaused();
     $('#undoButton').hide();
     $('#redoButton').hide();
+    $GameKeyEvent.unbind();
+    $GameMouseEvent.unbind();
+    $Renderer.renderPaused();
 };
 
 ISOLACE.GamePanel.prototype.unpause = function() {
-    $Renderer.render(this.state);
     $('#undoButton').show();
     $('#redoButton').show();
+    $GameKeyEvent.bind();
+    $GameMouseEvent.bind(this.puzzle);
+    $Renderer.render(this.state);
 };
 
 
@@ -62,6 +68,8 @@ ISOLACE.GamePanel.prototype.unpause = function() {
 ISOLACE.GamePanel.prototype.show = function() {
     $Renderer.render(this.state);
     this.timerController.unpause();
+    $GameKeyEvent.bind();
+    $GameMouseEvent.bind(this.puzzle);
 };
 
 /**
@@ -70,6 +78,8 @@ ISOLACE.GamePanel.prototype.show = function() {
  */
 ISOLACE.GamePanel.prototype.hide = function() {
     this.timerController.pause();
+    $GameKeyEvent.unbind();
+    $GameMouseEvent.unbind();
 };
 
 /**
@@ -81,8 +91,7 @@ ISOLACE.GamePanel.prototype.initBoard = function() {
     this.numMissed = 0;
     $Renderer.renderBoard();
     //var boardView = new ISOLACE.sudoku.BoardView();
-    var selector = new ISOLACE.sudoku.ImageSelector();
-    var jsLintLikesThis = new ISOLACE.sudoku.BoardViewEvents(selector, this.puzzle);
+    //var jsLintLikesThis = new ISOLACE.sudoku.BoardViewEvents(null, this.puzzle);
     var initialState = this.puzzle.getInitialState();
     this.state = new ISOLACE.sudoku.BoardState(this.puzzle.getValues(), initialState);
     $Renderer.render(this.state);
@@ -107,27 +116,16 @@ ISOLACE.GamePanel.prototype.initUndo = function() {
  * @param {int} value Value between 1 and 9 inclusive to check for.
  * @param {int} index Index (0 to 80 inclusive) of the cell to check.
  */
-ISOLACE.GamePanel.prototype.handleGuess = function(value, index) {
+ISOLACE.GamePanel.prototype.handleGuess = function(value) {
+    var index = this.selector.getIndex();
     if(this.markMode) {
-        this.handleMark(value, index);
-        return;
+        this.state.setMarkerValue(value, index);
+    } else {
+        var correctGuess = this.state.setValue(value, index);
+        if(!correctGuess) {
+            this.numMissed++;
+        }
     }
-    var correctGuess = this.state.setValue(value, index);
-    if(!correctGuess) {
-        this.numMissed++;
-    }
-    $GameEvent.fireStateChange(this.state);
-};
-
-/**
- * Set a marker at the given index.
- * @private
- * @method mark
- * @param {int} value Value between 1 and 9 inclusive to check for.
- * @param {int} index Index (0 to 80 inclusive) of the cell to check.
- */
-ISOLACE.GamePanel.prototype.handleMark = function(value, index) {
-    this.state.setMarkerValue(value, index);
     $GameEvent.fireStateChange(this.state);
 };
 

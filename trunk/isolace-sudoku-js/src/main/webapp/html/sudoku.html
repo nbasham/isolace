@@ -83,6 +83,7 @@
     <link rel="stylesheet" href="../styles/sudoku.css" type="text/css" media="screen" />
 
     <script src="../scripts/isolace/isolace.js"></script>
+    <script src="../scripts/isolace/KeyEvent.js"></script>
     <script src="../scripts/isolace/Log.js"></script>
     <script src="../scripts/isolace/assert.js"></script>
 
@@ -93,6 +94,8 @@
 
     <script src="../scripts/isolace/Event.js"></script>
     <script src="../scripts/isolace/sudoku/game/GameEvent.js"></script>
+    <script src="../scripts/isolace/sudoku/game/GameKeyEvent.js"></script>
+    <script src="../scripts/isolace/sudoku/game/GameMouseEvent.js"></script>
     <script src="../scripts/isolace/undo/UndoView.js"></script>
     <script src="../scripts/isolace/timer/TimerEvent.js"></script>
 
@@ -115,9 +118,7 @@
     <script src="../scripts/isolace/sudoku/model/BoardState.js"></script>
     <script src="../scripts/isolace/sudoku/game/GamePanel.js"></script>
     <script src="../scripts/isolace/sudoku/OptionPanel.js"></script>
-    <script src="../scripts/isolace/sudoku/view/selector/BorderSelector.js"></script>
-    <script src="../scripts/isolace/sudoku/view/selector/ImageSelector.js"></script>
-    <script src="../scripts/isolace/sudoku/view/BoardViewEvents.js"></script>
+    <script src="../scripts/isolace/sudoku/game/CellSelector.js"></script>
     <script src="../scripts/isolace/sudoku/game/GameKeyEvent.js"></script>
 
     <script>
@@ -139,7 +140,7 @@
 
 </head>
 <body class='bodyContent'>
-<p align='center'><img title='2/2/10 7:00PM' src='../images/sudoku.png' /></p>
+<p align='center'><img title='2/3/10 10:00AM' src='../images/sudoku.png' /></p>
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1" title='Visit this tab for general information'>About</a></li>
@@ -161,7 +162,7 @@
             </ul>
         </div>
         <br/>
-        <p><u>Welcome</u><br/>We're working on a great way to play Sudoku. We're just starting and plan on rolling out lots of new features, so come back reguraly.</p>
+        <p><u>Welcome</u><br/>We're working on a great way to play Sudoku. We're just starting and plan on rolling out lots of new features, so come back regularly.</p>
         <br/>
         <p>
             <u>The Basics</u><br/>
@@ -240,7 +241,7 @@
     </div>
     <div id="tabs-4">
         <hr/>
-        <div id='personalBest'>hey</div>
+        <div id='personalBest'>No games have been played yet.</div>
         <hr/>
         <div id='scorePanel'>
             <table id='scorePanelTable' cellpadding="0" cellspacing="0" border="0" class="display"></table>
@@ -248,7 +249,7 @@
         <hr/>
     </div>
     <div id="tabs-5">
-        <h1>Connect JavaScript - jQuery Login Example</h1>
+        <h1>This section is under construction and does not work yet.</h1>
         <div>
             <button id="login">Login</button>
             <button id="logout">Logout</button>
