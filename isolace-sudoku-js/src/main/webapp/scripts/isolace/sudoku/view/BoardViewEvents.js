@@ -10,7 +10,7 @@ ISOLACE.namespace("sudoku");
  * @version 0.1
  */
 
-ISOLACE.sudoku.BoardViewEvents = function(boardView, puzzle) {
+ISOLACE.sudoku.BoardViewEvents = function(selector, puzzle) {
     this.KEY_RETURN = 13;
     this.KEY_TAB = 9;
     this.KEY_BACKSPACE = 8;
@@ -26,7 +26,7 @@ ISOLACE.sudoku.BoardViewEvents = function(boardView, puzzle) {
      * don't map properly on Mac
      */
     this.KEY_FUNCTION_NUMBERS = [112,113,114,115,116,117,118,119,120];
-    this.boardView = boardView;
+    this.selector = selector;
     this.selectedCellIndex = -1;
     
     var me = this;
@@ -99,7 +99,7 @@ ISOLACE.sudoku.BoardViewEvents.prototype.setupKeyHandler = function(f, keys) {
  */
 ISOLACE.sudoku.BoardViewEvents.prototype.moveLeft = function() {
     this.selectedCellIndex = this.dec(this.selectedCellIndex, 1);
-    this.boardView.selector.select(this.selectedCellIndex);
+    this.selector.select(this.selectedCellIndex);
 };
 
 /**
@@ -114,7 +114,7 @@ ISOLACE.sudoku.BoardViewEvents.prototype.moveLeftToNextOpen = function() {
     while(this.sudokuLogic.revealed(this.selectedCellIndex)) {
         this.selectedCellIndex = this.dec(this.selectedCellIndex, 1);
     }
-    this.boardView.selector.select(this.selectedCellIndex);
+    this.selector.select(this.selectedCellIndex);
 };
 
 /**
@@ -125,7 +125,7 @@ ISOLACE.sudoku.BoardViewEvents.prototype.moveLeftToNextOpen = function() {
  */
 ISOLACE.sudoku.BoardViewEvents.prototype.moveUp = function() {
     this.selectedCellIndex = this.dec(this.selectedCellIndex, 9);
-    this.boardView.selector.select(this.selectedCellIndex);
+    this.selector.select(this.selectedCellIndex);
 };
 
 /**
@@ -140,7 +140,7 @@ ISOLACE.sudoku.BoardViewEvents.prototype.moveUpToNextOpen = function() {
     while(this.sudokuLogic.revealed(this.selectedCellIndex)) {
         this.selectedCellIndex = this.dec(this.selectedCellIndex, 9);
     }
-    this.boardView.selector.select(this.selectedCellIndex);
+    this.selector.select(this.selectedCellIndex);
 };
 
 /**
@@ -152,7 +152,7 @@ ISOLACE.sudoku.BoardViewEvents.prototype.moveUpToNextOpen = function() {
 ISOLACE.sudoku.BoardViewEvents.prototype.moveRight = function() {
 
     this.selectedCellIndex = this.inc(this.selectedCellIndex, 1);
-    this.boardView.selector.select(this.selectedCellIndex);
+    this.selector.select(this.selectedCellIndex);
 };
 
 /**
@@ -167,7 +167,7 @@ ISOLACE.sudoku.BoardViewEvents.prototype.moveRightToNextOpen = function() {
     while(this.sudokuLogic.revealed(this.selectedCellIndex)) {
         this.selectedCellIndex = this.inc(sel, 1);
     }
-    this.boardView.selector.select(this.selectedCellIndex);
+    this.selector.select(this.selectedCellIndex);
 };
 
 /**
@@ -178,7 +178,7 @@ ISOLACE.sudoku.BoardViewEvents.prototype.moveRightToNextOpen = function() {
  */
 ISOLACE.sudoku.BoardViewEvents.prototype.moveDown = function() {
     this.selectedCellIndex = this.inc(this.selectedCellIndex, 9);
-    this.boardView.selector.select(this.selectedCellIndex);
+    this.selector.select(this.selectedCellIndex);
 };
 
 /**
@@ -193,7 +193,7 @@ ISOLACE.sudoku.BoardViewEvents.prototype.moveDownToNextOpen = function() {
     while(this.sudokuLogic.revealed(this.selectedCellIndex)) {
         this.selectedCellIndex = this.inc(this.selectedCellIndex, 9);
     }
-    this.boardView.selector.select(this.selectedCellIndex);
+    this.selector.select(this.selectedCellIndex);
 };
 
 /**
@@ -255,7 +255,7 @@ ISOLACE.sudoku.BoardViewEvents.prototype.dec = function(value, amount) {
 ISOLACE.sudoku.BoardViewEvents.prototype.handleSelectEvent = function(e) {
     var me = e.data.me;
     me.selectedCellIndex = e.data.index;
-    me.boardView.selector.select(me.selectedCellIndex);
+    me.selector.select(me.selectedCellIndex);
 };
 
 /**
@@ -266,6 +266,6 @@ ISOLACE.sudoku.BoardViewEvents.prototype.handleSelectEvent = function(e) {
  */
 ISOLACE.sudoku.BoardViewEvents.prototype.handleUnselectEvent = function(e) {
     var me = e.data.me;
-    me.boardView.selector.unselect(e.data.index);
+    me.selector.unselect(e.data.index);
 };
 

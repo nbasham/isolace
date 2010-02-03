@@ -110,6 +110,37 @@ ISOLACE.sudoku.Renderer.prototype.getRevealCounts = function(state) {
     }
 };
 
+/**
+ */
+ISOLACE.sudoku.Renderer.prototype.renderBoard = function() {
+    var cellIndex = 0;
+    var html = '';
+    html += "<div id='board' class='board'>";
+    for( var row = 0; row < 9; row++) {
+        html += "<div class='cellrow'>";
+        for( var col = 0; col < 9; col++) {
+            var gridClass = 'oddGrid';
+            if($SUDOKU_UTIL.getGridFromIndex(cellIndex) % 2 === 0) {
+                gridClass = 'evenGrid';
+            }
+            var row = $SUDOKU_UTIL.getRowFromIndex(cellIndex);
+            if (row == 2 || row == 5) {
+                gridClass += ' rowBorder';
+            }
+            var col = $SUDOKU_UTIL.getColFromIndex(cellIndex);
+            if (col == 2 || col == 5) {
+                gridClass += ' colBorder';
+            }
+            html += "<div id='c" + cellIndex + "' class='cell " + gridClass + "'>&nbsp;</div>";
+            cellIndex++;
+        }
+        html += "</div>";
+    }
+    html += "</div>";
+
+    $('#boardView').html(html);
+};
+
 if(typeof $Renderer == "undefined" || !$Renderer) {
     /**
      * Global player Renderer.

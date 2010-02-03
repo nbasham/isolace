@@ -7,7 +7,6 @@
  * @version 0.1
  */
 ISOLACE.GamePanel = function() {
-    this.gameInProgress = false;
     this.markMode = false;
 };
 
@@ -16,26 +15,31 @@ ISOLACE.GamePanel = function() {
  * @method load
  */
 ISOLACE.GamePanel.prototype.load = function() {
-    var me = this;
-    $('#markButton').toggle(function() {
-        me.markMode = true;
-//        $('#markButton').removeClass('ui-state-active');
-//        $GameEvent.fireMarkMode(true);
-    },
-    function() {
-        me.markMode = false;
-//        $('#markButton').removeClass('ui-state-active');
-//        $GameEvent.fireMarkMode(false);
-    });
     $GameEvent.handleToggleMarkMode(this, this.handleToggleMarkMode);
     $GameEvent.handleStateChange(this, this.handleStateChanged);
+    $GameEvent.handleLevelChange(this, this.handleLevelChange);
     $TimerEvent.handleTimerPause(this, this.pause);
     $TimerEvent.handleTimerUnpause(this, this.unpause);
+    $GameEvent.handleGuess(this, this.handleGuess);
+    $GameEvent.handleMark(this, this.handleMark);
+    $UndoEvent.handleUndoEvent(this, function(stateArray) {
+        this.state = new ISOLACE.sudoku.BoardState(this.puzzle.getValues(), stateArray);
+        $Renderer.render(this.state);
+    });
     this.puzzle = this.getNextPuzzle();
     this.timerController = new ISOLACE.TimerController();
     var jsLintLikesThis1 = new ISOLACE.TimerView();
     this.initBoard();
     this.initUndo();
+};
+
+ISOLACE.GamePanel.prototype.handleLevelChange = function(level) {
+    this.puzzle = this.getNextPuzzle();
+    var initialState = this.puzzle.getInitialState();
+    this.state = new ISOLACE.sudoku.BoardState(this.puzzle.getValues(), initialState);
+    this.undoController.reset(initialState);
+    $Renderer.render(this.state);
+    this.timerController.reset();
 };
 
 ISOLACE.GamePanel.prototype.pause = function() {
@@ -75,15 +79,15 @@ ISOLACE.GamePanel.prototype.hide = function() {
  */
 ISOLACE.GamePanel.prototype.initBoard = function() {
     this.numMissed = 0;
-    var boardView = new ISOLACE.sudoku.BoardView();
-    var jsLintLikesThis = new ISOLACE.sudoku.BoardViewEvents(boardView, this.puzzle);
+    $Renderer.renderBoard();
+    //var boardView = new ISOLACE.sudoku.BoardView();
+    var selector = new ISOLACE.sudoku.ImageSelector();
+    var jsLintLikesThis = new ISOLACE.sudoku.BoardViewEvents(selector, this.puzzle);
     var initialState = this.puzzle.getInitialState();
     this.state = new ISOLACE.sudoku.BoardState(this.puzzle.getValues(), initialState);
     $Renderer.render(this.state);
-    boardView.start();
+    //boardView.start();
     $TimerEvent.fireTimerStart();
-    $GameEvent.handleGuess(this, this.handleGuess);
-    $GameEvent.handleMark(this, this.handleMark);
 };
 
 /**
@@ -92,12 +96,8 @@ ISOLACE.GamePanel.prototype.initBoard = function() {
  * @private
  */
 ISOLACE.GamePanel.prototype.initUndo = function() {
-    var undoController = new ISOLACE.UndoController(this.puzzle.getInitialState());
+    this.undoController = new ISOLACE.UndoController(this.puzzle.getInitialState());
     var undoView = new ISOLACE.UndoView();
-    $UndoEvent.handleUndoEvent(this, function(stateArray) {
-        this.state = new ISOLACE.sudoku.BoardState(this.puzzle.getValues(), stateArray);
-        $Renderer.render(this.state);
-    });
 };
 
 /**
@@ -140,9 +140,8 @@ ISOLACE.GamePanel.prototype.handleMark = function(value, index) {
 ISOLACE.GamePanel.prototype.handleStateChanged = function(notUsedBoardState) {
     var solved = this.state.solved();
     if(solved) {
-        var index = $Persistence.getPuzzleIndex();
         var time = this.timerController.getSeconds();
-        var score = $Scores.add(index, time, this.numMissed);
+        var score = $Persistence.addScore(time, this.numMissed);
         var formattedScore = $SUDOKU_UTIL.formatTime(score.getScore());
         
         $Persistence.incPuzzleIndex();
@@ -168,6 +167,8 @@ ISOLACE.GamePanel.prototype.handleToggleMarkMode = function() {
 };
 
 
+ISOLACE.sudoku.PUZZLES = [ISOLACE.sudoku.NOVICE_PUZZLES, ISOLACE.sudoku.EASY_PUZZLES, ISOLACE.sudoku.MEDIUM_PUZZLES, ISOLACE.sudoku.HARD_PUZZLES];
+
 /**
  * Make a server call, retrieve from cookie, or data lookup and get the next
  * puzzle at the given level.
@@ -177,6 +178,8 @@ ISOLACE.GamePanel.prototype.handleToggleMarkMode = function() {
 ISOLACE.GamePanel.prototype.getNextPuzzle = function() {
     var values;
     var revealedIndexes;
+    var level = $Persistence.getPuzzleLevel();
+    var levelPuzzles = ISOLACE.sudoku.PUZZLES[level];
     var index = $Persistence.getPuzzleIndex();
     if(false) {
         values = [8,6,4,5,3,1,2,9,7,9,5,1,6,2,7,8,4,3,2,7,3,4,8,9,6,1,5,1,4,7,9,5,6,3,8,2,3,9,6,2,4,8,5,7,1,5,8,2,1,7,3,9,6,4,6,2,5,8,1,4,7,3,9,7,1,9,3,6,5,4,2,8,4,3,8,7,9,2,1,5,6];
@@ -185,7 +188,7 @@ ISOLACE.GamePanel.prototype.getNextPuzzle = function() {
     } else {
         values = [];
         revealedIndexes = [];
-        var puzzleArray = ISOLACE.sudoku.puzzles[index];
+        var puzzleArray = levelPuzzles[index];
         for( var i = 0; i < puzzleArray.length; i++) {
             var cell = puzzleArray[i];
             if(cell > 9) {

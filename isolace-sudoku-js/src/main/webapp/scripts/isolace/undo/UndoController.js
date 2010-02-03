@@ -14,11 +14,7 @@
  * @param {object} o The initial state to enter in undo queue.
  */
 ISOLACE.UndoController = function(o) {
-    assertDefined(o);
-    this.stack = [];
-    this.stack.push(o);
-    this.stackPtr = 0;
-    $Log.debug('UndoController instantiated: ' + this.toString());
+    this.reset(o);
     $UndoEvent.handleSubmitUndoRecordEvent(this, this.add);
     $UndoEvent.handleUndoRequestEvent(this, function(isRedo) {
         var o;
@@ -31,8 +27,21 @@ ISOLACE.UndoController = function(o) {
         $UndoEvent.fireUndoEvent(o);
         $UndoEvent.fireUpdateUndoUIEvent(this.canUndo(), this.canRedo());
     });
-    // initial update for UI
+    $Log.debug('UndoController instantiated: ' + this.toString());
+};
+
+/**
+ * Reset undo controller, e.g. if player starts a new game.
+ * @method reset
+ * @private
+ */
+ISOLACE.UndoController.prototype.reset = function(o) {
+    assertDefined(o);
+    this.stack = [];
+    this.stack.push(o);
+    this.stackPtr = 0;
     $UndoEvent.fireUpdateUndoUIEvent(this.canUndo(), this.canRedo());
+    $Log.debug('UndoController reset: ' + this.toString());
 };
 
 /**

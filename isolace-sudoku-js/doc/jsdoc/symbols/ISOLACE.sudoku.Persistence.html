@@ -202,8 +202,6 @@ ul.inheritsList
 	
 	<li><a href="../symbols/%24Renderer.html">$Renderer</a></li>
 	
-	<li><a href="../symbols/%24Scores.html">$Scores</a></li>
-	
 	<li><a href="../symbols/%24SUDOKU_UTIL.html">$SUDOKU_UTIL</a></li>
 	
 	<li><a href="../symbols/%24TimerEvent.html">$TimerEvent</a></li>
@@ -224,6 +222,8 @@ ul.inheritsList
 	
 	<li><a href="../symbols/ISOLACE.Log.html">ISOLACE.Log</a></li>
 	
+	<li><a href="../symbols/ISOLACE.OptionPanel.html">ISOLACE.OptionPanel</a></li>
+	
 	<li><a href="../symbols/ISOLACE.Options.html">ISOLACE.Options</a></li>
 	
 	<li><a href="../symbols/ISOLACE.PanelController.html">ISOLACE.PanelController</a></li>
@@ -232,11 +232,7 @@ ul.inheritsList
 	
 	<li><a href="../symbols/ISOLACE.ScorePanel.html">ISOLACE.ScorePanel</a></li>
 	
-	<li><a href="../symbols/ISOLACE.Scores.html">ISOLACE.Scores</a></li>
-	
 	<li><a href="../symbols/ISOLACE.sudoku.BoardState.html">ISOLACE.sudoku.BoardState</a></li>
-	
-	<li><a href="../symbols/ISOLACE.sudoku.BoardView.html">ISOLACE.sudoku.BoardView</a></li>
 	
 	<li><a href="../symbols/ISOLACE.sudoku.BoardViewEvents.html">ISOLACE.sudoku.BoardViewEvents</a></li>
 	
@@ -253,8 +249,6 @@ ul.inheritsList
 	<li><a href="../symbols/ISOLACE.sudoku.Puzzle.html">ISOLACE.sudoku.Puzzle</a></li>
 	
 	<li><a href="../symbols/ISOLACE.sudoku.Renderer.html">ISOLACE.sudoku.Renderer</a></li>
-	
-	<li><a href="../symbols/ISOLACE.sudoku.SymbolCountView.html">ISOLACE.sudoku.SymbolCountView</a></li>
 	
 	<li><a href="../symbols/ISOLACE.sudoku.TextRenderer.html">ISOLACE.sudoku.TextRenderer</a></li>
 	
@@ -339,6 +333,25 @@ a server side solution using Google's AppEngine.
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Persistence.html#addScore">addScore</a></b>(time, numMissed)
+								</div>
+								<div class="description">Add and save the given score.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Persistence.html#clearAll">clearAll</a></b>()
+								</div>
+								<div class="description">TODO see if there's a way to iterate over a domain's cookies
+Clears all stored values, use with care.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Persistence.html#getPuzzleIndex">getPuzzleIndex</a></b>()
 								</div>
 								<div class="description"></div>
@@ -348,7 +361,43 @@ a server side solution using Google's AppEngine.
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Persistence.html#getPuzzleLevel">getPuzzleLevel</a></b>()
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Persistence.html#getScores">getScores</a></b>()
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Persistence.html#incPuzzleIndex">incPuzzleIndex</a></b>(puzzleIndex)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Persistence.html#setPuzzleLevel">setPuzzleLevel</a></b>(puzzleLevel)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/ISOLACE.sudoku.Persistence.html#setScores">setScores</a></b>(scores)
 								</div>
 								<div class="description"></div>
 							</td>
@@ -401,6 +450,84 @@ a server side solution using Google's AppEngine.
 					Method Detail
 				</div>
 				
+					<a name="addScore"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>addScore</b>(time, numMissed)
+					
+					</div>
+					<div class="description">
+						Add and save the given score. The score will be marked with the current
+date/time.
+						
+						
+					</div>
+					
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>time</b>
+									
+								</dt>
+								<dd>The number of seconds it took to solve the puzzle.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>numMissed</b>
+									
+								</dt>
+								<dd>The number of incorrect guesses.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>The new score object.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="clearAll"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>clearAll</b>()
+					
+					</div>
+					<div class="description">
+						TODO see if there's a way to iterate over a domain's cookies
+Clears all stored values, use with care.
+						
+						
+					</div>
+					
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name="getPuzzleIndex"> </a>
 					<div class="fixedFont">
 					
@@ -426,6 +553,72 @@ a server side solution using Google's AppEngine.
 							<dt class="heading">Returns:</dt>
 							
 								<dd><span class="light fixedFont">{int}</span> The current puzzle index.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getPuzzleLevel"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>getPuzzleLevel</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>The current puzzle level.</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="getScores"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>getScores</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd>An array of Score objects.</dd>
 							
 							</dl>
 						
@@ -469,6 +662,80 @@ a server side solution using Google's AppEngine.
 						
 						
 
+					<hr />
+				
+					<a name="setPuzzleLevel"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setPuzzleLevel</b>(puzzleLevel)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{int}</span> <b>puzzleLevel</b>
+									
+								</dt>
+								<dd>The puzzle level.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setScores"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setScores</b>(scores)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{array[Score]}</span> <b>scores</b>
+									
+								</dt>
+								<dd>An array of Score objects.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
 					
 				
 			
@@ -479,7 +746,7 @@ a server side solution using Google's AppEngine.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blank">JsDoc Toolkit</a> 2.0.0 on Mon Feb 01 2010 11:13:10 GMT-0800 (PST)
+			Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blank">JsDoc Toolkit</a> 2.0.0 on Tue Feb 02 2010 16:48:08 GMT-0800 (PST)
 		</div>
 	</body>
 </html>

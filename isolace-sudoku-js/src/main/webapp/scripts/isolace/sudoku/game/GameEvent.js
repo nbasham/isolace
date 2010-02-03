@@ -21,6 +21,9 @@ ISOLACE.GameEvent = function() {
     this.STATE_CHANGE = function() {
         return 'ISOLACE.EVENT_STATE_CHANGE';
     };
+    this.LEVEL_CHANGE = function() {
+        return 'ISOLACE.EVENT_LEVEL_CHANGE';
+    };
 };
 
 /**
@@ -32,6 +35,7 @@ ISOLACE.GameEvent.prototype.unbind = function() {
     $(document).unbind(this.MARK_MODE());
     $(document).unbind(this.GUESS());
     $(document).unbind(this.STATE_CHANGE());
+    $(document).unbind(this.LEVEL_CHANGE());
 };
 
 /**
@@ -109,6 +113,25 @@ ISOLACE.GameEvent.prototype.fireStateChange = function(boardState) {
  */
 ISOLACE.GameEvent.prototype.handleStateChange = function(context, callback) {
     $Event.handle(this.STATE_CHANGE(), context, callback);
+};
+
+/**
+ * Fire LEVEL_CHANGE event.
+ * @method fireLevelChange
+ * @param {int} puzzleLevel The puzzle level.
+ */
+ISOLACE.GameEvent.prototype.fireLevelChange = function(puzzleLevel) {
+    $Event.fire(this.LEVEL_CHANGE(), [puzzleLevel]);
+};
+
+/**
+ * Bind a handler to the LEVEL_CHANGE event. The handler expects one argument (puzzleLevel).
+ * @method handleLevelChange
+ * @param {object} context The context to set when calling the handler (usually this).
+ * @param {function} f The function you wish to invoke when the event is fired.
+ */
+ISOLACE.GameEvent.prototype.handleLevelChange = function(context, callback) {
+    $Event.handle(this.LEVEL_CHANGE(), context, callback);
 };
 
 if(typeof $GameEvent == "undefined" || !$GameEvent) {

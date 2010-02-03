@@ -8,7 +8,11 @@
  */
 ISOLACE.TimerEvent = function() {
     
-    // encapsulate private static event types
+    //  UI
+    this.TIMER_PLAY_PAUSE_REQUEST = function() {
+        return 'ISOLACE.TIMER_PLAY_PAUSE_REQUEST';
+    };
+    //  LOGIC
     this.TIMER_INCREMENT = function() {
         return 'ISOLACE.TIMER_INCREMENT';
     };
@@ -31,11 +35,29 @@ ISOLACE.TimerEvent = function() {
  * @method unbind
  */
 ISOLACE.TimerEvent.prototype.unbind = function() {
+    $(document).unbind(this.TIMER_PLAY_PAUSE_REQUEST());
     $(document).unbind(this.TIMER_INCREMENT());
     $(document).unbind(this.TIMER_PAUSE());
     $(document).unbind(this.TIMER_START());
     $(document).unbind(this.TIMER_STOP());
     $(document).unbind(this.TIMER_UNPAUSE());
+};
+
+/**
+ * @method fireTimerPlayPauseRequest
+ * @param {boolean} isPauseRequest True if the player requested pause, false if unpause.
+ */
+ISOLACE.TimerEvent.prototype.fireTimerPlayPauseRequest = function(isPauseRequest) {
+    $Event.fire(this.TIMER_PLAY_PAUSE_REQUEST(), [isPauseRequest]);
+};
+
+/**
+ * @method handleTimerPlayPauseRequest
+ * @param {object} context The context to set when calling the handler (usually this).
+ * @param {function} callback The function to invoke when the event is fired.
+ */
+ISOLACE.TimerEvent.prototype.handleTimerPlayPauseRequest = function(context, callback) {
+    $Event.handle(this.TIMER_PLAY_PAUSE_REQUEST(), context, callback);
 };
 
 /**

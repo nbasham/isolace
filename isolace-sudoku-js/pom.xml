@@ -50,7 +50,7 @@
                     <!-- this is actually the default -->
                     <includes>**/*.js</includes>
                     <!-- maybe you need to exclude compressed JS files -->
-                    <excludes>**/*Data.js</excludes>
+                    <excludes>**/*data.js</excludes>
                     <!-- this is actually the default -->
                     <caseSensitive>true</caseSensitive>
                     <outputBaseDirectory>${basedir}/doc</outputBaseDirectory>

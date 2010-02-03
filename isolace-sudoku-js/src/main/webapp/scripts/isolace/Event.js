@@ -24,6 +24,7 @@ ISOLACE.Event = function() {
  * @param {array} argArray An array of parameters to be sent with the event.
  */
 ISOLACE.Event.prototype.fire = function(eventType, argArray) {
+    assertDefined(eventType, 'eventType is invalid');
     var e = jQuery.Event(eventType);
     var message = "Firing event type: '" + eventType + "'";
     if(arguments.length > 1) {
@@ -44,6 +45,9 @@ ISOLACE.Event.prototype.fire = function(eventType, argArray) {
  * @param {function} callback The function to call when the event is triggered.
  */
 ISOLACE.Event.prototype.handle = function(eventType, context, callback) {
+    assertDefined(eventType, 'eventType is invalid');
+    assertDefined(context, 'context is invalid');
+    assertDefined(callback, 'callback is invalid');
     var message = "Called handler for event type: '" + eventType + "'";
     $(document).bind(eventType, function(e) {
         if(e.payload !== undefined) {
