@@ -1,33 +1,11 @@
 /**
- * Constructs an Score object.
- * @class Score is an object that contains the elements that comprise a score.
- *        This will have to be application specific, and eventually Score should
- *        perform the role of an interface.
+ * Constructs an Score POJsO.
+ * @class Score is an object that contains the elements that comprise a Sudoku score.
  * @author Norman Basham, iSolace, Copyright (c) 2009-2010. ALL RIGHTS RESERVED<br/>
  * @version 0.1
  * @constructor
  */
 ISOLACE.Score = function() {
-//    * @param {number} puzzleId The unique puzzle identifier.
-//    * @param {number} puzzleLevel The puzzle level i.e NOVICE=0, EASY=1, MEDIUM=2,
-//    *            HARD=3
-//    * @param {number} date The date/time the puzzle was solved in milliseconds
-//    *            since 1970.
-//    * @param {number} time The number of seconds it took to solve the puzzle.
-//    * @param {number} numMissed The number of incorrect guesses.
-    // (puzzleId, puzzleLevel, date, time, numMissed)
-    // assertNumber(puzzleId, 'puzzleId should be numeric.');
-    // assertNumber(puzzleLevel, 'level should be passed as milliseconds since
-    // 1970.');
-    // assertNumber(date, 'date should be passed as milliseconds since 1970.');
-    // assertNumber(time, 'time should be numeric, a value representing the
-    // number of seconds it took to finsih the game.');
-    // assertNumber(numMissed, 'numMissed id should be numeric.');
-    // this.puzzleId = puzzleId;
-    // this.puzzleLevel = puzzleLevel;
-    // this.date = date;
-    // this.time = time;
-    // this.numMissed = numMissed;
     this.puzzleId = undefined;
     this.puzzleLevel = undefined;
     this.date = undefined;
