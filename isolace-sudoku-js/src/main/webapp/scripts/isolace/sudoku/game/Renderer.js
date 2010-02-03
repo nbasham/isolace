@@ -12,6 +12,9 @@ ISOLACE.sudoku.Renderer = function() {
     this.renderers.image = new ISOLACE.sudoku.ImageRenderer();
     this.renderers.color = new ISOLACE.sudoku.ColorRenderer();
     $GameEvent.handleStateChange(this, this.render);
+    this.selector = undefined;
+    this.markMode = false;
+    $GameEvent.handleToggleMarkMode(this, this.handleToggleMarkMode);
 };
 
 /**
@@ -139,6 +142,47 @@ ISOLACE.sudoku.Renderer.prototype.renderBoard = function() {
     html += "</div>";
 
     $('#boardView').html(html);
+};
+
+/**
+ * @method renderSelector
+ */
+ISOLACE.sudoku.Renderer.prototype.renderSelector = function(index) {
+    if(this.selector === undefined) {
+        this.selector = $('<img/>', {
+            src: '../images/45/numbers/select.png',
+            id: 'selector'
+        }).appendTo('.board');
+        this.marker = $('<div/>', {
+            id: 'selectorMarker',
+            'class': 'ui-icon ui-icon-pencil fiftyPercent'
+        }).appendTo('.board').hide();
+    }
+    var cell = $('#c' + index);
+    var t = cell.offset().top;
+    var l = cell.position().left;
+    this.selector.css('top', t);
+    this.selector.css('left', l);
+    this.selector.css('display', 'block');
+
+    this.marker.css('top', t + 16);
+    this.marker.css('left', l + 16);
+    $Log.debug('Rendered selector at index ' + index + '.');
+};
+
+/**
+ * Handle a toggle mark mode event.
+ * 
+ * @method handleToggleMarkMode
+ * @private
+ */
+ISOLACE.sudoku.Renderer.prototype.handleToggleMarkMode = function() {
+    this.markMode = !this.markMode;
+    if(this.markMode) {
+        this.marker.css('display', 'block');
+    } else {
+        this.marker.css('display', 'none');
+    }
 };
 
 if(typeof $Renderer == "undefined" || !$Renderer) {

@@ -8,21 +8,33 @@
  */
 ISOLACE.GameEvent = function() {
     
-    // encapsulate private static event types
-    this.MARK = function() {
-        return 'ISOLACE.EVENT_MARK';
+    this.STATE_CHANGE = function() {
+        return 'ISOLACE.EVENT_STATE_CHANGE';
     };
+    // UI Events Follow
     this.MARK_MODE = function() {
         return 'ISOLACE.EVENT_MARK_MODE';
     };
     this.GUESS = function() {
         return 'ISOLACE.EVENT_GUESS';
     };
-    this.STATE_CHANGE = function() {
-        return 'ISOLACE.EVENT_STATE_CHANGE';
-    };
     this.LEVEL_CHANGE = function() {
         return 'ISOLACE.EVENT_LEVEL_CHANGE';
+    };
+    this.SELECT_CELL = function() {
+        return 'ISOLACE.EVENT_SELECT_CELL';
+    };
+    this.SELECT_CELL_UP = function() {
+        return 'ISOLACE.EVENT_SELECT_CELL_UP';
+    };
+    this.SELECT_CELL_DOWN = function() {
+        return 'ISOLACE.EVENT_SELECT_CELLL_DOWN';
+    };
+    this.SELECT_CELL_LEFT = function() {
+        return 'ISOLACE.EVENT_SELECT_CELL_LEFT';
+    };
+    this.SELECT_CELL_RIGHT = function() {
+        return 'ISOLACE.EVENT_SELECT_CELL_RIGHT';
     };
 };
 
@@ -31,25 +43,28 @@ ISOLACE.GameEvent = function() {
  * @method unbind
  */
 ISOLACE.GameEvent.prototype.unbind = function() {
-    $(document).unbind(this.MARK());
     $(document).unbind(this.MARK_MODE());
     $(document).unbind(this.GUESS());
     $(document).unbind(this.STATE_CHANGE());
     $(document).unbind(this.LEVEL_CHANGE());
+    $(document).unbind(this.SELECT_CELL());
+    $(document).unbind(this.SELECT_CELL_UP());
+    $(document).unbind(this.SELECT_CELL_DOWN());
+    $(document).unbind(this.SELECT_CELL_LEFT());
+    $(document).unbind(this.SELECT_CELL_RIGHT());
 };
 
 /**
  * Fire GUESS event.
  * @method fireGuess
  * @param {int} value The value of the guess.
- * @param {int} index The cell index of the guess.
  */
-ISOLACE.GameEvent.prototype.fireGuess = function(value, index) {
-    $Event.fire(this.GUESS(), [value, index]);
+ISOLACE.GameEvent.prototype.fireGuess = function(value) {
+    $Event.fire(this.GUESS(), [value]);
 };
 
 /**
- * Bind a handler to the GUESS event. The handler expects two arguments (value, index).
+ * Bind a handler to the GUESS event.
  * @method handleGuess
  * @param {object} context The context to set when calling the handler (usually this).
  * @param {function} f The function you wish to invoke when the event is fired.
@@ -58,25 +73,6 @@ ISOLACE.GameEvent.prototype.handleGuess = function(context, callback) {
     $Event.handle(this.GUESS(), context, callback);
 };
 
-/**
- * Fire MARK event.
- * @method fireMark
- * @param {int} value The value of the mark.
- * @param {int} index The cell index of the mark.
- */
-ISOLACE.GameEvent.prototype.fireMark = function(value, index) {
-    $Event.fire(this.MARK(), [value, index]);
-};
-
-/**
- * Bind a handler to the MARK event. The handler expects two arguments (value, index).
- * @method handleMark
- * @param {object} context The context to set when calling the handler (usually this).
- * @param {function} f The function you wish to invoke when the event is fired.
- */
-ISOLACE.GameEvent.prototype.handleMark = function(context, callback) {
-    $Event.handle(this.MARK(), context, callback);
-};
 
 /**
  * Fire fireMarkMode event.
@@ -133,6 +129,17 @@ ISOLACE.GameEvent.prototype.fireLevelChange = function(puzzleLevel) {
 ISOLACE.GameEvent.prototype.handleLevelChange = function(context, callback) {
     $Event.handle(this.LEVEL_CHANGE(), context, callback);
 };
+
+ISOLACE.GameEvent.prototype.fireSelectCell = function(index) { $Event.fire(this.SELECT_CELL(), [index]);};
+ISOLACE.GameEvent.prototype.handleSelectCell = function(context, callback) {$Event.handle(this.SELECT_CELL(), context, callback);};
+ISOLACE.GameEvent.prototype.fireSelectCellUp = function() { $Event.fire(this.SELECT_CELL_UP());};
+ISOLACE.GameEvent.prototype.handleSelectCellUp = function(context, callback) {$Event.handle(this.SELECT_CELL_UP(), context, callback);};
+ISOLACE.GameEvent.prototype.fireSelectCellDown = function() { $Event.fire(this.SELECT_CELL_DOWN());};
+ISOLACE.GameEvent.prototype.handleSelectCellDown = function(context, callback) {$Event.handle(this.SELECT_CELL_DOWN(), context, callback);};
+ISOLACE.GameEvent.prototype.fireSelectCellLeft = function() { $Event.fire(this.SELECT_CELL_LEFT());};
+ISOLACE.GameEvent.prototype.handleSelectCellLeft = function(context, callback) {$Event.handle(this.SELECT_CELL_LEFT(), context, callback);};
+ISOLACE.GameEvent.prototype.fireSelectCellRight = function() { $Event.fire(this.SELECT_CELL_RIGHT());};
+ISOLACE.GameEvent.prototype.handleSelectCellRight = function(context, callback) {$Event.handle(this.SELECT_CELL_RIGHT(), context, callback);};
 
 if(typeof $GameEvent == "undefined" || !$GameEvent) {
     /**
