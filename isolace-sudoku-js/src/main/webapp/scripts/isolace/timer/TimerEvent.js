@@ -10,23 +10,23 @@ ISOLACE.TimerEvent = function() {
     
     //  UI
     this.TIMER_PLAY_PAUSE_REQUEST = function() {
-        return 'ISOLACE.TIMER_PLAY_PAUSE_REQUEST';
+        return 'ISOLACE_TIMER_PLAY_PAUSE_REQUEST';
     };
     //  LOGIC
     this.TIMER_INCREMENT = function() {
-        return 'ISOLACE.TIMER_INCREMENT';
+        return 'ISOLACE_TIMER_INCREMENT';
     };
     this.TIMER_PAUSE = function() {
-        return 'ISOLACE.TIMER_PAUSE';
+        return 'ISOLACE_TIMER_PAUSE';
     };
     this.TIMER_START = function() {
-        return 'ISOLACE.TIMER_START';
+        return 'ISOLACE_TIMER_START';
     };
     this.TIMER_STOP = function() {
-        return 'ISOLACE.TIMER_STOP';
+        return 'ISOLACE_TIMER_STOP';
     };
     this.TIMER_UNPAUSE = function() {
-        return 'ISOLACE.TIMER_UNPAUSE';
+        return 'ISOLACE_TIMER_UNPAUSE';
     };
 };
 
@@ -65,7 +65,7 @@ ISOLACE.TimerEvent.prototype.handleTimerPlayPauseRequest = function(context, cal
  * @param {int} seconds The number of seconds elapsed.
  */
 ISOLACE.TimerEvent.prototype.fireTimerIncrement = function(seconds) {
-    $Event.fire(this.TIMER_INCREMENT(), [seconds]);
+    $Event.fire(this.TIMER_INCREMENT(), [seconds], true);
 };
 
 /**

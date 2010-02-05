@@ -7,7 +7,6 @@
  * @version 0.1
  */
 ISOLACE.GamePanel = function() {
-    this.markMode = false;
 };
 
 /**
@@ -118,7 +117,7 @@ ISOLACE.GamePanel.prototype.initUndo = function() {
  */
 ISOLACE.GamePanel.prototype.handleGuess = function(value) {
     var index = this.selector.getIndex();
-    if(this.markMode) {
+    if($Options.inMarkerMode) {
         this.state.setMarkerValue(value, index);
     } else {
         var correctGuess = this.state.setValue(value, index);
@@ -161,7 +160,7 @@ ISOLACE.GamePanel.prototype.handleStateChanged = function(notUsedBoardState) {
  * @method handleToggleMarkMode
  */
 ISOLACE.GamePanel.prototype.handleToggleMarkMode = function() {
-    this.markMode = !this.markMode;
+    $Renderer.renderSelector(this.selector.getIndex());
 };
 
 

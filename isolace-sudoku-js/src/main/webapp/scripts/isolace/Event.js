@@ -22,8 +22,9 @@ ISOLACE.Event = function() {
  * @method fire
  * @param {string} eventType The Event type
  * @param {array} argArray An array of parameters to be sent with the event.
+ * @param {boolean | optional} skipLog Don't log this event, useful for mouse move or time events.
  */
-ISOLACE.Event.prototype.fire = function(eventType, argArray) {
+ISOLACE.Event.prototype.fire = function(eventType, argArray, skipLog) {
     assertDefined(eventType, 'eventType is invalid');
     var e = jQuery.Event(eventType);
     var message = "Firing event type: '" + eventType + "'";
@@ -32,8 +33,12 @@ ISOLACE.Event.prototype.fire = function(eventType, argArray) {
         e.payload = argArray;
         message += ' with args: [' + argArray + ']';
     }
-
-    $Log.debug(message);
+    if(skipLog) {
+        e.skipLog = true;
+    } else {
+        e.skipLog = false;
+        $Log.debug(message);
+    }
     $(document).trigger(e);
 };
 
@@ -48,15 +53,17 @@ ISOLACE.Event.prototype.handle = function(eventType, context, callback) {
     assertDefined(eventType, 'eventType is invalid');
     assertDefined(context, 'context is invalid');
     assertDefined(callback, 'callback is invalid');
-    var message = "Called handler for event type: '" + eventType + "'";
     $(document).bind(eventType, function(e) {
+        var message = "Called handler for event type: '" + e.type + "'";
         if(e.payload !== undefined) {
             callback.apply(context, e.payload);
             message += ' with args: [' + e.payload + ']';
         } else {
             callback.call(context, e);
         }
-        $Log.debug(message);
+        if(!e.skipLog) {
+            $Log.debug(message);
+        }
     });
 };
 
