@@ -75,6 +75,20 @@
     float: left;
 }
 
+.markBackground {
+    -moz-opacity:0.1;
+    -khtml-opacity: 0.1;
+    opacity: 0.1;
+    background-color: #3B5998;
+}
+
+.guessBackground {
+    -moz-opacity:1.0;
+    -khtml-opacity: 1.0;
+    opacity: 1.0;
+    background-color: transparent;
+}
+
 #optionsContent {
     position: absolute;
     margin: 12px;
