@@ -83,7 +83,7 @@ ISOLACE.sudoku.Renderer.prototype.renderSymbolCount = function(state) {
         if(count > 8) {
             style = 'fiftyPercent';
         }
-        var img = "<div class='symbolCount combinedImage sprite-" + (i+1) + "-marker" + style + "'  />&nbsp;</div>";
+        var img = "<div class='symbolCount combinedImage sprite-" + (i+1) + "-marker " + style + "'  />&nbsp;</div>";
         var bar = '';
         var numRevealed = this.revealed[i];
         for( var j = 0; j < count; j++) {
