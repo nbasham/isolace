@@ -123,10 +123,36 @@ function arrayEquals(a1, a2) {
  * @param  {object} context The scope to wrap a function call to.
  */
 Function.prototype.bind = function(context) {
-    var fun = this;
+    var localFunctionRef = this;
     return function(){
-      return fun.apply(context, arguments);
+      return localFunctionRef.apply(context, arguments);
     };
 };
 
+/**
+ * Extends jQuery's removeClass.
+ * <pre>
+ *     Given: <div id='did' class='a b c1'/>
+ *     $('#did').removeClassContains('c');
+ *     Yields: <div id='did' class='a b'/>
+ * </pre>
+ *
+ * @method removeClassContains
+ * @param  {string} classFragment The class string to search for.
+ */
+$.fn.extend({
+    removeClassContains: function(classFragment) {
+    var classes = $(this).attr('class');
+    if(classes !== null) {
+        classes = classes.split(' ');
+        for (var classIndex in classes) {
+            var className = classes[classIndex];
+            var i = className.indexOf(classFragment);
+            if (i >= 0) {
+                classes.splice(classIndex, 1);
+            }
+        }
 
+        $(this).attr('class', classes.join(' '));}
+    }
+});

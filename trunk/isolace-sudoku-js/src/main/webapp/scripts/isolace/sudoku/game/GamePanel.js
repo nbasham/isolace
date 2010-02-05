@@ -41,7 +41,7 @@ ISOLACE.GamePanel.prototype.handleLevelChange = function(level) {
     this.undoController.reset(initialState);
     $Renderer.render(this.state);
     this.timerController.reset();
-    this.selector.reset(puzzle);
+    this.selector.reset(this.puzzle);
 };
 
 ISOLACE.GamePanel.prototype.pause = function() {
