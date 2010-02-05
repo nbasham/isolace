@@ -50,19 +50,19 @@ ISOLACE.UndoEvent = function() {
     // encapsulate private static event types
 
     this.SUBMIT_UNDO_RECORD = function() {
-        return 'ISOLACE.SUBMIT_UNDO_RECORD';
+        return 'ISOLACE_SUBMIT_UNDO_RECORD';
     };
 
     this.UNDO = function() {
-        return 'ISOLACE.UNDO';
+        return 'ISOLACE_UNDO';
     };
 
     this.UNDO_REQUEST = function() {
-        return 'ISOLACE.UNDO_REQUEST';
+        return 'ISOLACE_UNDO_REQUEST';
     };
 
     this.UPDATE_UNDO_UI = function() {
-        return 'ISOLACE.UPDATE_UNDO_UI';
+        return 'ISOLACE_UPDATE_UNDO_UI';
     };
 };
 

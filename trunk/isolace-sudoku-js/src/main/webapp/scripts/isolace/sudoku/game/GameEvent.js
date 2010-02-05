@@ -9,32 +9,32 @@
 ISOLACE.GameEvent = function() {
     
     this.STATE_CHANGE = function() {
-        return 'ISOLACE.EVENT_STATE_CHANGE';
+        return 'ISOLACE_EVENT_STATE_CHANGE';
     };
     // UI Events Follow
     this.MARK_MODE = function() {
-        return 'ISOLACE.EVENT_MARK_MODE';
+        return 'ISOLACE_EVENT_MARK_MODE';
     };
     this.GUESS = function() {
-        return 'ISOLACE.EVENT_GUESS';
+        return 'ISOLACE_EVENT_GUESS';
     };
     this.LEVEL_CHANGE = function() {
-        return 'ISOLACE.EVENT_LEVEL_CHANGE';
+        return 'ISOLACE_EVENT_LEVEL_CHANGE';
     };
     this.SELECT_CELL = function() {
-        return 'ISOLACE.EVENT_SELECT_CELL';
+        return 'ISOLACE_EVENT_SELECT_CELL';
     };
     this.SELECT_CELL_UP = function() {
-        return 'ISOLACE.EVENT_SELECT_CELL_UP';
+        return 'ISOLACE_EVENT_SELECT_CELL_UP';
     };
     this.SELECT_CELL_DOWN = function() {
-        return 'ISOLACE.EVENT_SELECT_CELLL_DOWN';
+        return 'ISOLACE_EVENT_SELECT_CELLL_DOWN';
     };
     this.SELECT_CELL_LEFT = function() {
-        return 'ISOLACE.EVENT_SELECT_CELL_LEFT';
+        return 'ISOLACE_EVENT_SELECT_CELL_LEFT';
     };
     this.SELECT_CELL_RIGHT = function() {
-        return 'ISOLACE.EVENT_SELECT_CELL_RIGHT';
+        return 'ISOLACE_EVENT_SELECT_CELL_RIGHT';
     };
 };
 
@@ -72,7 +72,6 @@ ISOLACE.GameEvent.prototype.fireGuess = function(value) {
 ISOLACE.GameEvent.prototype.handleGuess = function(context, callback) {
     $Event.handle(this.GUESS(), context, callback);
 };
-
 
 /**
  * Fire fireMarkMode event.

@@ -13,8 +13,6 @@ ISOLACE.sudoku.Renderer = function() {
     this.renderers.color = new ISOLACE.sudoku.ColorRenderer();
     $GameEvent.handleStateChange(this, this.render);
     this.selector = undefined;
-    this.markMode = false;
-    $GameEvent.handleToggleMarkMode(this, this.handleToggleMarkMode);
 };
 
 /**
@@ -148,22 +146,12 @@ ISOLACE.sudoku.Renderer.prototype.renderBoard = function() {
  * @method renderSelector
  */
 ISOLACE.sudoku.Renderer.prototype.renderSelector = function(index) {
-    this.renderers.image.renderSelector(index, this.markMode);
+    this.renderers.image.renderSelector(index, $Options.inMarkerMode);
     $Log.debug('Rendered selector at index ' + index + '.');
 };
 
 ISOLACE.sudoku.Renderer.prototype.renderTimer = function(seconds) {
     this.renderers.image.renderTimer(seconds);
-};
-
-/**
- * Handle a toggle mark mode event.
- * 
- * @method handleToggleMarkMode
- * @private
- */
-ISOLACE.sudoku.Renderer.prototype.handleToggleMarkMode = function() {
-    this.markMode = !this.markMode;
 };
 
 if(typeof $Renderer == "undefined" || !$Renderer) {
