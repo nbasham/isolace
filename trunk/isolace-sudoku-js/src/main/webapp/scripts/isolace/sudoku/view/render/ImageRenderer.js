@@ -120,8 +120,12 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderSelector = function(index, inMarker
     this.selector.css('display', 'block');
 
     if(inMarkerMode) {
+        this.selector.removeClass('guessBackground');
+        this.selector.addClass('markBackground');
         this.marker.css('display', 'block');
     } else {
+        this.selector.removeClass('markBackground');
+        this.selector.addClass('guessBackground');
         this.marker.css('display', 'none');
     }
     this.marker.css('top', t + 16);
