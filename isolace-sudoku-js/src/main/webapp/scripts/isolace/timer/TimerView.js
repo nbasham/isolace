@@ -10,9 +10,6 @@
  */
 ISOLACE.TimerView = function() {
     $TimerEvent.handleTimerIncrement(this, this.update);
-    $('.timerViewImages')
-            .html(
-                    "<img src='../images/45/numbers/timer-0.png' /><img src='../images/45/numbers/timer-0.png' /><img src='../images/45/numbers/timer-seperator.png' /><img src='../images/45/numbers/timer-0.png' /><img src='../images/45/numbers/timer-0.png' />");
     $('.timerPause').toggle(function() {
         $TimerEvent.fireTimerPlayPauseRequest(true);
     },
@@ -28,17 +25,7 @@ ISOLACE.TimerView = function() {
  * @method update
  */
 ISOLACE.TimerView.prototype.update = function(seconds) {
-    $('.timerViewImages').html('');
-    var time = $SUDOKU_UTIL.formatTime(seconds);
-    var timeElements = time.split('');
-    for( var i = 0; i < timeElements.length; i++) {
-        var el = timeElements[i];
-        if(el == ':') {
-            el = 'seperator';
-        }
-        var src = '../images/45/numbers/timer-' + el + '.png';
-        $('.timerViewImages').append("<img src='" + src + "' />");
-    }
+    $Renderer.renderTimer(seconds);
 };
 
 ISOLACE.TimerView.prototype.handleTimerPlayPauseRequest = function(isPauseRequest) {

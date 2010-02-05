@@ -1,7 +1,7 @@
 ISOLACE.namespace("sudoku");
 
 /**
- * Implements selecting a cell using a image.
+ * Implements logic for cell selection and navigation.
  * 
  * @class CellSelector
  * @namespace ISOLACE.sudoku
@@ -22,6 +22,23 @@ ISOLACE.sudoku.CellSelector = function(puzzle) {
 ISOLACE.sudoku.CellSelector.prototype.reset = function(puzzle) {
     this.puzzle = puzzle;
     this.selectedIndex = undefined;
+};
+/**
+ * Represents a cell being selected by adding a image.
+ * 
+ * @method select
+ * @param {number} cellIndex The index of the cell to select.
+ */
+ISOLACE.sudoku.CellSelector.prototype.select = function(cellIndex) {
+    $Renderer.renderSelector(cellIndex);
+};
+/**
+ * Not required because select moves the image from the previously selected cell.
+ * 
+ * @method unselect
+ * @param {number} cellIndex The index of the cell to unselect.
+ */
+ISOLACE.sudoku.CellSelector.prototype.unselect = function(cell, cellIndex) {
 };
 ISOLACE.sudoku.CellSelector.prototype.getIndex = function() {
     return this.selectedIndex;
@@ -88,63 +105,4 @@ ISOLACE.sudoku.CellSelector.prototype.dec = function(value, amount) {
         }
     } while(!this.puzzle.isEditable(newIndex) && this.SKIP_REVEALED);
     return newIndex;
-};
-
-/**
- * Represents a cell being selected by adding a image.
- * 
- * @method select
- */
-ISOLACE.sudoku.CellSelector.prototype.select = function(index) {
-    if(this.selector === undefined) {
-        this.createSelectorElement();
-    }
-    var cell = $('#c' + index);
-    var t = cell.offset().top;
-    var l = cell.position().left;
-    this.selector.css('top', t);
-    this.selector.css('left', l);
-    this.selector.css('display', 'block');
-
-    this.marker.css('top', t + 16);
-    this.marker.css('left', l + 16);
-};
-
-/**
- * Not required because select moves the image from the previously selected cell.
- * 
- * @method unselect
- */
-ISOLACE.sudoku.CellSelector.prototype.unselect = function(cell, index) {
-};
-
-
-/**
- * Create selector HTMLELement.
- * @private
- * @method createSelectorElement
- */
-ISOLACE.sudoku.CellSelector.prototype.createSelectorElement = function() {
-    this.selector = $('<img/>', {
-        src: '../images/45/numbers/select.png',
-        id: 'selector'
-    }).appendTo('.board');
-    this.marker = $('<div/>', {
-        id: 'selectorMarker',
-        'class': 'ui-icon ui-icon-pencil fiftyPercent'
-    }).appendTo('.board').hide();
-};
-
-/**
- * Handle a toggle mark mode event.
- * 
- * @method handleToggleMarkMode
- */
-ISOLACE.sudoku.CellSelector.prototype.handleToggleMarkMode = function() {
-    this.markMode = !this.markMode;
-    if(this.markMode) {
-        this.marker.css('display', 'block');
-    } else {
-        this.marker.css('display', 'none');
-    }
 };

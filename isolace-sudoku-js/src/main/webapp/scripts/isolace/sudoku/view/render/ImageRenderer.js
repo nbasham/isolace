@@ -25,7 +25,7 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderCountSymbol = function(symbolIndex)
  */
 ISOLACE.sudoku.ImageRenderer.prototype.renderMarkerCell = function(boardState, index) {
     var parentCell = $('#c' + index);
-    this.setImage(parentCell, '');
+    parentCell.css('background-image', "url('')");
     var s = '';
     for(var markerIndex = 0; markerIndex < 9; markerIndex++) {
         var value = markerIndex + 1;
@@ -38,9 +38,9 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderMarkerCell = function(boardState, i
         var cell = $('.marker' + index + '-' + value);
         if(boardState.hasMarkerValue(value, index)) {
             if(boardState.conflicts(value, index)) {
-                this.setImage(cell, value + '-marker-conflict');
+                this.setBackground(cell, value + '-marker-conflict');
             } else {
-                this.setImage(cell, value + '-marker');
+                this.setBackground(cell, value + '-marker');
             }
         }
     }
@@ -54,26 +54,77 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderCell = function(boardState, index) 
     var value = boardState.getValue(index);
     var isEditable = boardState.isEditable(index);
     if(isEditable) {
-        if(boardState.conflicts(value, index)) {
-            this.setImage(cell, value + '-guess-conflict');
+        if(value === 0) {
+            cell.css('background-image', "url('')");
+        } else if(boardState.conflicts(value, index)) {
+            this.setBackground(cell, value + '-guess-conflict');
         } else {
-            this.setImage(cell, value + '-guess');
+            this.setBackground(cell, value + '-guess');
         }
     } else {
-        this.setImage(cell, value + '-revealed');
+        this.setBackground(cell, value + '-revealed');
     }
-    if(value === 0) {        
-        this.setImage(cell, '');
+};
+
+
+/**
+ * @method renderTimer
+ */
+ISOLACE.sudoku.ImageRenderer.prototype.renderTimer = function(seconds) {
+    var time = $SUDOKU_UTIL.formatTime(seconds);
+    var timeElements = time.split('');
+    var numPlaces = timeElements.length;
+    if(numPlaces > 5) {
+        $('#timerImage5').show();
+    } else {
+        $('#timerImage5').hide();
+    }
+    for( var i = 0; i < numPlaces; i++) {
+        var el = timeElements[numPlaces - i - 1];
+        if(el != ':') {
+            this.setBackground($('#timerImage' + i), 'timer-' + el);
+        }
     }
 };
 
 /**
  * @private
  */
-ISOLACE.sudoku.ImageRenderer.prototype.setImage = function(cell, imageName) {
-    var imagePath = '../images/45/numbers/'  + imageName + '.png';
+ISOLACE.sudoku.ImageRenderer.prototype.setBackground = function(cell, imageName) {
+    var imagePath = '../images/' + ISOLACE.sudoku.THEME + '/combined.png';
     cell.css('background-image', 'url(' + imagePath + ')');
     cell.css('background-repeat', 'no-repeat');
-    cell.css('background-position', 'center center');
+    cell.removeClassContains('sprite');
+    cell.addClass('sprite-' + imageName);
 };
 
+/**
+ * @method renderSelector
+ */
+ISOLACE.sudoku.ImageRenderer.prototype.renderSelector = function(index, inMarkerMode) {
+    if(this.selector === undefined) {
+        this.selector = $('<div/>', {
+            id: 'selector'
+        }).appendTo('.board');
+        this.setBackground(this.selector, 'select');
+        this.marker = $('<div/>', {
+            id: 'selectorMarker',
+            'class': 'ui-icon ui-icon-pencil fiftyPercent'
+        }).appendTo('.board').hide();
+    }
+    var cell = $('#c' + index);
+    var t = cell.offset().top;
+    var l = cell.position().left;
+    this.selector.css('top', t);
+    this.selector.css('left', l);
+    this.selector.css('display', 'block');
+
+    if(inMarkerMode) {
+        this.marker.css('display', 'block');
+    } else {
+        this.marker.css('display', 'none');
+    }
+    this.marker.css('top', t + 16);
+    this.marker.css('left', l + 16);
+    $Log.debug('Rendered selector at index ' + index + '.');
+};
