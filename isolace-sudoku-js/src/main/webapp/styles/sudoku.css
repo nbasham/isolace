@@ -1,17 +1,18 @@
 .bodyContent {
-    width: 50em;
+    width: 51em;
     height: 58em;
-    margin-left: auto ;
-    margin-right: auto ;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#tabs-1, #tabs-2, #tabs-3, #tabs-4, #tabs-5 {
-    height: 476px;
+#tabs-1,#tabs-2,#tabs-3,#tabs-4,#tabs-5 {
+    min-height: 468px;
 }
 
 .boardContent {
-    width: 446px;
-    height: 472px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
 }
@@ -25,12 +26,99 @@
 }
 
 #boardView {
-    height: 443px;
+    position: absolute;
+    top: 7px;
+    left: 0px;
     border: 2px solid black;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
+    /*
+    height: 443px;
     float: left;
     margin-bottom: 6px;
+    */
+}
+
+#markerModeView {
+    position: absolute;
+    top: 461px;
+    left: 166px;
+    font-family: arial !important;
+    font-size: 14px !important;
+    font-weight: bold;
+    color: #3B5998;
+}
+
+#levelView {
+    position: absolute;
+    top: 461px;
+    left: 0px;
+    font-family: arial !important;
+    font-size: 14px !important;
+    font-weight: bold;
+}
+
+.timerView {
+    position: absolute;
+    top: 459px;
+    left: 306px;
+    min-width: 141px;
+}
+
+#controlView {
+    position: absolute;
+    top: 7px;
+    left: 466px;
+    height: 127px;
+    width: 135px;
+    padding: 4px;
+    padding-top: 10px;
+    padding-left: 11px;
+}
+
+.sbutton {
+    width: 90px !important;
+    margin-bottom: 8px;
+    font-family: arial !important;
+    font-size: 12px !important;
+    text-alignment: left !important;
+}
+
+
+#symbolCountView {
+    position: absolute;
+    top: 167px;
+    left: 466px;
+    border: 1px solid #999;
+    height: 170px;
+    min-width: 150px;
+}
+
+#undoView {
+    position: absolute;
+    top: 250px;
+    left: 470px;
+}
+
+#levelMenu {
+    font-size: 62.5%;
+    font-family: "Verdana", sans-serif;
+    margin: 70px 10px;
+    float: left;
+}
+
+fieldset {
+    border: 0;
+    margin-bottom: 40px;
+}
+
+select {
+    width: 100px;
+}
+
+label,select,.ui-select-menu {
+    float: left;
+    margin-right: 10px;
 }
 
 .boardControls {
@@ -41,33 +129,16 @@
     margin-left: 18px;
 }
 
-#boardControlView {
-    margin-top: 4px;
-}
-
-#symbolCountView {
-    float: left;
-    border: 1px solid #999;
-    height: 170px;
-    min-width: 141px;
-}
-
-.symbolCount, .symbolCountHeader {
+.symbolCount,.symbolCountHeader {
     float: left;
     width: 14px;
     height: 17px;
 }
 
 .symbolCountHeader {
-    -moz-opacity:0.5;
+    -moz-opacity: 0.5;
     -khtml-opacity: 0.5;
     opacity: 0.5;
-}
-
-.timerView {
-    margin-top: 6px;
-    float: right;
-    min-width: 126px;
 }
 
 .markIcon {
@@ -76,22 +147,43 @@
 }
 
 .markBackground {
-    -moz-opacity:0.1;
+    -moz-opacity: 0.1;
     -khtml-opacity: 0.1;
     opacity: 0.1;
     background-color: #3B5998;
 }
 
 .guessBackground {
-    -moz-opacity:1.0;
+    -moz-opacity: 1.0;
     -khtml-opacity: 1.0;
     opacity: 1.0;
     background-color: transparent;
 }
 
+#playContent {
+    position: absolute;
+}
+
 #optionsContent {
     position: absolute;
-    margin: 12px;
+}
+
+#optionsSepartor0,#optionsSepartor1,#optionsSepartor2 {
+    position: absolute;
+    left: 12px;
+    width: 400px;
+}
+
+#optionsSepartor0 {
+    top: 0px;
+}
+
+#optionsSepartor1 {
+    top: 146px;
+}
+
+#optionsSepartor2 {
+    top: 204px;
 }
 
 .optionsSymbolTypeImage, .optionSymbolTypeColorImage, .optionSymbolTypeNumberImage {
@@ -106,33 +198,32 @@
 }
 
 .optionSymbolTypeColorImage {
-    top: 12px;
+    top: 22px;
     left: 124px;
 }
 
 .optionSymbolTypeNumberImage {
-    top: 12px;
+    top: 22px;
     left: 12px;
 }
 
-.optionSymbolTypeColorButton, .optionSymbolTypeNumberButton {
+.optionSymbolTypeColorButton,.optionSymbolTypeNumberButton {
     position: absolute;
     width: 92px !important;
+    top: 115px;
 }
 
 .optionSymbolTypeNumberButton {
-    top: 112px;
     left: 12px;
 }
 
 .optionSymbolTypeColorButton {
-    top: 112px;
     left: 124px;
 }
 
 .optionLevel {
     position: absolute;
-    top: 162px;
+    top: 168px;
     left: 12px;
     width: 400px;
 }
@@ -146,14 +237,14 @@
     height: 48px;
     width: 48px;
 }
-    
+
 #selectorMarker {
     position: absolute;
-    height: 16px;
-    width: 16px;
+    height: 45px;
+    width: 45px;
     display: 'none';
 }
-    
+
 .undoView {
     float: left;
     display: block;
@@ -217,7 +308,7 @@ div.marker {
 }
 
 .revealedCell {
-    color: #888888 ;
+    color: #888888;
 }
 
 .unrevealedCell {
@@ -229,15 +320,15 @@ div.marker {
 }
 
 .fiftyPercent {
-    filter:alpha(opacity=50);
-    -moz-opacity:0.5;
+    filter: alpha(opacity =     50);
+    -moz-opacity: 0.5;
     -khtml-opacity: 0.5;
     opacity: 0.5;
 }
 
 .sixtyPercent {
-    filter:alpha(opacity=60);
-    -moz-opacity:0.6;
+    filter: alpha(opacity =     60);
+    -moz-opacity: 0.6;
     -khtml-opacity: 0.6;
     opacity: 0.6;
 }
@@ -245,10 +336,17 @@ div.marker {
 .facebook {
     background-color: #3B5998;
 }
-
-
-.my-state-active { background: #3B5998 url(facebook/images/ui-bg_glass_50_3B5998_1x400.png) 50% 50% repeat-x !important; font-weight: bold !important; color: #fff !important; }
-.my-state-hover { color: #ddd !important; }
+/*
+.my-state-active {
+    background: #3B5998 url(facebook/images/ui-bg_glass_50_3B5998_1x400.png)
+        50% 50% repeat-x !important;
+    font-weight: bold !important;
+    color: #fff !important;
+}
+.my-state-hover {
+    color: #ddd !important;
+}
+*/
 
 .marker {
     height: 14px;
@@ -294,34 +392,44 @@ div.marker {
 div.zero {
     background-color: transparent;
 }
+
 div.one {
     background-color: #D62469;
 }
+
 div.two {
     background-color: #F87F1F;
 }
+
 div.three {
     background-color: #F9C71E;
 }
+
 div.four {
     background-color: #AFCE3B;
 }
+
 div.five {
     background-color: #187349;
 }
+
 div.six {
     background-color: #00ABED;
 }
+
 div.seven {
     background-color: #0665AE;
 }
+
 div.eight {
     background-color: #64095E;
 }
+
 div.nine {
     background-color: black;
 }
-.timerViewImage{
+
+.timerViewImage {
     float: right;
     width: 14px;
     height: 17px;
@@ -335,8 +443,8 @@ button.timerPause {
 div.logo {
     width: 151px;
     height: 44px;
-    margin-left: auto ;
-    margin-right: auto ;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .combinedImage {
@@ -344,66 +452,284 @@ div.logo {
     background-repeat: no-repeat;
 }
 
-.why { background-position: -95px -1771px;  } 
+.colorsImage {
+    background-image: url(../images/colors.png);
+    background-repeat: no-repeat;
+}
 
-.sprite-1-guess-conflict { background-position: 0 0;  } 
-.sprite-1-guess { background-position: 0 -95px;  } 
-.sprite-1-marker-conflict { background-position: 0 -190px;  } 
-.sprite-1-marker { background-position: 0 -257px;  } 
-.sprite-1-revealed { background-position: 0 -324px;  } 
-.sprite-2-guess-conflict { background-position: 0 -419px;  } 
-.sprite-2-guess { background-position: 0 -514px;  } 
-.sprite-2-marker-conflict { background-position: 0 -609px;  } 
-.sprite-2-marker { background-position: 0 -676px;  } 
-.sprite-2-revealed { background-position: 0 -743px;  } 
-.sprite-3-guess-conflict { background-position: 0 -838px;  } 
-.sprite-3-guess { background-position: 0 -933px;  } 
-.sprite-3-marker-conflict { background-position: 0 -1028px;  } 
-.sprite-3-marker { background-position: 0 -1095px;  } 
-.sprite-3-revealed { background-position: 0 -1162px;  } 
-.sprite-4-guess-conflict { background-position: 0 -1257px;  } 
-.sprite-4-guess { background-position: 0 -1352px;  } 
-.sprite-4-marker-conflict { background-position: 0 -1447px;  } 
-.sprite-4-marker { background-position: 0 -1514px;  } 
-.sprite-4-revealed { background-position: 0 -1581px;  } 
-.sprite-5-guess-conflict { background-position: 0 -1676px;  } 
-.sprite-5-guess { background-position: 0 -1771px;  } 
-.sprite-5-marker-conflict { background-position: 0 -1866px;  } 
-.sprite-5-marker { background-position: 0 -1933px;  } 
-.sprite-5-revealed { background-position: -95px 0;  } 
-.sprite-6-guess-conflict { background-position: -95px -95px;  } 
-.sprite-6-guess { background-position: -95px -190px;  } 
-.sprite-6-marker-conflict { background-position: -95px -285px;  } 
-.sprite-6-marker { background-position: -95px -352px;  } 
-.sprite-6-revealed { background-position: -95px -419px;  } 
-.sprite-7-guess-conflict { background-position: -95px -514px;  } 
-.sprite-7-guess { background-position: -95px -609px;  } 
-.sprite-7-marker-conflict { background-position: -95px -704px;  } 
-.sprite-7-marker { background-position: -95px -771px;  } 
-.sprite-7-revealed { background-position: -95px -838px;  } 
-.sprite-8-guess-conflict { background-position: -95px -933px;  } 
-.sprite-8-guess { background-position: -95px -1028px;  } 
-.sprite-8-marker-conflict { background-position: -95px -1123px;  } 
-.sprite-8-marker { background-position: -95px -1190px;  } 
-.sprite-8-revealed { background-position: -95px -1257px;  } 
-.sprite-9-guess-conflict { background-position: -95px -1352px;  } 
-.sprite-9-guess { background-position: -95px -1447px;  } 
-.sprite-9-marker-conflict { background-position: -95px -1542px;  } 
-.sprite-9-marker { background-position: -95px -1609px;  } 
-.sprite-9-revealed { background-position: -95px -1676px;  } 
-.sprite-colorboard { background-position: -95px -1771px;  } 
-.sprite-numbicboard { background-position: -95px -1909px;  } 
-.sprite-select { background-position: -233px 0;  } 
-.sprite-sudoku { background-position: -233px -98px;  } 
-.sprite-timer-0 { background-position: -233px -192px;  } 
-.sprite-timer-1 { background-position: -233px -259px;  } 
-.sprite-timer-2 { background-position: -233px -326px;  } 
-.sprite-timer-3 { background-position: -233px -393px;  } 
-.sprite-timer-4 { background-position: -233px -460px;  } 
-.sprite-timer-5 { background-position: -233px -527px;  } 
-.sprite-timer-6 { background-position: -233px -594px;  } 
-.sprite-timer-7 { background-position: -233px -661px;  } 
-.sprite-timer-8 { background-position: -233px -728px;  } 
-.sprite-timer-9 { background-position: -233px -795px;  } 
-.sprite-timer-seperator { background-position: -233px -862px;  } 
+.why {
+    background-position: -95px -1771px;
+}
 
+.sprite-1-guess-conflict {
+    background-position: 0 0;
+}
+
+.sprite-1-guess {
+    background-position: 0 -95px;
+}
+
+.sprite-1-marker-conflict {
+    background-position: 0 -190px;
+}
+
+.sprite-1-marker {
+    background-position: 0 -257px;
+}
+
+.sprite-1-revealed {
+    background-position: 0 -324px;
+}
+
+.sprite-2-guess-conflict {
+    background-position: 0 -419px;
+}
+
+.sprite-2-guess {
+    background-position: 0 -514px;
+}
+
+.sprite-2-marker-conflict {
+    background-position: 0 -609px;
+}
+
+.sprite-2-marker {
+    background-position: 0 -676px;
+}
+
+.sprite-2-revealed {
+    background-position: 0 -743px;
+}
+
+.sprite-3-guess-conflict {
+    background-position: 0 -838px;
+}
+
+.sprite-3-guess {
+    background-position: 0 -933px;
+}
+
+.sprite-3-marker-conflict {
+    background-position: 0 -1028px;
+}
+
+.sprite-3-marker {
+    background-position: 0 -1095px;
+}
+
+.sprite-3-revealed {
+    background-position: 0 -1162px;
+}
+
+.sprite-4-guess-conflict {
+    background-position: 0 -1257px;
+}
+
+.sprite-4-guess {
+    background-position: 0 -1352px;
+}
+
+.sprite-4-marker-conflict {
+    background-position: 0 -1447px;
+}
+
+.sprite-4-marker {
+    background-position: 0 -1514px;
+}
+
+.sprite-4-revealed {
+    background-position: 0 -1581px;
+}
+
+.sprite-5-guess-conflict {
+    background-position: 0 -1676px;
+}
+
+.sprite-5-guess {
+    background-position: 0 -1771px;
+}
+
+.sprite-5-marker-conflict {
+    background-position: 0 -1866px;
+}
+
+.sprite-5-marker {
+    background-position: 0 -1933px;
+}
+
+.sprite-5-revealed {
+    background-position: -95px 0;
+}
+
+.sprite-6-guess-conflict {
+    background-position: -95px -95px;
+}
+
+.sprite-6-guess {
+    background-position: -95px -190px;
+}
+
+.sprite-6-marker-conflict {
+    background-position: -95px -285px;
+}
+
+.sprite-6-marker {
+    background-position: -95px -352px;
+}
+
+.sprite-6-revealed {
+    background-position: -95px -419px;
+}
+
+.sprite-7-guess-conflict {
+    background-position: -95px -514px;
+}
+
+.sprite-7-guess {
+    background-position: -95px -609px;
+}
+
+.sprite-7-marker-conflict {
+    background-position: -95px -704px;
+}
+
+.sprite-7-marker {
+    background-position: -95px -771px;
+}
+
+.sprite-7-revealed {
+    background-position: -95px -838px;
+}
+
+.sprite-8-guess-conflict {
+    background-position: -95px -933px;
+}
+
+.sprite-8-guess {
+    background-position: -95px -1028px;
+}
+
+.sprite-8-marker-conflict {
+    background-position: -95px -1123px;
+}
+
+.sprite-8-marker {
+    background-position: -95px -1190px;
+}
+
+.sprite-8-revealed {
+    background-position: -95px -1257px;
+}
+
+.sprite-9-guess-conflict {
+    background-position: -95px -1352px;
+}
+
+.sprite-9-guess {
+    background-position: -95px -1447px;
+}
+
+.sprite-9-marker-conflict {
+    background-position: -95px -1542px;
+}
+
+.sprite-9-marker {
+    background-position: -95px -1609px;
+}
+
+.sprite-9-revealed {
+    background-position: -95px -1676px;
+}
+
+.sprite-colorboard {
+    background-position: -95px -1771px;
+}
+
+.sprite-numbicboard {
+    background-position: -95px -1909px;
+}
+
+.sprite-select {
+    background-position: -233px 0;
+}
+
+.sprite-sudoku {
+    background-position: -233px -98px;
+}
+
+.sprite-timer-0 {
+    background-position: -233px -192px;
+}
+
+.sprite-timer-1 {
+    background-position: -233px -259px;
+}
+
+.sprite-timer-2 {
+    background-position: -233px -326px;
+}
+
+.sprite-timer-3 {
+    background-position: -233px -393px;
+}
+
+.sprite-timer-4 {
+    background-position: -233px -460px;
+}
+
+.sprite-timer-5 {
+    background-position: -233px -527px;
+}
+
+.sprite-timer-6 {
+    background-position: -233px -594px;
+}
+
+.sprite-timer-7 {
+    background-position: -233px -661px;
+}
+
+.sprite-timer-8 {
+    background-position: -233px -728px;
+}
+
+.sprite-timer-9 {
+    background-position: -233px -795px;
+}
+
+.sprite-timer-seperator {
+    background-position: -233px -862px;
+}
+
+#tooltip.pretty {
+    font-family: Arial;
+    border: none;
+    width: 210px;
+    padding:20px;
+    height: 135px;
+    opacity: 0.8;
+    background: url('../images/tooltip/shadow.png');
+}
+#tooltip.pretty h3 {
+    margin-bottom: 0.75em;
+    font-size: 12pt;
+    width: 220px;
+    text-align: center;
+}
+#tooltip.pretty div { width: 220px; text-align: left; }
+ 
+#tooltip.fancy {
+    background: url('../images/tooltip/spout-left.png');
+    padding-top: 5em;
+    height: 100px;
+}
+#tooltip.fancy.viewport-right {
+    background: url('../images/tooltip/spout-right.png');
+}
+
+#tooltip.spout-left-down {
+    background: url('../images/tooltip/spout-left-down.png');
+    background-repeat: no-repeat;
+    height: 100px;
+    opacity: 1.0;
+}

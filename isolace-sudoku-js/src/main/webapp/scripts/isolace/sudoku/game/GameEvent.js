@@ -36,6 +36,97 @@ ISOLACE.GameEvent = function() {
     this.SELECT_CELL_RIGHT = function() {
         return 'ISOLACE_EVENT_SELECT_CELL_RIGHT';
     };
+    this.SKIP_GAME = function() {
+        return 'ISOLACE_EVENT_SKIP_GAME';
+    };
+    this.SHOW_TIMER = function() {
+        return 'ISOLACE_EVENT_SHOW_TIMER';
+    };
+    this.SHOW_MARKER_CONFLICT = function() {
+        return 'ISOLACE_EVENT_SHOW_MARKER_CONFLICT';
+    };
+    this.SHOW_GUESS_CONFLICT = function() {
+        return 'ISOLACE_EVENT_SHOW_GUESS_CONFLICT';
+    };
+    this.USE_COLOR_SYMBOLS = function() {
+        return 'ISOLACE_EVENT_USE_COLOR_SYMBOLS';
+    };
+};
+
+/**
+ * Fire USE_COLOR_SYMBOLS event.
+ * @method fireUseColorSymbols
+ * @param {boolean} useColor True if color symbols should be used.
+ */
+ISOLACE.GameEvent.prototype.fireUseColorSymbols = function(useColor) {
+    $Event.fire(this.USE_COLOR_SYMBOLS(), [useColor]);
+};
+
+/**
+ * Bind a handler to the USE_COLOR_SYMBOLS event.
+ * @method handleUseColorSymbols
+ * @param {object} context The context to set when calling the handler (usually this).
+ * @param {function} f The function you wish to invoke when the event is fired.
+ */
+ISOLACE.GameEvent.prototype.handleUseColorSymbols = function(context, callback) {
+    $Event.handle(this.USE_COLOR_SYMBOLS(), context, callback);
+};
+
+/**
+ * Fire SHOW_TIMER event.
+ * @method fireShowTimer
+ * @param {boolean} show True if timer should be shown, false if not.
+ */
+ISOLACE.GameEvent.prototype.fireShowTimer = function(show) {
+    $Event.fire(this.SHOW_TIMER(), [show]);
+};
+
+/**
+ * Bind a handler to the SHOW_TIMER event.
+ * @method handleShowTimer
+ * @param {object} context The context to set when calling the handler (usually this).
+ * @param {function} f The function you wish to invoke when the event is fired.
+ */
+ISOLACE.GameEvent.prototype.handleShowTimer = function(context, callback) {
+    $Event.handle(this.SHOW_TIMER(), context, callback);
+};
+
+/**
+ * Fire SHOW_MARKER_CONFLICT event.
+ * @method fhowMarkerConflict
+ * @param {boolean} show True marker conflicts should be shown.
+ */
+ISOLACE.GameEvent.prototype.fireShowMarkerConflict = function(show) {
+    $Event.fire(this.SHOW_MARKER_CONFLICT(), [show]);
+};
+
+/**
+ * Bind a handler to the SHOW_MARKER_CONFLICT event.
+ * @method handleShowMarkerConflict
+ * @param {object} context The context to set when calling the handler (usually this).
+ * @param {function} f The function you wish to invoke when the event is fired.
+ */
+ISOLACE.GameEvent.prototype.handleShowMarkerConflict = function(context, callback) {
+    $Event.handle(this.SHOW_MARKER_CONFLICT(), context, callback);
+};
+
+/**
+ * Fire SHOW_GUESS_CONFLICT event.
+ * @method fireShowGuessConflict
+ * @param {boolean} show True if incorrect guesses should be flagged.
+ */
+ISOLACE.GameEvent.prototype.fireShowGuessConflict = function(show) {
+    $Event.fire(this.SHOW_GUESS_CONFLICT(), [show]);
+};
+
+/**
+ * Bind a handler to the SHOW_GUESS_CONFLICT event.
+ * @method handleShowGuessConflict
+ * @param {object} context The context to set when calling the handler (usually this).
+ * @param {function} f The function you wish to invoke when the event is fired.
+ */
+ISOLACE.GameEvent.prototype.handleShowGuessConflict = function(context, callback) {
+    $Event.handle(this.SHOW_GUESS_CONFLICT(), context, callback);
 };
 
 /**
@@ -52,6 +143,10 @@ ISOLACE.GameEvent.prototype.unbind = function() {
     $(document).unbind(this.SELECT_CELL_DOWN());
     $(document).unbind(this.SELECT_CELL_LEFT());
     $(document).unbind(this.SELECT_CELL_RIGHT());
+    $(document).unbind(this.SKIP_GAME());
+    $(document).unbind(this.SHOW_TIMER());
+    $(document).unbind(this.SHOW_MARKER_CONFLICT());
+    $(document).unbind(this.SHOW_GUESS_CONFLICT());
 };
 
 /**
@@ -127,6 +222,24 @@ ISOLACE.GameEvent.prototype.fireLevelChange = function(puzzleLevel) {
  */
 ISOLACE.GameEvent.prototype.handleLevelChange = function(context, callback) {
     $Event.handle(this.LEVEL_CHANGE(), context, callback);
+};
+
+/**
+ * Fire SKIP_GAME event.
+ * @method fireSkipGame
+ */
+ISOLACE.GameEvent.prototype.fireSkipGame = function() {
+    $Event.fire(this.SKIP_GAME());
+};
+
+/**
+ * Bind a handler to the SKIP_GAME event.
+ * @method handleSkipGame
+ * @param {object} context The context to set when calling the handler (usually this).
+ * @param {function} f The function you wish to invoke when the event is fired.
+ */
+ISOLACE.GameEvent.prototype.handleSkipGame = function(context, callback) {
+    $Event.handle(this.SKIP_GAME(), context, callback);
 };
 
 ISOLACE.GameEvent.prototype.fireSelectCell = function(index) { $Event.fire(this.SELECT_CELL(), [index]);};

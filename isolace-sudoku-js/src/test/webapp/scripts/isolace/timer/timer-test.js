@@ -36,42 +36,6 @@ asyncTest("TimerIncrement", function() {
     $TimerEvent.fireTimerIncrement(37);
 });
 
-asyncTest("TimerPause", function() {
-    expect(1);
-    $TimerEvent.handleTimerPause(this, function() {
-        ok(true, "TimerPause fired and handled");
-        start();
-    });
-    $TimerEvent.fireTimerPause();
-});
-
-asyncTest("TimerStart", function() {
-    expect(1);
-    $TimerEvent.handleTimerStart(this, function() {
-        ok(true, "TimerStart fired and handled");
-        start();
-    });
-    $TimerEvent.fireTimerStart(true, false);
-});
-
-asyncTest("TimerStop", function() {
-    expect(1);
-    $TimerEvent.handleTimerStop(this, function() {
-        ok(true, "TimerStop fired and handled");
-        start();
-    });
-    $TimerEvent.fireTimerStop();
-});
-
-asyncTest("TimerUnpause", function() {
-    expect(1);
-    $TimerEvent.handleTimerUnpause(this, function() {
-        ok(true, "TimerUnpause fired and handled");
-        start();
-    });
-    $TimerEvent.fireTimerUnpause();
-});
-
 module("isolace/timer/TimerController", {
   setup: function() {
     this.tc = new ISOLACE.TimerController();

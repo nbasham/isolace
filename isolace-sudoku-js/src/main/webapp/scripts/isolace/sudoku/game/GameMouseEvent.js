@@ -10,9 +10,12 @@ ISOLACE.GameMouseEvent = function() {
 };
 
 /**
+ * Unbind cell mouseenter events and rebind them to cells based on the specified
+ * puzzle.
  * @method bind
  */
 ISOLACE.GameMouseEvent.prototype.bind = function(puzzle) {
+    $('.cell').unbind("mouseenter");
     $('.cell').each(function(i, el) {
         var editable = puzzle.isEditable(i);
         if (editable) {

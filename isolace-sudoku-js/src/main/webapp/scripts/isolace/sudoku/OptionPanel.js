@@ -15,6 +15,49 @@ ISOLACE.OptionPanel = function() {
  * @method load
  */
 ISOLACE.OptionPanel.prototype.load = function() {
+    var showTimer = $Persistence.getShowTimer();
+    $('#showTimerControl')[0].checked = showTimer;
+    $('#showTimerControl').click(function() {
+        var showTimer = $('#showTimerControl')[0].checked;
+        $Persistence.setShowTimer(showTimer);
+        //$GameEvent.fireShowTimer(showTimer);
+    });
+    this.showMarkerConflict = $Persistence.getShowMarkerConflict();
+    $('#showMarkConflictControl')[0].checked = this.showMarkerConflict;
+    $('#showMarkConflictControl').click(function() {
+        var showMarkConflict = $('#showMarkConflictControl')[0].checked;
+        $Persistence.setShowMarkerConflict(showMarkConflict);
+        $GameEvent.fireShowMarkerConflict(showMarkConflict);
+    });
+    this.showGuessConflict = $Persistence.getShowGuessConflict();
+    $('#showGuessConflictControl')[0].checked = this.showGuessConflict;
+    $('#showGuessConflictControl').click(function() {
+        var showGuessConflict = $('#showGuessConflictControl')[0].checked;
+        $Persistence.setShowGuessConflict(showGuessConflict);
+        //$GameEvent.fireShowGuessConflict(showGuessConflict);
+    });
+
+    this.useColorSymbols = $Persistence.getUseColorSymbols();
+    $('#useColorSymbolControl')[0].checked = this.useColorSymbols;
+    $('#useColorSymbolControl').click(function() {
+        var useColorSymbols = $('#useColorSymbolControl')[0].checked;
+        $Persistence.setUseColorSymbols(useColorSymbols);
+        //$GameEvent.fireUseColorSymbols(useColorSymbols);
+    });
+    
+    this.setPuzzleLevelButtonState();
+    $('#level0Button').click(function() {
+        $Persistence.setPuzzleLevel(0);
+    });
+    $('#level1Button').click(function() {
+        $Persistence.setPuzzleLevel(1);
+    });
+    $('#level2Button').click(function() {
+        $Persistence.setPuzzleLevel(2);
+    });
+    $('#level3Button').click(function() {
+        $Persistence.setPuzzleLevel(3);
+    });
 };
 
 /**

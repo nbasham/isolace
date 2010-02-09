@@ -29,6 +29,10 @@ ISOLACE.sudoku.Persistence.prototype.clearAll = function() {
     this.remove('puzzleIndex2');
     this.remove('puzzleIndex3');
     this.remove('scores');
+    this.remove('showTimer');
+    this.remove('showMarkerConflict');
+    this.remove('showGuessConflict');
+    this.remove('useColorSymbols');
 };
 
 /**
@@ -191,6 +195,107 @@ ISOLACE.sudoku.Persistence.prototype.setScores = function(scores) {
     }
     var scoresStr = $Persistence.set('scores', s);
 };
+
+/**
+ * @method getShowMarkerConflict
+ * @return True if conflicting markers should be shown in red.
+ * @type {boolean}
+ */
+ISOLACE.sudoku.Persistence.prototype.getShowMarkerConflict = function() {
+    var showMarkerConflict = this.get('showMarkerConflict');
+    if(showMarkerConflict === null) {
+        showMarkerConflict = true;
+        this.set('showMarkerConflict', showMarkerConflict);
+    } else {
+        showMarkerConflict = parseBool(showMarkerConflict);
+    }
+    return showMarkerConflict;
+};
+
+/**
+ * @method setShowMarkerConflict
+ * @param {boolean} showMarkerConflict True if conflicting markers should be shown in red.
+ */
+ISOLACE.sudoku.Persistence.prototype.setShowMarkerConflict = function(showMarkerConflict) {
+    var showMarkerConflict = this.set('showMarkerConflict', '' + showMarkerConflict);
+    $GameEvent.fireShowMarkerConflict(showMarkerConflict);
+};
+
+/**
+ * @method getShowGuessConflict
+ * @return True if incorrect guess should be flagged.
+ * @type {boolean}
+ */
+ISOLACE.sudoku.Persistence.prototype.getShowGuessConflict = function() {
+    var showGuessConflict = this.get('showGuessConflict');
+    if(showGuessConflict === null) {
+        showGuessConflict = true;
+        this.set('showGuessConflict', showGuessConflict);
+    } else {
+        showGuessConflict = parseBool(showGuessConflict);
+    }
+    return showGuessConflict;
+};
+
+/**
+ * @method setShowGuessConflict
+ * @param {boolean} showGuessConflict True if incorrect guess should be flagged.
+ */
+ISOLACE.sudoku.Persistence.prototype.setShowGuessConflict = function(showGuessConflict) {
+    var showGuessConflict = this.set('showGuessConflict', '' + showGuessConflict);
+    $GameEvent.fireShowGuessConflict(showGuessConflict);
+};
+
+/**
+ * @method getShowTimer
+ * @return True if timer should be shown.
+ * @type {boolean}
+ */
+ISOLACE.sudoku.Persistence.prototype.getShowTimer = function() {
+    var showTimer = this.get('showTimer');
+    if(showTimer === null) {
+        showTimer = true;
+        this.set('showTimer', showTimer);
+    } else {
+        showTimer = parseBool(showTimer);
+    }
+    return showTimer;
+};
+
+/**
+ * @method setShowTimer
+ * @param {boolean} showTimer The puzzle level.
+ */
+ISOLACE.sudoku.Persistence.prototype.setShowTimer = function(showTimer) {
+    var showTimer = this.set('showTimer', '' + showTimer);
+    $GameEvent.fireShowTimer(showTimer);
+};
+
+/**
+ * @method getUseColorSymbols
+ * @return True if symbols should be rendered as colors.
+ * @type {boolean}
+ */
+ISOLACE.sudoku.Persistence.prototype.getUseColorSymbols = function() {
+    var useColorSymbols = this.get('useColorSymbols');
+    if(useColorSymbols === null) {
+        useColorSymbols = false;
+        this.set('useColorSymbols', useColorSymbols);
+    } else {
+        useColorSymbols = parseBool(useColorSymbols);
+    }
+    return useColorSymbols;
+};
+
+/**
+ * @method setUseColorSymbols
+ * @param {boolean} useColorSymbols True if symbols should be rendered as colors.
+ */
+ISOLACE.sudoku.Persistence.prototype.setUseColorSymbols = function(useColorSymbols) {
+    var showGuessConflict = this.set('useColorSymbols', '' + useColorSymbols);
+    $GameEvent.fireUseColorSymbols(useColorSymbols);
+};
+
 
 if(typeof $Persistence == "undefined" || !$Persistence) {
     /**

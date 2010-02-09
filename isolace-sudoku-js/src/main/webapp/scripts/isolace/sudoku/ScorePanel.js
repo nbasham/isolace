@@ -96,7 +96,7 @@ ISOLACE.ScorePanel.prototype.show = function(options) {
     var scores = $Persistence.getScores();
     var scoreCount = scores.length;
     if(numRows < scoreCount) {
-        for( var numRows = 0; i < scoreCount; i++) {
+        for( var i = numRows; i < scoreCount; i++) {
             var score = scores[i];
             if(score.getScore() < this.personalBest) {
                 this.personalBest = score.getScore();
@@ -126,14 +126,7 @@ ISOLACE.ScorePanel.prototype.scoreToRowData = function(score) {
     var penalty = $SUDOKU_UTIL.formatTime(score.getNumMissed() * score.getPenalty());
     var finalTime = $SUDOKU_UTIL.formatTime(score.getScore());
     var scoreArray = [];
-    var levelStr = 'Novice';
-    if(level == 1) {
-        levelStr = 'Easy';
-    } else if(level == 2) {
-        levelStr = 'Medium';
-    } else if(level == 3) {
-        levelStr = 'Hard';
-    }
+    var levelStr = $SUDOKU_UTIL.levelToString(level);
     scoreArray.push(levelStr + '-' + puzzleId);
     scoreArray.push(date);
     scoreArray.push(time);

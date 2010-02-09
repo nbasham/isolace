@@ -27,7 +27,7 @@ ISOLACE.UndoController = function(o) {
         $UndoEvent.fireUndoEvent(o);
         $UndoEvent.fireUpdateUndoUIEvent(this.canUndo(), this.canRedo());
     });
-    $Log.debug('UndoController instantiated: ' + this.toString());
+    $Log.info('UndoController instantiated: ' + this.toString() + ' initialized to: ' + o);
 };
 
 /**
@@ -38,10 +38,10 @@ ISOLACE.UndoController = function(o) {
 ISOLACE.UndoController.prototype.reset = function(o) {
     assertDefined(o);
     this.stack = [];
-    this.stack.push(o);
+    this.stack.push(this.clone(o));
     this.stackPtr = 0;
     $UndoEvent.fireUpdateUndoUIEvent(this.canUndo(), this.canRedo());
-    $Log.debug('UndoController reset: ' + this.toString());
+    $Log.info('UndoController reset: ' + this.toString() + ' reset to: ' + o);
 };
 
 /**
@@ -56,7 +56,7 @@ ISOLACE.UndoController.prototype.add = function(o) {
     this.stack.push(this.clone(o));
 
     this.stackPtr = this.stack.length - 1;
-    $Log.debug('UndoController add: ' + this.toString());
+    $Log.info('UndoController add: ' + this.toString() + ' adding: ' + o);
     $UndoEvent.fireUpdateUndoUIEvent(this.canUndo(), this.canRedo());
 };
 
@@ -91,7 +91,7 @@ ISOLACE.UndoController.prototype.undo = function() {
     }
     this.stackPtr--;
     var boardState = this.stack[this.stackPtr];
-    $Log.debug('UndoController undo: ' + this.toString());
+    $Log.info('UndoController undo: ' + this.toString() + ' returning: ' + boardState);
     return boardState;
 };
 
@@ -106,7 +106,7 @@ ISOLACE.UndoController.prototype.redo = function() {
     }
     this.stackPtr++;
     var boardState = this.stack[this.stackPtr];
-    $Log.debug('UndoController redo: ' + this.toString());
+    $Log.info('UndoController redo: ' + this.toString() + ' returning: ' + boardState);
     return boardState;
 };
 

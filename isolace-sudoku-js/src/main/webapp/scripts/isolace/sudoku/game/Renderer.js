@@ -49,8 +49,8 @@ ISOLACE.sudoku.Renderer.prototype.renderPaused = function() {
  * @private
  */
 ISOLACE.sudoku.Renderer.prototype.getRenderer = function() {
-    var symbolType = $Options.getSymbolType();
-    if(symbolType == 'color') {
+    var useColorSymbols = $Persistence.getUseColorSymbols();
+    if(useColorSymbols) {
         return this.renderers.color;
     }
     return this.renderers.image;
