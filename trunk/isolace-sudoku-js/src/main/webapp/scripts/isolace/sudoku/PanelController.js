@@ -13,10 +13,10 @@ ISOLACE.PanelController = function() {
 //    var panel = new ISOLACE.AboutPanel();
     this.panelControllers.push(null);
 
-    panel = new ISOLACE.GamePanel();
+    panel = new ISOLACE.OptionPanel();
     this.panelControllers.push(panel);
     
-    panel = new ISOLACE.OptionPanel();
+    panel = new ISOLACE.GamePanel();
     this.panelControllers.push(panel);
     
     panel = new ISOLACE.ScorePanel();
@@ -35,8 +35,8 @@ ISOLACE.PanelController = function() {
 };
 
 ISOLACE.PanelController.prototype.ABOUT_PANEL = 0;
-ISOLACE.PanelController.prototype.GAME_PANEL = 1;
-ISOLACE.PanelController.prototype.OPTIONS_PANEL = 2;
+ISOLACE.PanelController.prototype.OPTIONS_PANEL = 1;
+ISOLACE.PanelController.prototype.GAME_PANEL = 2;
 ISOLACE.PanelController.prototype.SCORE_PANEL = 3;
 
 /**

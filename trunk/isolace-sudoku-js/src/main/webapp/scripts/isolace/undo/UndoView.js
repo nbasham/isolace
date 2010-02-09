@@ -6,12 +6,15 @@
  * @constructor
  */
 ISOLACE.UndoView = function() {
-    $('#undoView').show();
     $('#undoButton').bind('click', function() {
-        $UndoEvent.fireUndoRequestEvent(false);
+        if($(this).attr('disabled') !== 'true') {
+            $UndoEvent.fireUndoRequestEvent(false);
+        }
     });
     $('#redoButton').bind('click', function() {
-        $UndoEvent.fireUndoRequestEvent(true);
+        if($(this).attr('disabled') !== 'true') {
+            $UndoEvent.fireUndoRequestEvent(true);
+        }
     });
     $UndoEvent.handleUpdateUndoUIEvent(this, this.updateUndoUIEvent);
 };
@@ -30,7 +33,7 @@ ISOLACE.UndoView.prototype.updateUndoUIEvent = function(canUndo, canRedo) {
         $('#undoButton').addClass('ui-state-disabled').attr('disabled', 'true');
     }
 
-    $('#redoButton').removeClass('ui-state-active');
+   // $('#redoButton').removeClass('ui-state-active');
     if(canRedo) {
         $('#redoButton').removeClass('ui-state-disabled').removeAttr('disabled');
     } else {

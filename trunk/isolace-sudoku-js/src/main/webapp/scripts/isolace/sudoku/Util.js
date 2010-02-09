@@ -18,6 +18,27 @@ ISOLACE.sudoku.Util = function() {
  * Format seconds to mmm:ss.
  * @private
  * @method formatTime
+ * @param {int} level The level.
+ * @return The string representing the level.
+ * @type string
+ */
+ISOLACE.sudoku.Util.prototype.levelToString = function(level) {
+    var levelStr = 'Easy';
+    if(level == 1) {
+        levelStr = 'Medium';
+    } else if(level == 2) {
+        levelStr = 'Hard';
+    } else if(level == 3) {
+        levelStr = 'Evil';
+    }
+    
+    return levelStr;
+};
+
+/**
+ * Format seconds to mmm:ss.
+ * @private
+ * @method formatTime
  * @param {int} seconds The seconds to format.
  * @return Seconds formatted as mmm:ss.
  */

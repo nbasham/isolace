@@ -10,13 +10,6 @@
  */
 ISOLACE.TimerView = function() {
     $TimerEvent.handleTimerIncrement(this, this.update);
-    $('.timerPause').toggle(function() {
-        $TimerEvent.fireTimerPlayPauseRequest(true);
-    },
-    function() {
-        $TimerEvent.fireTimerPlayPauseRequest(false);
-    });
-    $TimerEvent.handleTimerPlayPauseRequest(this, this.handleTimerPlayPauseRequest);
 };
 
 /**
@@ -28,16 +21,16 @@ ISOLACE.TimerView.prototype.update = function(seconds) {
     $Renderer.renderTimer(seconds);
 };
 
-ISOLACE.TimerView.prototype.handleTimerPlayPauseRequest = function(isPauseRequest) {
-    var icon = $('.timerPlayPauseIcon');
-//    var wasPause = icon.hasClass('ui-icon-pause');
-    if(isPauseRequest) {
-        icon.removeClass('ui-icon-pause');
-        icon.addClass('ui-icon-play');
-        $TimerEvent.fireTimerPause();
-    } else {
-        icon.removeClass('ui-icon-play');
-        icon.addClass('ui-icon-pause');
-        $TimerEvent.fireTimerUnpause();
-    }
-}
+/**
+ * Show timer view.
+ */
+ISOLACE.TimerView.prototype.show = function() {
+    $('#timerView').show();
+};
+
+/**
+ * Hide timer view.
+ */
+ISOLACE.TimerView.prototype.hide = function() {
+    $('#timerView').hide();
+};

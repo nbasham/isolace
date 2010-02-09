@@ -9,6 +9,7 @@ ISOLACE.Options = function() {
 
     this.symbolType = 'numeric';
     this.inMarkerMode = false;
+    this.useTooltips = false;
 };
 
 /**

@@ -10,10 +10,10 @@ ISOLACE.TimerController = function() {
     this.time = 0;
     this.timerId = undefined;
     this.paused = true;
-    $TimerEvent.handleTimerPause(this, this.pause);
-    $TimerEvent.handleTimerStart(this, this.start);
-    $TimerEvent.handleTimerStop(this, this.stop);
-    $TimerEvent.handleTimerUnpause(this, this.unpause);
+//    $TimerEvent.handleTimerPause(this, this.pause);
+//    $TimerEvent.handleTimerStart(this, this.start);
+//    $TimerEvent.handleTimerStop(this, this.stop);
+//    $TimerEvent.handleTimerUnpause(this, this.unpause);
 };
 
 /**
@@ -22,6 +22,7 @@ ISOLACE.TimerController = function() {
  * @method reset
  */
 ISOLACE.TimerController.prototype.reset = function() {
+    this.stop();
     this.time = 0;
 };
 

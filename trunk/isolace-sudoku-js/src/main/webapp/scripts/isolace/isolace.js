@@ -156,3 +156,22 @@ $.fn.extend({
         $(this).attr('class', classes.join(' '));}
     }
 });
+
+function parseBool(b) {
+    if(typeof b == 'boolean') {
+        return b;
+    } else if(typeof b == 'string') {
+        if(b.toLowerCase() == 'true') {
+            return true;
+        } else {
+            return false;
+        }
+    } else if(typeof b == 'number') {
+        if(b === 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    return false;
+}

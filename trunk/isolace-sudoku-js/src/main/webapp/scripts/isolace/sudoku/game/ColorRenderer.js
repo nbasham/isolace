@@ -34,12 +34,13 @@ ISOLACE.sudoku.ColorRenderer.prototype.renderMarkerCell = function(boardState, i
     }
     parentCell.html(s);
 
+    var showMarkerConflicts = $Persistence.getShowMarkerConflict();
     for( var markerIndex = 0; markerIndex < 9; markerIndex++) {
         var value = markerIndex + 1;
         var cell = $('.marker' + index + '-' + value);
         if(boardState.hasMarkerValue(value, index)) {
             cell.addClass(this.styles[value]);
-            if(boardState.conflicts(value, index)) {
+            if(showMarkerConflicts && boardState.conflicts(value, index)) {
                 cell.html("<div class='colorMarkerConflict'>&nbsp;</div>");
             }
         }
@@ -76,7 +77,7 @@ ISOLACE.sudoku.ColorRenderer.prototype.renderCell = function(boardState, index) 
     var klass = 'color ' + this.styles[value] + ' ';
     cell.css('background-color', 'transparent');
     if(isEditable) {
-        if(boardState.conflicts(value, index)) {
+        if(boardState.conflicts(value, index) && $Persistence.getShowGuessConflict()) {
             cell.css('background-color', 'red');
         }
     } else {

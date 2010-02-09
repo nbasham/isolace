@@ -33,11 +33,12 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderMarkerCell = function(boardState, i
     }
     parentCell.html(s);
 
+    var showMarkerConflicts = $Persistence.getShowMarkerConflict();
     for(var markerIndex = 0; markerIndex < 9; markerIndex++) {
         var value = markerIndex + 1;
         var cell = $('.marker' + index + '-' + value);
         if(boardState.hasMarkerValue(value, index)) {
-            if(boardState.conflicts(value, index)) {
+            if(showMarkerConflicts && boardState.conflicts(value, index)) {
                 this.setBackground(cell, value + '-marker-conflict');
             } else {
                 this.setBackground(cell, value + '-marker');
@@ -56,7 +57,7 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderCell = function(boardState, index) 
     if(isEditable) {
         if(value === 0) {
             cell.css('background-image', "url('')");
-        } else if(boardState.conflicts(value, index)) {
+        } else if(boardState.conflicts(value, index) && $Persistence.getShowGuessConflict()) {
             this.setBackground(cell, value + '-guess-conflict');
         } else {
             this.setBackground(cell, value + '-guess');
@@ -104,31 +105,42 @@ ISOLACE.sudoku.ImageRenderer.prototype.setBackground = function(cell, imageName)
 ISOLACE.sudoku.ImageRenderer.prototype.renderSelector = function(index, inMarkerMode) {
     if(this.selector === undefined) {
         this.selector = $('<div/>', {
-            id: 'selector'
+            id: 'selector',
+            'class': 'guessBackground'
         }).appendTo('.board');
         this.setBackground(this.selector, 'select');
         this.marker = $('<div/>', {
             id: 'selectorMarker',
-            'class': 'ui-icon ui-icon-pencil fiftyPercent'
+            'class': 'ui-icon ui-icon-pencil fiftyPercent',
+            css: {
+                'background-color': '#3B5998'
+            }
         }).appendTo('.board').hide();
     }
+//    if(index === undefined) {
+//        this.selector.hide();
+//        return;
+//    } else {
+//        this.selector.show();
+//    }
     var cell = $('#c' + index);
-    var t = cell.offset().top;
+    var t = cell.position().top;
     var l = cell.position().left;
     this.selector.css('top', t);
     this.selector.css('left', l);
     this.selector.css('display', 'block');
 
     if(inMarkerMode) {
-        this.selector.removeClass('guessBackground');
-        this.selector.addClass('markBackground');
+        //this.selector.removeClass('guessBackground');
+        //this.selector.addClass('markBackground');
+        //this.marker.addClass('markBackground');
         this.marker.css('display', 'block');
     } else {
-        this.selector.removeClass('markBackground');
-        this.selector.addClass('guessBackground');
+        //this.selector.removeClass('markBackground');
+        //this.selector.addClass('guessBackground');
         this.marker.css('display', 'none');
     }
-    this.marker.css('top', t + 16);
-    this.marker.css('left', l + 16);
+    this.marker.css('top', t);
+    this.marker.css('left', l);
     $Log.debug('Rendered selector at index ' + index + '.');
 };

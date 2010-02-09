@@ -92,13 +92,20 @@ ISOLACE.sudoku.BoardState.prototype.conflicts = function(value, index) {
     assertInRange(index, 0, 80);
     var stateArray = this.normalize();
     var conflicts = $SUDOKU_UTIL.conflicts(stateArray, value, index);
-    var wrongAnswer = false;
     var rawValue = this.state[index];
-    if(rawValue > 0) {
-        wrongAnswer = this.solution[index] != rawValue;
+    var isGuess = rawValue > 0;
+    if(isGuess) {
+        var correctAnswer = this.solution[index] == rawValue;
+        if(correctAnswer) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return conflicts;
     }
 
-    return conflicts || wrongAnswer;
+    return conflicts || wrongAnswer || correctAnswer;
 };
 
 /**
@@ -126,6 +133,34 @@ ISOLACE.sudoku.BoardState.prototype.removeMarkersFromGrid = function(value, inde
 };
 
 /**
+ * After a successful guessing a number already guessed, remove the previous guess.
+ * @private
+ * @method removeGuessFromGrid
+ * @param {int} value Value between 1 and 9 inclusive to check for.
+ * @param {int} index Index (0 to 80 inclusive) of the cell to check.
+ */
+ISOLACE.sudoku.BoardState.prototype.removeGuessFromGrid = function(value, index) {
+    var grid = $SUDOKU_UTIL.getGridFromIndex(index);
+    var a = $SUDOKU_UTIL.getGridIndexes(grid);
+    var gridValues = [];
+    for(var i = 0; i < 9; i++) {
+        var gridIndex = a[i];
+        var isRevealed = !this.isEditable(gridIndex);
+        if(index == gridIndex || isRevealed) {
+            gridValues.push(0);
+        } else {
+            gridValues.push(this.getValue(gridIndex));
+        }
+    }
+    var arrayIndex = $.inArray(value, gridValues);
+    var isCorrectAnswer = this.solution[a[arrayIndex]] == value;
+    if(arrayIndex != -1 && !isCorrectAnswer) {
+        this.state[a[arrayIndex]] = 0;
+        $Log.info('Clearing incorrect guess at index ' + a[arrayIndex] + ' with value ' + gridValues[arrayIndex]);
+    }
+};
+
+/**
  * Set cell to value, if that value already exists remove it.
  * 
  * @method setValue
@@ -146,6 +181,7 @@ ISOLACE.sudoku.BoardState.prototype.setValue = function(value, index) {
         $Log.debug('Set index ' + index + ' to value ' + value);
     }
     this.removeMarkersFromGrid(value, index);
+    this.removeGuessFromGrid(value, index);
     var correctGuess = this.solution[index] == value || this.solution[index] === 0;
     return correctGuess;
 };
