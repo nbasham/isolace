@@ -15,33 +15,33 @@ ISOLACE.OptionPanel = function() {
  * @method load
  */
 ISOLACE.OptionPanel.prototype.load = function() {
-    var showTimer = $Persistence.getShowTimer();
+    var showTimer = $Options.getShowTimer();
     $('#showTimerControl')[0].checked = showTimer;
     $('#showTimerControl').click(function() {
         var showTimer = $('#showTimerControl')[0].checked;
-        $Persistence.setShowTimer(showTimer);
+        $Options.setShowTimer(showTimer);
         //$GameEvent.fireShowTimer(showTimer);
     });
-    this.showMarkerConflict = $Persistence.getShowMarkerConflict();
+    this.showMarkerConflict = $Options.getShowMarkerConflict();
     $('#showMarkConflictControl')[0].checked = this.showMarkerConflict;
     $('#showMarkConflictControl').click(function() {
         var showMarkConflict = $('#showMarkConflictControl')[0].checked;
-        $Persistence.setShowMarkerConflict(showMarkConflict);
+        $Options.setShowMarkerConflict(showMarkConflict);
         $GameEvent.fireShowMarkerConflict(showMarkConflict);
     });
-    this.showGuessConflict = $Persistence.getShowGuessConflict();
+    this.showGuessConflict = $Options.getShowGuessConflict();
     $('#showGuessConflictControl')[0].checked = this.showGuessConflict;
     $('#showGuessConflictControl').click(function() {
         var showGuessConflict = $('#showGuessConflictControl')[0].checked;
-        $Persistence.setShowGuessConflict(showGuessConflict);
+        $Options.setShowGuessConflict(showGuessConflict);
         //$GameEvent.fireShowGuessConflict(showGuessConflict);
     });
 
-    this.useColorSymbols = $Persistence.getUseColorSymbols();
+    this.useColorSymbols = $Options.getUseColorSymbols();
     $('#useColorSymbolControl')[0].checked = this.useColorSymbols;
     $('#useColorSymbolControl').click(function() {
         var useColorSymbols = $('#useColorSymbolControl')[0].checked;
-        $Persistence.setUseColorSymbols(useColorSymbols);
+        $Options.setUseColorSymbols(useColorSymbols);
         //$GameEvent.fireUseColorSymbols(useColorSymbols);
     });
     

@@ -16,8 +16,7 @@ ISOLACE.GameKeyEvent.prototype.bind = function(puzzle) {
     $('body').keyup(function(event) {
         var keyCode = event.keyCode;
         if(keyCode == KeyEvent.DOM_VK_M) {
-            $Options.inMarkerMode = !$Options.inMarkerMode;
-            $GameEvent.fireToggleMarkMode();
+            $Options.toggleMarkerMode();
         } else if(keyCode == KeyEvent.DOM_VK_UP) {
             $GameEvent.fireSelectCellUp();
         } else if(keyCode == KeyEvent.DOM_VK_DOWN) {

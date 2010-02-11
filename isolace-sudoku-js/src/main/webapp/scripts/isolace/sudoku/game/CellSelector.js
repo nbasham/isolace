@@ -21,7 +21,7 @@ ISOLACE.sudoku.CellSelector = function(puzzle) {
 };
 ISOLACE.sudoku.CellSelector.prototype.reset = function(puzzle) {
     this.puzzle = puzzle;
-    this.selectedIndex = undefined;
+    this.selectedIndex = 0;
 };
 /**
  * Represents a cell being selected by adding a image.

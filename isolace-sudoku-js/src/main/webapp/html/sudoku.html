@@ -15,7 +15,7 @@
     <script src="../scripts/ext/jquery.bgiframe.js" type="text/javascript"></script>
     <script src="../scripts/ext/jquery.dimensions.js" type="text/javascript"></script>
     <script src="../scripts/ext/jquery.tooltip.js" type="text/javascript"></script>
-    
+
     <script src="../scripts/ext/jquery.dataTables.js"></script>
     <link rel="stylesheet" href="../styles/datatable_table.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="../styles/datatable_page.css" type="text/css" media="screen" />
@@ -109,6 +109,8 @@
     <script src="../scripts/isolace/sudoku/game/GameEvent.js"></script>
     <script src="../scripts/isolace/sudoku/game/GameKeyEvent.js"></script>
     <script src="../scripts/isolace/sudoku/game/GameMouseEvent.js"></script>
+    <script src="../scripts/isolace/sudoku/Persistence.js"></script>
+    <script src="../scripts/isolace/sudoku/model/Options.js"></script>
     <script src="../scripts/isolace/undo/UndoView.js"></script>
     <script src="../scripts/isolace/timer/TimerEvent.js"></script>
 
@@ -116,7 +118,6 @@
     <script src="../scripts/isolace/sudoku/view/render/ImageRenderer.js"></script>
     <script src="../scripts/isolace/sudoku/view/render/TextRenderer.js"></script>
     <script src="../scripts/isolace/sudoku/game/Renderer.js"></script>
-    <script src="../scripts/isolace/sudoku/model/Options.js"></script>
     <script src="../scripts/isolace/sudoku/model/Score.js"></script>
 
     <script src="../scripts/isolace/undo/UndoEvent.js"></script>
@@ -126,7 +127,6 @@
     <script src="../scripts/isolace/timer/TimerView.js"></script>
     <script src="../scripts/isolace/sudoku/Dialog.js"></script>
     <script src="../scripts/isolace/sudoku/Util.js"></script>
-    <script src="../scripts/isolace/sudoku/Persistence.js"></script>
     <script src="../scripts/isolace/sudoku/PanelController.js"></script>
     <script src="../scripts/isolace/sudoku/model/Puzzle.js"></script>
     <script src="../scripts/isolace/sudoku/model/BoardState.js"></script>
@@ -166,9 +166,10 @@
         <u>Updates</u><br/><br/>
          <div class='ui-state-error'>
             <ul>
-                <li>1. Revamped the look and feel. All input/suggestions very welcomed.</li>
-                <li>2. Added new options in Option Panel.</li>
-                <li>3. A guess will remove existing guesses in the same grid with the same value.</li>
+                <li>1. Added marker button.</li>
+                <li>2. Revamped the look and feel. All input/suggestions very welcomed.</li>
+                <li>3. Added new options in Option Panel.</li>
+                <li>4. A guess will remove existing guesses in the same grid with the same value.</li>
             </ul>
         </div>
         <br/>
@@ -178,7 +179,7 @@
             <u>The Basics</u><br/>
             Move the mouse over a cell and type a number from 1 to 9 with your keyboard.
             Typing 'm' will move you in and out of marker mode, you can use markers to provide hints in each cell.
-            Each wrong answer will add 30 seconds to your time. If you're not sure what something does hover the mouse over that item to see it's tooltip. That's it! Have fun.
+            Each wrong answer will add 30 seconds to your time. That's it! Have fun.
         </p>        
         <br/>
         <p><u>Quality Assurance Extraordinaire</u><br/>Joanne and Kelly</p>
@@ -217,7 +218,6 @@
         <div class='boardContent'>
             <div id='boardView' class='boardView'></div>
             <div id='levelView' class='.ui-widget'>&nbsp;</div>
-            <div id='markerModeView' class='.ui-widget'>Marker Mode On</div>
             <div id='timerView' class='timerView ui-corner-all ui-helper-clearfix' title='Displays how much time has elapsed since you started the game (minues:seconds)'>
                 <div style='background-color: white; margin-top: 2px;' class='timerViewImages'>
                     <div id='timerImage0' class='timerViewImage combinedImage sprite-timer-0' >&nbsp;</div>
@@ -229,6 +229,7 @@
                 </div>
             </div>
             <div id='controlView' class='ui-corner-all'>
+                <a id='markButton' href="#" class="sbutton fg-button-toggleable fg-button ui-state-default fg-button-icon-left ui-corner-all"><span id='markButtonIcon' class="ui-icon ui-icon-pencil"></span><span id='markButtonText'>Use Markers</span></a>
                 <a id='pauseButton' href="#" class="sbutton fg-button ui-state-default fg-button-icon-left ui-corner-all"><span id='pauseButtonIcon' class="ui-icon ui-icon-pause"></span><span id='pauseButtonText'>Pause Game</span></a>
                 <a id='skipButton' href="#" class="sbutton fg-button ui-state-default fg-button-icon-left ui-corner-all"><span class="ui-icon ui-icon-seek-end"></span>New Game</a>
                 <a id='undoButton' href="#" class="sbutton fg-button ui-state-default fg-button-icon-left ui-corner-all sbutton"><span class="ui-icon ui-icon-arrowrefresh-1-w"></span>Undo</a>

@@ -49,7 +49,7 @@ ISOLACE.sudoku.Renderer.prototype.renderPaused = function() {
  * @private
  */
 ISOLACE.sudoku.Renderer.prototype.getRenderer = function() {
-    var useColorSymbols = $Persistence.getUseColorSymbols();
+    var useColorSymbols = $Options.getUseColorSymbols();
     if(useColorSymbols) {
         return this.renderers.color;
     }
@@ -146,7 +146,7 @@ ISOLACE.sudoku.Renderer.prototype.renderBoard = function() {
  * @method renderSelector
  */
 ISOLACE.sudoku.Renderer.prototype.renderSelector = function(index) {
-    this.renderers.image.renderSelector(index, $Options.inMarkerMode);
+    this.renderers.image.renderSelector(index, $Options.inMarkerMode());
     $Log.debug('Rendered selector at index ' + index + '.');
 };
 
