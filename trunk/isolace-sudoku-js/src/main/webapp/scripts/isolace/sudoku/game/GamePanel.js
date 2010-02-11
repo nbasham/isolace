@@ -70,10 +70,9 @@ ISOLACE.GamePanel.prototype.hide = function() {
  * @private
  */
 ISOLACE.GamePanel.prototype.newPuzzle = function() {
-    $Options.inMarkerMode = false;
-    $('#markerModeView').hide();
     this.numMissed = 0;
     this.gameInProgress = true;
+    $Options.reset();
     this.puzzle = this.getNextPuzzle();
     var initialState = this.puzzle.getInitialState();
     this.state = new ISOLACE.sudoku.BoardState(this.puzzle.getValues(), initialState);
@@ -81,6 +80,7 @@ ISOLACE.GamePanel.prototype.newPuzzle = function() {
     this.timerController.reset();
     this.timerController.start();
     this.selector.reset(this.puzzle);
+    $('#markButton').removeClass("ui-state-active");
     this.updateLevelInfo();
     $GameMouseEvent.bind(this.puzzle);
     $Renderer.render(this.state);
@@ -125,6 +125,9 @@ ISOLACE.GamePanel.prototype.bindEvents = function() {
         me.handleTimerPlayPauseRequest(false);
     });
     $GameKeyEvent.bind();
+    $('#markButton').click(function() {
+        $Options.setMarkerMode($(this).hasClass('ui-state-active'));
+    });
 };
 
 
@@ -219,7 +222,7 @@ ISOLACE.GamePanel.prototype.initUndo = function() {
  */
 ISOLACE.GamePanel.prototype.handleGuess = function(value) {
     var index = this.selector.getIndex();
-    if($Options.inMarkerMode) {
+    if($Options.inMarkerMode()) {
         this.state.setMarkerValue(value, index);
     } else {
         var correctGuess = this.state.setValue(value, index);
@@ -260,10 +263,10 @@ ISOLACE.GamePanel.prototype.handleStateChanged = function(notUsedBoardState) {
  */
 ISOLACE.GamePanel.prototype.handleToggleMarkMode = function() {
     $Renderer.renderSelector(this.selector.getIndex());
-    if($Options.inMarkerMode) {
-        $('#markerModeView').show();
+    if($Options.inMarkerMode()) {
+        $('#markButton').addClass("ui-state-active");
     } else {
-        $('#markerModeView').hide();
+        $('#markButton').removeClass("ui-state-active");
     }
 };
 

@@ -41,16 +41,6 @@
     */
 }
 
-#markerModeView {
-    position: absolute;
-    top: 461px;
-    left: 166px;
-    font-family: arial !important;
-    font-size: 14px !important;
-    font-weight: bold;
-    color: #3B5998;
-}
-
 #levelView {
     position: absolute;
     top: 461px;
@@ -89,7 +79,7 @@
 
 #symbolCountView {
     position: absolute;
-    top: 167px;
+    top: 187px;
     left: 466px;
     border: 1px solid #999;
     height: 170px;
@@ -319,6 +309,13 @@ div.marker {
 
 .unrevealedCellConflicted {
     color: red;
+}
+
+.twentyPercent {
+    filter: alpha(opacity = 20);
+    -moz-opacity: 0.2;
+    -khtml-opacity: 0.2;
+    opacity: 0.2;
 }
 
 .fiftyPercent {

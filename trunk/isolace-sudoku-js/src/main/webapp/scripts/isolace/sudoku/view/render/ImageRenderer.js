@@ -33,7 +33,7 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderMarkerCell = function(boardState, i
     }
     parentCell.html(s);
 
-    var showMarkerConflicts = $Persistence.getShowMarkerConflict();
+    var showMarkerConflicts = $Options.getShowMarkerConflict();
     for(var markerIndex = 0; markerIndex < 9; markerIndex++) {
         var value = markerIndex + 1;
         var cell = $('.marker' + index + '-' + value);
@@ -57,7 +57,7 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderCell = function(boardState, index) 
     if(isEditable) {
         if(value === 0) {
             cell.css('background-image', "url('')");
-        } else if(boardState.conflicts(value, index) && $Persistence.getShowGuessConflict()) {
+        } else if(boardState.conflicts(value, index) && $Options.getShowGuessConflict()) {
             this.setBackground(cell, value + '-guess-conflict');
         } else {
             this.setBackground(cell, value + '-guess');
@@ -111,7 +111,7 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderSelector = function(index, inMarker
         this.setBackground(this.selector, 'select');
         this.marker = $('<div/>', {
             id: 'selectorMarker',
-            'class': 'ui-icon ui-icon-pencil fiftyPercent',
+            'class': 'ui-icon ui-icon-pencil twentyPercent',
             css: {
                 'background-color': '#3B5998'
             }
