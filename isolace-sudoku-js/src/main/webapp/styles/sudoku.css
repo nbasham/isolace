@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 .bodyContent {
     width: 51em;
     height: 58em;
