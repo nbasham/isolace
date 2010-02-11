@@ -144,12 +144,15 @@ ISOLACE.sudoku.Persistence.prototype.addScore = function(time, numMissed) {
     var date = new Date().getTime();
     var puzzleLevel = $Persistence.getPuzzleLevel();
     var puzzleId = $Persistence.getPuzzleIndex();
+    var symbolType = $Persistence.getUseColorSymbols() ? 1 : 0;
     var score = new ISOLACE.Score();
     score.setDate(date);
     score.setNumMissed(numMissed);
     score.setPuzzleId(puzzleId);
     score.setPuzzleLevel(puzzleLevel);
     score.setTime(time);
+    score.setSymbolType(symbolType);
+    score.setUserId(UID);
 
     var scores = $Persistence.getScores();
     scores.push(score);
@@ -176,7 +179,7 @@ ISOLACE.sudoku.Persistence.prototype.getScores = function() {
         a.push(score);
     }
 
-    return a;
+    return a.reverse();
 };
 
 /**

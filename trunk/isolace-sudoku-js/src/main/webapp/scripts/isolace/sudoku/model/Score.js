@@ -11,7 +11,8 @@ ISOLACE.Score = function() {
     this.date = undefined;
     this.time = undefined;
     this.numMissed = undefined;
-
+    this.userId = undefined;
+    this.symbolType = undefined;
 };
 
 ISOLACE.Score.PENALTY = 30;
@@ -123,13 +124,47 @@ ISOLACE.Score.prototype.setNumMissed = function(numMissed) {
 };
 
 /**
+ * @method getUserId
+ * @return The user id this score applies to.
+ * @type number
+ */
+ISOLACE.Score.prototype.getUserId = function() {
+    return this.userId;
+};
+
+/**
+ * @method setUserId
+ * @param {number} userId The user id this score applies to.
+ */
+ISOLACE.Score.prototype.setUserId = function(userId) {
+    this.userId = userId;
+};
+
+/**
+ * @method getSymbolType
+ * @return The symbol set used when completing the puzzle i.e NUMBER=0, COLOR=2...
+ * @type number
+ */
+ISOLACE.Score.prototype.getSymbolType = function() {
+    return this.symbolType;
+};
+
+/**
+ * @method setSymbolType
+ * @param {number} symbolType The symbol set used when completing the puzzle i.e NUMBER=0, COLOR=2...
+ */
+ISOLACE.Score.prototype.setSymbolType = function(symbolType) {
+    this.symbolType = symbolType;
+};
+
+/**
  * @method toScoreCsv
  * @return The comma separated values representing the Score object as a string.
  * @type string
  */
 ISOLACE.Score.prototype.toScoreCsv = function() {
     var scoreCsvStr = this.getPuzzleId() + ',' + this.getPuzzleLevel() + ',' + this.getDate() + ',' + this.getTime()
-            + ',' + this.getNumMissed();
+            + ',' + this.getNumMissed() + ',' + this.getUserId() + ',' + this.getSymbolType();
     return scoreCsvStr;
 };
 
@@ -144,5 +179,12 @@ ISOLACE.Score.prototype.fromScoreCsv = function(scoreCsvStr) {
     this.setDate(parseInt(s[2]));
     this.setTime(parseInt(s[3]));
     this.setNumMissed(parseInt(s[4]));
+    if(s.length > 4) {
+        this.setUserId(parseInt(s[5]));
+        this.setSymbolType(parseInt(s[6]));
+    } else {
+        this.setUserId(UID);
+        this.setSymbolType(0);
+    }
 };
 
