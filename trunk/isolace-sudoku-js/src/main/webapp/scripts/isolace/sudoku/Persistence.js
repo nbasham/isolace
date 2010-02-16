@@ -179,7 +179,7 @@ ISOLACE.sudoku.Persistence.prototype.getScores = function() {
         a.push(score);
     }
 
-    return a.reverse();
+    return a.sort(function(a,b){return b.getDate() - a.getDate()});
 };
 
 /**
