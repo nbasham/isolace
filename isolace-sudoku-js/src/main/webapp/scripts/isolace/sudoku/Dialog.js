@@ -35,7 +35,6 @@ ISOLACE.Dialog = function() {
                 "Ok" : function() {
                     $(this).dialog("close");
                     $('#tabs').tabs('select', 3);
-//                    location.reload();
             }
         }
     };
@@ -46,6 +45,8 @@ ISOLACE.Dialog.prototype.showSkipGameDialog = function() {
         this.skipDialog = $("#skipGameView").dialog(this.skipGameConfig);
     }
     this.skipDialog.dialog('open');
+    $('.ui-widget-overlay').css('height', '100%');
+    $('.ui-widget-overlay').css('width', '100%');
 };
 
 ISOLACE.Dialog.prototype.showSolvedDialog = function(html) {
@@ -54,6 +55,8 @@ ISOLACE.Dialog.prototype.showSolvedDialog = function(html) {
     }
     this.solvedDialog.html(html);
     this.solvedDialog.dialog('open');
+    $('.ui-widget-overlay').css('height', '100%');
+    $('.ui-widget-overlay').css('width', '100%');
 };
 
 if(typeof $Dialog == "undefined" || !$Dialog) {
