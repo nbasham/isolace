@@ -108,7 +108,8 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderSelector = function(index, inMarker
             id: 'selector',
             'class': 'guessBackground'
         }).appendTo('.board');
-        this.setBackground(this.selector, 'select');
+        this.selector.css('background-image', 'url(../images/select.gif)');
+        this.selector.css('background-repeat', 'no-repeat');
         this.marker = $('<div/>', {
             id: 'selectorMarker',
             'class': 'ui-icon ui-icon-pencil twentyPercent',
@@ -117,27 +118,25 @@ ISOLACE.sudoku.ImageRenderer.prototype.renderSelector = function(index, inMarker
             }
         }).appendTo('.board').hide();
     }
-//    if(index === undefined) {
-//        this.selector.hide();
-//        return;
-//    } else {
-//        this.selector.show();
-//    }
+
     var cell = $('#c' + index);
     var t = cell.position().top;
     var l = cell.position().left;
+
+    //  obviously got to figure this out
+    var isIE8 = $.browser.version.substr(0,1)=='8' && $.browser.msie;
+    if(isIE8) {
+        t += 1;
+        l += 2;
+    }
+    
     this.selector.css('top', t);
     this.selector.css('left', l);
     this.selector.css('display', 'block');
 
     if(inMarkerMode) {
-        //this.selector.removeClass('guessBackground');
-        //this.selector.addClass('markBackground');
-        //this.marker.addClass('markBackground');
         this.marker.css('display', 'block');
     } else {
-        //this.selector.removeClass('markBackground');
-        //this.selector.addClass('guessBackground');
         this.marker.css('display', 'none');
     }
     this.marker.css('top', t);

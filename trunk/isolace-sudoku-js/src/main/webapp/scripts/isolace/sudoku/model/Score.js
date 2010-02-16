@@ -188,3 +188,29 @@ ISOLACE.Score.prototype.fromScoreCsv = function(scoreCsvStr) {
     }
 };
 
+/**
+ * @method toTable
+ * @return The Table HTMLElement.
+ * @type HTMLElement
+ */
+ISOLACE.Score.prototype.toTable = function() {
+    var puzzleId = this.getPuzzleId();
+    var level = $SUDOKU_UTIL.levelToString(this.getPuzzleLevel());
+    var date = new Date(parseInt(this.getDate()));
+    var time = $SUDOKU_UTIL.formatTime(this.getTime());
+    var nuMissed = this.getNumMissed();
+    var penalty = $SUDOKU_UTIL.formatTime(this.getNumMissed() * this.getPenalty());
+    var finalTime = $SUDOKU_UTIL.formatTime(this.getScore());
+    var symbolType = this.getSymbolType() == 0 ? 'Number' : 'Color' + "&nbsp;<img src='../images/colors.png'>";
+    var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+    sOut += '<tr><td>Puzzle:</td><td>' + level + ' ' + puzzleId + '</td></tr>';
+    sOut += '<tr><td>Date:</td><td>' + dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT") + '</td></tr>';
+    sOut += '<tr><td>Symbol Type:</td><td>' + symbolType + '</td></tr>';
+    sOut += '<tr><td>Play Time:</td><td>' + time + '</td></tr>';
+    sOut += '<tr><td>Incorrect guesses:</td><td>' + nuMissed + '</td></tr>';
+    sOut += '<tr><td>Penalty:</td><td>' + penalty + '</td></tr>';
+    sOut += '<tr><td>Score:</td><td>' + finalTime + '</td></tr>';
+    sOut += '</table>';
+
+    return sOut;
+};
